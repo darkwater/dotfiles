@@ -66,8 +66,18 @@ function fish_prompt
     fish_prompt_separator
 end
 
-function fish_right_prompt
-    
+function fish_right_prompt_DEACTIVATED
+    if [ -z $TMUX ]
+        fish_prompt_separator
+        set_color aaafff
+        echo -n (w | grep -oE '[0-9.]+, [0-9.]+, [0-9.]+')
+
+        fish_prompt_separator
+        set_color 00afff
+        echo -n (date +'%H:%M')
+
+        echo ' '
+    end
 end
 
 

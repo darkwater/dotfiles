@@ -30,13 +30,13 @@ border_color = #ED2323 80
 # ID 5 - taskbar
 rounded = 0
 border_width = 1
-background_color = #1d1f21 80
+background_color = #1d1f21 100
 border_color = #000000 0
 
 # ID 6 - active taskbar
 rounded = 0
 border_width = 1
-background_color = #1d1f21 80
+background_color = #1d1f21 100
 border_color = #00AFFF 100
 
 # ID 7 - tooltip
@@ -54,7 +54,7 @@ border_color = #888888 20
 # Panel
 panel_monitor = all
 panel_position = bottom left horizontal
-panel_items = CST
+panel_items = ST
 panel_size = 810 25
 panel_margin = 0 -1 10
 panel_padding = 0 0 10
