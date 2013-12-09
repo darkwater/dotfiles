@@ -1,0 +1,86 @@
+#!/bin/bash
+
+
+imageEncoding="png"
+videoEncoding="webm"
+pidFile="/tmp/screen_record.pid"
+slopcmd="slop -nkb -b=10 -c=1,0.68,0 -b=1"
+fileFormat="%N"
+
+destination="novaember.com:/var/www/s/"
+destinationPublic="http://novaember.com/s/"
+ 
+
+case "$1" in
+    "save")
+        eval $($slopcmd)
+        if [ "$(($W+$H))" != "0" ]; then
+            maim -g=${W}x${H}+${X}+${Y} "/tmp/screen.${imageEncoding}"
+
+            number=1
+            until [ ! -e "/tmp/saved.${number}.${imageEncoding}" ]; do
+                let number=number+1
+            done
+
+            mv "/tmp/screen.${imageEncoding}" "/tmp/saved.${number}.${imageEncoding}"
+            notify-send "Screenshot saved" "Saved as /tmp/saved.${number}.${imageEncoding}"
+        fi
+        ;;
+    "upload")
+        eval $($slopcmd)
+        if [ "$(($W+$H))" != "0" ]; then
+            filename="$(date +"$fileFormat").${imageEncoding}"
+            maim -g=${W}x${H}+${X}+${Y} "/tmp/$filename"
+            echo "Uploading screenshot..." | dzen2 -p &
+            pid=$!
+            scp "/tmp/$filename" "$destination"
+            if [ $? -eq 0 ]; then
+                notify-send "Screenshot uploaded" "$filename"
+                copy="${destinationPublic}${filename}"
+                rm "/tmp/$filename"
+            else
+                notify-send "Screenshot upload failed" "Saved as /tmp/${filename}"
+                copy="/tmp/${filename}"
+            fi
+            kill $pid
+            echo -n "$copy" | xclip -selection clipboard
+        fi
+        ;;
+    "measure")
+        eval $($slopcmd -t=0)
+        if [ "$(($W+$H))" != "0" ]; then
+            maim -g=${W}x${H}+${X}+${Y} "/tmp/sample.png"
+            color="`convert /tmp/sample.png -resize 1x1 txt: | grep -oE '#[0-9A-F]+'`"
+            echo "$W x $H - $color" | dzen2 -x $X -y $Y -w 210 -p 5 -e 'button1=exit:0'
+        fi
+        ;;
+    "record")
+        if [ -f "$pidFile" ]; then
+            kill -2 `cat "$pidFile"`
+            rm "$pidFile"
+            filename="$(date +"$fileFormat").$videoEncoding"
+            mv "/tmp/screen.$videoEncoding" "/tmp/$filename"
+            echo "Uploading screencast..." | dzen2 -p &
+            pid=$!
+            scp "/tmp/$filename" "$destination"
+            if [ $? -eq 0 ]; then
+                notify-send "Screencast uploaded" "$filename"
+                copy="${destinationPublic}${filename}"
+                rm "/tmp/$filename"
+            else
+                notify-send "Screencast upload failed" "Saved as /tmp/${filename}"
+                copy="/tmp/${filename}"
+            fi
+            kill $pid
+            echo -n "$copy" | xclip -selection clipboard
+            exit 0
+        fi
+
+        eval $($slopcmd)
+        if [ "$(($W+$H))" != "0" ]; then
+            rm "/tmp/screen.*"
+            ffmpeg -f x11grab -s "${W}x${H}" -i ":0.0+${X},${Y}" -crf 10 -b:v 1M "/tmp/screen.${videoEncoding}" >/dev/null 2>/dev/null &
+            pid="$!"
+            echo -n "$pid" > /tmp/screen_record.pid
+        fi
+esac
