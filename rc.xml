@@ -495,37 +495,37 @@
     </keybind>
     <keybind key="XF86AudioLowerVolume">
       <action name="Execute">
-        <command>media down</command>
+        <command>media.fish down</command>
       </action>
     </keybind>
     <keybind key="XF86AudioRaiseVolume">
       <action name="Execute">
-        <command>media up</command>
+        <command>media.fish up</command>
       </action>
     </keybind>
     <keybind key="XF86AudioMute">
       <action name="Execute">
-        <command>media mute</command>
+        <command>media.fish mute</command>
       </action>
     </keybind>
     <keybind key="XF86AudioPlay">
       <action name="Execute">
-        <command>media toggle</command>
+        <command>media.fish toggle</command>
       </action>
     </keybind>
     <keybind key="S-XF86AudioLowerVolume">
       <action name="Execute">
-        <command>media prev</command>
+        <command>media.fish prev</command>
       </action>
     </keybind>
     <keybind key="S-XF86AudioRaiseVolume">
       <action name="Execute">
-        <command>media next</command>
+        <command>media.fish next</command>
       </action>
     </keybind>
     <keybind key="S-XF86AudioMute">
       <action name="Execute">
-        <command>media show</command>
+        <command>media.fish show</command>
       </action>
     </keybind>
     <!-- <keybind key="W-Right">
