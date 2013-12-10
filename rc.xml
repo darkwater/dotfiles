@@ -503,6 +503,16 @@
         <command>media.fish up</command>
       </action>
     </keybind>
+    <keybind key="C-XF86AudioLowerVolume">
+      <action name="Execute">
+        <command>media.fish rdown</command>
+      </action>
+    </keybind>
+    <keybind key="C-XF86AudioRaiseVolume">
+      <action name="Execute">
+        <command>media.fish rup</command>
+      </action>
+    </keybind>
     <keybind key="XF86AudioMute">
       <action name="Execute">
         <command>media.fish mute</command>
@@ -519,6 +529,16 @@
       </action>
     </keybind>
     <keybind key="S-XF86AudioRaiseVolume">
+      <action name="Execute">
+        <command>media.fish next</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioPrev">
+      <action name="Execute">
+        <command>media.fish prev</command>
+      </action>
+    </keybind>
+    <keybind key="XF86AudioNext">
       <action name="Execute">
         <command>media.fish next</command>
       </action>
