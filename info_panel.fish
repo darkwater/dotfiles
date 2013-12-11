@@ -45,7 +45,7 @@ function volume
         end
         echo $volume | gdbar -fg '#0f4' -bg '#052' -h 2 | sed -re's/(\^r\([0-9x]*)\)/\1+0-2)/g'
     else
-        echo $volume | gdbar -fg '#0f4' -bg '#052' -h 2
+        echo $volume | gdbar -fg '#0f4' -bg '#052' -h 2 -sw 6 -ss 2
     end
 end
 

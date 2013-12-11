@@ -1,6 +1,7 @@
 #!/usr/bin/fish
 
-set volume (amixer sget Master | grep -oE '\[1?[0-9]{1,2}%\]' | grep -oE '[0-9]+')
+set volume (amixer sget Master | grep -oE '\[1?[0-9]{1,2}%\]' | \
+            grep -oE '[0-9]+' | perl -e '$v = <>; print int($v / 10 + 0.5) * 10')
 
 for i in $argv
     switch $i
