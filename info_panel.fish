@@ -101,6 +101,8 @@ while true
         echo
     end >>/tmp/info_panel
 
+    # 0.(math 1000000000 - (date +'%N'))
+
     inotifywait -e close_write -t 1 /tmp/info_panel_update ^/dev/null >/dev/null
 
     if [ $status -eq 1 ]; exit; end
