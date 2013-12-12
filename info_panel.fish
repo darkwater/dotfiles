@@ -30,10 +30,19 @@ function load ; echo '#af0' ; echo 'cpu'
 end
 
 function volume
-    echo '#0f4'
-    echo 'spkr_01'
-
     set volume (amixer sget Master | grep -oE '\[1?[0-9]{1,2}%\]' | grep -oE '[0-9]+')
+    set mute (amixer sget Master | grep -oE '\[(on|off)\]' | grep -oE '[onf]+')
+
+    if [ "$mute" = "on" ] # NOT muted
+        set fg '#0f4'
+        set bg '#052'
+    else
+        set fg '#aaa'
+        set bg '#444'
+    end
+
+    echo $fg
+    echo 'spkr_01'
 
     if [ (hostname) = 'dark-desktop' ]
         set now_playing (mpc -h 'mpd')
@@ -43,9 +52,9 @@ function volume
                 sed -re's/(\^r\([0-9x]*)\)/\1+0+2)/g')
             echo -n '^p(-80)^ib(1)'
         end
-        echo $volume | gdbar -fg '#0f4' -bg '#052' -h 2 | sed -re's/(\^r\([0-9x]*)\)/\1+0-2)/g'
+        echo $volume | gdbar -fg $fg -bg $bg -h 2 | sed -re's/(\^r\([0-9x]*)\)/\1+0-2)/g'
     else
-        echo $volume | gdbar -fg '#0f4' -bg '#052' -h 2
+        echo $volume | gdbar -fg $fg -bg $bg -h 2 -sw 6 -ss 2
     end
 end
 
@@ -100,6 +109,8 @@ while true
 
         echo
     end >>/tmp/info_panel
+
+    # 0.(math 1000000000 - (date +'%N'))
 
     inotifywait -e close_write -t 1 /tmp/info_panel_update ^/dev/null >/dev/null
 
