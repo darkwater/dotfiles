@@ -1,0 +1,57 @@
+#!/usr/bin/fish
+
+
+function clock ; echo '214'
+    echo (date +'%a %b %d %H:%M:%S')
+end
+
+function host ; echo '220'
+    echo (hostname)
+end
+
+function load ; echo '190'
+    echo (uptime | grep -oE '[0-9.]+, [0-9.]+, [0-9.]+' | cut -d' ' -f2 | sed 's/[, ]//g')
+end
+
+
+begin
+    set items
+    function add_item
+        if [ (count $argv) -ne 2 ]; return; end
+        set items "#[fg=colour$argv[1]] $argv[2] " $items
+    end
+
+
+
+    add_item (clock)
+    add_item (host)
+    add_item (load)
+
+
+    for i in $items
+        echo -n "#[fg=colour242]\\\\$i"
+    end
+
+    echo
+end
+
+## # Uptime
+## 
+## set uptime (uptime | rev | cut -d":" -f1 | rev | sed s/,//g | xargs)
+## fg 246; echo -en "$uptime[0] "
+## fg 250; echo -en "$uptime[1] "
+## fg 195; echo -en "$uptime[2]"
+## 
+## sep
+## 
+## 
+## # Hostname
+## 
+## echo -en $HOSTNAME
+## 
+## sep
+## 
+## 
+## # Time
+## 
+## date +'%b %d %H:%M'
