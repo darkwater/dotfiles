@@ -69,11 +69,11 @@ function mpd
         echo '#aaa'
     end
     
-    set now_playing (basename -s'.mp3' $now_playing[1] | sed -re's/\(.*\)//g' -e's/^ +| +$|^.* – //g')
+    set now_playing (basename -s'.mp3' $now_playing[1] | sed -re's/\(.*\)//g' -e's/^ +| +$|^.* – //g' | grep -oE '.{1,45}')
 
     echo 'note'
 
-    echo -n $now_playing
+    echo -n $now_playing[1]
 end
 
 function battery ; echo '#0ff' ; echo 'bat_low_02'
