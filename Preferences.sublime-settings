@@ -3,6 +3,7 @@
 	"bold_folder_labels": false,
 	"color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow-Night.tmTheme",
 	"drag_text": false,
+	"enable_tab_scrolling": true,
 	"ensure_newline_at_eof_on_save": true,
 	"file_exclude_patterns":
 	[
@@ -43,12 +44,12 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"SublimeGit",
-		"SublimeCodeIntel",
-		"Nodejs",
+		"Git",
 		"Vintage",
 		"GitGutter",
-		"Git"
+		"Nodejs",
+		"SublimeCodeIntel",
+		"SublimeGit"
 	],
 	"indent_guide_options":
 	[
@@ -56,11 +57,11 @@
 		"draw_active"
 	],
 	"match_brackets_angle": true,
-    "overlay_scroll_bars": "enabled",
+	"overlay_scroll_bars": "enabled",
 	"preview_on_click": true,
 	"save_on_focus_lost": false,
 	"scroll_past_end": false,
-    "scroll_speed": 1.5,
+	"scroll_speed": 1.5,
 	"shift_tab_unindent": true,
 	"theme": "Soda Dark.sublime-theme",
 	"translate_tabs_to_spaces": true
