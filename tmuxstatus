@@ -1,15 +1,19 @@
 #!/usr/bin/fish
 
 
-function clock ; echo '214'
+function clock ; echo '214' ; echo -n \uf017' '
     echo (date +'%a %b %d %H:%M:%S')
 end
 
-function host ; echo '220'
+function host ; echo '220' ; echo -n \uf0ac' '
     echo (hostname)
 end
 
-function load ; echo '190'
+function disk ; echo '220' ; echo -n \uf0a0' '
+    echo (df -h ~ | grep -oE '[0-9.]+[KMGTPEZY]' | cut -d \n -f 3)
+end
+
+function load ; echo '190' ; echo -n \uf013' '
     echo (uptime | grep -oE '[0-9.]+, [0-9.]+, [0-9.]+' | cut -d' ' -f2 | sed 's/[, ]//g')
 end
 
@@ -18,18 +22,18 @@ begin
     set items
     function add_item
         if [ (count $argv) -ne 2 ]; return; end
-        set items "#[fg=colour$argv[1]] $argv[2] " $items
+        set items "#[fg=colour$argv[1]]$argv[2]" $items
     end
 
 
 
     add_item (clock)
-    add_item (host)
+    add_item (disk)
     add_item (load)
 
 
     for i in $items
-        echo -n "#[fg=colour242]\\\\$i"
+        echo -n " #[fg=colour242]\\\\ $i"
     end
 
     echo
