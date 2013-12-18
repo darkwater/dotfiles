@@ -110,7 +110,7 @@ function fish_greeting
 
     echo '        '$FPS(hostname)
     echo '       '$FPS(date +'%a %b %d %H:%M:%S')
-    echo '      '$FPS(fortune -n (math '20 -'(tput cols)) ~/downloads/fortunes.txt)
+    echo '      '$FPS(fortune -s -n (math (tput cols)'- 15') ~/dotfiles/fortunes.txt)
 end
 
 

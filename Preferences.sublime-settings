@@ -3,7 +3,7 @@
 	"bold_folder_labels": false,
 	"color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow-Night.tmTheme",
 	"drag_text": false,
-	"enable_tab_scrolling": true,
+	"enable_tab_scrolling": false,
 	"ensure_newline_at_eof_on_save": true,
 	"file_exclude_patterns":
 	[
@@ -44,11 +44,11 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Git",
-		"Vintage",
 		"GitGutter",
-		"Nodejs",
+		"Vintage",
+		"Git",
 		"SublimeCodeIntel",
+		"Nodejs",
 		"SublimeGit"
 	],
 	"indent_guide_options":
