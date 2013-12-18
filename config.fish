@@ -80,10 +80,43 @@ function fish_right_prompt_DEACTIVATED
     end
 end
 
+function cut_pad
+    if [ (count $argv) -lt 2 ]; return; end
+
+    set -l res (echo "$argv[2]" | cut -c -$argv[1])
+    set -l len (echo "$argv[2]" | wc -c)
+
+    set -l res (printf '%-*s\n' $argv[1] $res[1])
+
+    echo $res[1]
+end
+
+function floor
+    printf '%.0f\n' (math "$argv[1] - ($argv[1] % 1)")
+end
+
+function print_row
+    set -l length (count $argv)
+    set -l width (math 'scale=2; '(tput cols)'/'$length)
+
+    for str in $argv
+        echo -n (cut_pad (floor $width) $str)
+    end
+    echo
+end
+
+function fish_greeting
+    set -l FPS (fish_prompt_separator)
+
+    echo '        '$FPS(hostname)
+    echo '       '$FPS(date +'%a %b %d %H:%M:%S')
+    echo '      '$FPS(fortune -n (math '20 -'(tput cols)) ~/downloads/fortunes.txt)
+end
+
 
 stty stop '' -ixon -ixoff
 
 
 set TERM xterm-256color
 set PATH ~/bin $PATH
-set GREP_COLOR '30;48;5;221'
+set GREP_COLOR '38;5;214;48;5;236'

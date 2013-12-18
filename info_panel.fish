@@ -25,6 +25,10 @@ function host ; echo '#ff0' ; echo 'arch_10x10'
     echo (hostname)
 end
 
+function disk ; echo '#ff0' ; echo 'diskette'
+    echo (df -h --output=avail ~ | tail -n 1 | tr -d ' ')
+end
+
 function load ; echo '#af0' ; echo 'cpu'
     echo (uptime | grep -oE '[0-9.]+, [0-9.]+, [0-9.]+' | cut -d' ' -f2 | sed 's/[, ]//g')
 end
@@ -96,7 +100,7 @@ while true
 
 
         add_item (clock)
-        add_item (host)
+        add_item (disk)
         add_item (load)
         add_item (volume)
         add_item (mpd)
