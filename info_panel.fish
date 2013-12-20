@@ -48,18 +48,7 @@ function volume
     echo $fg
     echo 'spkr_01'
 
-    if [ (hostname) = 'dark-desktop' ]
-        set now_playing (mpc -h 'mpd')
-        if [ $status -eq 0 ]
-            echo -n '^ib(1)'
-            echo -n (math (echo $now_playing[3] | grep -oE '[0-9]+') - 60 | gdbar -max 40 -fg '#0fa' -bg '#054' -h 2 | \
-                sed -re's/(\^r\([0-9x]*)\)/\1+0+2)/g')
-            echo -n '^p(-80)^ib(1)'
-        end
-        echo $volume | gdbar -fg $fg -bg $bg -h 2 | sed -re's/(\^r\([0-9x]*)\)/\1+0-2)/g'
-    else
-        echo $volume | gdbar -fg $fg -bg $bg -h 2 -sw 6 -ss 2
-    end
+    echo $volume | gdbar -fg $fg -bg $bg -h 2 -sw 6 -ss 2
 end
 
 function mpd
@@ -72,12 +61,13 @@ function mpd
     else
         echo '#aaa'
     end
-    
+
+    set volume (math '('(echo $now_playing[3] | grep -oE '[0-9]+')' - 60) * 100 / 40')
     set now_playing (basename -s'.mp3' $now_playing[1] | sed -re's/\(.*\)//g' -e's/^ +| +$|^.* – //g' | grep -oE '.{1,45}')
 
     echo 'note'
 
-    echo -n $now_playing[1]
+    echo -n $now_playing[1] '@' $volume'%'
 end
 
 function battery ; echo '#0ff' ; echo 'bat_low_02'
