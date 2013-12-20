@@ -2,9 +2,9 @@ alias ll='ls -halF --group-directories-first'
 alias watchdir='watch -tcn 1 tree -C'
 
 if test (uname -a | grep -ie arch -e manjaro)
-    alias get='sudo apt-get install'
-    alias search='apt-cache search'
-    alias show='apt-cache show'
+    alias get='sudo pacman -S'
+    alias search='pacman -Ss'
+    alias show='pacman -Si'
 end
 
 function irssi
