@@ -68,7 +68,6 @@ function mpd
     echo 'note'
 
     echo -n $now_playing[1] '@' $volume'%'
-<<<<<<< HEAD
 end
 
 function mpd_volume
@@ -88,8 +87,6 @@ function mpd_volume
     echo 'note'
 
     echo -n (math (echo $now_playing[3] | grep -oE '[0-9]+') - 60 | gdbar -max 40 -fg $fg -bg $bg -h 2 -sw 6 -ss 2)
-=======
->>>>>>> b1eacc072e1666a79f9964ce1e093b275ab8731b
 end
 
 function battery ; echo '#0ff' ; echo 'bat_low_02'
