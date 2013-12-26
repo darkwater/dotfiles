@@ -17,6 +17,14 @@ function load ; echo '190' ; echo -n \uf013' '
     echo (uptime | grep -oE '[0-9.]+, [0-9.]+, [0-9.]+' | cut -d' ' -f2 | sed 's/[, ]//g')
 end
 
+function starbound; echo '118' ; echo -n \uf0c0' '
+    echo (netstat -nt | grep -c 21025)
+end
+
+function mail; echo '121' ; echo -n \uf071' '
+    echo (cat /tmp/dark_mails)
+end
+
 
 begin
     set items
@@ -30,6 +38,8 @@ begin
     add_item (clock)
     add_item (disk)
     add_item (load)
+    add_item (starbound)
+    add_item (mail)
 
 
     for i in $items
@@ -40,22 +50,22 @@ begin
 end
 
 ## # Uptime
-## 
+##
 ## set uptime (uptime | rev | cut -d":" -f1 | rev | sed s/,//g | xargs)
 ## fg 246; echo -en "$uptime[0] "
 ## fg 250; echo -en "$uptime[1] "
 ## fg 195; echo -en "$uptime[2]"
-## 
+##
 ## sep
-## 
-## 
+##
+##
 ## # Hostname
-## 
+##
 ## echo -en $HOSTNAME
-## 
+##
 ## sep
-## 
-## 
+##
+##
 ## # Time
-## 
+##
 ## date +'%b %d %H:%M'
