@@ -30,7 +30,7 @@ function disk ; echo '#ff0' ; echo 'diskette'
 end
 
 function load ; echo '#af0' ; echo 'cpu'
-    echo (uptime | grep -oE '[0-9.]+, [0-9.]+, [0-9.]+' | cut -d' ' -f2 | sed 's/[, ]//g')
+    echo (uptime | grep -oE '[0-9.]+, [0-9.]+, [0-9.]+' | cut -d' ' -f2 | sed 's/[, ]//g') \\ (cat /tmp/vps_load)
 end
 
 function volume
