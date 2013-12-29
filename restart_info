@@ -1,0 +1,6 @@
+#!/bin/bash
+
+kill $(ps xo pid,args | grep '/usr/bin/fish /home/dark/dotfiles/info_panel.fish' | grep -P '\d+' -m1 -o)
+killall dzen2
+
+~/dotfiles/info_panel.fish
