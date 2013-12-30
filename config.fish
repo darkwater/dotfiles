@@ -8,7 +8,7 @@ if test (uname -a | grep -ie arch -e manjaro)
 end
 
 function irssi
-    ssh novaember.com -t 'screen -xUS irssi; or screen -US irssi irssi'
+    ssh novaember.com -t 'screen -xUS irssi; or screen -US irssi /usr/bin/irssi'
     sleep 1s
     irssi
 end
