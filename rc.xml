@@ -288,9 +288,9 @@
         <menu>client-menu</menu>
       </action>
     </keybind>
-    <keybind key="C-S-Print">
+    <keybind key="Pause">
       <action name="Execute">
-        <command>ldtag</command>
+        <command>restart_info</command>
       </action>
     </keybind>
     <keybind key="Print">
@@ -508,12 +508,12 @@
         <command>media.fish up</command>
       </action>
     </keybind>
-    <keybind key="C-XF86AudioLowerVolume">
+    <keybind key="A-XF86AudioLowerVolume">
       <action name="Execute">
         <command>media.fish rdown</command>
       </action>
     </keybind>
-    <keybind key="C-XF86AudioRaiseVolume">
+    <keybind key="A-XF86AudioRaiseVolume">
       <action name="Execute">
         <command>media.fish rup</command>
       </action>

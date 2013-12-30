@@ -1,0 +1,6 @@
+#!/bin/bash
+
+ps xo pid,args | grep -e '/usr/bin/fish /home/dark/dotfiles/info_panel.fish' -e 'tail -f /tmp/info_panel' | grep -P '\d+' -o | xargs kill
+killall dzen2
+
+~/dotfiles/info_panel.fish

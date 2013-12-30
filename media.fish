@@ -16,9 +16,9 @@ for i in $argv
         case 'down'
             amixer sset Master (math $volume - 10)'%'
         case 'rup'
-            mpc -h mpd volume +2
+            mpc -h mpd volume +4
         case 'rdown'
-            mpc -h mpd volume -2
+            mpc -h mpd volume -4
         case 'mute'
             amixer sset Master toggle
     end
