@@ -112,7 +112,9 @@ while true
         add_item (disk)
         add_item (load)
         add_item (volume)
-        add_item (mpd_volume)
+        if [ (hostname) = "dark-desktop" ]; then
+            add_item (mpd_volume)
+        end
         add_item (battery)
 
 
