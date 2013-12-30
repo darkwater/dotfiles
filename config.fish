@@ -1,4 +1,3 @@
-alias ll='ls -halF --group-directories-first'
 alias watchdir='watch -tcn 1 tree -C'
 
 if test (uname -a | grep -ie arch -e manjaro)
@@ -15,6 +14,14 @@ end
 
 function snv
     ssh novaember.com -t 'tmux a; or tmux; or /usr/bin/fish'
+end
+
+function ll
+    if test \("$PWD" = "$HOME" -a -z "$argv"\) -o "$argv" = "$HOME"
+        ls -hlF --group-directories-first $argv
+        return
+    end
+    ls -halF --group-directories-first $argv
 end
 
 
