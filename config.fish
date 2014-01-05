@@ -17,7 +17,7 @@ function snv
 end
 
 function ll
-    if test \("$PWD" = "$HOME" -a -z "$argv"\) -o "$argv" = "$HOME"
+    if test "$PWD" = "$HOME" -o "$argv" = "$HOME"
         ls -hlF --group-directories-first $argv
         return
     end
