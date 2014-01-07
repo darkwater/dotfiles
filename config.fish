@@ -1,5 +1,11 @@
 alias watchdir='watch -tcn 1 tree -C'
 
+function multiscreen
+    xrandr --output VGA1 --auto
+    xrandr --output VGA1 --left-of LVDS1
+    nitrogen --restore
+end
+
 if test (uname -a | grep -ie arch -e manjaro)
     alias get='sudo pacman -S'
     alias search='pacman -Ss'
