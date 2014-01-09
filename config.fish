@@ -14,8 +14,8 @@ end
 
 function irssi
     ssh novaember.com -t 'screen -xUS irssi; or screen -US irssi /usr/bin/irssi'
-    sleep 1s
-    irssi
+    #sleep 1s
+    #irssi
 end
 
 function snv
