@@ -4,6 +4,10 @@ if test (uname -a | grep -ie arch -e manjaro)
     alias get='sudo pacman -S'
     alias search='pacman -Ss'
     alias show='pacman -Si'
+else
+    alias get='sudo apt-get install'
+    alias search='apt-cache search'
+    alias show='apt-cache show'
 end
 
 function irssi
