@@ -25,6 +25,16 @@ function snv
     ssh novaember.com -t 'tmux a; or tmux; or /usr/bin/fish'
 end
 
+function gitlog
+    git log --graph \
+            --abbrev-commit \
+            --decorate \
+            --date=relative \
+            --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset)'\t'%C(white)%s%C(reset) %C(bold black)- %an%C(reset)%C(bold yellow)%d%C(reset)' \
+            --all \
+      | tac | sed -e's|/|'\a'|g' -e's|\\\\|/|g' -e's|'\\a'|\\\\|g'
+end
+
 function ll
     if test "$PWD" = "$HOME" -o "$argv" = "$HOME"
         ls -hlF --group-directories-first $argv
