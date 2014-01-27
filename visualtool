@@ -1,0 +1,17 @@
+#!/bin/fish
+
+
+# DEPENDENCIES:
+#
+#   fish        - to run the script
+#   date        - to parse the filename
+#   scp         - to copy the file to a remote server
+
+##%  SETTINGS  %##
+
+set image_ext 'png'
+set video_ext 'webm'
+set name_format '%N'
+
+set destination 'nv:/var/www/s/'
+
