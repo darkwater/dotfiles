@@ -13,12 +13,12 @@ if test (uname -a | grep -ie arch -e manjaro)
 end
 
 function irssi
-    ssh novaember.com -t 'screen -xUS irssi; or screen -US irssi /usr/bin/irssi'
+    ssh nv -t 'screen -xUS irssi; or screen -US irssi /usr/bin/irssi'
     clear
 end
 
 function snv
-    ssh novaember.com -t 'tmux a; or tmux; or /usr/bin/fish'
+    ssh nv -t 'tmux a; or tmux; or /usr/bin/fish'
 end
 
 function ll
