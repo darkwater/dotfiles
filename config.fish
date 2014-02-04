@@ -144,5 +144,6 @@ stty stop '' -ixon -ixoff
 
 
 set TERM xterm-256color
-set PATH ~/bin $PATH
+set PATH ~/bin $PATH ~/.gem/ruby/2.0.0/bin
+set EDITOR /usr/bin/vim
 set GREP_COLOR '38;5;214;48;5;236'
