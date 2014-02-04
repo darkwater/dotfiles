@@ -1,0 +1,5 @@
+#!/usr/bin/fish
+
+maim /tmp/screenshot.png
+and convert /tmp/screenshot.png -blur 0x8 /tmp/screenshot.png
+and i3lock -i /tmp/screenshot.png
