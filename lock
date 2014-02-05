@@ -1,5 +1,8 @@
 #!/usr/bin/fish
 
+echo 'Locking..' | dzen2 -x -1060 -w 200 -y -100 -fn 'Droid Sans:size=30' -p 2 &
+
 maim /tmp/screenshot.png
 and convert /tmp/screenshot.png -blur 0x8 /tmp/screenshot.png
-and i3lock -i /tmp/screenshot.png
+and i3lock -ni /tmp/screenshot.png &
+and echo 'Locked' | dzen2 -x -1060 -w 200 -y 520 -fn 'Droid Sans:size=30' -p 2
