@@ -1,11 +1,26 @@
-#!/bin/fish
+#!/usr/bin/fish
 
 
 # DEPENDENCIES:
 #
-#   fish        - to run the script
-#   date        - to parse the filename
-#   scp         - to copy the file to a remote server
+#   fish            - to run the script
+#   date            - to parse the filename
+#   scp             - to copy the file to a remote server
+#   ffmpeg          - record video
+#
+# ARGUMENTS:
+#   
+#   first argument  - type of media to capture
+#       image       - capture a still image
+#       video       - record a video
+#       gif         - record a gif
+#
+#   second argument - area to record
+#       screen      - capture the entire screen
+#       area        - select an area to capture
+#       later       - IMAGE ONLY: capture entire screen first, select area later
+#
+#   third argument  - ???
 
 ##%  SETTINGS  %##
 
@@ -15,3 +30,5 @@ set name_format '%N'
 
 set destination 'nv:/var/www/s/'
 
+switch $1;
+    case 
