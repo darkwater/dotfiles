@@ -1,8 +1,10 @@
 #!/usr/bin/fish
 
-echo 'Locking..' | dzen2 -x -1060 -w 200 -y -100 -fn 'Droid Sans:size=30' -p 2 &
-
 maim /tmp/screenshot.png
-and convert /tmp/screenshot.png -blur 0x8 /tmp/screenshot.png
-and i3lock -ni /tmp/screenshot.png &
-and echo 'Locked' | dzen2 -x -1060 -w 200 -y 520 -fn 'Droid Sans:size=30' -p 2
+and convert /tmp/screenshot.png -level 0,100%,0.4 -blur 0x8 /tmp/screenshot.png
+and fish -c 'i3lock -ni /tmp/screenshot.png; killall conky' &
+
+sleep 0.1s
+conky &
+
+set conky_pid %1
