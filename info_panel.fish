@@ -95,6 +95,12 @@ function battery ; echo '#0ff' ; echo 'bat_low_02'
     end
 end
 
+function stream_viewers ; echo '#f22' ; echo 'full'
+    if test (cat /tmp/stream_viewers) -ne 0
+        cat /tmp/stream_viewers
+    end
+end
+
 
 touch /tmp/info_panel_update
 
@@ -112,10 +118,11 @@ while true
         add_item (disk)
         add_item (load)
         add_item (volume)
-        if [ (hostname) = "dark-desktop" ]; then
+        if [ (hostname) = "dark-desktop" ];
             add_item (mpd_volume)
         end
         add_item (battery)
+        add_item (stream_viewers)
 
 
         for i in $items
