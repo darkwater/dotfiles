@@ -10,8 +10,8 @@ if test (uname -a | grep -ie arch -e manjaro)
     alias get='sudo pacman -S'
     alias search='pacman -Ss'
     alias show='pacman -Si'
-    alias update='pacman -Sy'
-    alias upgrade='pacman -Syyuu'
+    alias update='sudo pacman -Sy'
+    alias upgrade='sudo pacman -Syyuu'
 else
     alias get='sudo apt-get install'
     alias search='apt-cache search'
