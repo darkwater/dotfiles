@@ -147,6 +147,6 @@ stty stop '' -ixon -ixoff
 
 
 set TERM xterm-256color
-set PATH ~/bin $PATH ~/.gem/ruby/2.0.0/bin
+set PATH ~/bin $PATH /opt/android-sdk/platform-tools /opt/android-sdk/tools ~/.gem/ruby/1.0.0/bin
 set EDITOR /usr/bin/vim
 set GREP_COLOR '38;5;214;48;5;236'
