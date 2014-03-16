@@ -34,8 +34,8 @@ function load ; echo '#af0' ; echo 'cpu'
 end
 
 function volume
-    set volume (amixer sget Master | grep -oE '\[1?[0-9]{1,2}%\]' | grep -oE '[0-9]+')
-    set mute (amixer sget Master | grep -oE '\[(on|off)\]' | grep -oE '[onf]+')
+    set volume (amixer sget Master | grep -oE '\[1?[0-9]{1,2}%\]' | grep -m 1 -oE '[0-9]+')
+    set mute (amixer sget Master | grep -oE '\[(on|off)\]' | grep -m 1 -oE '[onf]+')
 
     if [ "$mute" = "on" ] # NOT muted
         set fg '#0f4'
