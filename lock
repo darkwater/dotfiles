@@ -1,7 +1,7 @@
 #!/usr/bin/fish
 
 maim /tmp/screenshot.png
-and convert /tmp/screenshot.png -level 0,100%,0.4 -blur 0x8 /tmp/screenshot.png
+and convert /tmp/screenshot.png -level 0,100%,0.7 -blur 0x8 /tmp/screenshot.png
 and fish -c 'i3lock -ni /tmp/screenshot.png; killall conky' &
 
 sleep 0.1s
