@@ -290,7 +290,7 @@
     </keybind>
     <keybind key="Pause">
       <action name="Execute">
-        <command>restart_info</command>
+        <command>forever restart info-panel.js</command>
       </action>
     </keybind>
     <keybind key="Print">
