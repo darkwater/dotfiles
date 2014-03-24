@@ -12,12 +12,15 @@ if test (uname -a | grep -ie arch -e manjaro)
     alias show='pacman -Si'
     alias update='sudo pacman -Sy'
     alias upgrade='sudo pacman -Syyuu'
+    alias remove='sudo pacman -R'
 else
     alias get='sudo apt-get install'
     alias search='apt-cache search'
     alias show='apt-cache show'
     alias update='sudo apt-get update'
     alias upgrade='sudo apt-get upgrade'
+    alias remove='sudo apt-get remove'
+    alias purge='sudo apt-get purge'
 end
 
 function irssi
