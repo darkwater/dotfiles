@@ -7,7 +7,7 @@ pidFile="/tmp/screen_record.pid"
 slopcmd="slop -nkb -b=10 -c=1,0.68,0 -b=1"
 fileFormat="%N"
 
-destination="nv:/var/www/s/"
+destination="nv:/srv/www/static/s/"
 destinationPublic="http://novaember.com/s/"
  
 
