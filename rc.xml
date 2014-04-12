@@ -41,7 +41,7 @@
   </placement>
   <theme>
     <name>Carbon</name>
-    <titleLayout>DSLIMC</titleLayout>
+    <titleLayout>CL</titleLayout>
     <!--
       avaible characters are NDSLIMC, each can occur at most once.
       N: window icon
@@ -67,7 +67,7 @@
       <name>Liberation Sans</name>
       <size>10</size>
       <!-- font size in points -->
-      <weight>Normal</weight>
+      <weight>Bold</weight>
       <!-- 'bold' or 'normal' -->
       <slant>Normal</slant>
       <!-- 'italic' or 'normal' -->
