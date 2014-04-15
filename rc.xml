@@ -41,7 +41,7 @@
   </placement>
   <theme>
     <name>Carbon</name>
-    <titleLayout>CL</titleLayout>
+    <titleLayout>DSLIMC</titleLayout>
     <!--
       avaible characters are NDSLIMC, each can occur at most once.
       N: window icon
@@ -67,7 +67,7 @@
       <name>Liberation Sans</name>
       <size>10</size>
       <!-- font size in points -->
-      <weight>Bold</weight>
+      <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
       <slant>Normal</slant>
       <!-- 'italic' or 'normal' -->
@@ -152,7 +152,7 @@
        cases. -->
   <margins>
     <top>0</top>
-    <bottom>35</bottom>
+    <bottom>50</bottom>
     <left>0</left>
     <right>0</right>
   </margins>
@@ -290,7 +290,7 @@
     </keybind>
     <keybind key="Pause">
       <action name="Execute">
-        <command>forever restart info-panel.js</command>
+        <command>restart_info</command>
       </action>
     </keybind>
     <keybind key="Print">
@@ -399,7 +399,23 @@
           <enabled>true</enabled>
           <name>Lock screen</name>
         </startupnotify>
-        <command>lock</command>
+        <!-- <command>slimlock</command> -->
+        <command>i3lock</command>
+      </action>
+    </keybind>
+    <keybind key="W-Delete">
+      <action name="Execute">
+        <command>/home/mro95/dotfiles/restart_info</command>
+      </action>
+    </keybind>
+    <keybind key="W-S-Delete">
+      <action name="Execute">
+        <command>toggle tint2</command>
+      </action>
+    </keybind>
+    <keybind key="W-S-End">
+      <action name="Execute">
+        <command>toggle compton</command>
       </action>
     </keybind>
     <keybind key="W-x">
@@ -498,6 +514,16 @@
         <command>dock moveright</command>
       </action>
     </keybind>
+    <keybind key="XF86MonBrightnessUp">
+      <action name="Execute">
+        <command>brightness_up.sh 10</command>
+      </action>
+    </keybind>
+    <keybind key="XF86MonBrightnessDown">
+      <action name="Execute">
+        <command>brightness_down.sh 10</command>
+      </action>
+    </keybind>
     <keybind key="XF86AudioLowerVolume">
       <action name="Execute">
         <command>media.fish down</command>
@@ -571,11 +597,6 @@
     <keybind key="W-w">
       <action name="ShowMenu">
         <menu>client-menu</menu>
-      </action>
-    </keybind>
-    <keybind key="Scroll_Lock">
-      <action name="Execute">
-        <command>toggle compton</command>
       </action>
     </keybind>
     <!-- <keybind key="W-Right">
@@ -1081,7 +1102,7 @@
       # end of the example
     -->
     <application class="*">
-      <decor>no</decor>
+      <decor>yes</decor>
     </application>
     <application name="gmessage">
       <decor>no</decor>

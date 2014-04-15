@@ -7,8 +7,8 @@ pidFile="/tmp/screen_record.pid"
 slopcmd="slop -nkb -b=10 -c=1,0.68,0 -b=1"
 fileFormat="%N"
 
-destination="nv:/var/www/s/"
-destinationPublic="http://novaember.com/s/"
+destination="vps:/var/www/maartenoosting.eu/public_html/s/"
+destinationPublic="http://maartenoosting.eu/s/"
  
 
 case "$1" in
@@ -79,7 +79,7 @@ case "$1" in
         eval $($slopcmd)
         if [ "$(($W+$H))" != "0" ]; then
             rm "/tmp/screen.*"
-            ffmpeg -f x11grab -s "${W}x${H}" -i ":0.0+${X},${Y}" -crf 10 -b:v 1M "/tmp/screen.${videoEncoding}" >/dev/null 2>/dev/null &
+            ffmpeg -f x11grab -s "${W}x${H}" -i ":0.0+${X},${Y}" -threads=2 -crf 10 -b:v 1M "/tmp/screen.${videoEncoding}" >/dev/null 2>/dev/null &
             pid="$!"
             echo -n "$pid" > /tmp/screen_record.pid
         fi

@@ -10,26 +10,19 @@ if test (uname -a | grep -ie arch -e manjaro)
     alias get='sudo pacman -S'
     alias search='pacman -Ss'
     alias show='pacman -Si'
-    alias update='sudo pacman -Sy'
-    alias upgrade='sudo pacman -Syyuu'
-    alias remove='sudo pacman -R'
 else
     alias get='sudo apt-get install'
     alias search='apt-cache search'
     alias show='apt-cache show'
-    alias update='sudo apt-get update'
-    alias upgrade='sudo apt-get upgrade'
-    alias remove='sudo apt-get remove'
-    alias purge='sudo apt-get purge'
 end
 
 function irssi
-    ssh nv -t 'screen -xUS irssi; or screen -US irssi /usr/bin/irssi'
+    ssh novaember.com -t 'screen -xUS irssi; or screen -US irssi /usr/bin/irssi'
     clear
 end
 
 function snv
-    ssh nv -t 'tmux a; or tmux; or /usr/bin/fish'
+    ssh novaember.com -t 'tmux a; or tmux; or /usr/bin/fish'
 end
 
 function gitlog
@@ -38,7 +31,8 @@ function gitlog
             --decorate \
             --date=relative \
             --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset)'\t'%C(white)%s%C(reset) %C(bold black)- %an%C(reset)%C(bold yellow)%d%C(reset)' \
-            --all
+            --all \
+      | tac | sed -e's|/|'\a'|g' -e's|\\\\|/|g' -e's|'\\a'|\\\\|g'
 end
 
 function ll
@@ -150,6 +144,5 @@ stty stop '' -ixon -ixoff
 
 
 set TERM xterm-256color
-set PATH ~/bin $PATH /opt/android-sdk/platform-tools /opt/android-sdk/tools ~/.gem/ruby/1.0.0/bin
-set EDITOR /usr/bin/vim
+set PATH ~/bin $PATH
 set GREP_COLOR '38;5;214;48;5;236'
