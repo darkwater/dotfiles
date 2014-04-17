@@ -7,12 +7,12 @@ function multiscreen
 end
 
 if test (uname -a | grep -ie arch -e manjaro)
-    alias get='sudo pacman -S'
-    alias search='pacman -Ss'
-    alias show='pacman -Si'
-    alias update='sudo pacman -Sy'
-    alias upgrade='sudo pacman -Syyuu'
-    alias remove='sudo pacman -R'
+    alias get='yaourt -S'
+    alias search='yaourt -Ss'
+    alias show='yaourt -Si'
+    alias update='yaourt -Sy'
+    alias upgrade='yaourt -Syyuu'
+    alias remove='yaourt -R'
 else
     alias get='sudo apt-get install'
     alias search='apt-cache search'
