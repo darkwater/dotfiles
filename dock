@@ -2,8 +2,14 @@
 
 
 
-local margins = {51, 31, 51, 59} -- left top right bottom
+local margins = {50, 30, 50, 50} -- left top right bottom
 local spacing = 50
+local maximizemargin = 51
+
+local snaptoterminal = true -- snap to terminal cell friendly sizes
+local cellwidth = 7
+local cellheight = 13
+local terminalmargin = 1 -- all sides
 
 
 
@@ -45,6 +51,20 @@ function execute(cmd, _t)
 end
 
 function position(win, x, y, w, h)
+    if snaptoterminal then
+        w = w - terminalmargin * 2
+        local wa = w % cellwidth
+        w = w - wa
+        w = w + terminalmargin * 2
+        x = math.floor(x + wa / 2)
+
+        h = h - terminalmargin * 2
+        local ha = h % cellheight
+        h = h - ha
+        h = h + terminalmargin * 2
+        y = math.floor(y + ha / 2)
+    end
+
     execute(("wmctrl -i -r '%s' -e 0,%d,%d,%d,%d"):format(win, x, y, w, h))
 end
 
@@ -151,7 +171,7 @@ local methods = {
         left   = screens[activescreen].x
         top    = screens[activescreen].y
         width  = screens[activescreen].w
-        height = screens[activescreen].h - 35
+        height = screens[activescreen].h - maximizemargin
         position(curwin, left, top, width, height)
     end,
     large = function ()

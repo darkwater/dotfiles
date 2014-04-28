@@ -11,33 +11,33 @@ border_color = #828282 0
 
 # ID 2 - task
 rounded = 0
-border_width = 0
+border_width = 1
 background_color = #000000 0
 border_color = #000000 0
 
 # ID 3 - task active
-rounded = 0
-border_width = 0
-background_color = #00AFFF 30
-border_color = #000000 0
+rounded = 3
+border_width = 1
+background_color = #1D1F21 100
+border_color = #ABCDEF 100
 
 # ID 4 - task urgent
-rounded = 0
-border_width = 0
-background_color = #FFAF00 100
-border_color = #ED2323 80
+rounded = 3
+border_width = 1
+background_color = #1D1F21 100
+border_color = #FFAF00 100
 
 # ID 5 - taskbar
 rounded = 0
 border_width = 1
-background_color = #1d1f21 100
-border_color = #1d1f21 100
+background_color = #1d1f21 0
+border_color = #1d1f21 0
 
 # ID 6 - active taskbar
 rounded = 0
 border_width = 1
-background_color = #1d1f21 100
-border_color = #00AFFF 100
+background_color = #1d1f21 0
+border_color = #00AFFF 0
 
 # ID 7 - tooltip
 rounded = 0
@@ -55,12 +55,12 @@ border_color = #888888 20
 panel_monitor = all
 panel_position = bottom left horizontal
 panel_items = ST
-panel_size = 810 25
-panel_margin = 0 -1 10
-panel_padding = 0 0 10
+panel_size = 810 30
+panel_margin = 10 4 0
+panel_padding = 0 1 10
 panel_dock = 0
 wm_menu = 1
-panel_layer = top
+panel_layer = bottom
 panel_background_id = 0
 
 # Panel Autohide
@@ -72,17 +72,25 @@ strut_policy = none
 
 # Taskbar
 taskbar_mode = multi_desktop
-taskbar_padding = 4 0 0
+taskbar_padding = 4 0 10
 taskbar_background_id = 5
 taskbar_active_background_id = 6
+
+taskbar_name = 1
+taskbar_name_padding = 0
+taskbar_name_background_id = 5
+taskbar_name_active_background_id = 5
+taskbar_name_font = Droid Sans Mono 12
+taskbar_name_font_color = #EFEFEF 50
+taskbar_name_active_font_color = #EFEFEF 100
 
 # Tasks
 urgent_nb_of_blink = 20
 task_icon = 1
 task_text = 0
 task_centered = 0
-task_maximum_size = 30 20
-task_padding = 5 2
+task_maximum_size = 28 19
+task_padding = 1 1
 task_background_id = 2
 task_active_background_id = 3
 task_urgent_background_id = 4

@@ -121,10 +121,10 @@
     <number>4</number>
     <firstdesk>1</firstdesk>
     <names>
-      <name>1</name>
-      <name>2</name>
-      <name>3</name>
-      <name>4</name>
+      <name>一</name>
+      <name>二</name>
+      <name>三</name>
+      <name>四</name>
     </names>
     <popupTime>0</popupTime>
     <!-- The number of milliseconds to show the popup for when switching
@@ -291,6 +291,9 @@
     <keybind key="Pause">
       <action name="Execute">
         <command>forever restart info-panel.js</command>
+      </action>
+      <action name="Execute">
+        <command>restart tint2</command>
       </action>
     </keybind>
     <keybind key="Print">
