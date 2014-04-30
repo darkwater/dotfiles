@@ -40,10 +40,10 @@ background_color = #1d1f21 0
 border_color = #00AFFF 0
 
 # ID 7 - tooltip
-rounded = 0
-border_width = 0
+rounded = 3
+border_width = 1
 background_color = #1D1F21 90
-border_color = #1D1F21 90
+border_color = #000000 90
 
 # ID 8
 rounded = 1
@@ -54,8 +54,8 @@ border_color = #888888 20
 # Panel
 panel_monitor = all
 panel_position = bottom left horizontal
-panel_items = ST
-panel_size = 810 30
+panel_items = STC
+panel_size = 0 30
 panel_margin = 10 4 0
 panel_padding = 0 1 10
 panel_dock = 0
@@ -87,9 +87,9 @@ taskbar_name_active_font_color = #EFEFEF 100
 # Tasks
 urgent_nb_of_blink = 20
 task_icon = 1
-task_text = 0
+task_text = 1
 task_centered = 0
-task_maximum_size = 28 19
+task_maximum_size = 150 19
 task_padding = 1 1
 task_background_id = 2
 task_active_background_id = 3
@@ -97,10 +97,10 @@ task_urgent_background_id = 4
 task_iconified_background_id = 2
 
 # Task Icons
-task_icon_asb = 80 0 0
+task_icon_asb = 100 0 0
 task_active_icon_asb = 100 0 0
 task_urgent_icon_asb = 100 0 0
-task_iconified_icon_asb = 80 0 0
+task_iconified_icon_asb = 40 0 0
 
 # Fonts
 task_font = Droid Sans Mono 8
@@ -119,30 +119,30 @@ systray_icon_size = 24
 systray_icon_asb = 100 0 0
 
 # Clock
-time1_format = %H:%M
-time1_font = Liberation Sans Mono 11
-#time2_format = %A %d %B
-#time2_font = Liberation Sans 6
+time1_format = %H:%M:%S
+time1_font = Droid Sans Mono 12
+time2_format = %a %b %d
+time2_font = Droid Sans Mono 8
 clock_font_color = #b5b5b5 100
 clock_padding = 12 4
 clock_background_id = 5
-clock_lclick_command = gsimplecal
-clock_rclick_command = gsimplecal
+clock_lclick_command = terminator --geometry 499x457 -i ~/.icons/custom/apps/48/calendar.png -T Calendar -x clickcal
+clock_rclick_command = restart tint2
 
 # Tooltips
-tooltip = 1
-tooltip_padding = 5 3
+tooltip = 0
+tooltip_padding = 11 6
 tooltip_show_timeout = 0.0
 tooltip_hide_timeout = 0.0
 tooltip_background_id = 7
-tooltip_font_color = #d8d8d8 100
-tooltip_font = Liberation Sans normal 9.0
+tooltip_font_color = #ABCDEF 100
+tooltip_font = Droid Sans normal 10.0
 
 # Mouse
-mouse_middle = none
-mouse_right = toggle
-mouse_scroll_up = toggle
-mouse_scroll_down = iconify
+mouse_middle = close
+mouse_right = none
+mouse_scroll_up = none
+mouse_scroll_down = none
 
 # Battery
 battery = 1
