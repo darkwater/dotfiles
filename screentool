@@ -24,6 +24,7 @@ case "$1" in
 
             mv "/tmp/screen.${imageEncoding}" "/tmp/saved.${number}.${imageEncoding}"
             notify-send "Screenshot saved" "Saved as /tmp/saved.${number}.${imageEncoding}"
+            feh "/tmp/saved.${number}.${imageEncoding}" -g ${W}x${H}+${X}+${Y}
         fi
         ;;
     "upload")
