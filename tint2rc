@@ -87,9 +87,9 @@ taskbar_name_active_font_color = #EFEFEF 100
 # Tasks
 urgent_nb_of_blink = 20
 task_icon = 1
-task_text = 1
+task_text = 0
 task_centered = 0
-task_maximum_size = 150 19
+task_maximum_size = 28 19
 task_padding = 1 1
 task_background_id = 2
 task_active_background_id = 3
