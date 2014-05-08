@@ -25,6 +25,10 @@ function mail; echo '121' ; echo -n \uf01c' '
     echo (cat /tmp/dark_mails)
 end
 
+function bitcoin; echo '39' ; echo -n ' '
+    echo (bitcoind getbalance dark)
+end
+
 
 begin
     set items
@@ -40,6 +44,7 @@ begin
     add_item (load)
     add_item (starbound)
     add_item (mail)
+    add_item (bitcoin)
 
 
     for i in $items
