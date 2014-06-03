@@ -25,6 +25,10 @@ function mail; echo '121' ; echo -n \uf01c' '
     echo (cat /tmp/dark_mails)
 end
 
+function bitcoin; echo '39' ; echo -n ' '
+    echo (bitcoind getbalance dark)
+end
+
 
 begin
     set items
@@ -42,8 +46,9 @@ begin
     if test (hostname) = 'novaember'
         add_item (starbound)
         add_item (mail)
+        add_item (bitcoin)
     end
-
+Â[M`Â[M`Â[M`Ã[M`Ã
 
     for i in $items
         echo -n " #[fg=colour242]\\\\ $i"
