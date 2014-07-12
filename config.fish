@@ -1,8 +1,8 @@
 alias watchdir='watch -tcn 1 tree -C'
 
 function multiscreen
-    xrandr --output VGA1 --auto
-    xrandr --output VGA1 --left-of LVDS1
+    xrandr --output DVI-I-3 --auto
+    xrandr --output DVI-I-3 --left-of DIV-I-2
     nitrogen --restore
 end
 
@@ -11,7 +11,7 @@ if test (uname -a | grep -ie arch -e manjaro)
     alias search='yaourt -Ss'
     alias show='yaourt -Si'
     alias update='yaourt -Sy'
-    alias upgrade='yaourt -Syyuu'
+    alias upgrade='yaourt -Syyuua'
     alias remove='yaourt -R'
 else
     alias get='sudo apt-get install'

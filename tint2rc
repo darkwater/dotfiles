@@ -130,7 +130,7 @@ clock_lclick_command = terminator --geometry 499x457 -i ~/.icons/custom/apps/48/
 clock_rclick_command = restart tint2
 
 # Tooltips
-tooltip = 0
+tooltip = 1
 tooltip_padding = 11 6
 tooltip_show_timeout = 0.0
 tooltip_hide_timeout = 0.0
