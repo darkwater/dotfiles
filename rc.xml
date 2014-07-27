@@ -281,7 +281,7 @@
     <!-- {{{ Miscellaneous -->
     <keybind key="Pause">
       <action name="Execute">
-        <command>forever restart infoboard.js</command>
+        <command>xmodmap .xmodmap; xset r rate 250 25</command>
       </action>
     </keybind>
     <keybind key="Scroll_Lock">
