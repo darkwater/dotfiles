@@ -263,6 +263,15 @@
         <command>lock</command>
       </action>
     </keybind>
+    <keybind key="W-S-l">
+      <action name="Execute">
+        <startupnotify>
+          <enabled>true</enabled>
+          <name>Lock screen</name>
+        </startupnotify>
+        <command>lock prompt</command>
+      </action>
+    </keybind>
     <keybind key="W-x">
       <action name="Execute">
         <startupnotify>
@@ -937,7 +946,7 @@
   <!-- }}} -->
   <!-- {{{ Applications -->
   <applications>
-      <!-- {{{ Explanation
+    <!-- {{{ Explanation
       # this is an example with comments through out. use these to make your
       # own rules, but without the comments of course.
       # you may use one or more of the name/class/role/title/type rules to specify
@@ -1018,18 +1027,15 @@
 
       # end of the example
     }}} -->
-
     <application class="*">
       <decor>no</decor>
     </application>
-
     <application title="Calendar">
       <decor>yes</decor>
     </application>
     <application title="nvirc">
       <decor>yes</decor>
     </application>
-
     <application name="gmessage">
       <decor>no</decor>
       <shade>no</shade>
