@@ -21,4 +21,6 @@ and fish -c 'i3lock -ni /tmp/screenshot.png; killall conky' &
 sleep 0.2s
 conky &
 
+xdotool key a Escape
+
 set conky_pid %1
