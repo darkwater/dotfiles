@@ -23,9 +23,16 @@ else
     alias purge='sudo apt-get purge'
 end
 
+function mirssi
+    mosh nv 'screen -xUS irssi; or screen -US irssi /usr/bin/irssi'
+end
+
 function irssi
     ssh nv -t 'screen -xUS irssi; or screen -US irssi /usr/bin/irssi'
-    clear
+end
+
+function mnv
+    mosh nv 'tmux a; or tmux; or /usr/bin/fish'
 end
 
 function snv
@@ -58,6 +65,8 @@ switch (hostname)
         set prompt_color 2266ff
     case novaember
         set prompt_color ffaf00
+    case sinuss
+        set prompt_color 8700d7
     case '*'
         set prompt_color ababab
         set prompt_show_hostname yes
@@ -143,6 +152,26 @@ function fish_greeting
     echo '        '$FPS(hostname)
     echo '       '$FPS(date +'%a %b %d %H:%M:%S')
     echo '      '$FPS(fortune -s -n (math (tput cols)'- 15') ~/dotfiles/fortunes.txt)
+end
+
+if test "$TERM" = "linux"
+    echo -en "\e]P0070809" #black
+    echo -en "\e]P1cd0000" #darkred
+    echo -en "\e]P200cd00" #darkgreen
+    echo -en "\e]P3b8b800" #brown
+    echo -en "\e]P41e90ff" #darkblue
+    echo -en "\e]P5cd00cd" #darkmagenta
+    echo -en "\e]P600cdcd" #darkcyan
+    echo -en "\e]P7e5e5e5" #lightgrey
+    echo -en "\e]P84c4c4c" #darkgrey
+    echo -en "\e]P9ff0000" #red
+    echo -en "\e]PA00ff00" #green
+    echo -en "\e]PBffff00" #yellow
+    echo -en "\e]PC4682b4" #blue
+    echo -en "\e]PDff00ff" #magenta
+    echo -en "\e]PE00ffff" #cyan
+    echo -en "\e]PFffffff" #white
+    clear #for background artifacting
 end
 
 
