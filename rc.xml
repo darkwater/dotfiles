@@ -290,7 +290,10 @@
     <!-- {{{ Miscellaneous -->
     <keybind key="Pause">
       <action name="Execute">
-        <command>xmodmap .xmodmap; xset r rate 250 25</command>
+        <command>xmodmap .xmodmap</command>
+      </action>
+      <action name="Execute">
+        <command>xset r rate 250 25</command>
       </action>
     </keybind>
     <keybind key="Scroll_Lock">
