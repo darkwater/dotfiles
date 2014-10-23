@@ -4,7 +4,7 @@
 imageEncoding="png"
 videoEncoding="webm"
 pidFile="/tmp/screen_record.pid"
-slopcmd="slop -nkb -b=10 -c=1,0.68,0 -b=1"
+slopcmd="slop --nokeyboard -c 1,0.68,0 -b 1"
 fileFormat="%N"
 
 destination="nv:s/"
@@ -15,7 +15,7 @@ case "$1" in
     "save")
         eval $($slopcmd)
         if [ "$(($W+$H))" != "0" ]; then
-            maim -g=${W}x${H}+${X}+${Y} "/tmp/screen.${imageEncoding}"
+            maim --hidecursor -g ${W}x${H}+${X}+${Y} "/tmp/screen.${imageEncoding}"
 
             number=1
             until [ ! -e "/tmp/saved.${number}.${imageEncoding}" ]; do
@@ -31,7 +31,7 @@ case "$1" in
         eval $($slopcmd)
         if [ "$(($W+$H))" != "0" ]; then
             filename="$(date +"$fileFormat").${imageEncoding}"
-            maim -g=${W}x${H}+${X}+${Y} "/tmp/$filename"
+            maim --hidecursor -g ${W}x${H}+${X}+${Y} "/tmp/$filename"
             echo "Uploading screenshot..." | dzen2 -p &
             pid=$!
             scp "/tmp/$filename" "$destination"
@@ -48,9 +48,9 @@ case "$1" in
         fi
         ;;
     "measure")
-        eval $($slopcmd -t=0)
+        eval $($slopcmd -t 0)
         if [ "$(($W+$H))" != "0" ]; then
-            maim -g=${W}x${H}+${X}+${Y} "/tmp/sample.png"
+            maim --hidecursor -g ${W}x${H}+${X}+${Y} "/tmp/sample.png"
             color="`convert /tmp/sample.png -resize 1x1 txt: | grep -oE '#[0-9A-F]+'`"
             echo "$W x $H - $color" | dzen2 -x $X -y $Y -w 210 -p 5 -e 'button1=exit:0'
         fi
@@ -80,7 +80,7 @@ case "$1" in
         eval $($slopcmd)
         if [ "$(($W+$H))" != "0" ]; then
             rm "/tmp/screen.*"
-            ffmpeg -f x11grab -s "${W}x${H}" -i ":0.0+${X},${Y}" -crf 10 -b:v 1M "/tmp/screen.${videoEncoding}" >/dev/null 2>/dev/null &
+            ffmpeg -f x11grab -s "${W}x${H}" -i ":0.0+${X},${Y}" -preset fast -crf 10 -b:v 1M "/tmp/screen.${videoEncoding}" >/tmp/screencast.log 2>/tmp/screencast.err &
             pid="$!"
             echo -n "$pid" > /tmp/screen_record.pid
         fi
