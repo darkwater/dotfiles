@@ -40,7 +40,7 @@
                     'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>Carbon</name>
+    <name>Numix</name>
     <titleLayout>DSLIMC</titleLayout>
     <!--
       avaible characters are NDSLIMC, each can occur at most once.
@@ -343,26 +343,6 @@
         </finalactions>
       </action>
     </keybind>
-    <keybind key="KP_Right">
-      <action name="Execute">
-        <command>xdotool mousemove_relative -- 1 0</command>
-      </action>
-    </keybind>
-    <keybind key="KP_Left">
-      <action name="Execute">
-        <command>xdotool mousemove_relative -- -1 0</command>
-      </action>
-    </keybind>
-    <keybind key="KP_Up">
-      <action name="Execute">
-        <command>xdotool mousemove_relative -- 0 -1</command>
-      </action>
-    </keybind>
-    <keybind key="KP_Down">
-      <action name="Execute">
-        <command>xdotool mousemove_relative -- 0 1</command>
-      </action>
-    </keybind>
     <!-- Keybindings for window switching with wsad -->
     <keybind key="W-S-d">
       <action name="DirectionalCycleWindows">
@@ -400,7 +380,7 @@
           <name>Lock screen</name>
         </startupnotify>
         <!-- <command>slimlock</command> -->
-        <command>i3lock</command>
+        <command>lock</command>
       </action>
     </keybind>
     <keybind key="W-Delete">
@@ -1049,7 +1029,7 @@
         # each rule element can be left out or set to 'default' to specify to not
         # change that attribute of the window
     
-        <decor>yes</decor>
+        <decor>no</decor>
         # enable or disable window decorations
     
         <shade>no</shade>
@@ -1101,8 +1081,11 @@
     
       # end of the example
     -->
-    <application class="*">
+    <!--application class="*">
       <decor>yes</decor>
+    </application-->
+    <application name="terminator">
+      <decor>no</decor>
     </application>
     <application name="gmessage">
       <decor>no</decor>

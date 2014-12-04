@@ -51,17 +51,23 @@ border_width = 1
 background_color = #888888 20
 border_color = #888888 20
 
+# ID 9 Panel
+rounded = 1
+border_width = 1
+background_color = #262729 100
+border_color = #888888 20
+
 # Panel
 panel_monitor = all
 panel_position = bottom center horizontal
 panel_items = STBC
-panel_size = 75% 40
+panel_size = 100% 25
 panel_margin = 0 -1 10
 panel_padding = 0 0 10
 panel_dock = 0
 wm_menu = 1
 panel_layer = top
-panel_background_id = 0
+panel_background_id = 9
 
 # Panel Autohide
 autohide = 0
@@ -73,20 +79,20 @@ strut_policy = none
 # Taskbar
 taskbar_mode = multi_desktop
 taskbar_padding = 4 0 0
-taskbar_background_id = 5
-taskbar_active_background_id = 6
+taskbar_background_id = 0
+taskbar_active_background_id = 0
 
 # Tasks
 urgent_nb_of_blink = 20
 task_icon = 1
-task_text = 0
+task_text = 1
 task_centered = 0
-task_maximum_size = 45 20
+task_maximum_size = 1000 20
 task_padding = 5 2
 task_background_id = 2
 task_active_background_id = 3
 task_urgent_background_id = 4
-task_iconified_background_id = 2
+task_iconified_background_id = 0
 
 # Task Icons
 task_icon_asb = 80 0 0
@@ -112,7 +118,7 @@ systray_icon_asb = 100 0 0
 
 # Clock
 time1_format = %H:%M
-time1_font = Liberation Sans Mono 15
+time1_font = Droid Sans Mono 12
 #time2_format = %A %d %B
 #time2_font = Liberation Sans 6
 clock_font_color = #b5b5b5 100
@@ -137,7 +143,7 @@ mouse_scroll_up = toggle
 mouse_scroll_down = iconify
 
 # Battery
-battery = 1
+battery = 0
 battery_low_status = 20
 battery_low_cmd = notify-send "battery low"
 battery_hide = 96
