@@ -16,11 +16,17 @@ compinit
 stty stop '' -ixon -ixoff
 
 
-test "$TERM" = "xterm" && TERM=xterm-256color
-test "$TERM" = "screen" && TERMs=screen-256color
-set PATH ~/bin $PATH /opt/android-sdk/platform-tools /opt/android-sdk/tools ~/.gem/ruby/1.0.0/bin
-set EDITOR /usr/bin/vim
-set GREP_COLOR '38;5;214;48;5;236'
+test "$TERM" = "xterm" && export TERM=xterm-256color
+test "$TERM" = "screen" && export TERM=screen-256color
+
+export PATH=~/bin:~/dotfiles/bin:$PATH:/opt/android-sdk/platform-tools:/opt/android-sdk/tools:~/.gem/ruby/1.0.0/bin
+export EDITOR=/usr/bin/vim
+export GREP_COLOR='38;5;214;48;5;236'
+
+bindkey ';5D' emacs-backward-word
+bindkey ';5C' emacs-forward-word
+bindkey '\e[H' beginning-of-line
+bindkey '\e[F' end-of-line
 
 
 if test (uname -a | grep -ie arch -e manjaro); then
@@ -40,68 +46,67 @@ else
     alias purge='sudo apt-get purge'
 fi
 
-function irssi
-{
-    ssh nv -t 'screen -xUS irssi; or screen -US irssi /usr/bin/irssi'
-}
+alias irssi="ssh nv -t 'screen -xUS irssi; or screen -US irssi /usr/bin/irssi'"
+alias snv="ssh nv -t 'tmux a; or tmux; or /usr/bin/fish'"
 
-function snv
-{
-    ssh nv -t 'tmux a; or tmux; or /usr/bin/fish'
-}
-
-function gitlog
-{
-    git log --graph \
-            --abbrev-commit \
-            --decorate \
-            --date=relative \
-            --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset)'\t'%C(white)%s%C(reset) %C(bold black)- %an%C(reset)%C(bold yellow)%d%C(reset)' \
-            --all
-}
-
-function ll
+function ll()
 {
     if test "$PWD" = "$HOME" -o "$1" = "$HOME"; then
-        ls -hlF --group-directories-first $argv
+        ls -hlF --color=auto --group-directories-first $argv
         return
     fi
 
-    ls -halF --group-directories-first $argv
+    ls -halF --color=auto --group-directories-first $argv
 }
 
-
-prompt_show_hostname=no
-case `hostname`; in
-    dark-desktop) prompt_color=00aa00 ;;
-     dark-laptop) prompt_color=2266ff ;;
-       novaember) prompt_color=ffaf00 ;;
-          sinuss) prompt_color=8700d7 ;;
-               *) prompt_color=ababab
-                  prompt_show_hostname=yes ;;
-esac
-
-function floor
-{
-    printf '%.0f\n' (math "$1 - ($1 % 1)")
-}
 
 if test "$TERM" = "linux"; then
-    echo -en "\e]P0070809" #black
-    echo -en "\e]P1cd0000" #darkred
-    echo -en "\e]P200cd00" #darkgreen
-    echo -en "\e]P3b8b800" #brown
-    echo -en "\e]P41e90ff" #darkblue
-    echo -en "\e]P5cd00cd" #darkmagenta
-    echo -en "\e]P600cdcd" #darkcyan
-    echo -en "\e]P7e5e5e5" #lightgrey
-    echo -en "\e]P84c4c4c" #darkgrey
-    echo -en "\e]P9ff0000" #red
-    echo -en "\e]PA00ff00" #green
-    echo -en "\e]PBffff00" #yellow
-    echo -en "\e]PC4682b4" #blue
-    echo -en "\e]PDff00ff" #magenta
-    echo -en "\e]PE00ffff" #cyan
-    echo -en "\e]PFffffff" #white
-    clear #for background artifacting
+    echo -en "\e]P0070809" # black
+    echo -en "\e]P1cd0000" # darkred
+    echo -en "\e]P200cd00" # darkgreen
+    echo -en "\e]P3b8b800" # brown
+    echo -en "\e]P41e90ff" # darkblue
+    echo -en "\e]P5cd00cd" # darkmagenta
+    echo -en "\e]P600cdcd" # darkcyan
+    echo -en "\e]P7e5e5e5" # lightgrey
+    echo -en "\e]P84c4c4c" # darkgrey
+    echo -en "\e]P9ff0000" # red
+    echo -en "\e]PA00ff00" # green
+    echo -en "\e]PBffff00" # yellow
+    echo -en "\e]PC4682b4" # blue
+    echo -en "\e]PDff00ff" # magenta
+    echo -en "\e]PE00ffff" # cyan
+    echo -en "\e]PFffffff" # white
+    clear # for background artifacting
 fi
+
+
+setopt prompt_subst
+setopt promptsubst
+setopt promptpercent
+
+autoload colors; colors;
+
+local return_code="%(?..%{$fg[red]%}%? ↵ %{$reset_color%})"
+
+local user_host='%{$fg[green]%}%n@%m%{$reset_color%}'
+local current_dir='%{$fg[blue]%}%~%{$reset_color%}'
+
+local git_branch='$(git_prompt_info)%{$reset_color%}'
+
+PROMPT="%{$fg[yellow]%}%T%{$reset_color%} ${return_code}%{$reset_color%}${current_dir}${git_branch} $ %B%b"
+
+
+function git_prompt_info()
+{
+    ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+    if [[ $((git status 2> /dev/null) | tail -n1) != "nothing to commit, working directory clean" ]]; then
+        echo -n "%{$fg[yellow]%}"
+    else
+        echo -n "%{$fg[green]%}"
+    fi
+    echo " [${ref#refs/heads/}]%{$reset_color%}"
+}
+
+
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
