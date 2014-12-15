@@ -19,7 +19,6 @@ stty stop '' -ixon -ixoff
 test "$TERM" = "xterm" && export TERM=xterm-256color
 test "$TERM" = "screen" && export TERM=screen-256color
 
-export PATH=~/bin:~/dotfiles/bin:$PATH:/opt/android-sdk/platform-tools:/opt/android-sdk/tools:~/.gem/ruby/1.0.0/bin
 export EDITOR=/usr/bin/vim
 export GREP_COLOR='38;5;214;48;5;236'
 
