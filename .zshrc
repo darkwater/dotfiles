@@ -28,7 +28,7 @@ bindkey '\e[H' beginning-of-line
 bindkey '\e[F' end-of-line
 
 
-if test (uname -a | grep -ie arch -e manjaro); then
+if test -n "$(uname -a | grep -ie arch -e manjaro 2>/dev/null)"; then
     alias get='yaourt -S'
     alias search='yaourt -Ss'
     alias show='yaourt -Si'
