@@ -45,8 +45,8 @@ else
     alias purge='sudo apt-get purge'
 fi
 
-alias irssi="ssh nv -t 'screen -xUS irssi; or screen -US irssi /usr/bin/irssi'"
-alias snv="ssh nv -t 'tmux a; or tmux; or /usr/bin/fish'"
+alias irssi="ssh nv -t 'screen -xUS irssi || screen -US irssi /usr/bin/irssi'"
+alias snv="ssh nv -t 'tmux a || tmux || /usr/bin/fish'"
 
 function ll()
 {
