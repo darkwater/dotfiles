@@ -22,8 +22,8 @@ test "$TERM" = "screen" && export TERM=screen-256color
 export EDITOR=/usr/bin/vim
 export GREP_COLOR='38;5;214;48;5;236'
 
-bindkey ';5D' emacs-backward-word
-bindkey ';5C' emacs-forward-word
+bindkey '\e;5D' emacs-backward-word
+bindkey '\e;5C' emacs-forward-word
 bindkey '\e[H' beginning-of-line
 bindkey '\e[F' end-of-line
 
