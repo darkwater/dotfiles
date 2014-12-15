@@ -48,7 +48,7 @@ begin
         add_item (mail)
         add_item (bitcoin)
     end
-Â[M`Â[M`Â[M`Ã[M`Ã
+
 
     for i in $items
         echo -n " #[fg=colour242]\\\\ $i"
