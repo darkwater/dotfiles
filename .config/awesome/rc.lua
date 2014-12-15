@@ -260,19 +260,30 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     awful.key({                   }, "Print", function () awful.util.spawn('screentool upload') end),
+    awful.key({                   }, "Pause", function () awful.util.spawn('xdotool mousemove 3840 1080') end),
 
     -- Prompt
     awful.key({ modkey            }, "r",     function () mypromptbox[mouse.screen]:run() end),
 
     awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run({ prompt = "Run Lua code: " },
-                  mypromptbox[mouse.screen].widget,
-                  awful.util.eval, nil,
-                  awful.util.getdir("cache") .. "/history_eval")
-              end),
+            function ()
+                awful.prompt.run({ prompt = "Run Lua code: " },
+                mypromptbox[mouse.screen].widget,
+                awful.util.eval, nil,
+                awful.util.getdir("cache") .. "/history_eval")
+            end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ modkey }, "p", function() menubar.show() end),
+
+    -- Restore all minimized windows
+    awful.key({ modkey, "Shift"   }, "n", 
+            function()
+                local tag = awful.tag.selected()
+                for i=1, #tag:clients() do
+                    tag:clients()[i].minimized=false
+                end
+            end)
+
 )
 
 clientkeys = awful.util.table.join(
