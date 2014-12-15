@@ -1,10 +1,26 @@
 #!/usr/bin/fish
 
+if test "$argv[1]" = "prompt"
+    echo -n | dmenu -i -f -p 'reason:'                 \
+          -fn 'Droid Sans Mono-10'                     \
+          -q                                           \
+          -x 500 -y 500                                \
+          -w 920 -h 24                                 \
+          -nb '#1d1f21' -nf '#ababab'                  \
+          -sb '#111111' -sf '#ffaf00'                  > /tmp/afk.reason
+else
+    echo > /tmp/afk.reason
+end
+
+sleep 0.5s
+
 maim /tmp/screenshot.png
 and convert /tmp/screenshot.png -level 0,100%,0.7 -blur 0x8 /tmp/screenshot.png
 and fish -c 'i3lock -ni /tmp/screenshot.png; killall conky' &
 
-sleep 0.1s
+sleep 0.2s
 conky &
+
+xdotool key a Escape
 
 set conky_pid %1

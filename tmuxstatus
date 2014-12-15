@@ -1,7 +1,7 @@
 #!/usr/bin/fish
 
 
-function clock ; echo '214' ; echo -n \uf017' '
+function clock ; echo '214' ; # echo -n \uf017' '
     echo (date +'%a %b %d %H:%M:%S')
 end
 
@@ -10,7 +10,7 @@ function host ; echo '220' ; echo -n \uf0ac' '
 end
 
 function disk ; echo '220' ; echo -n \uf0a0' '
-    echo (df -h ~ | grep -oE '[0-9.]+[KMGTPEZY]' | cut -d \n -f 3)
+    echo (df -h ~ | grep -oE '[0-9.]+[KMGTPEZY]' | tr \n \t | cut -f 3)
 end
 
 function load ; echo '190' ; echo -n \uf013' '
@@ -21,8 +21,12 @@ function starbound; echo '118' ; echo -n \uf0c0' '
     echo (netstat -nt | grep -c 21025)
 end
 
-function mail; echo '121' ; echo -n \uf071' '
+function mail; echo '121' ; echo -n \uf01c' '
     echo (cat /tmp/dark_mails)
+end
+
+function bitcoin; echo '39' ; echo -n ' '
+    echo (bitcoind getbalance dark)
 end
 
 
@@ -38,8 +42,12 @@ begin
     add_item (clock)
     add_item (disk)
     add_item (load)
-    add_item (starbound)
-    add_item (mail)
+
+    if test (hostname) = 'novaember'
+        add_item (starbound)
+        add_item (mail)
+        add_item (bitcoin)
+    end
 
 
     for i in $items
