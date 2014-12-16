@@ -26,6 +26,7 @@ bindkey '\e[1;5D' emacs-backward-word
 bindkey '\e[1;5C' emacs-forward-word
 bindkey '\e[H' beginning-of-line
 bindkey '\e[F' end-of-line
+bindkey '\e[3~' delete-char
 
 
 if test -n "$(uname -a | grep -ie arch -e manjaro 2>/dev/null)"; then
