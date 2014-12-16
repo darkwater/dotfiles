@@ -97,7 +97,7 @@ local git_branch='$(git_prompt_info)%{$reset_color%}'
 # PROMPT="%{$fg[yellow]%}%T%{$reset_color%} ${return_code}%{$reset_color%}${current_dir}${git_branch} $ %B%b"
 
 PROMPT='$(zsh_prompt)'
-RPROMPT="%(?..%{$fg[red]%}%? ↵ %{$reset_color%})%{$fg_bold[black]%}%T%{$reset_color%}"
+RPROMPT="%(?..%{$fg[red]%}%? ↵ %{$reset_color%})%{$fg_bold[black]%}$(hostname)  %T%{$reset_color%}"
 
 
 function zsh_prompt()
