@@ -48,6 +48,7 @@ fi
 
 alias irssi="ssh nv -t 'screen -xUS irssi || screen -US irssi /usr/bin/irssi'"
 alias snv="ssh nv -t 'tmux a || tmux || /usr/bin/fish'"
+alias nv="ssh nv" # 6 characters is too much!
 
 function ll()
 {
