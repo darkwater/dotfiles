@@ -94,7 +94,52 @@ local current_dir='%{$fg[blue]%}%~%{$reset_color%}'
 
 local git_branch='$(git_prompt_info)%{$reset_color%}'
 
-PROMPT="%{$fg[yellow]%}%T%{$reset_color%} ${return_code}%{$reset_color%}${current_dir}${git_branch} $ %B%b"
+# PROMPT="%{$fg[yellow]%}%T%{$reset_color%} ${return_code}%{$reset_color%}${current_dir}${git_branch} $ %B%b"
+
+PROMPT='$(zsh_prompt)'
+RPROMPT="%(?..%{$fg[red]%}%? ↵ %{$reset_color%})%{$fg_bold[black]%}%T%{$reset_color%}"
+
+
+function zsh_prompt()
+{
+    # Time
+    # echo -n "%{$fg_bold[black]%}%T%{$reset_color%} "
+
+    # Return code
+    # echo -n "%(?..%{$fg[red]%}%? ↵ %{$reset_color%})"
+
+    local ref=$(git symbolic-ref HEAD 2> /dev/null)
+    if [[ -n "$ref" ]]; then
+
+        local repo="$(git rev-parse --show-toplevel)"
+        local cwd="$(pwd)"
+
+        if [[ "$repo" = "$cwd" ]]; then
+            cwd=$cwd/
+        fi
+
+        if [[ "$(git status 2> /dev/null | tail -n1)" != "nothing to commit, working directory clean" ]]; then
+            echo -n "%{$fg[yellow]%}"
+        else
+            echo -n "%{$fg[green]%}"
+        fi
+
+        # Repository name @ branch
+        echo -n "[${ref#refs/heads/}] $(basename "$repo")"
+
+        # Internal path (relative to repository root)
+        echo -n "%{$fg[blue]%}${cwd#$repo}"
+
+    else
+
+        # Current working directory
+        echo -n "%{$fg[blue]%}%~"
+
+    fi
+
+    # Shell $ prompt sign
+    echo -n " %{$reset_color%}$ "
+}
 
 
 function git_prompt_info()
