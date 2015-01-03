@@ -48,6 +48,24 @@ do
 end
 -- }}}
 
+-- {{{ Naughty
+naughty.config.defaults.timeout          = 6
+naughty.config.defaults.screen           = 1
+naughty.config.defaults.position         = "top_right"
+naughty.config.defaults.margin           = 4
+naughty.config.defaults.width            = 300
+naughty.config.defaults.gap              = 4
+naughty.config.defaults.ontop            = true
+naughty.config.defaults.font             = "Droid Sans Mono 8"
+naughty.config.defaults.icon             = nil
+naughty.config.defaults.icon_size        = 16
+naughty.config.defaults.fg               = '#efefef'
+naughty.config.defaults.bg               = '#1d1f21'
+naughty.config.defaults.border_color     = '#2a2a2a'
+naughty.config.defaults.border_width     = 1
+naughty.config.defaults.hover_timeout    = nil
+-- }}}
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("/home/dark/.config/awesome/theme.lua")
