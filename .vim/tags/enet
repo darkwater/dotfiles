@@ -1,0 +1,772 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ENET_API	/usr/include/enet/unix.h	37;"	d
+ENET_API	/usr/include/enet/win32.h	40;"	d
+ENET_API	/usr/include/enet/win32.h	42;"	d
+ENET_API	/usr/include/enet/win32.h	45;"	d
+ENET_BUFFER_MAXIMUM	/usr/include/enet/enet.h	203;"	d
+ENET_BUFFER_MAXIMUM	/usr/include/enet/unix.h	16;"	d
+ENET_CALLBACK	/usr/include/enet/unix.h	35;"	d
+ENET_CALLBACK	/usr/include/enet/win32.h	36;"	d
+ENET_EVENT_TYPE_CONNECT	/usr/include/enet/enet.h	/^   ENET_EVENT_TYPE_CONNECT    = 1,  $/;"	e	enum:_ENetEventType
+ENET_EVENT_TYPE_DISCONNECT	/usr/include/enet/enet.h	/^   ENET_EVENT_TYPE_DISCONNECT = 2,  $/;"	e	enum:_ENetEventType
+ENET_EVENT_TYPE_NONE	/usr/include/enet/enet.h	/^   ENET_EVENT_TYPE_NONE       = 0,  $/;"	e	enum:_ENetEventType
+ENET_EVENT_TYPE_RECEIVE	/usr/include/enet/enet.h	/^   ENET_EVENT_TYPE_RECEIVE    = 3$/;"	e	enum:_ENetEventType
+ENET_HOST_ANY	/usr/include/enet/enet.h	75;"	d
+ENET_HOST_BANDWIDTH_THROTTLE_INTERVAL	/usr/include/enet/enet.h	/^   ENET_HOST_BANDWIDTH_THROTTLE_INTERVAL  = 1000,$/;"	e	enum:__anon2
+ENET_HOST_BROADCAST	/usr/include/enet/enet.h	76;"	d
+ENET_HOST_DEFAULT_MAXIMUM_PACKET_SIZE	/usr/include/enet/enet.h	/^   ENET_HOST_DEFAULT_MAXIMUM_PACKET_SIZE  = 32 * 1024 * 1024,$/;"	e	enum:__anon2
+ENET_HOST_DEFAULT_MAXIMUM_WAITING_DATA	/usr/include/enet/enet.h	/^   ENET_HOST_DEFAULT_MAXIMUM_WAITING_DATA = 32 * 1024 * 1024,$/;"	e	enum:__anon2
+ENET_HOST_DEFAULT_MTU	/usr/include/enet/enet.h	/^   ENET_HOST_DEFAULT_MTU                  = 1400,$/;"	e	enum:__anon2
+ENET_HOST_RECEIVE_BUFFER_SIZE	/usr/include/enet/enet.h	/^   ENET_HOST_RECEIVE_BUFFER_SIZE          = 256 * 1024,$/;"	e	enum:__anon2
+ENET_HOST_SEND_BUFFER_SIZE	/usr/include/enet/enet.h	/^   ENET_HOST_SEND_BUFFER_SIZE             = 256 * 1024,$/;"	e	enum:__anon2
+ENET_HOST_TO_NET_16	/usr/include/enet/unix.h	23;"	d
+ENET_HOST_TO_NET_16	/usr/include/enet/win32.h	24;"	d
+ENET_HOST_TO_NET_32	/usr/include/enet/unix.h	24;"	d
+ENET_HOST_TO_NET_32	/usr/include/enet/win32.h	25;"	d
+ENET_MAX	/usr/include/enet/utility.h	8;"	d
+ENET_MIN	/usr/include/enet/utility.h	9;"	d
+ENET_NET_TO_HOST_16	/usr/include/enet/unix.h	26;"	d
+ENET_NET_TO_HOST_16	/usr/include/enet/win32.h	27;"	d
+ENET_NET_TO_HOST_32	/usr/include/enet/unix.h	27;"	d
+ENET_NET_TO_HOST_32	/usr/include/enet/win32.h	28;"	d
+ENET_PACKED	/usr/include/enet/protocol.h	58;"	d
+ENET_PACKED	/usr/include/enet/protocol.h	60;"	d
+ENET_PACKED	/usr/include/enet/protocol.h	62;"	d
+ENET_PACKET_FLAG_NO_ALLOCATE	/usr/include/enet/enet.h	/^   ENET_PACKET_FLAG_NO_ALLOCATE = (1 << 2),$/;"	e	enum:_ENetPacketFlag
+ENET_PACKET_FLAG_RELIABLE	/usr/include/enet/enet.h	/^   ENET_PACKET_FLAG_RELIABLE    = (1 << 0),$/;"	e	enum:_ENetPacketFlag
+ENET_PACKET_FLAG_SENT	/usr/include/enet/enet.h	/^   ENET_PACKET_FLAG_SENT = (1<<8)$/;"	e	enum:_ENetPacketFlag
+ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT	/usr/include/enet/enet.h	/^   ENET_PACKET_FLAG_UNRELIABLE_FRAGMENT = (1 << 3),$/;"	e	enum:_ENetPacketFlag
+ENET_PACKET_FLAG_UNSEQUENCED	/usr/include/enet/enet.h	/^   ENET_PACKET_FLAG_UNSEQUENCED = (1 << 1),$/;"	e	enum:_ENetPacketFlag
+ENET_PEER_DEFAULT_PACKET_THROTTLE	/usr/include/enet/enet.h	/^   ENET_PEER_DEFAULT_PACKET_THROTTLE      = 32,$/;"	e	enum:__anon2
+ENET_PEER_DEFAULT_ROUND_TRIP_TIME	/usr/include/enet/enet.h	/^   ENET_PEER_DEFAULT_ROUND_TRIP_TIME      = 500,$/;"	e	enum:__anon2
+ENET_PEER_FREE_RELIABLE_WINDOWS	/usr/include/enet/enet.h	/^   ENET_PEER_FREE_RELIABLE_WINDOWS        = 8$/;"	e	enum:__anon2
+ENET_PEER_FREE_UNSEQUENCED_WINDOWS	/usr/include/enet/enet.h	/^   ENET_PEER_FREE_UNSEQUENCED_WINDOWS     = 32,$/;"	e	enum:__anon2
+ENET_PEER_PACKET_LOSS_INTERVAL	/usr/include/enet/enet.h	/^   ENET_PEER_PACKET_LOSS_INTERVAL         = 10000,$/;"	e	enum:__anon2
+ENET_PEER_PACKET_LOSS_SCALE	/usr/include/enet/enet.h	/^   ENET_PEER_PACKET_LOSS_SCALE            = (1 << 16),$/;"	e	enum:__anon2
+ENET_PEER_PACKET_THROTTLE_ACCELERATION	/usr/include/enet/enet.h	/^   ENET_PEER_PACKET_THROTTLE_ACCELERATION = 2,$/;"	e	enum:__anon2
+ENET_PEER_PACKET_THROTTLE_COUNTER	/usr/include/enet/enet.h	/^   ENET_PEER_PACKET_THROTTLE_COUNTER      = 7, $/;"	e	enum:__anon2
+ENET_PEER_PACKET_THROTTLE_DECELERATION	/usr/include/enet/enet.h	/^   ENET_PEER_PACKET_THROTTLE_DECELERATION = 2,$/;"	e	enum:__anon2
+ENET_PEER_PACKET_THROTTLE_INTERVAL	/usr/include/enet/enet.h	/^   ENET_PEER_PACKET_THROTTLE_INTERVAL     = 5000,$/;"	e	enum:__anon2
+ENET_PEER_PACKET_THROTTLE_SCALE	/usr/include/enet/enet.h	/^   ENET_PEER_PACKET_THROTTLE_SCALE        = 32,$/;"	e	enum:__anon2
+ENET_PEER_PING_INTERVAL	/usr/include/enet/enet.h	/^   ENET_PEER_PING_INTERVAL                = 500,$/;"	e	enum:__anon2
+ENET_PEER_RELIABLE_WINDOWS	/usr/include/enet/enet.h	/^   ENET_PEER_RELIABLE_WINDOWS             = 16,$/;"	e	enum:__anon2
+ENET_PEER_RELIABLE_WINDOW_SIZE	/usr/include/enet/enet.h	/^   ENET_PEER_RELIABLE_WINDOW_SIZE         = 0x1000,$/;"	e	enum:__anon2
+ENET_PEER_STATE_ACKNOWLEDGING_CONNECT	/usr/include/enet/enet.h	/^   ENET_PEER_STATE_ACKNOWLEDGING_CONNECT       = 2,$/;"	e	enum:_ENetPeerState
+ENET_PEER_STATE_ACKNOWLEDGING_DISCONNECT	/usr/include/enet/enet.h	/^   ENET_PEER_STATE_ACKNOWLEDGING_DISCONNECT    = 8,$/;"	e	enum:_ENetPeerState
+ENET_PEER_STATE_CONNECTED	/usr/include/enet/enet.h	/^   ENET_PEER_STATE_CONNECTED                   = 5,$/;"	e	enum:_ENetPeerState
+ENET_PEER_STATE_CONNECTING	/usr/include/enet/enet.h	/^   ENET_PEER_STATE_CONNECTING                  = 1,$/;"	e	enum:_ENetPeerState
+ENET_PEER_STATE_CONNECTION_PENDING	/usr/include/enet/enet.h	/^   ENET_PEER_STATE_CONNECTION_PENDING          = 3,$/;"	e	enum:_ENetPeerState
+ENET_PEER_STATE_CONNECTION_SUCCEEDED	/usr/include/enet/enet.h	/^   ENET_PEER_STATE_CONNECTION_SUCCEEDED        = 4,$/;"	e	enum:_ENetPeerState
+ENET_PEER_STATE_DISCONNECTED	/usr/include/enet/enet.h	/^   ENET_PEER_STATE_DISCONNECTED                = 0,$/;"	e	enum:_ENetPeerState
+ENET_PEER_STATE_DISCONNECTING	/usr/include/enet/enet.h	/^   ENET_PEER_STATE_DISCONNECTING               = 7,$/;"	e	enum:_ENetPeerState
+ENET_PEER_STATE_DISCONNECT_LATER	/usr/include/enet/enet.h	/^   ENET_PEER_STATE_DISCONNECT_LATER            = 6,$/;"	e	enum:_ENetPeerState
+ENET_PEER_STATE_ZOMBIE	/usr/include/enet/enet.h	/^   ENET_PEER_STATE_ZOMBIE                      = 9 $/;"	e	enum:_ENetPeerState
+ENET_PEER_TIMEOUT_LIMIT	/usr/include/enet/enet.h	/^   ENET_PEER_TIMEOUT_LIMIT                = 32,$/;"	e	enum:__anon2
+ENET_PEER_TIMEOUT_MAXIMUM	/usr/include/enet/enet.h	/^   ENET_PEER_TIMEOUT_MAXIMUM              = 30000,$/;"	e	enum:__anon2
+ENET_PEER_TIMEOUT_MINIMUM	/usr/include/enet/enet.h	/^   ENET_PEER_TIMEOUT_MINIMUM              = 5000,$/;"	e	enum:__anon2
+ENET_PEER_UNSEQUENCED_WINDOWS	/usr/include/enet/enet.h	/^   ENET_PEER_UNSEQUENCED_WINDOWS          = 64,$/;"	e	enum:__anon2
+ENET_PEER_UNSEQUENCED_WINDOW_SIZE	/usr/include/enet/enet.h	/^   ENET_PEER_UNSEQUENCED_WINDOW_SIZE      = 1024,$/;"	e	enum:__anon2
+ENET_PEER_WINDOW_SIZE_SCALE	/usr/include/enet/enet.h	/^   ENET_PEER_WINDOW_SIZE_SCALE            = 64 * 1024,$/;"	e	enum:__anon2
+ENET_PORT_ANY	/usr/include/enet/enet.h	77;"	d
+ENET_PROTOCOL_COMMAND_ACKNOWLEDGE	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_ACKNOWLEDGE        = 1,$/;"	e	enum:_ENetProtocolCommand
+ENET_PROTOCOL_COMMAND_BANDWIDTH_LIMIT	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_BANDWIDTH_LIMIT    = 10,$/;"	e	enum:_ENetProtocolCommand
+ENET_PROTOCOL_COMMAND_CONNECT	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_CONNECT            = 2,$/;"	e	enum:_ENetProtocolCommand
+ENET_PROTOCOL_COMMAND_COUNT	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_COUNT              = 13,$/;"	e	enum:_ENetProtocolCommand
+ENET_PROTOCOL_COMMAND_DISCONNECT	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_DISCONNECT         = 4,$/;"	e	enum:_ENetProtocolCommand
+ENET_PROTOCOL_COMMAND_FLAG_ACKNOWLEDGE	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_FLAG_ACKNOWLEDGE = (1 << 7),$/;"	e	enum:_ENetProtocolFlag
+ENET_PROTOCOL_COMMAND_FLAG_UNSEQUENCED	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_FLAG_UNSEQUENCED = (1 << 6),$/;"	e	enum:_ENetProtocolFlag
+ENET_PROTOCOL_COMMAND_MASK	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_MASK               = 0x0F$/;"	e	enum:_ENetProtocolCommand
+ENET_PROTOCOL_COMMAND_NONE	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_NONE               = 0,$/;"	e	enum:_ENetProtocolCommand
+ENET_PROTOCOL_COMMAND_PING	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_PING               = 5,$/;"	e	enum:_ENetProtocolCommand
+ENET_PROTOCOL_COMMAND_SEND_FRAGMENT	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_SEND_FRAGMENT      = 8,$/;"	e	enum:_ENetProtocolCommand
+ENET_PROTOCOL_COMMAND_SEND_RELIABLE	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_SEND_RELIABLE      = 6,$/;"	e	enum:_ENetProtocolCommand
+ENET_PROTOCOL_COMMAND_SEND_UNRELIABLE	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_SEND_UNRELIABLE    = 7,$/;"	e	enum:_ENetProtocolCommand
+ENET_PROTOCOL_COMMAND_SEND_UNRELIABLE_FRAGMENT	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_SEND_UNRELIABLE_FRAGMENT = 12,$/;"	e	enum:_ENetProtocolCommand
+ENET_PROTOCOL_COMMAND_SEND_UNSEQUENCED	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_SEND_UNSEQUENCED   = 9,$/;"	e	enum:_ENetProtocolCommand
+ENET_PROTOCOL_COMMAND_THROTTLE_CONFIGURE	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_THROTTLE_CONFIGURE = 11,$/;"	e	enum:_ENetProtocolCommand
+ENET_PROTOCOL_COMMAND_VERIFY_CONNECT	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_COMMAND_VERIFY_CONNECT     = 3,$/;"	e	enum:_ENetProtocolCommand
+ENET_PROTOCOL_HEADER_FLAG_COMPRESSED	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_HEADER_FLAG_COMPRESSED = (1 << 14),$/;"	e	enum:_ENetProtocolFlag
+ENET_PROTOCOL_HEADER_FLAG_MASK	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_HEADER_FLAG_MASK       = ENET_PROTOCOL_HEADER_FLAG_COMPRESSED | ENET_PROTOCOL_HEADER_FLAG_SENT_TIME,$/;"	e	enum:_ENetProtocolFlag
+ENET_PROTOCOL_HEADER_FLAG_SENT_TIME	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_HEADER_FLAG_SENT_TIME  = (1 << 15),$/;"	e	enum:_ENetProtocolFlag
+ENET_PROTOCOL_HEADER_SESSION_MASK	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_HEADER_SESSION_MASK    = (3 << 12),$/;"	e	enum:_ENetProtocolFlag
+ENET_PROTOCOL_HEADER_SESSION_SHIFT	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_HEADER_SESSION_SHIFT   = 12$/;"	e	enum:_ENetProtocolFlag
+ENET_PROTOCOL_MAXIMUM_CHANNEL_COUNT	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_MAXIMUM_CHANNEL_COUNT   = 255,$/;"	e	enum:__anon1
+ENET_PROTOCOL_MAXIMUM_FRAGMENT_COUNT	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_MAXIMUM_FRAGMENT_COUNT  = 1024 * 1024$/;"	e	enum:__anon1
+ENET_PROTOCOL_MAXIMUM_MTU	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_MAXIMUM_MTU             = 4096,$/;"	e	enum:__anon1
+ENET_PROTOCOL_MAXIMUM_PACKET_COMMANDS	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_MAXIMUM_PACKET_COMMANDS = 32,$/;"	e	enum:__anon1
+ENET_PROTOCOL_MAXIMUM_PEER_ID	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_MAXIMUM_PEER_ID         = 0xFFF,$/;"	e	enum:__anon1
+ENET_PROTOCOL_MAXIMUM_WINDOW_SIZE	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_MAXIMUM_WINDOW_SIZE     = 65536,$/;"	e	enum:__anon1
+ENET_PROTOCOL_MINIMUM_CHANNEL_COUNT	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_MINIMUM_CHANNEL_COUNT   = 1,$/;"	e	enum:__anon1
+ENET_PROTOCOL_MINIMUM_MTU	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_MINIMUM_MTU             = 576,$/;"	e	enum:__anon1
+ENET_PROTOCOL_MINIMUM_WINDOW_SIZE	/usr/include/enet/protocol.h	/^   ENET_PROTOCOL_MINIMUM_WINDOW_SIZE     = 4096,$/;"	e	enum:__anon1
+ENET_SOCKETSET_ADD	/usr/include/enet/unix.h	42;"	d
+ENET_SOCKETSET_ADD	/usr/include/enet/win32.h	51;"	d
+ENET_SOCKETSET_CHECK	/usr/include/enet/unix.h	44;"	d
+ENET_SOCKETSET_CHECK	/usr/include/enet/win32.h	53;"	d
+ENET_SOCKETSET_EMPTY	/usr/include/enet/unix.h	41;"	d
+ENET_SOCKETSET_EMPTY	/usr/include/enet/win32.h	50;"	d
+ENET_SOCKETSET_REMOVE	/usr/include/enet/unix.h	43;"	d
+ENET_SOCKETSET_REMOVE	/usr/include/enet/win32.h	52;"	d
+ENET_SOCKET_NULL	/usr/include/enet/unix.h	21;"	d
+ENET_SOCKET_NULL	/usr/include/enet/win32.h	22;"	d
+ENET_SOCKET_SHUTDOWN_READ	/usr/include/enet/enet.h	/^    ENET_SOCKET_SHUTDOWN_READ       = 0,$/;"	e	enum:_ENetSocketShutdown
+ENET_SOCKET_SHUTDOWN_READ_WRITE	/usr/include/enet/enet.h	/^    ENET_SOCKET_SHUTDOWN_READ_WRITE = 2$/;"	e	enum:_ENetSocketShutdown
+ENET_SOCKET_SHUTDOWN_WRITE	/usr/include/enet/enet.h	/^    ENET_SOCKET_SHUTDOWN_WRITE      = 1,$/;"	e	enum:_ENetSocketShutdown
+ENET_SOCKET_TYPE_DATAGRAM	/usr/include/enet/enet.h	/^   ENET_SOCKET_TYPE_DATAGRAM = 2$/;"	e	enum:_ENetSocketType
+ENET_SOCKET_TYPE_STREAM	/usr/include/enet/enet.h	/^   ENET_SOCKET_TYPE_STREAM   = 1,$/;"	e	enum:_ENetSocketType
+ENET_SOCKET_WAIT_INTERRUPT	/usr/include/enet/enet.h	/^   ENET_SOCKET_WAIT_INTERRUPT = (1 << 2)$/;"	e	enum:_ENetSocketWait
+ENET_SOCKET_WAIT_NONE	/usr/include/enet/enet.h	/^   ENET_SOCKET_WAIT_NONE      = 0,$/;"	e	enum:_ENetSocketWait
+ENET_SOCKET_WAIT_RECEIVE	/usr/include/enet/enet.h	/^   ENET_SOCKET_WAIT_RECEIVE   = (1 << 1),$/;"	e	enum:_ENetSocketWait
+ENET_SOCKET_WAIT_SEND	/usr/include/enet/enet.h	/^   ENET_SOCKET_WAIT_SEND      = (1 << 0),$/;"	e	enum:_ENetSocketWait
+ENET_SOCKOPT_BROADCAST	/usr/include/enet/enet.h	/^   ENET_SOCKOPT_BROADCAST = 2,$/;"	e	enum:_ENetSocketOption
+ENET_SOCKOPT_ERROR	/usr/include/enet/enet.h	/^   ENET_SOCKOPT_ERROR     = 8,$/;"	e	enum:_ENetSocketOption
+ENET_SOCKOPT_NODELAY	/usr/include/enet/enet.h	/^   ENET_SOCKOPT_NODELAY   = 9$/;"	e	enum:_ENetSocketOption
+ENET_SOCKOPT_NONBLOCK	/usr/include/enet/enet.h	/^   ENET_SOCKOPT_NONBLOCK  = 1,$/;"	e	enum:_ENetSocketOption
+ENET_SOCKOPT_RCVBUF	/usr/include/enet/enet.h	/^   ENET_SOCKOPT_RCVBUF    = 3,$/;"	e	enum:_ENetSocketOption
+ENET_SOCKOPT_RCVTIMEO	/usr/include/enet/enet.h	/^   ENET_SOCKOPT_RCVTIMEO  = 6,$/;"	e	enum:_ENetSocketOption
+ENET_SOCKOPT_REUSEADDR	/usr/include/enet/enet.h	/^   ENET_SOCKOPT_REUSEADDR = 5,$/;"	e	enum:_ENetSocketOption
+ENET_SOCKOPT_SNDBUF	/usr/include/enet/enet.h	/^   ENET_SOCKOPT_SNDBUF    = 4,$/;"	e	enum:_ENetSocketOption
+ENET_SOCKOPT_SNDTIMEO	/usr/include/enet/enet.h	/^   ENET_SOCKOPT_SNDTIMEO  = 7,$/;"	e	enum:_ENetSocketOption
+ENET_TIME_DIFFERENCE	/usr/include/enet/time.h	15;"	d
+ENET_TIME_GREATER	/usr/include/enet/time.h	11;"	d
+ENET_TIME_GREATER_EQUAL	/usr/include/enet/time.h	13;"	d
+ENET_TIME_LESS	/usr/include/enet/time.h	10;"	d
+ENET_TIME_LESS_EQUAL	/usr/include/enet/time.h	12;"	d
+ENET_TIME_OVERFLOW	/usr/include/enet/time.h	8;"	d
+ENET_VERSION	/usr/include/enet/enet.h	33;"	d
+ENET_VERSION_CREATE	/usr/include/enet/enet.h	29;"	d
+ENET_VERSION_GET_MAJOR	/usr/include/enet/enet.h	30;"	d
+ENET_VERSION_GET_MINOR	/usr/include/enet/enet.h	31;"	d
+ENET_VERSION_GET_PATCH	/usr/include/enet/enet.h	32;"	d
+ENET_VERSION_MAJOR	/usr/include/enet/enet.h	26;"	d
+ENET_VERSION_MINOR	/usr/include/enet/enet.h	27;"	d
+ENET_VERSION_PATCH	/usr/include/enet/enet.h	28;"	d
+ENetAcknowledgement	/usr/include/enet/enet.h	/^} ENetAcknowledgement;$/;"	t	typeref:struct:_ENetAcknowledgement
+ENetAddress	/usr/include/enet/enet.h	/^} ENetAddress;$/;"	t	typeref:struct:_ENetAddress
+ENetBuffer	/usr/include/enet/unix.h	/^} ENetBuffer;$/;"	t	typeref:struct:__anon3
+ENetBuffer	/usr/include/enet/win32.h	/^} ENetBuffer;$/;"	t	typeref:struct:__anon4
+ENetCallbacks	/usr/include/enet/callbacks.h	/^} ENetCallbacks;$/;"	t	typeref:struct:_ENetCallbacks
+ENetChannel	/usr/include/enet/enet.h	/^} ENetChannel;$/;"	t	typeref:struct:_ENetChannel
+ENetChecksumCallback	/usr/include/enet/enet.h	/^typedef enet_uint32 (ENET_CALLBACK * ENetChecksumCallback) (const ENetBuffer * buffers, size_t bufferCount);$/;"	t
+ENetCompressor	/usr/include/enet/enet.h	/^} ENetCompressor;$/;"	t	typeref:struct:_ENetCompressor
+ENetEvent	/usr/include/enet/enet.h	/^} ENetEvent;$/;"	t	typeref:struct:_ENetEvent
+ENetEventType	/usr/include/enet/enet.h	/^} ENetEventType;$/;"	t	typeref:enum:_ENetEventType
+ENetHost	/usr/include/enet/enet.h	/^} ENetHost;$/;"	t	typeref:struct:_ENetHost
+ENetIncomingCommand	/usr/include/enet/enet.h	/^} ENetIncomingCommand;$/;"	t	typeref:struct:_ENetIncomingCommand
+ENetInterceptCallback	/usr/include/enet/enet.h	/^typedef int (ENET_CALLBACK * ENetInterceptCallback) (struct _ENetHost * host, struct _ENetEvent * event);$/;"	t
+ENetList	/usr/include/enet/list.h	/^} ENetList;$/;"	t	typeref:struct:_ENetList
+ENetListIterator	/usr/include/enet/list.h	/^typedef ENetListNode * ENetListIterator;$/;"	t
+ENetListNode	/usr/include/enet/list.h	/^} ENetListNode;$/;"	t	typeref:struct:_ENetListNode
+ENetOutgoingCommand	/usr/include/enet/enet.h	/^} ENetOutgoingCommand;$/;"	t	typeref:struct:_ENetOutgoingCommand
+ENetPacket	/usr/include/enet/enet.h	/^} ENetPacket;$/;"	t	typeref:struct:_ENetPacket
+ENetPacketFlag	/usr/include/enet/enet.h	/^} ENetPacketFlag;$/;"	t	typeref:enum:_ENetPacketFlag
+ENetPacketFreeCallback	/usr/include/enet/enet.h	/^typedef void (ENET_CALLBACK * ENetPacketFreeCallback) (struct _ENetPacket *);$/;"	t
+ENetPeer	/usr/include/enet/enet.h	/^} ENetPeer;$/;"	t	typeref:struct:_ENetPeer
+ENetPeerState	/usr/include/enet/enet.h	/^} ENetPeerState;$/;"	t	typeref:enum:_ENetPeerState
+ENetProtocol	/usr/include/enet/protocol.h	/^} ENET_PACKED ENetProtocol;$/;"	t	typeref:union:_ENetProtocol
+ENetProtocolAcknowledge	/usr/include/enet/protocol.h	/^} ENET_PACKED ENetProtocolAcknowledge;$/;"	t	typeref:struct:_ENetProtocolAcknowledge
+ENetProtocolBandwidthLimit	/usr/include/enet/protocol.h	/^} ENET_PACKED ENetProtocolBandwidthLimit;$/;"	t	typeref:struct:_ENetProtocolBandwidthLimit
+ENetProtocolCommand	/usr/include/enet/protocol.h	/^} ENetProtocolCommand;$/;"	t	typeref:enum:_ENetProtocolCommand
+ENetProtocolCommandHeader	/usr/include/enet/protocol.h	/^} ENET_PACKED ENetProtocolCommandHeader;$/;"	t	typeref:struct:_ENetProtocolCommandHeader
+ENetProtocolConnect	/usr/include/enet/protocol.h	/^} ENET_PACKED ENetProtocolConnect;$/;"	t	typeref:struct:_ENetProtocolConnect
+ENetProtocolDisconnect	/usr/include/enet/protocol.h	/^} ENET_PACKED ENetProtocolDisconnect;$/;"	t	typeref:struct:_ENetProtocolDisconnect
+ENetProtocolFlag	/usr/include/enet/protocol.h	/^} ENetProtocolFlag;$/;"	t	typeref:enum:_ENetProtocolFlag
+ENetProtocolHeader	/usr/include/enet/protocol.h	/^} ENET_PACKED ENetProtocolHeader;$/;"	t	typeref:struct:_ENetProtocolHeader
+ENetProtocolPing	/usr/include/enet/protocol.h	/^} ENET_PACKED ENetProtocolPing;$/;"	t	typeref:struct:_ENetProtocolPing
+ENetProtocolSendFragment	/usr/include/enet/protocol.h	/^} ENET_PACKED ENetProtocolSendFragment;$/;"	t	typeref:struct:_ENetProtocolSendFragment
+ENetProtocolSendReliable	/usr/include/enet/protocol.h	/^} ENET_PACKED ENetProtocolSendReliable;$/;"	t	typeref:struct:_ENetProtocolSendReliable
+ENetProtocolSendUnreliable	/usr/include/enet/protocol.h	/^} ENET_PACKED ENetProtocolSendUnreliable;$/;"	t	typeref:struct:_ENetProtocolSendUnreliable
+ENetProtocolSendUnsequenced	/usr/include/enet/protocol.h	/^} ENET_PACKED ENetProtocolSendUnsequenced;$/;"	t	typeref:struct:_ENetProtocolSendUnsequenced
+ENetProtocolThrottleConfigure	/usr/include/enet/protocol.h	/^} ENET_PACKED ENetProtocolThrottleConfigure;$/;"	t	typeref:struct:_ENetProtocolThrottleConfigure
+ENetProtocolVerifyConnect	/usr/include/enet/protocol.h	/^} ENET_PACKED ENetProtocolVerifyConnect;$/;"	t	typeref:struct:_ENetProtocolVerifyConnect
+ENetSocket	/usr/include/enet/unix.h	/^typedef int ENetSocket;$/;"	t
+ENetSocket	/usr/include/enet/win32.h	/^typedef SOCKET ENetSocket;$/;"	t
+ENetSocketOption	/usr/include/enet/enet.h	/^} ENetSocketOption;$/;"	t	typeref:enum:_ENetSocketOption
+ENetSocketSet	/usr/include/enet/unix.h	/^typedef fd_set ENetSocketSet;$/;"	t
+ENetSocketSet	/usr/include/enet/win32.h	/^typedef fd_set ENetSocketSet;$/;"	t
+ENetSocketShutdown	/usr/include/enet/enet.h	/^} ENetSocketShutdown;$/;"	t	typeref:enum:_ENetSocketShutdown
+ENetSocketType	/usr/include/enet/enet.h	/^} ENetSocketType;$/;"	t	typeref:enum:_ENetSocketType
+ENetSocketWait	/usr/include/enet/enet.h	/^} ENetSocketWait;$/;"	t	typeref:enum:_ENetSocketWait
+ENetVersion	/usr/include/enet/enet.h	/^typedef enet_uint32 ENetVersion;$/;"	t
+_ENetAcknowledgement	/usr/include/enet/enet.h	/^typedef struct _ENetAcknowledgement$/;"	s
+_ENetAcknowledgement::acknowledgementList	/usr/include/enet/enet.h	/^   ENetListNode acknowledgementList;$/;"	m	struct:_ENetAcknowledgement	access:public
+_ENetAcknowledgement::command	/usr/include/enet/enet.h	/^   ENetProtocol command;$/;"	m	struct:_ENetAcknowledgement	access:public
+_ENetAcknowledgement::sentTime	/usr/include/enet/enet.h	/^   enet_uint32  sentTime;$/;"	m	struct:_ENetAcknowledgement	access:public
+_ENetAddress	/usr/include/enet/enet.h	/^typedef struct _ENetAddress$/;"	s
+_ENetAddress::host	/usr/include/enet/enet.h	/^   enet_uint32 host;$/;"	m	struct:_ENetAddress	access:public
+_ENetAddress::port	/usr/include/enet/enet.h	/^   enet_uint16 port;$/;"	m	struct:_ENetAddress	access:public
+_ENetCallbacks	/usr/include/enet/callbacks.h	/^typedef struct _ENetCallbacks$/;"	s
+_ENetCallbacks::free	/usr/include/enet/callbacks.h	/^    void (ENET_CALLBACK * free) (void * memory);$/;"	m	struct:_ENetCallbacks	access:public
+_ENetCallbacks::malloc	/usr/include/enet/callbacks.h	/^    void * (ENET_CALLBACK * malloc) (size_t size);$/;"	m	struct:_ENetCallbacks	access:public
+_ENetCallbacks::no_memory	/usr/include/enet/callbacks.h	/^    void (ENET_CALLBACK * no_memory) (void);$/;"	m	struct:_ENetCallbacks	access:public
+_ENetChannel	/usr/include/enet/enet.h	/^typedef struct _ENetChannel$/;"	s
+_ENetChannel::incomingReliableCommands	/usr/include/enet/enet.h	/^   ENetList     incomingReliableCommands;$/;"	m	struct:_ENetChannel	access:public
+_ENetChannel::incomingReliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16  incomingReliableSequenceNumber;$/;"	m	struct:_ENetChannel	access:public
+_ENetChannel::incomingUnreliableCommands	/usr/include/enet/enet.h	/^   ENetList     incomingUnreliableCommands;$/;"	m	struct:_ENetChannel	access:public
+_ENetChannel::incomingUnreliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16  incomingUnreliableSequenceNumber;$/;"	m	struct:_ENetChannel	access:public
+_ENetChannel::outgoingReliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16  outgoingReliableSequenceNumber;$/;"	m	struct:_ENetChannel	access:public
+_ENetChannel::outgoingUnreliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16  outgoingUnreliableSequenceNumber;$/;"	m	struct:_ENetChannel	access:public
+_ENetChannel::reliableWindows	/usr/include/enet/enet.h	/^   enet_uint16  reliableWindows [ENET_PEER_RELIABLE_WINDOWS];$/;"	m	struct:_ENetChannel	access:public
+_ENetChannel::usedReliableWindows	/usr/include/enet/enet.h	/^   enet_uint16  usedReliableWindows;$/;"	m	struct:_ENetChannel	access:public
+_ENetCompressor	/usr/include/enet/enet.h	/^typedef struct _ENetCompressor$/;"	s
+_ENetCompressor::compress	/usr/include/enet/enet.h	/^   size_t (ENET_CALLBACK * compress) (void * context, const ENetBuffer * inBuffers, size_t inBufferCount, size_t inLimit, enet_uint8 * outData, size_t outLimit);$/;"	m	struct:_ENetCompressor	access:public
+_ENetCompressor::context	/usr/include/enet/enet.h	/^   void * context;$/;"	m	struct:_ENetCompressor	access:public
+_ENetCompressor::decompress	/usr/include/enet/enet.h	/^   size_t (ENET_CALLBACK * decompress) (void * context, const enet_uint8 * inData, size_t inLimit, enet_uint8 * outData, size_t outLimit);$/;"	m	struct:_ENetCompressor	access:public
+_ENetCompressor::destroy	/usr/include/enet/enet.h	/^   void (ENET_CALLBACK * destroy) (void * context);$/;"	m	struct:_ENetCompressor	access:public
+_ENetEvent	/usr/include/enet/enet.h	/^typedef struct _ENetEvent $/;"	s
+_ENetEvent::channelID	/usr/include/enet/enet.h	/^   enet_uint8           channelID; \/**< channel on the peer that generated the event, if appropriate *\/$/;"	m	struct:_ENetEvent	access:public
+_ENetEvent::data	/usr/include/enet/enet.h	/^   enet_uint32          data;      \/**< data associated with the event, if appropriate *\/$/;"	m	struct:_ENetEvent	access:public
+_ENetEvent::packet	/usr/include/enet/enet.h	/^   ENetPacket *         packet;    \/**< packet associated with the event, if appropriate *\/$/;"	m	struct:_ENetEvent	access:public
+_ENetEvent::peer	/usr/include/enet/enet.h	/^   ENetPeer *           peer;      \/**< peer that generated a connect, disconnect or receive event *\/$/;"	m	struct:_ENetEvent	access:public
+_ENetEvent::type	/usr/include/enet/enet.h	/^   ENetEventType        type;      \/**< type of the event *\/$/;"	m	struct:_ENetEvent	access:public
+_ENetEventType	/usr/include/enet/enet.h	/^typedef enum _ENetEventType$/;"	g
+_ENetHost	/usr/include/enet/enet.h	/^typedef struct _ENetHost$/;"	s
+_ENetHost::address	/usr/include/enet/enet.h	/^   ENetAddress          address;                     \/**< Internet address of the host *\/$/;"	m	struct:_ENetHost	access:public
+_ENetHost::bandwidthLimitedPeers	/usr/include/enet/enet.h	/^   size_t               bandwidthLimitedPeers;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::bandwidthThrottleEpoch	/usr/include/enet/enet.h	/^   enet_uint32          bandwidthThrottleEpoch;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::bufferCount	/usr/include/enet/enet.h	/^   size_t               bufferCount;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::buffers	/usr/include/enet/enet.h	/^   ENetBuffer           buffers [ENET_BUFFER_MAXIMUM];$/;"	m	struct:_ENetHost	access:public
+_ENetHost::channelLimit	/usr/include/enet/enet.h	/^   size_t               channelLimit;                \/**< maximum number of channels allowed for connected peers *\/$/;"	m	struct:_ENetHost	access:public
+_ENetHost::checksum	/usr/include/enet/enet.h	/^   ENetChecksumCallback checksum;                    \/**< callback the user can set to enable packet checksums for this host *\/$/;"	m	struct:_ENetHost	access:public
+_ENetHost::commandCount	/usr/include/enet/enet.h	/^   size_t               commandCount;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::commands	/usr/include/enet/enet.h	/^   ENetProtocol         commands [ENET_PROTOCOL_MAXIMUM_PACKET_COMMANDS];$/;"	m	struct:_ENetHost	access:public
+_ENetHost::compressor	/usr/include/enet/enet.h	/^   ENetCompressor       compressor;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::connectedPeers	/usr/include/enet/enet.h	/^   size_t               connectedPeers;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::continueSending	/usr/include/enet/enet.h	/^   int                  continueSending;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::dispatchQueue	/usr/include/enet/enet.h	/^   ENetList             dispatchQueue;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::duplicatePeers	/usr/include/enet/enet.h	/^   size_t               duplicatePeers;              \/**< optional number of allowed peers from duplicate IPs, defaults to ENET_PROTOCOL_MAXIMUM_PEER_ID *\/$/;"	m	struct:_ENetHost	access:public
+_ENetHost::headerFlags	/usr/include/enet/enet.h	/^   enet_uint16          headerFlags;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::incomingBandwidth	/usr/include/enet/enet.h	/^   enet_uint32          incomingBandwidth;           \/**< downstream bandwidth of the host *\/$/;"	m	struct:_ENetHost	access:public
+_ENetHost::intercept	/usr/include/enet/enet.h	/^   ENetInterceptCallback intercept;                  \/**< callback the user can set to intercept received raw UDP packets *\/$/;"	m	struct:_ENetHost	access:public
+_ENetHost::maximumPacketSize	/usr/include/enet/enet.h	/^   size_t               maximumPacketSize;           \/**< the maximum allowable packet size that may be sent or received on a peer *\/$/;"	m	struct:_ENetHost	access:public
+_ENetHost::maximumWaitingData	/usr/include/enet/enet.h	/^   size_t               maximumWaitingData;          \/**< the maximum aggregate amount of buffer space a peer may use waiting for packets to be delivered *\/$/;"	m	struct:_ENetHost	access:public
+_ENetHost::mtu	/usr/include/enet/enet.h	/^   enet_uint32          mtu;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::outgoingBandwidth	/usr/include/enet/enet.h	/^   enet_uint32          outgoingBandwidth;           \/**< upstream bandwidth of the host *\/$/;"	m	struct:_ENetHost	access:public
+_ENetHost::packetData	/usr/include/enet/enet.h	/^   enet_uint8           packetData [2][ENET_PROTOCOL_MAXIMUM_MTU];$/;"	m	struct:_ENetHost	access:public
+_ENetHost::packetSize	/usr/include/enet/enet.h	/^   size_t               packetSize;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::peerCount	/usr/include/enet/enet.h	/^   size_t               peerCount;                   \/**< number of peers allocated for this host *\/$/;"	m	struct:_ENetHost	access:public
+_ENetHost::peers	/usr/include/enet/enet.h	/^   ENetPeer *           peers;                       \/**< array of peers allocated for this host *\/$/;"	m	struct:_ENetHost	access:public
+_ENetHost::randomSeed	/usr/include/enet/enet.h	/^   enet_uint32          randomSeed;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::recalculateBandwidthLimits	/usr/include/enet/enet.h	/^   int                  recalculateBandwidthLimits;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::receivedAddress	/usr/include/enet/enet.h	/^   ENetAddress          receivedAddress;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::receivedData	/usr/include/enet/enet.h	/^   enet_uint8 *         receivedData;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::receivedDataLength	/usr/include/enet/enet.h	/^   size_t               receivedDataLength;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::serviceTime	/usr/include/enet/enet.h	/^   enet_uint32          serviceTime;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::socket	/usr/include/enet/enet.h	/^   ENetSocket           socket;$/;"	m	struct:_ENetHost	access:public
+_ENetHost::totalReceivedData	/usr/include/enet/enet.h	/^   enet_uint32          totalReceivedData;           \/**< total data received, user should reset to 0 as needed to prevent overflow *\/$/;"	m	struct:_ENetHost	access:public
+_ENetHost::totalReceivedPackets	/usr/include/enet/enet.h	/^   enet_uint32          totalReceivedPackets;        \/**< total UDP packets received, user should reset to 0 as needed to prevent overflow *\/$/;"	m	struct:_ENetHost	access:public
+_ENetHost::totalSentData	/usr/include/enet/enet.h	/^   enet_uint32          totalSentData;               \/**< total data sent, user should reset to 0 as needed to prevent overflow *\/$/;"	m	struct:_ENetHost	access:public
+_ENetHost::totalSentPackets	/usr/include/enet/enet.h	/^   enet_uint32          totalSentPackets;            \/**< total UDP packets sent, user should reset to 0 as needed to prevent overflow *\/$/;"	m	struct:_ENetHost	access:public
+_ENetIncomingCommand	/usr/include/enet/enet.h	/^typedef struct _ENetIncomingCommand$/;"	s
+_ENetIncomingCommand::command	/usr/include/enet/enet.h	/^   ENetProtocol     command;$/;"	m	struct:_ENetIncomingCommand	access:public
+_ENetIncomingCommand::fragmentCount	/usr/include/enet/enet.h	/^   enet_uint32      fragmentCount;$/;"	m	struct:_ENetIncomingCommand	access:public
+_ENetIncomingCommand::fragments	/usr/include/enet/enet.h	/^   enet_uint32 *    fragments;$/;"	m	struct:_ENetIncomingCommand	access:public
+_ENetIncomingCommand::fragmentsRemaining	/usr/include/enet/enet.h	/^   enet_uint32      fragmentsRemaining;$/;"	m	struct:_ENetIncomingCommand	access:public
+_ENetIncomingCommand::incomingCommandList	/usr/include/enet/enet.h	/^   ENetListNode     incomingCommandList;$/;"	m	struct:_ENetIncomingCommand	access:public
+_ENetIncomingCommand::packet	/usr/include/enet/enet.h	/^   ENetPacket *     packet;$/;"	m	struct:_ENetIncomingCommand	access:public
+_ENetIncomingCommand::reliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16      reliableSequenceNumber;$/;"	m	struct:_ENetIncomingCommand	access:public
+_ENetIncomingCommand::unreliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16      unreliableSequenceNumber;$/;"	m	struct:_ENetIncomingCommand	access:public
+_ENetList	/usr/include/enet/list.h	/^typedef struct _ENetList$/;"	s
+_ENetList::sentinel	/usr/include/enet/list.h	/^   ENetListNode sentinel;$/;"	m	struct:_ENetList	access:public
+_ENetListNode	/usr/include/enet/list.h	/^typedef struct _ENetListNode$/;"	s
+_ENetListNode::next	/usr/include/enet/list.h	/^   struct _ENetListNode * next;$/;"	m	struct:_ENetListNode	typeref:struct:_ENetListNode::_ENetListNode	access:public
+_ENetListNode::previous	/usr/include/enet/list.h	/^   struct _ENetListNode * previous;$/;"	m	struct:_ENetListNode	typeref:struct:_ENetListNode::_ENetListNode	access:public
+_ENetOutgoingCommand	/usr/include/enet/enet.h	/^typedef struct _ENetOutgoingCommand$/;"	s
+_ENetOutgoingCommand::command	/usr/include/enet/enet.h	/^   ENetProtocol command;$/;"	m	struct:_ENetOutgoingCommand	access:public
+_ENetOutgoingCommand::fragmentLength	/usr/include/enet/enet.h	/^   enet_uint16  fragmentLength;$/;"	m	struct:_ENetOutgoingCommand	access:public
+_ENetOutgoingCommand::fragmentOffset	/usr/include/enet/enet.h	/^   enet_uint32  fragmentOffset;$/;"	m	struct:_ENetOutgoingCommand	access:public
+_ENetOutgoingCommand::outgoingCommandList	/usr/include/enet/enet.h	/^   ENetListNode outgoingCommandList;$/;"	m	struct:_ENetOutgoingCommand	access:public
+_ENetOutgoingCommand::packet	/usr/include/enet/enet.h	/^   ENetPacket * packet;$/;"	m	struct:_ENetOutgoingCommand	access:public
+_ENetOutgoingCommand::reliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16  reliableSequenceNumber;$/;"	m	struct:_ENetOutgoingCommand	access:public
+_ENetOutgoingCommand::roundTripTimeout	/usr/include/enet/enet.h	/^   enet_uint32  roundTripTimeout;$/;"	m	struct:_ENetOutgoingCommand	access:public
+_ENetOutgoingCommand::roundTripTimeoutLimit	/usr/include/enet/enet.h	/^   enet_uint32  roundTripTimeoutLimit;$/;"	m	struct:_ENetOutgoingCommand	access:public
+_ENetOutgoingCommand::sendAttempts	/usr/include/enet/enet.h	/^   enet_uint16  sendAttempts;$/;"	m	struct:_ENetOutgoingCommand	access:public
+_ENetOutgoingCommand::sentTime	/usr/include/enet/enet.h	/^   enet_uint32  sentTime;$/;"	m	struct:_ENetOutgoingCommand	access:public
+_ENetOutgoingCommand::unreliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16  unreliableSequenceNumber;$/;"	m	struct:_ENetOutgoingCommand	access:public
+_ENetPacket	/usr/include/enet/enet.h	/^typedef struct _ENetPacket$/;"	s
+_ENetPacket::data	/usr/include/enet/enet.h	/^   enet_uint8 *             data;            \/**< allocated data for packet *\/$/;"	m	struct:_ENetPacket	access:public
+_ENetPacket::dataLength	/usr/include/enet/enet.h	/^   size_t                   dataLength;      \/**< length of data *\/$/;"	m	struct:_ENetPacket	access:public
+_ENetPacket::flags	/usr/include/enet/enet.h	/^   enet_uint32              flags;           \/**< bitwise-or of ENetPacketFlag constants *\/$/;"	m	struct:_ENetPacket	access:public
+_ENetPacket::freeCallback	/usr/include/enet/enet.h	/^   ENetPacketFreeCallback   freeCallback;    \/**< function to be called when the packet is no longer in use *\/$/;"	m	struct:_ENetPacket	access:public
+_ENetPacket::referenceCount	/usr/include/enet/enet.h	/^   size_t                   referenceCount;  \/**< internal use only *\/$/;"	m	struct:_ENetPacket	access:public
+_ENetPacket::userData	/usr/include/enet/enet.h	/^   void *                   userData;        \/**< application private data, may be freely modified *\/$/;"	m	struct:_ENetPacket	access:public
+_ENetPacketFlag	/usr/include/enet/enet.h	/^typedef enum _ENetPacketFlag$/;"	g
+_ENetPeer	/usr/include/enet/enet.h	/^typedef struct _ENetPeer$/;"	s
+_ENetPeer::acknowledgements	/usr/include/enet/enet.h	/^   ENetList      acknowledgements;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::address	/usr/include/enet/enet.h	/^   ENetAddress   address;            \/**< Internet address of the peer *\/$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::channelCount	/usr/include/enet/enet.h	/^   size_t        channelCount;       \/**< Number of channels allocated for communication with peer *\/$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::channels	/usr/include/enet/enet.h	/^   ENetChannel * channels;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::connectID	/usr/include/enet/enet.h	/^   enet_uint32   connectID;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::data	/usr/include/enet/enet.h	/^   void *        data;               \/**< Application private data, may be freely modified *\/$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::dispatchList	/usr/include/enet/enet.h	/^   ENetListNode  dispatchList;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::dispatchedCommands	/usr/include/enet/enet.h	/^   ENetList      dispatchedCommands;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::earliestTimeout	/usr/include/enet/enet.h	/^   enet_uint32   earliestTimeout;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::eventData	/usr/include/enet/enet.h	/^   enet_uint32   eventData;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::highestRoundTripTimeVariance	/usr/include/enet/enet.h	/^   enet_uint32   highestRoundTripTimeVariance;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::host	/usr/include/enet/enet.h	/^   struct _ENetHost * host;$/;"	m	struct:_ENetPeer	typeref:struct:_ENetPeer::_ENetHost	access:public
+_ENetPeer::incomingBandwidth	/usr/include/enet/enet.h	/^   enet_uint32   incomingBandwidth;  \/**< Downstream bandwidth of the client in bytes\/second *\/$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::incomingBandwidthThrottleEpoch	/usr/include/enet/enet.h	/^   enet_uint32   incomingBandwidthThrottleEpoch;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::incomingDataTotal	/usr/include/enet/enet.h	/^   enet_uint32   incomingDataTotal;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::incomingPeerID	/usr/include/enet/enet.h	/^   enet_uint16   incomingPeerID;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::incomingSessionID	/usr/include/enet/enet.h	/^   enet_uint8    incomingSessionID;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::incomingUnsequencedGroup	/usr/include/enet/enet.h	/^   enet_uint16   incomingUnsequencedGroup;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::lastReceiveTime	/usr/include/enet/enet.h	/^   enet_uint32   lastReceiveTime;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::lastRoundTripTime	/usr/include/enet/enet.h	/^   enet_uint32   lastRoundTripTime;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::lastRoundTripTimeVariance	/usr/include/enet/enet.h	/^   enet_uint32   lastRoundTripTimeVariance;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::lastSendTime	/usr/include/enet/enet.h	/^   enet_uint32   lastSendTime;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::lowestRoundTripTime	/usr/include/enet/enet.h	/^   enet_uint32   lowestRoundTripTime;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::mtu	/usr/include/enet/enet.h	/^   enet_uint32   mtu;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::needsDispatch	/usr/include/enet/enet.h	/^   int           needsDispatch;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::nextTimeout	/usr/include/enet/enet.h	/^   enet_uint32   nextTimeout;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::outgoingBandwidth	/usr/include/enet/enet.h	/^   enet_uint32   outgoingBandwidth;  \/**< Upstream bandwidth of the client in bytes\/second *\/$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::outgoingBandwidthThrottleEpoch	/usr/include/enet/enet.h	/^   enet_uint32   outgoingBandwidthThrottleEpoch;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::outgoingDataTotal	/usr/include/enet/enet.h	/^   enet_uint32   outgoingDataTotal;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::outgoingPeerID	/usr/include/enet/enet.h	/^   enet_uint16   outgoingPeerID;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::outgoingReliableCommands	/usr/include/enet/enet.h	/^   ENetList      outgoingReliableCommands;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::outgoingReliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16   outgoingReliableSequenceNumber;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::outgoingSessionID	/usr/include/enet/enet.h	/^   enet_uint8    outgoingSessionID;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::outgoingUnreliableCommands	/usr/include/enet/enet.h	/^   ENetList      outgoingUnreliableCommands;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::outgoingUnsequencedGroup	/usr/include/enet/enet.h	/^   enet_uint16   outgoingUnsequencedGroup;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::packetLoss	/usr/include/enet/enet.h	/^   enet_uint32   packetLoss;          \/**< mean packet loss of reliable packets as a ratio with respect to the constant ENET_PEER_PACKET_LOSS_SCALE *\/$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::packetLossEpoch	/usr/include/enet/enet.h	/^   enet_uint32   packetLossEpoch;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::packetLossVariance	/usr/include/enet/enet.h	/^   enet_uint32   packetLossVariance;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::packetThrottle	/usr/include/enet/enet.h	/^   enet_uint32   packetThrottle;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::packetThrottleAcceleration	/usr/include/enet/enet.h	/^   enet_uint32   packetThrottleAcceleration;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::packetThrottleCounter	/usr/include/enet/enet.h	/^   enet_uint32   packetThrottleCounter;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::packetThrottleDeceleration	/usr/include/enet/enet.h	/^   enet_uint32   packetThrottleDeceleration;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::packetThrottleEpoch	/usr/include/enet/enet.h	/^   enet_uint32   packetThrottleEpoch;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::packetThrottleInterval	/usr/include/enet/enet.h	/^   enet_uint32   packetThrottleInterval;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::packetThrottleLimit	/usr/include/enet/enet.h	/^   enet_uint32   packetThrottleLimit;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::packetsLost	/usr/include/enet/enet.h	/^   enet_uint32   packetsLost;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::packetsSent	/usr/include/enet/enet.h	/^   enet_uint32   packetsSent;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::pingInterval	/usr/include/enet/enet.h	/^   enet_uint32   pingInterval;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::reliableDataInTransit	/usr/include/enet/enet.h	/^   enet_uint32   reliableDataInTransit;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::roundTripTime	/usr/include/enet/enet.h	/^   enet_uint32   roundTripTime;            \/**< mean round trip time (RTT), in milliseconds, between sending a reliable packet and receiving its acknowledgement *\/$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::roundTripTimeVariance	/usr/include/enet/enet.h	/^   enet_uint32   roundTripTimeVariance;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::sentReliableCommands	/usr/include/enet/enet.h	/^   ENetList      sentReliableCommands;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::sentUnreliableCommands	/usr/include/enet/enet.h	/^   ENetList      sentUnreliableCommands;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::state	/usr/include/enet/enet.h	/^   ENetPeerState state;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::timeoutLimit	/usr/include/enet/enet.h	/^   enet_uint32   timeoutLimit;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::timeoutMaximum	/usr/include/enet/enet.h	/^   enet_uint32   timeoutMaximum;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::timeoutMinimum	/usr/include/enet/enet.h	/^   enet_uint32   timeoutMinimum;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::totalWaitingData	/usr/include/enet/enet.h	/^   size_t        totalWaitingData;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::unsequencedWindow	/usr/include/enet/enet.h	/^   enet_uint32   unsequencedWindow [ENET_PEER_UNSEQUENCED_WINDOW_SIZE \/ 32]; $/;"	m	struct:_ENetPeer	access:public
+_ENetPeer::windowSize	/usr/include/enet/enet.h	/^   enet_uint32   windowSize;$/;"	m	struct:_ENetPeer	access:public
+_ENetPeerState	/usr/include/enet/enet.h	/^typedef enum _ENetPeerState$/;"	g
+_ENetProtocol	/usr/include/enet/protocol.h	/^typedef union _ENetProtocol$/;"	u
+_ENetProtocol::acknowledge	/usr/include/enet/protocol.h	/^   ENetProtocolAcknowledge acknowledge;$/;"	m	union:_ENetProtocol	access:public
+_ENetProtocol::bandwidthLimit	/usr/include/enet/protocol.h	/^   ENetProtocolBandwidthLimit bandwidthLimit;$/;"	m	union:_ENetProtocol	access:public
+_ENetProtocol::connect	/usr/include/enet/protocol.h	/^   ENetProtocolConnect connect;$/;"	m	union:_ENetProtocol	access:public
+_ENetProtocol::disconnect	/usr/include/enet/protocol.h	/^   ENetProtocolDisconnect disconnect;$/;"	m	union:_ENetProtocol	access:public
+_ENetProtocol::header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	union:_ENetProtocol	access:public
+_ENetProtocol::ping	/usr/include/enet/protocol.h	/^   ENetProtocolPing ping;$/;"	m	union:_ENetProtocol	access:public
+_ENetProtocol::sendFragment	/usr/include/enet/protocol.h	/^   ENetProtocolSendFragment sendFragment;$/;"	m	union:_ENetProtocol	access:public
+_ENetProtocol::sendReliable	/usr/include/enet/protocol.h	/^   ENetProtocolSendReliable sendReliable;$/;"	m	union:_ENetProtocol	access:public
+_ENetProtocol::sendUnreliable	/usr/include/enet/protocol.h	/^   ENetProtocolSendUnreliable sendUnreliable;$/;"	m	union:_ENetProtocol	access:public
+_ENetProtocol::sendUnsequenced	/usr/include/enet/protocol.h	/^   ENetProtocolSendUnsequenced sendUnsequenced;$/;"	m	union:_ENetProtocol	access:public
+_ENetProtocol::throttleConfigure	/usr/include/enet/protocol.h	/^   ENetProtocolThrottleConfigure throttleConfigure;$/;"	m	union:_ENetProtocol	access:public
+_ENetProtocol::verifyConnect	/usr/include/enet/protocol.h	/^   ENetProtocolVerifyConnect verifyConnect;$/;"	m	union:_ENetProtocol	access:public
+_ENetProtocolAcknowledge	/usr/include/enet/protocol.h	/^typedef struct _ENetProtocolAcknowledge$/;"	s
+_ENetProtocolAcknowledge::header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolAcknowledge	access:public
+_ENetProtocolAcknowledge::receivedReliableSequenceNumber	/usr/include/enet/protocol.h	/^   enet_uint16 receivedReliableSequenceNumber;$/;"	m	struct:_ENetProtocolAcknowledge	access:public
+_ENetProtocolAcknowledge::receivedSentTime	/usr/include/enet/protocol.h	/^   enet_uint16 receivedSentTime;$/;"	m	struct:_ENetProtocolAcknowledge	access:public
+_ENetProtocolBandwidthLimit	/usr/include/enet/protocol.h	/^typedef struct _ENetProtocolBandwidthLimit$/;"	s
+_ENetProtocolBandwidthLimit::header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolBandwidthLimit	access:public
+_ENetProtocolBandwidthLimit::incomingBandwidth	/usr/include/enet/protocol.h	/^   enet_uint32 incomingBandwidth;$/;"	m	struct:_ENetProtocolBandwidthLimit	access:public
+_ENetProtocolBandwidthLimit::outgoingBandwidth	/usr/include/enet/protocol.h	/^   enet_uint32 outgoingBandwidth;$/;"	m	struct:_ENetProtocolBandwidthLimit	access:public
+_ENetProtocolCommand	/usr/include/enet/protocol.h	/^typedef enum _ENetProtocolCommand$/;"	g
+_ENetProtocolCommandHeader	/usr/include/enet/protocol.h	/^typedef struct _ENetProtocolCommandHeader$/;"	s
+_ENetProtocolCommandHeader::channelID	/usr/include/enet/protocol.h	/^   enet_uint8 channelID;$/;"	m	struct:_ENetProtocolCommandHeader	access:public
+_ENetProtocolCommandHeader::command	/usr/include/enet/protocol.h	/^   enet_uint8 command;$/;"	m	struct:_ENetProtocolCommandHeader	access:public
+_ENetProtocolCommandHeader::reliableSequenceNumber	/usr/include/enet/protocol.h	/^   enet_uint16 reliableSequenceNumber;$/;"	m	struct:_ENetProtocolCommandHeader	access:public
+_ENetProtocolConnect	/usr/include/enet/protocol.h	/^typedef struct _ENetProtocolConnect$/;"	s
+_ENetProtocolConnect::channelCount	/usr/include/enet/protocol.h	/^   enet_uint32 channelCount;$/;"	m	struct:_ENetProtocolConnect	access:public
+_ENetProtocolConnect::connectID	/usr/include/enet/protocol.h	/^   enet_uint32 connectID;$/;"	m	struct:_ENetProtocolConnect	access:public
+_ENetProtocolConnect::data	/usr/include/enet/protocol.h	/^   enet_uint32 data;$/;"	m	struct:_ENetProtocolConnect	access:public
+_ENetProtocolConnect::header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolConnect	access:public
+_ENetProtocolConnect::incomingBandwidth	/usr/include/enet/protocol.h	/^   enet_uint32 incomingBandwidth;$/;"	m	struct:_ENetProtocolConnect	access:public
+_ENetProtocolConnect::incomingSessionID	/usr/include/enet/protocol.h	/^   enet_uint8  incomingSessionID;$/;"	m	struct:_ENetProtocolConnect	access:public
+_ENetProtocolConnect::mtu	/usr/include/enet/protocol.h	/^   enet_uint32 mtu;$/;"	m	struct:_ENetProtocolConnect	access:public
+_ENetProtocolConnect::outgoingBandwidth	/usr/include/enet/protocol.h	/^   enet_uint32 outgoingBandwidth;$/;"	m	struct:_ENetProtocolConnect	access:public
+_ENetProtocolConnect::outgoingPeerID	/usr/include/enet/protocol.h	/^   enet_uint16 outgoingPeerID;$/;"	m	struct:_ENetProtocolConnect	access:public
+_ENetProtocolConnect::outgoingSessionID	/usr/include/enet/protocol.h	/^   enet_uint8  outgoingSessionID;$/;"	m	struct:_ENetProtocolConnect	access:public
+_ENetProtocolConnect::packetThrottleAcceleration	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleAcceleration;$/;"	m	struct:_ENetProtocolConnect	access:public
+_ENetProtocolConnect::packetThrottleDeceleration	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleDeceleration;$/;"	m	struct:_ENetProtocolConnect	access:public
+_ENetProtocolConnect::packetThrottleInterval	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleInterval;$/;"	m	struct:_ENetProtocolConnect	access:public
+_ENetProtocolConnect::windowSize	/usr/include/enet/protocol.h	/^   enet_uint32 windowSize;$/;"	m	struct:_ENetProtocolConnect	access:public
+_ENetProtocolDisconnect	/usr/include/enet/protocol.h	/^typedef struct _ENetProtocolDisconnect$/;"	s
+_ENetProtocolDisconnect::data	/usr/include/enet/protocol.h	/^   enet_uint32 data;$/;"	m	struct:_ENetProtocolDisconnect	access:public
+_ENetProtocolDisconnect::header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolDisconnect	access:public
+_ENetProtocolFlag	/usr/include/enet/protocol.h	/^typedef enum _ENetProtocolFlag$/;"	g
+_ENetProtocolHeader	/usr/include/enet/protocol.h	/^typedef struct _ENetProtocolHeader$/;"	s
+_ENetProtocolHeader::peerID	/usr/include/enet/protocol.h	/^   enet_uint16 peerID;$/;"	m	struct:_ENetProtocolHeader	access:public
+_ENetProtocolHeader::sentTime	/usr/include/enet/protocol.h	/^   enet_uint16 sentTime;$/;"	m	struct:_ENetProtocolHeader	access:public
+_ENetProtocolPing	/usr/include/enet/protocol.h	/^typedef struct _ENetProtocolPing$/;"	s
+_ENetProtocolPing::header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolPing	access:public
+_ENetProtocolSendFragment	/usr/include/enet/protocol.h	/^typedef struct _ENetProtocolSendFragment$/;"	s
+_ENetProtocolSendFragment::dataLength	/usr/include/enet/protocol.h	/^   enet_uint16 dataLength;$/;"	m	struct:_ENetProtocolSendFragment	access:public
+_ENetProtocolSendFragment::fragmentCount	/usr/include/enet/protocol.h	/^   enet_uint32 fragmentCount;$/;"	m	struct:_ENetProtocolSendFragment	access:public
+_ENetProtocolSendFragment::fragmentNumber	/usr/include/enet/protocol.h	/^   enet_uint32 fragmentNumber;$/;"	m	struct:_ENetProtocolSendFragment	access:public
+_ENetProtocolSendFragment::fragmentOffset	/usr/include/enet/protocol.h	/^   enet_uint32 fragmentOffset;$/;"	m	struct:_ENetProtocolSendFragment	access:public
+_ENetProtocolSendFragment::header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolSendFragment	access:public
+_ENetProtocolSendFragment::startSequenceNumber	/usr/include/enet/protocol.h	/^   enet_uint16 startSequenceNumber;$/;"	m	struct:_ENetProtocolSendFragment	access:public
+_ENetProtocolSendFragment::totalLength	/usr/include/enet/protocol.h	/^   enet_uint32 totalLength;$/;"	m	struct:_ENetProtocolSendFragment	access:public
+_ENetProtocolSendReliable	/usr/include/enet/protocol.h	/^typedef struct _ENetProtocolSendReliable$/;"	s
+_ENetProtocolSendReliable::dataLength	/usr/include/enet/protocol.h	/^   enet_uint16 dataLength;$/;"	m	struct:_ENetProtocolSendReliable	access:public
+_ENetProtocolSendReliable::header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolSendReliable	access:public
+_ENetProtocolSendUnreliable	/usr/include/enet/protocol.h	/^typedef struct _ENetProtocolSendUnreliable$/;"	s
+_ENetProtocolSendUnreliable::dataLength	/usr/include/enet/protocol.h	/^   enet_uint16 dataLength;$/;"	m	struct:_ENetProtocolSendUnreliable	access:public
+_ENetProtocolSendUnreliable::header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolSendUnreliable	access:public
+_ENetProtocolSendUnreliable::unreliableSequenceNumber	/usr/include/enet/protocol.h	/^   enet_uint16 unreliableSequenceNumber;$/;"	m	struct:_ENetProtocolSendUnreliable	access:public
+_ENetProtocolSendUnsequenced	/usr/include/enet/protocol.h	/^typedef struct _ENetProtocolSendUnsequenced$/;"	s
+_ENetProtocolSendUnsequenced::dataLength	/usr/include/enet/protocol.h	/^   enet_uint16 dataLength;$/;"	m	struct:_ENetProtocolSendUnsequenced	access:public
+_ENetProtocolSendUnsequenced::header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolSendUnsequenced	access:public
+_ENetProtocolSendUnsequenced::unsequencedGroup	/usr/include/enet/protocol.h	/^   enet_uint16 unsequencedGroup;$/;"	m	struct:_ENetProtocolSendUnsequenced	access:public
+_ENetProtocolThrottleConfigure	/usr/include/enet/protocol.h	/^typedef struct _ENetProtocolThrottleConfigure$/;"	s
+_ENetProtocolThrottleConfigure::header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolThrottleConfigure	access:public
+_ENetProtocolThrottleConfigure::packetThrottleAcceleration	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleAcceleration;$/;"	m	struct:_ENetProtocolThrottleConfigure	access:public
+_ENetProtocolThrottleConfigure::packetThrottleDeceleration	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleDeceleration;$/;"	m	struct:_ENetProtocolThrottleConfigure	access:public
+_ENetProtocolThrottleConfigure::packetThrottleInterval	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleInterval;$/;"	m	struct:_ENetProtocolThrottleConfigure	access:public
+_ENetProtocolVerifyConnect	/usr/include/enet/protocol.h	/^typedef struct _ENetProtocolVerifyConnect$/;"	s
+_ENetProtocolVerifyConnect::channelCount	/usr/include/enet/protocol.h	/^   enet_uint32 channelCount;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+_ENetProtocolVerifyConnect::connectID	/usr/include/enet/protocol.h	/^   enet_uint32 connectID;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+_ENetProtocolVerifyConnect::header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+_ENetProtocolVerifyConnect::incomingBandwidth	/usr/include/enet/protocol.h	/^   enet_uint32 incomingBandwidth;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+_ENetProtocolVerifyConnect::incomingSessionID	/usr/include/enet/protocol.h	/^   enet_uint8  incomingSessionID;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+_ENetProtocolVerifyConnect::mtu	/usr/include/enet/protocol.h	/^   enet_uint32 mtu;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+_ENetProtocolVerifyConnect::outgoingBandwidth	/usr/include/enet/protocol.h	/^   enet_uint32 outgoingBandwidth;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+_ENetProtocolVerifyConnect::outgoingPeerID	/usr/include/enet/protocol.h	/^   enet_uint16 outgoingPeerID;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+_ENetProtocolVerifyConnect::outgoingSessionID	/usr/include/enet/protocol.h	/^   enet_uint8  outgoingSessionID;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+_ENetProtocolVerifyConnect::packetThrottleAcceleration	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleAcceleration;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+_ENetProtocolVerifyConnect::packetThrottleDeceleration	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleDeceleration;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+_ENetProtocolVerifyConnect::packetThrottleInterval	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleInterval;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+_ENetProtocolVerifyConnect::windowSize	/usr/include/enet/protocol.h	/^   enet_uint32 windowSize;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+_ENetSocketOption	/usr/include/enet/enet.h	/^typedef enum _ENetSocketOption$/;"	g
+_ENetSocketShutdown	/usr/include/enet/enet.h	/^typedef enum _ENetSocketShutdown$/;"	g
+_ENetSocketType	/usr/include/enet/enet.h	/^typedef enum _ENetSocketType$/;"	g
+_ENetSocketWait	/usr/include/enet/enet.h	/^typedef enum _ENetSocketWait$/;"	g
+__ENET_CALLBACKS_H__	/usr/include/enet/callbacks.h	6;"	d
+__ENET_ENET_H__	/usr/include/enet/enet.h	6;"	d
+__ENET_LIST_H__	/usr/include/enet/list.h	6;"	d
+__ENET_PROTOCOL_H__	/usr/include/enet/protocol.h	6;"	d
+__ENET_TIME_H__	/usr/include/enet/time.h	6;"	d
+__ENET_TYPES_H__	/usr/include/enet/types.h	6;"	d
+__ENET_UNIX_H__	/usr/include/enet/unix.h	6;"	d
+__ENET_UTILITY_H__	/usr/include/enet/utility.h	6;"	d
+__ENET_WIN32_H__	/usr/include/enet/win32.h	6;"	d
+__anon3::data	/usr/include/enet/unix.h	/^    void * data;$/;"	m	struct:__anon3	access:public
+__anon3::dataLength	/usr/include/enet/unix.h	/^    size_t dataLength;$/;"	m	struct:__anon3	access:public
+__anon4::data	/usr/include/enet/win32.h	/^    void * data;$/;"	m	struct:__anon4	access:public
+__anon4::dataLength	/usr/include/enet/win32.h	/^    size_t dataLength;$/;"	m	struct:__anon4	access:public
+acknowledge	/usr/include/enet/protocol.h	/^   ENetProtocolAcknowledge acknowledge;$/;"	m	union:_ENetProtocol	access:public
+acknowledgementList	/usr/include/enet/enet.h	/^   ENetListNode acknowledgementList;$/;"	m	struct:_ENetAcknowledgement	access:public
+acknowledgements	/usr/include/enet/enet.h	/^   ENetList      acknowledgements;$/;"	m	struct:_ENetPeer	access:public
+address	/usr/include/enet/enet.h	/^   ENetAddress          address;                     \/**< Internet address of the host *\/$/;"	m	struct:_ENetHost	access:public
+address	/usr/include/enet/enet.h	/^   ENetAddress   address;            \/**< Internet address of the peer *\/$/;"	m	struct:_ENetPeer	access:public
+bandwidthLimit	/usr/include/enet/protocol.h	/^   ENetProtocolBandwidthLimit bandwidthLimit;$/;"	m	union:_ENetProtocol	access:public
+bandwidthLimitedPeers	/usr/include/enet/enet.h	/^   size_t               bandwidthLimitedPeers;$/;"	m	struct:_ENetHost	access:public
+bandwidthThrottleEpoch	/usr/include/enet/enet.h	/^   enet_uint32          bandwidthThrottleEpoch;$/;"	m	struct:_ENetHost	access:public
+bufferCount	/usr/include/enet/enet.h	/^   size_t               bufferCount;$/;"	m	struct:_ENetHost	access:public
+buffers	/usr/include/enet/enet.h	/^   ENetBuffer           buffers [ENET_BUFFER_MAXIMUM];$/;"	m	struct:_ENetHost	access:public
+channelCount	/usr/include/enet/enet.h	/^   size_t        channelCount;       \/**< Number of channels allocated for communication with peer *\/$/;"	m	struct:_ENetPeer	access:public
+channelCount	/usr/include/enet/protocol.h	/^   enet_uint32 channelCount;$/;"	m	struct:_ENetProtocolConnect	access:public
+channelCount	/usr/include/enet/protocol.h	/^   enet_uint32 channelCount;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+channelID	/usr/include/enet/enet.h	/^   enet_uint8           channelID; \/**< channel on the peer that generated the event, if appropriate *\/$/;"	m	struct:_ENetEvent	access:public
+channelID	/usr/include/enet/protocol.h	/^   enet_uint8 channelID;$/;"	m	struct:_ENetProtocolCommandHeader	access:public
+channelLimit	/usr/include/enet/enet.h	/^   size_t               channelLimit;                \/**< maximum number of channels allowed for connected peers *\/$/;"	m	struct:_ENetHost	access:public
+channels	/usr/include/enet/enet.h	/^   ENetChannel * channels;$/;"	m	struct:_ENetPeer	access:public
+checksum	/usr/include/enet/enet.h	/^   ENetChecksumCallback checksum;                    \/**< callback the user can set to enable packet checksums for this host *\/$/;"	m	struct:_ENetHost	access:public
+command	/usr/include/enet/enet.h	/^   ENetProtocol     command;$/;"	m	struct:_ENetIncomingCommand	access:public
+command	/usr/include/enet/enet.h	/^   ENetProtocol command;$/;"	m	struct:_ENetAcknowledgement	access:public
+command	/usr/include/enet/enet.h	/^   ENetProtocol command;$/;"	m	struct:_ENetOutgoingCommand	access:public
+command	/usr/include/enet/protocol.h	/^   enet_uint8 command;$/;"	m	struct:_ENetProtocolCommandHeader	access:public
+commandCount	/usr/include/enet/enet.h	/^   size_t               commandCount;$/;"	m	struct:_ENetHost	access:public
+commands	/usr/include/enet/enet.h	/^   ENetProtocol         commands [ENET_PROTOCOL_MAXIMUM_PACKET_COMMANDS];$/;"	m	struct:_ENetHost	access:public
+compress	/usr/include/enet/enet.h	/^   size_t (ENET_CALLBACK * compress) (void * context, const ENetBuffer * inBuffers, size_t inBufferCount, size_t inLimit, enet_uint8 * outData, size_t outLimit);$/;"	m	struct:_ENetCompressor	access:public
+compressor	/usr/include/enet/enet.h	/^   ENetCompressor       compressor;$/;"	m	struct:_ENetHost	access:public
+connect	/usr/include/enet/protocol.h	/^   ENetProtocolConnect connect;$/;"	m	union:_ENetProtocol	access:public
+connectID	/usr/include/enet/enet.h	/^   enet_uint32   connectID;$/;"	m	struct:_ENetPeer	access:public
+connectID	/usr/include/enet/protocol.h	/^   enet_uint32 connectID;$/;"	m	struct:_ENetProtocolConnect	access:public
+connectID	/usr/include/enet/protocol.h	/^   enet_uint32 connectID;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+connectedPeers	/usr/include/enet/enet.h	/^   size_t               connectedPeers;$/;"	m	struct:_ENetHost	access:public
+context	/usr/include/enet/enet.h	/^   void * context;$/;"	m	struct:_ENetCompressor	access:public
+continueSending	/usr/include/enet/enet.h	/^   int                  continueSending;$/;"	m	struct:_ENetHost	access:public
+data	/usr/include/enet/enet.h	/^   enet_uint32          data;      \/**< data associated with the event, if appropriate *\/$/;"	m	struct:_ENetEvent	access:public
+data	/usr/include/enet/enet.h	/^   enet_uint8 *             data;            \/**< allocated data for packet *\/$/;"	m	struct:_ENetPacket	access:public
+data	/usr/include/enet/enet.h	/^   void *        data;               \/**< Application private data, may be freely modified *\/$/;"	m	struct:_ENetPeer	access:public
+data	/usr/include/enet/protocol.h	/^   enet_uint32 data;$/;"	m	struct:_ENetProtocolConnect	access:public
+data	/usr/include/enet/protocol.h	/^   enet_uint32 data;$/;"	m	struct:_ENetProtocolDisconnect	access:public
+data	/usr/include/enet/unix.h	/^    void * data;$/;"	m	struct:__anon3	access:public
+data	/usr/include/enet/win32.h	/^    void * data;$/;"	m	struct:__anon4	access:public
+dataLength	/usr/include/enet/enet.h	/^   size_t                   dataLength;      \/**< length of data *\/$/;"	m	struct:_ENetPacket	access:public
+dataLength	/usr/include/enet/protocol.h	/^   enet_uint16 dataLength;$/;"	m	struct:_ENetProtocolSendFragment	access:public
+dataLength	/usr/include/enet/protocol.h	/^   enet_uint16 dataLength;$/;"	m	struct:_ENetProtocolSendReliable	access:public
+dataLength	/usr/include/enet/protocol.h	/^   enet_uint16 dataLength;$/;"	m	struct:_ENetProtocolSendUnreliable	access:public
+dataLength	/usr/include/enet/protocol.h	/^   enet_uint16 dataLength;$/;"	m	struct:_ENetProtocolSendUnsequenced	access:public
+dataLength	/usr/include/enet/unix.h	/^    size_t dataLength;$/;"	m	struct:__anon3	access:public
+dataLength	/usr/include/enet/win32.h	/^    size_t dataLength;$/;"	m	struct:__anon4	access:public
+decompress	/usr/include/enet/enet.h	/^   size_t (ENET_CALLBACK * decompress) (void * context, const enet_uint8 * inData, size_t inLimit, enet_uint8 * outData, size_t outLimit);$/;"	m	struct:_ENetCompressor	access:public
+destroy	/usr/include/enet/enet.h	/^   void (ENET_CALLBACK * destroy) (void * context);$/;"	m	struct:_ENetCompressor	access:public
+disconnect	/usr/include/enet/protocol.h	/^   ENetProtocolDisconnect disconnect;$/;"	m	union:_ENetProtocol	access:public
+dispatchList	/usr/include/enet/enet.h	/^   ENetListNode  dispatchList;$/;"	m	struct:_ENetPeer	access:public
+dispatchQueue	/usr/include/enet/enet.h	/^   ENetList             dispatchQueue;$/;"	m	struct:_ENetHost	access:public
+dispatchedCommands	/usr/include/enet/enet.h	/^   ENetList      dispatchedCommands;$/;"	m	struct:_ENetPeer	access:public
+duplicatePeers	/usr/include/enet/enet.h	/^   size_t               duplicatePeers;              \/**< optional number of allowed peers from duplicate IPs, defaults to ENET_PROTOCOL_MAXIMUM_PEER_ID *\/$/;"	m	struct:_ENetHost	access:public
+earliestTimeout	/usr/include/enet/enet.h	/^   enet_uint32   earliestTimeout;$/;"	m	struct:_ENetPeer	access:public
+enet_address_get_host	/usr/include/enet/enet.h	/^ENET_API int enet_address_get_host (const ENetAddress * address, char * hostName, size_t nameLength);$/;"	p	signature:(const ENetAddress * address, char * hostName, size_t nameLength)
+enet_address_get_host_ip	/usr/include/enet/enet.h	/^ENET_API int enet_address_get_host_ip (const ENetAddress * address, char * hostName, size_t nameLength);$/;"	p	signature:(const ENetAddress * address, char * hostName, size_t nameLength)
+enet_address_set_host	/usr/include/enet/enet.h	/^ENET_API int enet_address_set_host (ENetAddress * address, const char * hostName);$/;"	p	signature:(ENetAddress * address, const char * hostName)
+enet_crc32	/usr/include/enet/enet.h	/^ENET_API enet_uint32  enet_crc32 (const ENetBuffer *, size_t);$/;"	p	signature:(const ENetBuffer *, size_t)
+enet_deinitialize	/usr/include/enet/enet.h	/^ENET_API void enet_deinitialize (void);$/;"	p	signature:(void)
+enet_free	/usr/include/enet/callbacks.h	/^extern void   enet_free (void *);$/;"	p	signature:(void *)
+enet_host_bandwidth_limit	/usr/include/enet/enet.h	/^ENET_API void       enet_host_bandwidth_limit (ENetHost *, enet_uint32, enet_uint32);$/;"	p	signature:(ENetHost *, enet_uint32, enet_uint32)
+enet_host_bandwidth_throttle	/usr/include/enet/enet.h	/^extern   void       enet_host_bandwidth_throttle (ENetHost *);$/;"	p	signature:(ENetHost *)
+enet_host_broadcast	/usr/include/enet/enet.h	/^ENET_API void       enet_host_broadcast (ENetHost *, enet_uint8, ENetPacket *);$/;"	p	signature:(ENetHost *, enet_uint8, ENetPacket *)
+enet_host_channel_limit	/usr/include/enet/enet.h	/^ENET_API void       enet_host_channel_limit (ENetHost *, size_t);$/;"	p	signature:(ENetHost *, size_t)
+enet_host_check_events	/usr/include/enet/enet.h	/^ENET_API int        enet_host_check_events (ENetHost *, ENetEvent *);$/;"	p	signature:(ENetHost *, ENetEvent *)
+enet_host_compress	/usr/include/enet/enet.h	/^ENET_API void       enet_host_compress (ENetHost *, const ENetCompressor *);$/;"	p	signature:(ENetHost *, const ENetCompressor *)
+enet_host_compress_with_range_coder	/usr/include/enet/enet.h	/^ENET_API int        enet_host_compress_with_range_coder (ENetHost * host);$/;"	p	signature:(ENetHost * host)
+enet_host_connect	/usr/include/enet/enet.h	/^ENET_API ENetPeer * enet_host_connect (ENetHost *, const ENetAddress *, size_t, enet_uint32);$/;"	p	signature:(ENetHost *, const ENetAddress *, size_t, enet_uint32)
+enet_host_create	/usr/include/enet/enet.h	/^ENET_API ENetHost * enet_host_create (const ENetAddress *, size_t, size_t, enet_uint32, enet_uint32);$/;"	p	signature:(const ENetAddress *, size_t, size_t, enet_uint32, enet_uint32)
+enet_host_destroy	/usr/include/enet/enet.h	/^ENET_API void       enet_host_destroy (ENetHost *);$/;"	p	signature:(ENetHost *)
+enet_host_flush	/usr/include/enet/enet.h	/^ENET_API void       enet_host_flush (ENetHost *);$/;"	p	signature:(ENetHost *)
+enet_host_random_seed	/usr/include/enet/enet.h	/^extern  enet_uint32 enet_host_random_seed (void);$/;"	p	signature:(void)
+enet_host_service	/usr/include/enet/enet.h	/^ENET_API int        enet_host_service (ENetHost *, ENetEvent *, enet_uint32);$/;"	p	signature:(ENetHost *, ENetEvent *, enet_uint32)
+enet_initialize	/usr/include/enet/enet.h	/^ENET_API int enet_initialize (void);$/;"	p	signature:(void)
+enet_initialize_with_callbacks	/usr/include/enet/enet.h	/^ENET_API int enet_initialize_with_callbacks (ENetVersion version, const ENetCallbacks * inits);$/;"	p	signature:(ENetVersion version, const ENetCallbacks * inits)
+enet_linked_version	/usr/include/enet/enet.h	/^ENET_API ENetVersion enet_linked_version (void);$/;"	p	signature:(void)
+enet_list_back	/usr/include/enet/list.h	40;"	d
+enet_list_begin	/usr/include/enet/list.h	31;"	d
+enet_list_clear	/usr/include/enet/list.h	/^extern void enet_list_clear (ENetList *);$/;"	p	signature:(ENetList *)
+enet_list_empty	/usr/include/enet/list.h	34;"	d
+enet_list_end	/usr/include/enet/list.h	32;"	d
+enet_list_front	/usr/include/enet/list.h	39;"	d
+enet_list_insert	/usr/include/enet/list.h	/^extern ENetListIterator enet_list_insert (ENetListIterator, void *);$/;"	p	signature:(ENetListIterator, void *)
+enet_list_move	/usr/include/enet/list.h	/^extern ENetListIterator enet_list_move (ENetListIterator, void *, void *);$/;"	p	signature:(ENetListIterator, void *, void *)
+enet_list_next	/usr/include/enet/list.h	36;"	d
+enet_list_previous	/usr/include/enet/list.h	37;"	d
+enet_list_remove	/usr/include/enet/list.h	/^extern void * enet_list_remove (ENetListIterator);$/;"	p	signature:(ENetListIterator)
+enet_list_size	/usr/include/enet/list.h	/^extern size_t enet_list_size (ENetList *);$/;"	p	signature:(ENetList *)
+enet_malloc	/usr/include/enet/callbacks.h	/^extern void * enet_malloc (size_t);$/;"	p	signature:(size_t)
+enet_packet_create	/usr/include/enet/enet.h	/^ENET_API ENetPacket * enet_packet_create (const void *, size_t, enet_uint32);$/;"	p	signature:(const void *, size_t, enet_uint32)
+enet_packet_destroy	/usr/include/enet/enet.h	/^ENET_API void         enet_packet_destroy (ENetPacket *);$/;"	p	signature:(ENetPacket *)
+enet_packet_resize	/usr/include/enet/enet.h	/^ENET_API int          enet_packet_resize  (ENetPacket *, size_t);$/;"	p	signature:(ENetPacket *, size_t)
+enet_peer_disconnect	/usr/include/enet/enet.h	/^ENET_API void                enet_peer_disconnect (ENetPeer *, enet_uint32);$/;"	p	signature:(ENetPeer *, enet_uint32)
+enet_peer_disconnect_later	/usr/include/enet/enet.h	/^ENET_API void                enet_peer_disconnect_later (ENetPeer *, enet_uint32);$/;"	p	signature:(ENetPeer *, enet_uint32)
+enet_peer_disconnect_now	/usr/include/enet/enet.h	/^ENET_API void                enet_peer_disconnect_now (ENetPeer *, enet_uint32);$/;"	p	signature:(ENetPeer *, enet_uint32)
+enet_peer_dispatch_incoming_reliable_commands	/usr/include/enet/enet.h	/^extern void                  enet_peer_dispatch_incoming_reliable_commands (ENetPeer *, ENetChannel *);$/;"	p	signature:(ENetPeer *, ENetChannel *)
+enet_peer_dispatch_incoming_unreliable_commands	/usr/include/enet/enet.h	/^extern void                  enet_peer_dispatch_incoming_unreliable_commands (ENetPeer *, ENetChannel *);$/;"	p	signature:(ENetPeer *, ENetChannel *)
+enet_peer_on_connect	/usr/include/enet/enet.h	/^extern void                  enet_peer_on_connect (ENetPeer *);$/;"	p	signature:(ENetPeer *)
+enet_peer_on_disconnect	/usr/include/enet/enet.h	/^extern void                  enet_peer_on_disconnect (ENetPeer *);$/;"	p	signature:(ENetPeer *)
+enet_peer_ping	/usr/include/enet/enet.h	/^ENET_API void                enet_peer_ping (ENetPeer *);$/;"	p	signature:(ENetPeer *)
+enet_peer_ping_interval	/usr/include/enet/enet.h	/^ENET_API void                enet_peer_ping_interval (ENetPeer *, enet_uint32);$/;"	p	signature:(ENetPeer *, enet_uint32)
+enet_peer_queue_acknowledgement	/usr/include/enet/enet.h	/^extern ENetAcknowledgement * enet_peer_queue_acknowledgement (ENetPeer *, const ENetProtocol *, enet_uint16);$/;"	p	signature:(ENetPeer *, const ENetProtocol *, enet_uint16)
+enet_peer_queue_incoming_command	/usr/include/enet/enet.h	/^extern ENetIncomingCommand * enet_peer_queue_incoming_command (ENetPeer *, const ENetProtocol *, const void *, size_t, enet_uint32, enet_uint32);$/;"	p	signature:(ENetPeer *, const ENetProtocol *, const void *, size_t, enet_uint32, enet_uint32)
+enet_peer_queue_outgoing_command	/usr/include/enet/enet.h	/^extern ENetOutgoingCommand * enet_peer_queue_outgoing_command (ENetPeer *, const ENetProtocol *, ENetPacket *, enet_uint32, enet_uint16);$/;"	p	signature:(ENetPeer *, const ENetProtocol *, ENetPacket *, enet_uint32, enet_uint16)
+enet_peer_receive	/usr/include/enet/enet.h	/^ENET_API ENetPacket *        enet_peer_receive (ENetPeer *, enet_uint8 * channelID);$/;"	p	signature:(ENetPeer *, enet_uint8 * channelID)
+enet_peer_reset	/usr/include/enet/enet.h	/^ENET_API void                enet_peer_reset (ENetPeer *);$/;"	p	signature:(ENetPeer *)
+enet_peer_reset_queues	/usr/include/enet/enet.h	/^extern void                  enet_peer_reset_queues (ENetPeer *);$/;"	p	signature:(ENetPeer *)
+enet_peer_send	/usr/include/enet/enet.h	/^ENET_API int                 enet_peer_send (ENetPeer *, enet_uint8, ENetPacket *);$/;"	p	signature:(ENetPeer *, enet_uint8, ENetPacket *)
+enet_peer_setup_outgoing_command	/usr/include/enet/enet.h	/^extern void                  enet_peer_setup_outgoing_command (ENetPeer *, ENetOutgoingCommand *);$/;"	p	signature:(ENetPeer *, ENetOutgoingCommand *)
+enet_peer_throttle	/usr/include/enet/enet.h	/^extern int                   enet_peer_throttle (ENetPeer *, enet_uint32);$/;"	p	signature:(ENetPeer *, enet_uint32)
+enet_peer_throttle_configure	/usr/include/enet/enet.h	/^ENET_API void                enet_peer_throttle_configure (ENetPeer *, enet_uint32, enet_uint32, enet_uint32);$/;"	p	signature:(ENetPeer *, enet_uint32, enet_uint32, enet_uint32)
+enet_peer_timeout	/usr/include/enet/enet.h	/^ENET_API void                enet_peer_timeout (ENetPeer *, enet_uint32, enet_uint32, enet_uint32);$/;"	p	signature:(ENetPeer *, enet_uint32, enet_uint32, enet_uint32)
+enet_protocol_command_size	/usr/include/enet/enet.h	/^extern size_t enet_protocol_command_size (enet_uint8);$/;"	p	signature:(enet_uint8)
+enet_range_coder_compress	/usr/include/enet/enet.h	/^ENET_API size_t enet_range_coder_compress (void *, const ENetBuffer *, size_t, size_t, enet_uint8 *, size_t);$/;"	p	signature:(void *, const ENetBuffer *, size_t, size_t, enet_uint8 *, size_t)
+enet_range_coder_create	/usr/include/enet/enet.h	/^ENET_API void * enet_range_coder_create (void);$/;"	p	signature:(void)
+enet_range_coder_decompress	/usr/include/enet/enet.h	/^ENET_API size_t enet_range_coder_decompress (void *, const enet_uint8 *, size_t, enet_uint8 *, size_t);$/;"	p	signature:(void *, const enet_uint8 *, size_t, enet_uint8 *, size_t)
+enet_range_coder_destroy	/usr/include/enet/enet.h	/^ENET_API void   enet_range_coder_destroy (void *);$/;"	p	signature:(void *)
+enet_socket_accept	/usr/include/enet/enet.h	/^ENET_API ENetSocket enet_socket_accept (ENetSocket, ENetAddress *);$/;"	p	signature:(ENetSocket, ENetAddress *)
+enet_socket_bind	/usr/include/enet/enet.h	/^ENET_API int        enet_socket_bind (ENetSocket, const ENetAddress *);$/;"	p	signature:(ENetSocket, const ENetAddress *)
+enet_socket_connect	/usr/include/enet/enet.h	/^ENET_API int        enet_socket_connect (ENetSocket, const ENetAddress *);$/;"	p	signature:(ENetSocket, const ENetAddress *)
+enet_socket_create	/usr/include/enet/enet.h	/^ENET_API ENetSocket enet_socket_create (ENetSocketType);$/;"	p	signature:(ENetSocketType)
+enet_socket_destroy	/usr/include/enet/enet.h	/^ENET_API void       enet_socket_destroy (ENetSocket);$/;"	p	signature:(ENetSocket)
+enet_socket_get_address	/usr/include/enet/enet.h	/^ENET_API int        enet_socket_get_address (ENetSocket, ENetAddress *);$/;"	p	signature:(ENetSocket, ENetAddress *)
+enet_socket_get_option	/usr/include/enet/enet.h	/^ENET_API int        enet_socket_get_option (ENetSocket, ENetSocketOption, int *);$/;"	p	signature:(ENetSocket, ENetSocketOption, int *)
+enet_socket_listen	/usr/include/enet/enet.h	/^ENET_API int        enet_socket_listen (ENetSocket, int);$/;"	p	signature:(ENetSocket, int)
+enet_socket_receive	/usr/include/enet/enet.h	/^ENET_API int        enet_socket_receive (ENetSocket, ENetAddress *, ENetBuffer *, size_t);$/;"	p	signature:(ENetSocket, ENetAddress *, ENetBuffer *, size_t)
+enet_socket_send	/usr/include/enet/enet.h	/^ENET_API int        enet_socket_send (ENetSocket, const ENetAddress *, const ENetBuffer *, size_t);$/;"	p	signature:(ENetSocket, const ENetAddress *, const ENetBuffer *, size_t)
+enet_socket_set_option	/usr/include/enet/enet.h	/^ENET_API int        enet_socket_set_option (ENetSocket, ENetSocketOption, int);$/;"	p	signature:(ENetSocket, ENetSocketOption, int)
+enet_socket_shutdown	/usr/include/enet/enet.h	/^ENET_API int        enet_socket_shutdown (ENetSocket, ENetSocketShutdown);$/;"	p	signature:(ENetSocket, ENetSocketShutdown)
+enet_socket_wait	/usr/include/enet/enet.h	/^ENET_API int        enet_socket_wait (ENetSocket, enet_uint32 *, enet_uint32);$/;"	p	signature:(ENetSocket, enet_uint32 *, enet_uint32)
+enet_socketset_select	/usr/include/enet/enet.h	/^ENET_API int        enet_socketset_select (ENetSocket, ENetSocketSet *, ENetSocketSet *, enet_uint32);$/;"	p	signature:(ENetSocket, ENetSocketSet *, ENetSocketSet *, enet_uint32)
+enet_time_get	/usr/include/enet/enet.h	/^ENET_API enet_uint32 enet_time_get (void);$/;"	p	signature:(void)
+enet_time_set	/usr/include/enet/enet.h	/^ENET_API void enet_time_set (enet_uint32);$/;"	p	signature:(enet_uint32)
+enet_uint16	/usr/include/enet/types.h	/^typedef unsigned short enet_uint16;     \/**< unsigned 16-bit type *\/$/;"	t
+enet_uint32	/usr/include/enet/types.h	/^typedef unsigned int enet_uint32;      \/**< unsigned 32-bit type *\/$/;"	t
+enet_uint8	/usr/include/enet/types.h	/^typedef unsigned char enet_uint8;       \/**< unsigned 8-bit type  *\/$/;"	t
+eventData	/usr/include/enet/enet.h	/^   enet_uint32   eventData;$/;"	m	struct:_ENetPeer	access:public
+flags	/usr/include/enet/enet.h	/^   enet_uint32              flags;           \/**< bitwise-or of ENetPacketFlag constants *\/$/;"	m	struct:_ENetPacket	access:public
+fragmentCount	/usr/include/enet/enet.h	/^   enet_uint32      fragmentCount;$/;"	m	struct:_ENetIncomingCommand	access:public
+fragmentCount	/usr/include/enet/protocol.h	/^   enet_uint32 fragmentCount;$/;"	m	struct:_ENetProtocolSendFragment	access:public
+fragmentLength	/usr/include/enet/enet.h	/^   enet_uint16  fragmentLength;$/;"	m	struct:_ENetOutgoingCommand	access:public
+fragmentNumber	/usr/include/enet/protocol.h	/^   enet_uint32 fragmentNumber;$/;"	m	struct:_ENetProtocolSendFragment	access:public
+fragmentOffset	/usr/include/enet/enet.h	/^   enet_uint32  fragmentOffset;$/;"	m	struct:_ENetOutgoingCommand	access:public
+fragmentOffset	/usr/include/enet/protocol.h	/^   enet_uint32 fragmentOffset;$/;"	m	struct:_ENetProtocolSendFragment	access:public
+fragments	/usr/include/enet/enet.h	/^   enet_uint32 *    fragments;$/;"	m	struct:_ENetIncomingCommand	access:public
+fragmentsRemaining	/usr/include/enet/enet.h	/^   enet_uint32      fragmentsRemaining;$/;"	m	struct:_ENetIncomingCommand	access:public
+free	/usr/include/enet/callbacks.h	/^    void (ENET_CALLBACK * free) (void * memory);$/;"	m	struct:_ENetCallbacks	access:public
+freeCallback	/usr/include/enet/enet.h	/^   ENetPacketFreeCallback   freeCallback;    \/**< function to be called when the packet is no longer in use *\/$/;"	m	struct:_ENetPacket	access:public
+header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolAcknowledge	access:public
+header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolBandwidthLimit	access:public
+header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolConnect	access:public
+header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolDisconnect	access:public
+header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolPing	access:public
+header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolSendFragment	access:public
+header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolSendReliable	access:public
+header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolSendUnreliable	access:public
+header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolSendUnsequenced	access:public
+header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolThrottleConfigure	access:public
+header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+header	/usr/include/enet/protocol.h	/^   ENetProtocolCommandHeader header;$/;"	m	union:_ENetProtocol	access:public
+headerFlags	/usr/include/enet/enet.h	/^   enet_uint16          headerFlags;$/;"	m	struct:_ENetHost	access:public
+highestRoundTripTimeVariance	/usr/include/enet/enet.h	/^   enet_uint32   highestRoundTripTimeVariance;$/;"	m	struct:_ENetPeer	access:public
+host	/usr/include/enet/enet.h	/^   enet_uint32 host;$/;"	m	struct:_ENetAddress	access:public
+host	/usr/include/enet/enet.h	/^   struct _ENetHost * host;$/;"	m	struct:_ENetPeer	typeref:struct:_ENetPeer::_ENetHost	access:public
+incomingBandwidth	/usr/include/enet/enet.h	/^   enet_uint32          incomingBandwidth;           \/**< downstream bandwidth of the host *\/$/;"	m	struct:_ENetHost	access:public
+incomingBandwidth	/usr/include/enet/enet.h	/^   enet_uint32   incomingBandwidth;  \/**< Downstream bandwidth of the client in bytes\/second *\/$/;"	m	struct:_ENetPeer	access:public
+incomingBandwidth	/usr/include/enet/protocol.h	/^   enet_uint32 incomingBandwidth;$/;"	m	struct:_ENetProtocolBandwidthLimit	access:public
+incomingBandwidth	/usr/include/enet/protocol.h	/^   enet_uint32 incomingBandwidth;$/;"	m	struct:_ENetProtocolConnect	access:public
+incomingBandwidth	/usr/include/enet/protocol.h	/^   enet_uint32 incomingBandwidth;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+incomingBandwidthThrottleEpoch	/usr/include/enet/enet.h	/^   enet_uint32   incomingBandwidthThrottleEpoch;$/;"	m	struct:_ENetPeer	access:public
+incomingCommandList	/usr/include/enet/enet.h	/^   ENetListNode     incomingCommandList;$/;"	m	struct:_ENetIncomingCommand	access:public
+incomingDataTotal	/usr/include/enet/enet.h	/^   enet_uint32   incomingDataTotal;$/;"	m	struct:_ENetPeer	access:public
+incomingPeerID	/usr/include/enet/enet.h	/^   enet_uint16   incomingPeerID;$/;"	m	struct:_ENetPeer	access:public
+incomingReliableCommands	/usr/include/enet/enet.h	/^   ENetList     incomingReliableCommands;$/;"	m	struct:_ENetChannel	access:public
+incomingReliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16  incomingReliableSequenceNumber;$/;"	m	struct:_ENetChannel	access:public
+incomingSessionID	/usr/include/enet/enet.h	/^   enet_uint8    incomingSessionID;$/;"	m	struct:_ENetPeer	access:public
+incomingSessionID	/usr/include/enet/protocol.h	/^   enet_uint8  incomingSessionID;$/;"	m	struct:_ENetProtocolConnect	access:public
+incomingSessionID	/usr/include/enet/protocol.h	/^   enet_uint8  incomingSessionID;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+incomingUnreliableCommands	/usr/include/enet/enet.h	/^   ENetList     incomingUnreliableCommands;$/;"	m	struct:_ENetChannel	access:public
+incomingUnreliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16  incomingUnreliableSequenceNumber;$/;"	m	struct:_ENetChannel	access:public
+incomingUnsequencedGroup	/usr/include/enet/enet.h	/^   enet_uint16   incomingUnsequencedGroup;$/;"	m	struct:_ENetPeer	access:public
+intercept	/usr/include/enet/enet.h	/^   ENetInterceptCallback intercept;                  \/**< callback the user can set to intercept received raw UDP packets *\/$/;"	m	struct:_ENetHost	access:public
+lastReceiveTime	/usr/include/enet/enet.h	/^   enet_uint32   lastReceiveTime;$/;"	m	struct:_ENetPeer	access:public
+lastRoundTripTime	/usr/include/enet/enet.h	/^   enet_uint32   lastRoundTripTime;$/;"	m	struct:_ENetPeer	access:public
+lastRoundTripTimeVariance	/usr/include/enet/enet.h	/^   enet_uint32   lastRoundTripTimeVariance;$/;"	m	struct:_ENetPeer	access:public
+lastSendTime	/usr/include/enet/enet.h	/^   enet_uint32   lastSendTime;$/;"	m	struct:_ENetPeer	access:public
+lowestRoundTripTime	/usr/include/enet/enet.h	/^   enet_uint32   lowestRoundTripTime;$/;"	m	struct:_ENetPeer	access:public
+malloc	/usr/include/enet/callbacks.h	/^    void * (ENET_CALLBACK * malloc) (size_t size);$/;"	m	struct:_ENetCallbacks	access:public
+maximumPacketSize	/usr/include/enet/enet.h	/^   size_t               maximumPacketSize;           \/**< the maximum allowable packet size that may be sent or received on a peer *\/$/;"	m	struct:_ENetHost	access:public
+maximumWaitingData	/usr/include/enet/enet.h	/^   size_t               maximumWaitingData;          \/**< the maximum aggregate amount of buffer space a peer may use waiting for packets to be delivered *\/$/;"	m	struct:_ENetHost	access:public
+mtu	/usr/include/enet/enet.h	/^   enet_uint32          mtu;$/;"	m	struct:_ENetHost	access:public
+mtu	/usr/include/enet/enet.h	/^   enet_uint32   mtu;$/;"	m	struct:_ENetPeer	access:public
+mtu	/usr/include/enet/protocol.h	/^   enet_uint32 mtu;$/;"	m	struct:_ENetProtocolConnect	access:public
+mtu	/usr/include/enet/protocol.h	/^   enet_uint32 mtu;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+needsDispatch	/usr/include/enet/enet.h	/^   int           needsDispatch;$/;"	m	struct:_ENetPeer	access:public
+next	/usr/include/enet/list.h	/^   struct _ENetListNode * next;$/;"	m	struct:_ENetListNode	typeref:struct:_ENetListNode::_ENetListNode	access:public
+nextTimeout	/usr/include/enet/enet.h	/^   enet_uint32   nextTimeout;$/;"	m	struct:_ENetPeer	access:public
+no_memory	/usr/include/enet/callbacks.h	/^    void (ENET_CALLBACK * no_memory) (void);$/;"	m	struct:_ENetCallbacks	access:public
+outgoingBandwidth	/usr/include/enet/enet.h	/^   enet_uint32          outgoingBandwidth;           \/**< upstream bandwidth of the host *\/$/;"	m	struct:_ENetHost	access:public
+outgoingBandwidth	/usr/include/enet/enet.h	/^   enet_uint32   outgoingBandwidth;  \/**< Upstream bandwidth of the client in bytes\/second *\/$/;"	m	struct:_ENetPeer	access:public
+outgoingBandwidth	/usr/include/enet/protocol.h	/^   enet_uint32 outgoingBandwidth;$/;"	m	struct:_ENetProtocolBandwidthLimit	access:public
+outgoingBandwidth	/usr/include/enet/protocol.h	/^   enet_uint32 outgoingBandwidth;$/;"	m	struct:_ENetProtocolConnect	access:public
+outgoingBandwidth	/usr/include/enet/protocol.h	/^   enet_uint32 outgoingBandwidth;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+outgoingBandwidthThrottleEpoch	/usr/include/enet/enet.h	/^   enet_uint32   outgoingBandwidthThrottleEpoch;$/;"	m	struct:_ENetPeer	access:public
+outgoingCommandList	/usr/include/enet/enet.h	/^   ENetListNode outgoingCommandList;$/;"	m	struct:_ENetOutgoingCommand	access:public
+outgoingDataTotal	/usr/include/enet/enet.h	/^   enet_uint32   outgoingDataTotal;$/;"	m	struct:_ENetPeer	access:public
+outgoingPeerID	/usr/include/enet/enet.h	/^   enet_uint16   outgoingPeerID;$/;"	m	struct:_ENetPeer	access:public
+outgoingPeerID	/usr/include/enet/protocol.h	/^   enet_uint16 outgoingPeerID;$/;"	m	struct:_ENetProtocolConnect	access:public
+outgoingPeerID	/usr/include/enet/protocol.h	/^   enet_uint16 outgoingPeerID;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+outgoingReliableCommands	/usr/include/enet/enet.h	/^   ENetList      outgoingReliableCommands;$/;"	m	struct:_ENetPeer	access:public
+outgoingReliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16   outgoingReliableSequenceNumber;$/;"	m	struct:_ENetPeer	access:public
+outgoingReliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16  outgoingReliableSequenceNumber;$/;"	m	struct:_ENetChannel	access:public
+outgoingSessionID	/usr/include/enet/enet.h	/^   enet_uint8    outgoingSessionID;$/;"	m	struct:_ENetPeer	access:public
+outgoingSessionID	/usr/include/enet/protocol.h	/^   enet_uint8  outgoingSessionID;$/;"	m	struct:_ENetProtocolConnect	access:public
+outgoingSessionID	/usr/include/enet/protocol.h	/^   enet_uint8  outgoingSessionID;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+outgoingUnreliableCommands	/usr/include/enet/enet.h	/^   ENetList      outgoingUnreliableCommands;$/;"	m	struct:_ENetPeer	access:public
+outgoingUnreliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16  outgoingUnreliableSequenceNumber;$/;"	m	struct:_ENetChannel	access:public
+outgoingUnsequencedGroup	/usr/include/enet/enet.h	/^   enet_uint16   outgoingUnsequencedGroup;$/;"	m	struct:_ENetPeer	access:public
+packet	/usr/include/enet/enet.h	/^   ENetPacket *         packet;    \/**< packet associated with the event, if appropriate *\/$/;"	m	struct:_ENetEvent	access:public
+packet	/usr/include/enet/enet.h	/^   ENetPacket *     packet;$/;"	m	struct:_ENetIncomingCommand	access:public
+packet	/usr/include/enet/enet.h	/^   ENetPacket * packet;$/;"	m	struct:_ENetOutgoingCommand	access:public
+packetData	/usr/include/enet/enet.h	/^   enet_uint8           packetData [2][ENET_PROTOCOL_MAXIMUM_MTU];$/;"	m	struct:_ENetHost	access:public
+packetLoss	/usr/include/enet/enet.h	/^   enet_uint32   packetLoss;          \/**< mean packet loss of reliable packets as a ratio with respect to the constant ENET_PEER_PACKET_LOSS_SCALE *\/$/;"	m	struct:_ENetPeer	access:public
+packetLossEpoch	/usr/include/enet/enet.h	/^   enet_uint32   packetLossEpoch;$/;"	m	struct:_ENetPeer	access:public
+packetLossVariance	/usr/include/enet/enet.h	/^   enet_uint32   packetLossVariance;$/;"	m	struct:_ENetPeer	access:public
+packetSize	/usr/include/enet/enet.h	/^   size_t               packetSize;$/;"	m	struct:_ENetHost	access:public
+packetThrottle	/usr/include/enet/enet.h	/^   enet_uint32   packetThrottle;$/;"	m	struct:_ENetPeer	access:public
+packetThrottleAcceleration	/usr/include/enet/enet.h	/^   enet_uint32   packetThrottleAcceleration;$/;"	m	struct:_ENetPeer	access:public
+packetThrottleAcceleration	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleAcceleration;$/;"	m	struct:_ENetProtocolConnect	access:public
+packetThrottleAcceleration	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleAcceleration;$/;"	m	struct:_ENetProtocolThrottleConfigure	access:public
+packetThrottleAcceleration	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleAcceleration;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+packetThrottleCounter	/usr/include/enet/enet.h	/^   enet_uint32   packetThrottleCounter;$/;"	m	struct:_ENetPeer	access:public
+packetThrottleDeceleration	/usr/include/enet/enet.h	/^   enet_uint32   packetThrottleDeceleration;$/;"	m	struct:_ENetPeer	access:public
+packetThrottleDeceleration	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleDeceleration;$/;"	m	struct:_ENetProtocolConnect	access:public
+packetThrottleDeceleration	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleDeceleration;$/;"	m	struct:_ENetProtocolThrottleConfigure	access:public
+packetThrottleDeceleration	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleDeceleration;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+packetThrottleEpoch	/usr/include/enet/enet.h	/^   enet_uint32   packetThrottleEpoch;$/;"	m	struct:_ENetPeer	access:public
+packetThrottleInterval	/usr/include/enet/enet.h	/^   enet_uint32   packetThrottleInterval;$/;"	m	struct:_ENetPeer	access:public
+packetThrottleInterval	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleInterval;$/;"	m	struct:_ENetProtocolConnect	access:public
+packetThrottleInterval	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleInterval;$/;"	m	struct:_ENetProtocolThrottleConfigure	access:public
+packetThrottleInterval	/usr/include/enet/protocol.h	/^   enet_uint32 packetThrottleInterval;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
+packetThrottleLimit	/usr/include/enet/enet.h	/^   enet_uint32   packetThrottleLimit;$/;"	m	struct:_ENetPeer	access:public
+packetsLost	/usr/include/enet/enet.h	/^   enet_uint32   packetsLost;$/;"	m	struct:_ENetPeer	access:public
+packetsSent	/usr/include/enet/enet.h	/^   enet_uint32   packetsSent;$/;"	m	struct:_ENetPeer	access:public
+peer	/usr/include/enet/enet.h	/^   ENetPeer *           peer;      \/**< peer that generated a connect, disconnect or receive event *\/$/;"	m	struct:_ENetEvent	access:public
+peerCount	/usr/include/enet/enet.h	/^   size_t               peerCount;                   \/**< number of peers allocated for this host *\/$/;"	m	struct:_ENetHost	access:public
+peerID	/usr/include/enet/protocol.h	/^   enet_uint16 peerID;$/;"	m	struct:_ENetProtocolHeader	access:public
+peers	/usr/include/enet/enet.h	/^   ENetPeer *           peers;                       \/**< array of peers allocated for this host *\/$/;"	m	struct:_ENetHost	access:public
+ping	/usr/include/enet/protocol.h	/^   ENetProtocolPing ping;$/;"	m	union:_ENetProtocol	access:public
+pingInterval	/usr/include/enet/enet.h	/^   enet_uint32   pingInterval;$/;"	m	struct:_ENetPeer	access:public
+port	/usr/include/enet/enet.h	/^   enet_uint16 port;$/;"	m	struct:_ENetAddress	access:public
+previous	/usr/include/enet/list.h	/^   struct _ENetListNode * previous;$/;"	m	struct:_ENetListNode	typeref:struct:_ENetListNode::_ENetListNode	access:public
+randomSeed	/usr/include/enet/enet.h	/^   enet_uint32          randomSeed;$/;"	m	struct:_ENetHost	access:public
+recalculateBandwidthLimits	/usr/include/enet/enet.h	/^   int                  recalculateBandwidthLimits;$/;"	m	struct:_ENetHost	access:public
+receivedAddress	/usr/include/enet/enet.h	/^   ENetAddress          receivedAddress;$/;"	m	struct:_ENetHost	access:public
+receivedData	/usr/include/enet/enet.h	/^   enet_uint8 *         receivedData;$/;"	m	struct:_ENetHost	access:public
+receivedDataLength	/usr/include/enet/enet.h	/^   size_t               receivedDataLength;$/;"	m	struct:_ENetHost	access:public
+receivedReliableSequenceNumber	/usr/include/enet/protocol.h	/^   enet_uint16 receivedReliableSequenceNumber;$/;"	m	struct:_ENetProtocolAcknowledge	access:public
+receivedSentTime	/usr/include/enet/protocol.h	/^   enet_uint16 receivedSentTime;$/;"	m	struct:_ENetProtocolAcknowledge	access:public
+referenceCount	/usr/include/enet/enet.h	/^   size_t                   referenceCount;  \/**< internal use only *\/$/;"	m	struct:_ENetPacket	access:public
+reliableDataInTransit	/usr/include/enet/enet.h	/^   enet_uint32   reliableDataInTransit;$/;"	m	struct:_ENetPeer	access:public
+reliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16      reliableSequenceNumber;$/;"	m	struct:_ENetIncomingCommand	access:public
+reliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16  reliableSequenceNumber;$/;"	m	struct:_ENetOutgoingCommand	access:public
+reliableSequenceNumber	/usr/include/enet/protocol.h	/^   enet_uint16 reliableSequenceNumber;$/;"	m	struct:_ENetProtocolCommandHeader	access:public
+reliableWindows	/usr/include/enet/enet.h	/^   enet_uint16  reliableWindows [ENET_PEER_RELIABLE_WINDOWS];$/;"	m	struct:_ENetChannel	access:public
+roundTripTime	/usr/include/enet/enet.h	/^   enet_uint32   roundTripTime;            \/**< mean round trip time (RTT), in milliseconds, between sending a reliable packet and receiving its acknowledgement *\/$/;"	m	struct:_ENetPeer	access:public
+roundTripTimeVariance	/usr/include/enet/enet.h	/^   enet_uint32   roundTripTimeVariance;$/;"	m	struct:_ENetPeer	access:public
+roundTripTimeout	/usr/include/enet/enet.h	/^   enet_uint32  roundTripTimeout;$/;"	m	struct:_ENetOutgoingCommand	access:public
+roundTripTimeoutLimit	/usr/include/enet/enet.h	/^   enet_uint32  roundTripTimeoutLimit;$/;"	m	struct:_ENetOutgoingCommand	access:public
+sendAttempts	/usr/include/enet/enet.h	/^   enet_uint16  sendAttempts;$/;"	m	struct:_ENetOutgoingCommand	access:public
+sendFragment	/usr/include/enet/protocol.h	/^   ENetProtocolSendFragment sendFragment;$/;"	m	union:_ENetProtocol	access:public
+sendReliable	/usr/include/enet/protocol.h	/^   ENetProtocolSendReliable sendReliable;$/;"	m	union:_ENetProtocol	access:public
+sendUnreliable	/usr/include/enet/protocol.h	/^   ENetProtocolSendUnreliable sendUnreliable;$/;"	m	union:_ENetProtocol	access:public
+sendUnsequenced	/usr/include/enet/protocol.h	/^   ENetProtocolSendUnsequenced sendUnsequenced;$/;"	m	union:_ENetProtocol	access:public
+sentReliableCommands	/usr/include/enet/enet.h	/^   ENetList      sentReliableCommands;$/;"	m	struct:_ENetPeer	access:public
+sentTime	/usr/include/enet/enet.h	/^   enet_uint32  sentTime;$/;"	m	struct:_ENetAcknowledgement	access:public
+sentTime	/usr/include/enet/enet.h	/^   enet_uint32  sentTime;$/;"	m	struct:_ENetOutgoingCommand	access:public
+sentTime	/usr/include/enet/protocol.h	/^   enet_uint16 sentTime;$/;"	m	struct:_ENetProtocolHeader	access:public
+sentUnreliableCommands	/usr/include/enet/enet.h	/^   ENetList      sentUnreliableCommands;$/;"	m	struct:_ENetPeer	access:public
+sentinel	/usr/include/enet/list.h	/^   ENetListNode sentinel;$/;"	m	struct:_ENetList	access:public
+serviceTime	/usr/include/enet/enet.h	/^   enet_uint32          serviceTime;$/;"	m	struct:_ENetHost	access:public
+socket	/usr/include/enet/enet.h	/^   ENetSocket           socket;$/;"	m	struct:_ENetHost	access:public
+startSequenceNumber	/usr/include/enet/protocol.h	/^   enet_uint16 startSequenceNumber;$/;"	m	struct:_ENetProtocolSendFragment	access:public
+state	/usr/include/enet/enet.h	/^   ENetPeerState state;$/;"	m	struct:_ENetPeer	access:public
+throttleConfigure	/usr/include/enet/protocol.h	/^   ENetProtocolThrottleConfigure throttleConfigure;$/;"	m	union:_ENetProtocol	access:public
+timeoutLimit	/usr/include/enet/enet.h	/^   enet_uint32   timeoutLimit;$/;"	m	struct:_ENetPeer	access:public
+timeoutMaximum	/usr/include/enet/enet.h	/^   enet_uint32   timeoutMaximum;$/;"	m	struct:_ENetPeer	access:public
+timeoutMinimum	/usr/include/enet/enet.h	/^   enet_uint32   timeoutMinimum;$/;"	m	struct:_ENetPeer	access:public
+totalLength	/usr/include/enet/protocol.h	/^   enet_uint32 totalLength;$/;"	m	struct:_ENetProtocolSendFragment	access:public
+totalReceivedData	/usr/include/enet/enet.h	/^   enet_uint32          totalReceivedData;           \/**< total data received, user should reset to 0 as needed to prevent overflow *\/$/;"	m	struct:_ENetHost	access:public
+totalReceivedPackets	/usr/include/enet/enet.h	/^   enet_uint32          totalReceivedPackets;        \/**< total UDP packets received, user should reset to 0 as needed to prevent overflow *\/$/;"	m	struct:_ENetHost	access:public
+totalSentData	/usr/include/enet/enet.h	/^   enet_uint32          totalSentData;               \/**< total data sent, user should reset to 0 as needed to prevent overflow *\/$/;"	m	struct:_ENetHost	access:public
+totalSentPackets	/usr/include/enet/enet.h	/^   enet_uint32          totalSentPackets;            \/**< total UDP packets sent, user should reset to 0 as needed to prevent overflow *\/$/;"	m	struct:_ENetHost	access:public
+totalWaitingData	/usr/include/enet/enet.h	/^   size_t        totalWaitingData;$/;"	m	struct:_ENetPeer	access:public
+type	/usr/include/enet/enet.h	/^   ENetEventType        type;      \/**< type of the event *\/$/;"	m	struct:_ENetEvent	access:public
+unreliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16      unreliableSequenceNumber;$/;"	m	struct:_ENetIncomingCommand	access:public
+unreliableSequenceNumber	/usr/include/enet/enet.h	/^   enet_uint16  unreliableSequenceNumber;$/;"	m	struct:_ENetOutgoingCommand	access:public
+unreliableSequenceNumber	/usr/include/enet/protocol.h	/^   enet_uint16 unreliableSequenceNumber;$/;"	m	struct:_ENetProtocolSendUnreliable	access:public
+unsequencedGroup	/usr/include/enet/protocol.h	/^   enet_uint16 unsequencedGroup;$/;"	m	struct:_ENetProtocolSendUnsequenced	access:public
+unsequencedWindow	/usr/include/enet/enet.h	/^   enet_uint32   unsequencedWindow [ENET_PEER_UNSEQUENCED_WINDOW_SIZE \/ 32]; $/;"	m	struct:_ENetPeer	access:public
+usedReliableWindows	/usr/include/enet/enet.h	/^   enet_uint16  usedReliableWindows;$/;"	m	struct:_ENetChannel	access:public
+userData	/usr/include/enet/enet.h	/^   void *                   userData;        \/**< application private data, may be freely modified *\/$/;"	m	struct:_ENetPacket	access:public
+verifyConnect	/usr/include/enet/protocol.h	/^   ENetProtocolVerifyConnect verifyConnect;$/;"	m	union:_ENetProtocol	access:public
+windowSize	/usr/include/enet/enet.h	/^   enet_uint32   windowSize;$/;"	m	struct:_ENetPeer	access:public
+windowSize	/usr/include/enet/protocol.h	/^   enet_uint32 windowSize;$/;"	m	struct:_ENetProtocolConnect	access:public
+windowSize	/usr/include/enet/protocol.h	/^   enet_uint32 windowSize;$/;"	m	struct:_ENetProtocolVerifyConnect	access:public
