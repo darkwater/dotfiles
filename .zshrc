@@ -24,8 +24,12 @@ export GREP_COLOR='38;5;214;48;5;236'
 
 bindkey '\e[1;5D' emacs-backward-word
 bindkey '\e[1;5C' emacs-forward-word
+bindkey '\eOd' emacs-backward-word
+bindkey '\eOc' emacs-forward-word
 bindkey '\e[H' beginning-of-line
 bindkey '\e[F' end-of-line
+bindkey '\e[7~' beginning-of-line
+bindkey '\e[8~' end-of-line
 bindkey '\e[3~' delete-char
 
 
@@ -49,6 +53,10 @@ fi
 alias irssi="ssh nv -t 'screen -xUS irssi || screen -US irssi /usr/bin/irssi'"
 alias snv="ssh nv -t 'tmux a || tmux || /usr/bin/fish'"
 alias nv="ssh nv" # 6 characters is too much!
+
+alias kb="xset r rate 250 25; xmodmap ~/.xmodmap" # reset keyboard
+
+alias px="cd ~/projects/xedroid; clear; git st"
 
 function ll()
 {
@@ -156,3 +164,5 @@ function git_prompt_info()
 
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+uptime; df -h /dev/sd?? | grep -v "^dev"
