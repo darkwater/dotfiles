@@ -165,4 +165,6 @@ function git_prompt_info()
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-uptime; df -h /dev/sd?? | grep -v "^dev"
+uptime
+acpi 2>/dev/null
+df -h /dev/sd?? | grep -v "^dev"
