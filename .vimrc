@@ -152,7 +152,20 @@ function SplitHeader()
     exec 'e '.h
     wincmd p
 endfunction
-nnoremap <F1> :call SplitHeader()<CR>
+
+
+let mapleader = ","
+
+nnoremap <leader>ch :call SplitHeader()<CR>
+
+nnoremap <leader>ji :JavaImport<CR>
+
+nnoremap <leader>pp :ProjectProblems!<CR>
+
+nnoremap <leader>// :s/^/\1\/\//<CR>
+vnoremap <leader>// :s/^/\1\/\//<CR>
+nnoremap <leader>\\ :s/^\( *\)\/\//\1/<CR>
+vnoremap <leader>\\ :s/^\( *\)\/\//\1/<CR>
 
 
 let g:tagbar_type_less = {
