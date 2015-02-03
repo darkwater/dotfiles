@@ -279,7 +279,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     awful.key({                   }, "Print", function () awful.util.spawn('screentool upload') end),
-    awful.key({                   }, "Pause", function () awful.util.spawn('xdotool mousemove 3840 1080') end),
+    awful.key({                   }, "Pause", function () awful.util.spawn('xdotool mousemove 9999 9999') end),
 
     -- Prompt
     awful.key({ modkey            }, "r",     function () mypromptbox[mouse.screen]:run() end),
