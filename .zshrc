@@ -56,7 +56,22 @@ alias nv="ssh nv" # 6 characters is too much!
 
 alias kb="xset r rate 250 25; xmodmap ~/.xmodmap" # reset keyboard
 
-alias px="cd ~/projects/xedroid; clear; git st"
+function px()
+{
+    cd ~/projects/xedroid
+    clear
+    git st
+}
+
+function pa()
+{
+    cd ~/projects/almanapp-android
+    clear
+    git st
+    export JAVA_HOME=/usr/lib/jvm/java-7-jdk/
+    export SBT_OPTS=-XX:MaxPermSize=2048m
+    alias run="ruby build.rb 0000-designtest run"
+}
 
 function ll()
 {
