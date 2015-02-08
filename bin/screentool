@@ -78,9 +78,13 @@ case "$1" in
         fi
 
         eval $($slopcmd)
+
+        W=$(( $W / 2 * 2 ))
+        H=$(( $H / 2 * 2 ))
+
         if [ "$(($W+$H))" != "0" ]; then
             rm "/tmp/screen.*"
-            ffmpeg -f x11grab -s "${W}x${H}" -i ":0.0+${X},${Y}" -preset fast -crf 10 -b:v 1M "/tmp/screen.${videoEncoding}" >/tmp/screencast.log 2>/tmp/screencast.err &
+            ffmpeg -f x11grab -s "${W}x${H}" -i ":0.0+${X},${Y}" -r 60 -preset fast -qmin 18 -qmax 18 "/tmp/screen.${videoEncoding}" >/tmp/screencast.log 2>/tmp/screencast.err &
             pid="$!"
             echo -n "$pid" > /tmp/screen_record.pid
         fi
