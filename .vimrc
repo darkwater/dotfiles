@@ -85,18 +85,25 @@ if &term =~ '^screen'
 endif
 
 
+" Fix Ctrl+arrows in urxvt
+map <ESC>Oa <C-Up>
+map <ESC>Ob <C-Down>
+map <ESC>Oc <C-Right>
+map <ESC>Od <C-Left>
+map! <ESC>Oa <C-Up>
+map! <ESC>Ob <C-Down>
+map! <ESC>Oc <C-Right>
+map! <ESC>Od <C-Left>
+
+
 " Ctrl+S for save
 nnoremap    <silent> <C-s>      :write<CR>
 vnoremap    <silent> <C-s>      <C-O>:write<CR>
 inoremap    <silent> <C-s>      <C-O>:write<CR>
 
-" Ctrl+Up/Down for tab switching
-nnoremap    <silent> <C-Down>   :bn<CR>
+" Ctrl+j/k for tab switching
 nnoremap    <silent> <C-k>      :bn<CR>
-inoremap    <silent> <C-Down>   <C-O>:bn<CR>
-nnoremap    <silent> <C-Up>     :bp<CR>
 nnoremap    <silent> <C-j>      :bp<CR>
-inoremap    <silent> <C-Up>     <C-O>:bp<CR>
 
 " Ctrl+X to close the current buffer
 nnoremap    <silent> <C-X>      :bp<bar>sp<bar>bn<bar>bd<CR>
