@@ -57,8 +57,6 @@ set tags+=~/.vim/tags/glm
 set tags+=~/.vim/tags/glfw
 set tags+=~/.vim/tags/sdl2
 set tags+=~/.vim/tags/enet
-" build tags of your own project with F12
-map <F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>
 
 " OmniCppComplete
 let OmniCpp_NamespaceSearch = 1
@@ -72,13 +70,6 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
-
-" Building
-au BufNewFile,BufRead,BufEnter *.java nmap <silent> <C-B> :execute 'ProjectBuild'<bar>Java<CR>
-au BufNewFile,BufRead,BufEnter *.cpp,*.h  nmap <silent> <C-B> :mak run<CR>
-
-inoremap <silent> <C-B> <C-C><C-B>
-
 
 let g:syntastic_cpp_compiler_options = '-std=c++11'
 
@@ -156,12 +147,22 @@ endfunction
 
 let mapleader = ","
 
+" Android
+nnoremap <leader>ad :silent ConqueTermVSplit ant debug install<CR>
+
+" C/C++
 nnoremap <leader>ch :call SplitHeader()<CR>
+nnoremap <leader>ct :let x = system('ctags -R --language-force=C++ --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .')<CR>
 
+" Java
 nnoremap <leader>ji :JavaImport<CR>
+nnoremap <leader>js :JavaSearch<CR>
+nnoremap <leader>jt :let x = system('ctags -R --language-force=java --sort=yes --fields=+iaS --extra=+q .')<CR>
 
+" Project
 nnoremap <leader>pp :ProjectProblems!<CR>
 
+" Comments
 nnoremap <leader>// :s/^/\1\/\//<CR>
 vnoremap <leader>// :s/^/\1\/\//<CR>
 nnoremap <leader>\\ :s/^\( *\)\/\//\1/<CR>
