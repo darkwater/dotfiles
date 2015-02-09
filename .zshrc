@@ -182,4 +182,4 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 
 uptime
 acpi 2>/dev/null
-df -h /dev/sd?? | grep -v "^dev"
+df -h /dev/{sd??,simfs} 2>/dev/null | grep -v "^dev"
