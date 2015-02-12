@@ -9,7 +9,7 @@
     ui = true
 [alias]
     fuck-it = reset --hard
-    fuck-this = reset --hard
+    fuck-that = reset --hard
 
     st = status
     ci = commit --verbose
