@@ -154,8 +154,8 @@ endfunction
 
 let mapleader = ","
 
-" Android
-nnoremap <leader>ad :silent ConqueTermVSplit ant debug install<CR>
+" Gradle
+nnoremap <leader>gid :silent ConqueTermVSplit gradle installDebug<CR>
 
 " C/C++
 nnoremap <leader>ch :call SplitHeader()<CR>
@@ -164,7 +164,7 @@ nnoremap <leader>ct :let x = system('ctags -R --language-force=C++ --sort=yes --
 " Java
 nnoremap <leader>ji :JavaImport<CR>
 nnoremap <leader>js :JavaSearch<CR>
-nnoremap <leader>jt :let x = system('ctags -R --language-force=java --sort=yes --fields=+iaS --extra=+q .')<CR>
+nnoremap <leader>jt :let x = system('ctags -R --language-force=Java --sort=yes --fields=+iaS --extra=+q .')<CR>
 
 " Project
 nnoremap <leader>pp :ProjectProblems!<CR>
@@ -174,6 +174,14 @@ nnoremap <leader>// :s/^/\1\/\//<CR>
 vnoremap <leader>// :s/^/\1\/\//<CR>
 nnoremap <leader>\\ :s/^\( *\)\/\//\1/<CR>
 vnoremap <leader>\\ :s/^\( *\)\/\//\1/<CR>
+
+" F# for buffers
+let i = 1
+while i <= 12
+    execute "nnoremap <F" . i . "> :" . i . "b<CR>"
+    execute "inoremap <F" . i . "> <C-c>:" . i . "b<CR>"
+    let i += 1
+endwhile
 
 
 let g:tagbar_type_less = {
@@ -321,7 +329,7 @@ function MyTabLabel(n)
   let s = ''
   let buflen = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
   if buflen > 1
-    let s .= '[' . buflen . '] '
+    let s .= bufnr('%') . ' / ' . buflen . ' · '
   endif
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
