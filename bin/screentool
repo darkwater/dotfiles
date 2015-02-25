@@ -27,6 +27,21 @@ case "$1" in
             feh "/tmp/saved.${number}.${imageEncoding}" -g ${W}x${H}+${X}+${Y}
         fi
         ;;
+    "dragon")
+        eval $($slopcmd)
+        if [ "$(($W+$H))" != "0" ]; then
+            maim --hidecursor -g ${W}x${H}+${X}+${Y} "/tmp/screen.${imageEncoding}"
+
+            number=1
+            until [ ! -e "/tmp/saved.${number}.${imageEncoding}" ]; do
+                let number=number+1
+            done
+
+            mv "/tmp/screen.${imageEncoding}" "/tmp/saved.${number}.${imageEncoding}"
+            notify-send "Screenshot saved" "Saved as /tmp/saved.${number}.${imageEncoding}"
+            dragon "/tmp/saved.${number}.${imageEncoding}"
+        fi
+        ;;
     "upload")
         eval $($slopcmd)
         if [ "$(($W+$H))" != "0" ]; then
