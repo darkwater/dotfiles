@@ -18,6 +18,9 @@ set winwidth=80
 set winminwidth=20
 set updatetime=1500
 
+set undofile
+set undodir=~/.vim/undodir
+
 " if !exists('g:airline_symbols')
 "     let g:airline_symbols = {}
 " endif
