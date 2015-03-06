@@ -68,9 +68,7 @@ function pa()
     cd ~/projects/almanapp-android
     clear
     git st
-    export JAVA_HOME=/usr/lib/jvm/java-7-jdk/
-    export SBT_OPTS=-XX:MaxPermSize=2048m
-    alias run="ruby build.rb 0000-designtest run"
+    alias run="gradle --daemon installDesigntestDebug"
 }
 
 function ll()
