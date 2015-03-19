@@ -1,0 +1,13 @@
+#!/usr/bin/node
+
+var input = '';
+
+process.stdin.on('data', function (data)
+{
+    input += data;
+});
+
+process.stdin.on('end', function ()
+{
+    eval('(function () {' + process.argv[2] + '})').call(JSON.parse(input));
+});
