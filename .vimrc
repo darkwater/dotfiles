@@ -130,6 +130,8 @@ nnoremap ;; :
 vnoremap ;; :
 inoremap ;; <C-C>:
 
+inoremap {} <CR>{<CR>}<Up><CR>
+
 "" Ctrl+X for quit
 "noremap  <silent> <C-X>         :q<CR>
 "inoremap <silent> <C-X>         <C-O>:q<CR>
@@ -179,10 +181,12 @@ nnoremap <leader>\\ :s/^\( *\)\/\//\1/<CR>
 vnoremap <leader>\\ :s/^\( *\)\/\//\1/<CR>
 
 " F# for buffers
-let i = 1
+nnoremap <F1> :1b<CR>
+inoremap <F1> <C-c>:1b<CR>
+let i = 2
 while i <= 12
-    execute "nnoremap <F" . i . "> :" . i . "b<CR>"
-    execute "inoremap <F" . i . "> <C-c>:" . i . "b<CR>"
+    execute "nnoremap <F" . i . "> :1b\\|" . (i - 1) . "bn<CR>"
+    execute "inoremap <F" . i . "> <C-c>:1b\\|" . (i - 1) . "bn<CR>"
     let i += 1
 endwhile
 
@@ -332,7 +336,7 @@ function MyTabLabel(n)
   let s = ''
   let buflen = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
   if buflen > 1
-    let s .= bufnr('%') . ' / ' . buflen . ' · '
+    let s .= len(filter(range(1, bufnr('%')), 'buflisted(v:val)')) . ' / ' . buflen . ' · '
   endif
   let buflist = tabpagebuflist(a:n)
   let winnr = tabpagewinnr(a:n)
