@@ -78,6 +78,10 @@ let g:syntastic_cpp_compiler_options = '-std=c++11'
 
 au BufWritePost *.cpp,*.h SyntasticCheck
 
+let g:ConqueTerm_ToggleKey = '<F8>'
+
+set wildignore+=*/bin/*
+set wildignore+=*/build/*
 
 if &term =~ '^screen'
     " tmux will send xterm-style keys when its xterm-keys option is on
@@ -112,10 +116,10 @@ nnoremap    <silent> <C-j>      :bp<CR>
 nnoremap    <silent> <C-X>      :bp<bar>sp<bar>bn<bar>bd<CR>
 vnoremap    <silent> <C-X>      <C-c>:bp<bar>sp<bar>bn<bar>bd<CR>
 
-inoremap    <silent> <A-h>      <Left>
-inoremap    <silent> <A-j>      <Down>
-inoremap    <silent> <A-k>      <Up>
-inoremap    <silent> <A-l>      <Right>
+inoremap    <silent> <ESC>h     <Left>
+inoremap    <silent> <ESC>j     <Down>
+inoremap    <silent> <ESC>k     <Up>
+inoremap    <silent> <ESC>l     <Right>
 
 nnoremap    <silent> <Home>     ^
 inoremap    <silent> <Home>     <C-o>^
