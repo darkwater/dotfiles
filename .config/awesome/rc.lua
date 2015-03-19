@@ -86,7 +86,7 @@ modkey = "Mod4"
 local layouts =
 {
     awful.layout.suit.tile,
-    awful.layout.suit.fair,
+    awful.layout.suit.floating
 }
 -- }}}
 
