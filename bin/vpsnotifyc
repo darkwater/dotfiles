@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+
+handle-int()
+{
+    ps ax | grep ssh.\*notifications | cut -f 1 -d' ' | xargs kill
+}
+
+trap handle-int INT
+
+ssh nv tail -f /tmp/notifications | while read line; do
+    echo $line | tr '\01' '\n' | xargs -d'\n' notify-send
+done
+
+ssh nv 'echo "start of notifications" > /tmp/notifications'
