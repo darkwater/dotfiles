@@ -53,7 +53,7 @@ naughty.config.defaults.timeout          = 5
 naughty.config.defaults.screen           = 1
 naughty.config.defaults.position         = "bottom_right"
 naughty.config.defaults.margin           = 4
-naughty.config.defaults.width            = 300
+naughty.config.defaults.width            = 400
 naughty.config.defaults.gap              = 4
 naughty.config.defaults.ontop            = true
 naughty.config.defaults.font             = "Roboto Light 12"
@@ -62,7 +62,7 @@ naughty.config.defaults.icon_size        = 16
 naughty.config.defaults.fg               = '#ffffff'
 naughty.config.defaults.bg               = '#1d1f21'
 naughty.config.defaults.border_color     = '#1d1f21'
-naughty.config.defaults.border_width     = 2
+naughty.config.defaults.border_width     = 5
 naughty.config.defaults.hover_timeout    = nil
 -- }}}
 
@@ -103,7 +103,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ " 一 ", " 二 ", " 三 ", " 四 ", " 五 " }, s, layouts[1])
+    tags[s] = awful.tag({ " 一 ", " 二 ", " 三 ", " 四 ", " 五 ", " 六 ", " 七 ", " 八 ", " 九 ", " 十 " }, s, layouts[1])
 end
 -- }}}
 
@@ -323,7 +323,7 @@ clientkeys = awful.util.table.join(
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 9 do
+for i = 1, 10 do
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
