@@ -1,6 +1,6 @@
-#!/usr/bin/fish
+#!/usr/bin/zsh
 
-if test "$argv[1]" = "prompt"
+if [[ "$1" = "prompt" ]]; then
     echo -n | dmenu -i -f -p 'reason:'                 \
           -fn 'Droid Sans Mono-10'                     \
           -q                                           \
@@ -8,19 +8,19 @@ if test "$argv[1]" = "prompt"
           -w 920 -h 24                                 \
           -nb '#1d1f21' -nf '#ababab'                  \
           -sb '#111111' -sf '#ffaf00'                  > /tmp/afk.reason
+elif [[ $# -ge 1 ]]; then
+    echo $* > /tmp/afk.reason
 else
     echo > /tmp/afk.reason
-end
+fi
 
-sleep 0.5s
+sleep 0.1s
 
-maim /tmp/screenshot.png
-and convert /tmp/screenshot.png -level 0,100%,0.7 -blur 0x8 /tmp/screenshot.png
-and fish -c 'i3lock -ni /tmp/screenshot.png; killall conky' &
+maim /tmp/screenshot.png && 
+convert /tmp/screenshot.png -level 0,100%,1.5 -blur 0x8 -spread 10 /tmp/screenshot.png &&
+zsh -c 'i3lock -ni /tmp/screenshot.png; killall conky' &
 
 sleep 0.2s
 conky &
 
 xdotool key a Escape
-
-set conky_pid %1
