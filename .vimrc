@@ -136,6 +136,9 @@ inoremap ;; <C-C>:
 
 inoremap {} <CR>{<CR>}<Up><CR>
 
+inoremap <C-e> <C-x><C-e>
+inoremap <C-y> <C-x><C-y>
+
 "" Ctrl+X for quit
 "noremap  <silent> <C-X>         :q<CR>
 "inoremap <silent> <C-X>         <C-O>:q<CR>
