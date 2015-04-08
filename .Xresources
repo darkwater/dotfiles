@@ -51,10 +51,10 @@ URxvt.background: [0]#000000
 ! URxvt.underlineColor: colour
 
 ! If set, use the specified colour as the background for highlighted characters. If unset, use reverse video.
-  URxvt.highlightColor: #1d1f21
+! URxvt.highlightColor: colour
 
 ! If set and highlightColor is set, use the specified colour as the foreground for highlighted characters.
-  URxvt.highlightTextColor: #ffaf00
+! URxvt.highlightTextColor: colour
 
 ! Use the specified colour for the cursor. The default is to use the foreground colour; option -cr.
   URxvt.cursorColor: #e0e0e0
@@ -189,7 +189,7 @@ URxvt.background: [0]#000000
   URxvt.cursorUnderline: true
 
 ! True: blank the pointer when a key is pressed or after a set number of seconds of inactivity. False: the pointer is
-  URxvt.pointerBlank: true
+! URxvt.pointerBlank: true
 
 ! Mouse pointer foreground colour.
 ! URxvt.pointerColor: colour
@@ -198,7 +198,7 @@ URxvt.background: [0]#000000
 ! URxvt.pointerColor2: colour
 
 ! Specifies number of seconds before blanking the pointer [default 2]. Use a large number (e.g. 987654321) to effectively
-  URxvt.pointerBlankDelay: 360000
+! URxvt.pointerBlankDelay: 360000
 
 ! The string to send when the backspace key is pressed. If set to DEC or unset it will send Delete (code 127) or, with
 ! URxvt.backspacekey: string

@@ -59,7 +59,7 @@ case "$1" in
                 copy="/tmp/${filename}"
             fi
             kill $pid
-            echo -n "$copy" | xclip
+            echo -n "$copy" | xclip -selection clipboard
         fi
         ;;
     "measure")
