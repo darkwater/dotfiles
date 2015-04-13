@@ -156,7 +156,7 @@ URxvt.background: [0]#000000
   URxvt.saveLines: 4096
 
 ! Internal border of number pixels. This resource is limited to 100; option -b.
-! URxvt.internalBorder: number
+  URxvt.internalBorder: 10
 
 ! External border of number pixels. This resource is limited to 100; option -w, -bw, -borderwidth.
 ! URxvt.externalBorder: number
