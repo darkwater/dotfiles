@@ -55,7 +55,7 @@ end
 class Panel
     def initialize(monitor)
         @monitor = monitor
-        @dzen = open '|dzen2 -y -1 -h 1 -ta l', 'w+'
+        @dzen = open '|dzen2 -y -1 -h 1 -ta l -e "button2=;"', 'w+'
 
         @width = monitor.w
         @desktops = `bspc query -m #{monitor.name} -D`.lines.size
