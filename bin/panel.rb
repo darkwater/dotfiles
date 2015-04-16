@@ -55,7 +55,7 @@ end
 class Panel
     def initialize(monitor)
         @monitor = monitor
-        @dzen = open '|dzen2 -y -1 -h 1 -ta l -e "button2=;"', 'w+'
+        @dzen = open '|dzen2 -y -1 -h 2 -ta l -e "button2=;"', 'w+'
 
         @width = monitor.w
         @desktops = `bspc query -m #{monitor.name} -D`.lines.size
@@ -63,7 +63,7 @@ class Panel
 
     def draw(items)
         item_width = @width / items.size
-        items.each { |item| @dzen.write "^fg(#{item})^r(#{item_width}x1)" }
+        items.each { |item| @dzen.write "^fg(#{item})^r(#{item_width}x2)" }
         @dzen.puts
     end
 end
