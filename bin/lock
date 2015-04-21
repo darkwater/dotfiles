@@ -1,5 +1,7 @@
 #!/usr/bin/zsh
 
+killall -USR1 dunst
+
 if [[ "$1" = "prompt" ]]; then
     echo -n | dmenu -i -f -p 'reason:'                 \
           -fn 'Droid Sans Mono-10'                     \
@@ -14,11 +16,11 @@ else
     echo > /tmp/afk.reason
 fi
 
-sleep 0.1s
+sleep 0.2s
 
 maim /tmp/screenshot.png && 
 convert /tmp/screenshot.png -level 0,100%,1.5 -blur 0x8 -spread 10 /tmp/screenshot.png &&
-zsh -c 'i3lock -ni /tmp/screenshot.png; killall conky' &
+zsh -c 'i3lock -ni /tmp/screenshot.png; killall conky; killall -USR2 dunst' &
 
 sleep 0.2s
 conky &

@@ -80,7 +80,6 @@ function pa()
 
 function ll()
 {
-    echo $*
     if test \( "$PWD" = "$HOME" -a $# = 0 \) -o "$1" = ~; then
         ls -hlF --color=auto --group-directories-first $argv
         return
