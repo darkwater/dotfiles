@@ -101,3 +101,6 @@ Scroll_Lock
 
 XF86Audio{Play,Stop,Prev,Next}
     music {play,show,prev,next}
+
+super + p
+    music pick

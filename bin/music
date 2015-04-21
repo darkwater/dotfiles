@@ -1,16 +1,23 @@
 #!/bin/sh
 
+SCREEN=($(bspc query -T | grep '^\S.*\*$' | grep -o '[[:digit:]]*x[[:digit:]]*' | tr 'x' ' '))
+
+DMENU_X=$((SCREEN[0] * 20 / 100))
+DMENU_Y=$((SCREEN[1] * 50 / 100))
+DMENU_WIDTH=$((SCREEN[0] * 60 / 100))
+
 case $1 in
 
     play) mpc toggle ;;
     prev) mpc prev ;;
     next) mpc next ;;
     show) ;;
+    pick) SELECTION=$(mpc playlist | dmenu -x $DMENU_X -y $DMENU_Y -w $DMENU_WIDTH -fn 'Droid Sans Mono-10' -p '>' -i -l 10)
+          if [[ "$?" != 0 || -z "$SELECTION" ]]; then exit 1; fi
+          mpc play $(mpc playlist | grep "$SELECTION" -n | cut -d: -f1) ;;
        *) echo "Unknown argument $1" >&2 ;;
 
 esac
-
-SCREEN=($(bspc query -T | grep '^\S.*\*$' | grep -o '[[:digit:]]*x[[:digit:]]*' | tr 'x' ' '))
 
 IFS=$'\n' :; TRACK=($(mpc -f '%artist%\n%album%\n%title%\n%file%' | head -n 5))
 ARTIST=${TRACK[0]}
