@@ -14,7 +14,7 @@ case $1 in
     show) ;;
     pick) SELECTION=$(mpc playlist | dmenu -x $DMENU_X -y $DMENU_Y -w $DMENU_WIDTH -fn 'Droid Sans Mono-10' -p '>' -i -l 10)
           if [[ "$?" != 0 || -z "$SELECTION" ]]; then exit 1; fi
-          mpc play $(mpc playlist | grep "$SELECTION" -n | cut -d: -f1) ;;
+          mpc play $(mpc playlist | grep -xF "$SELECTION" -n | cut -d: -f1) ;;
        *) echo "Unknown argument $1" >&2 ;;
 
 esac
@@ -29,7 +29,7 @@ PROGRESS=$(echo "${TRACK[4]}" | grep -o '[[:digit:]]*%' | tr -d '%')
 DIR=~/music/$(dirname $FILE)
 if [[ ( ! -f "$DIR/cover.xpm" ) && ( -f "$DIR/cover.jpg" ) ]]
 then
-    convert "$DIR/cover.jpg" -resize 256x256 "$DIR/cover.xpm"
+    convert "$DIR/cover.jpg" -resize 256x256^ -gravity center -extent 256x256 "$DIR/cover.xpm"
 fi
 
 ln -fs "$DIR/cover.xpm" /tmp/cover.xpm

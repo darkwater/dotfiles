@@ -35,12 +35,15 @@ class Monitor
         @pos.map! { |n| n = n.to_i }
 
         Monitor.add self
+
+        create_panel
     end
 
     def create_panel
         @panel ||= Panel.new self
     end
 
+    attr_accessor :active
     attr_reader :panel, :name
     def x; @pos[0] end
     def y; @pos[1] end
@@ -54,8 +57,10 @@ end
 
 class Panel
     def initialize(monitor)
+        height = 2
+
         @monitor = monitor
-        @dzen = open '|dzen2 -y -1 -h 2 -ta l -e "button2=;"', 'w+'
+        @dzen = open "|dzen2 -x #{monitor.x} -y #{monitor.y + monitor.h - height} -tw #{monitor.w} -h #{height} -ta l -e 'button2=;'", 'w+'
 
         @width = monitor.w
         @desktops = `bspc query -m #{monitor.name} -D`.lines.size
@@ -69,9 +74,11 @@ class Panel
     end
 end
 
-Monitor.new 'VGA1', '1200x1920', '0+0'
 
-Monitor.each { |m| m.create_panel }
+`bspc query -T`.scan(/^\S.*$/) do |m|
+    /(?<name>\S+) (?<size>\d+x\d+)\+(?<pos>\d+\+\d+)/ =~ m
+    Monitor.new name, size, pos
+end
 
 bspc = open '|bspc control --subscribe', 'r'
 bspc.each_line do |line|
@@ -88,7 +95,8 @@ bspc.each_line do |line|
             case item[0]
             when 'M', 'm'
                 monitor = Monitor[name]
-            when 'O', 'U' # occupied active (or urgent active, shouldn't happen)
+                monitor.active = item[0] == 'M'
+            when 'O' # occupied active
                 items << '#00abcd'
             when 'F' # free active
                 items << '#405060'
@@ -96,10 +104,11 @@ bspc.each_line do |line|
                 items << '#003050'
             when 'f' # free inactive
                 items << '#1d1f21'
-            when 'u' # urgent inactive
+            when 'u', 'U' # urgent
                 items << '#ffaf00'
             when 'L' # layout; end of desktops
                 monitor.panel.draw items unless monitor == nil
+                items = []
             end
         end
     end
