@@ -98,3 +98,6 @@ Pause
 
 Scroll_Lock
     clock.sh
+
+XF86Audio{Play,Stop,Prev,Next}
+    music {play,show,prev,next}

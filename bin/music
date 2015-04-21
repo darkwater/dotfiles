@@ -1,0 +1,39 @@
+#!/bin/sh
+
+case $1 in
+
+    play) mpc toggle ;;
+    prev) mpc prev ;;
+    next) mpc next ;;
+    show) ;;
+       *) echo "Unknown argument $1" >&2 ;;
+
+esac
+
+SCREEN=($(bspc query -T | grep '^\S.*\*$' | grep -o '[[:digit:]]*x[[:digit:]]*' | tr 'x' ' '))
+
+IFS=$'\n' :; TRACK=($(mpc -f '%artist%\n%album%\n%title%\n%file%' | head -n 5))
+ARTIST=${TRACK[0]}
+ALBUM=${TRACK[1]}
+TITLE=${TRACK[2]}
+FILE=${TRACK[3]}
+PROGRESS=$(echo "${TRACK[4]}" | grep -o '[[:digit:]]*%' | tr -d '%')
+
+DIR=~/music/$(dirname $FILE)
+if [[ ( ! -f "$DIR/cover.xpm" ) && ( -f "$DIR/cover.jpg" ) ]]
+then
+    convert "$DIR/cover.jpg" -resize 256x256 "$DIR/cover.xpm"
+fi
+
+ln -fs "$DIR/cover.xpm" /tmp/cover.xpm
+
+echo "^ib(1)^pa(0;0)^i(/tmp/cover.xpm)^pa(16;264)$ARTIST^pa(16;290)$TITLE^pa(1;319)^r($((PROGRESS * 254 / 100))x2)" | \
+    dzen2 -tw 256 -h 322 \
+        -x $((SCREEN[0] * 50 / 100 - 128)) -y $((SCREEN[1] * 60 / 100)) \
+        -p 5 -ta l -fn Droid\ Sans \
+        -e 'onstart=uncollapse;
+            entertitle=;
+            enterslave=;leaveslave=;
+            button1=exit;button2=;button3=exit;
+            button4=;button5=;
+            key_Escape=exit'
