@@ -63,7 +63,8 @@ class Panel
 
     def draw(items)
         item_width = @width / items.size
-        items.each { |item| @dzen.write "^fg(#{item})^r(#{item_width}x2)" }
+        i = 1
+        items.each { |item| @dzen.write "^ca(1, bspc desktop -f ^#{i})^fg(#{item})^r(#{item_width}x2)^ca()"; i += 1 }
         @dzen.puts
     end
 end
