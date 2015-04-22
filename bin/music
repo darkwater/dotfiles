@@ -11,6 +11,8 @@ case $1 in
     play) mpc toggle ;;
     prev) mpc prev ;;
     next) mpc next ;;
+  repeat) mpc repeat ;;
+ shuffle) mpc random ;;
     show) ;;
     pick) SELECTION=$(mpc playlist | dmenu -x $DMENU_X -y $DMENU_Y -w $DMENU_WIDTH -fn 'Droid Sans Mono-10' -p '>' -i -l 10)
           if [[ "$?" != 0 || -z "$SELECTION" ]]; then exit 1; fi
@@ -19,12 +21,16 @@ case $1 in
 
 esac
 
-IFS=$'\n' :; TRACK=($(mpc -f '%artist%\n%album%\n%title%\n%file%' | head -n 5))
+IFS=$'\n' :; TRACK=($(mpc -f '%artist%\n%album%\n%title%\n%file%'))
 ARTIST=${TRACK[0]}
 ALBUM=${TRACK[1]}
 TITLE=${TRACK[2]}
 FILE=${TRACK[3]}
 PROGRESS=$(echo "${TRACK[4]}" | grep -o '[[:digit:]]*%' | tr -d '%')
+REPEAT=$(echo "${TRACK[5]}" | grep -o 'repeat: on' | sed -e's/^.*$/white/')
+SHUFFLE=$(echo "${TRACK[5]}" | grep -o 'random: on' | sed -e's/^.*$/white/')
+REPEAT_ICON=~/dotfiles/assets/repeat_${REPEAT:-grey}_18x18.xpm
+SHUFFLE_ICON=~/dotfiles/assets/shuffle_${SHUFFLE:-grey}_18x18.xpm
 
 DIR=~/music/$(dirname $FILE)
 if [[ ( ! -f "$DIR/cover.xpm" ) && ( -f "$DIR/cover.jpg" ) ]]
@@ -34,10 +40,10 @@ fi
 
 ln -fs "$DIR/cover.xpm" /tmp/cover.xpm
 
-echo "^ib(1)^pa(0;0)^i(/tmp/cover.xpm)^pa(16;264)$ARTIST^pa(16;290)$TITLE^pa(1;319)^r($((PROGRESS * 254 / 100))x2)" | \
+echo "^ib(1)^pa(0;0)^i(/tmp/cover.xpm)^pa(16;264)$ARTIST^pa(16;290)$TITLE^pa(220;256)^fg(#1d1f21)^r(36x50)^fg()^pa(226;264)^i($REPEAT_ICON)^pa(226;290)^i($SHUFFLE_ICON)^pa(1;319)^r($((PROGRESS * 254 / 100))x2)" | \
     dzen2 -tw 256 -h 322 \
         -x $((SCREEN[0] * 50 / 100 - 128)) -y $((SCREEN[1] * 60 / 100)) \
-        -p 5 -ta l -fn Droid\ Sans \
+        -p 5 -ta l -fn Droid\ Sans -bg '#1d1f21' -fg '#ffffff' \
         -e 'onstart=uncollapse;
             entertitle=;
             enterslave=;leaveslave=;
