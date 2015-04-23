@@ -5,7 +5,13 @@ awful.rules = require("awful.rules")
 require("awful.autofocus")
 
 -- Autostart applications
-for _,cmd in pairs({"xmodmap .xmodmap", "xset r rate 250 25", "compton"}) do
+for _,cmd in pairs(
+{
+    "xmodmap .xmodmap",
+    "xset r rate 250 25",
+    "compton",
+    "xrandr --output HDMI-0 --primary"
+}) do
     awful.util.spawn_with_shell(cmd)
 end
 
@@ -279,6 +285,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     awful.key({                   }, "Print", function () awful.util.spawn('screentool upload') end),
+    awful.key({         "Control" }, "Print", function () awful.util.spawn('screentool save') end),
+    awful.key({         "Shift"   }, "Print", function () awful.util.spawn('screentool dragon') end),
     awful.key({                   }, "Pause", function () awful.util.spawn('xdotool mousemove 9999 9999') end),
 
     -- Prompt

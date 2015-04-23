@@ -1,6 +1,6 @@
 HISTFILE=~/.zhistory
-HISTSIZE=1000
-SAVEHIST=10000
+HISTSIZE=10000
+SAVEHIST=100000
 
 setopt appendhistory autocd beep notify hist_ignore_all_dups hist_ignore_space
 unsetopt extendedglob nomatch
@@ -64,6 +64,13 @@ function startblog()
 function px()
 {
     cd ~/projects/xedroid
+    clear
+    git st
+}
+
+function pl()
+{
+    cd ~/projects/lazors-in-space
     clear
     git st
 }
