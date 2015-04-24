@@ -128,6 +128,8 @@ nnoremap    <silent> <C-g>      :tag /^
 vnoremap    <silent> <C-g>      <C-c>:tag /^
 inoremap    <silent> <C-g>      <C-c>:tag /^
 
+imap <silent> <C-b> <C-c><C-b>
+
 nnoremap ; :
 vnoremap ; :
 nnoremap ;; :

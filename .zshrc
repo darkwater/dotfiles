@@ -54,6 +54,9 @@ alias irssi="ssh nv -t 'screen -xUS irssi || screen -US irssi /usr/bin/irssi'"
 alias snv="ssh nv -t 'tmux a || tmux || /usr/bin/fish'"
 alias nv="ssh nv" # 6 characters is too much!
 
+alias mcc="ssh mc -t 'screen -xS mc'"
+alias mc="ssh mc"
+
 alias kb="xset r rate 250 25; xmodmap ~/.xmodmap" # reset keyboard
 
 function startblog()
