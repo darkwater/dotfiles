@@ -100,22 +100,22 @@ function ll()
 
 
 if test "$TERM" = "linux"; then
-    echo -en "\e]P0070809" # black
-    echo -en "\e]P1cd0000" # darkred
-    echo -en "\e]P200cd00" # darkgreen
-    echo -en "\e]P3b8b800" # brown
-    echo -en "\e]P41e90ff" # darkblue
-    echo -en "\e]P5cd00cd" # darkmagenta
-    echo -en "\e]P600cdcd" # darkcyan
-    echo -en "\e]P7e5e5e5" # lightgrey
-    echo -en "\e]P84c4c4c" # darkgrey
-    echo -en "\e]P9ff0000" # red
-    echo -en "\e]PA00ff00" # green
-    echo -en "\e]PBffff00" # yellow
-    echo -en "\e]PC4682b4" # blue
-    echo -en "\e]PDff00ff" # magenta
-    echo -en "\e]PE00ffff" # cyan
-    echo -en "\e]PFffffff" # white
+    echo -en "\e]P0101010" # black
+    echo -en "\e]P1E84F4F" # darkred
+    echo -en "\e]P2B8D68C" # darkgreen
+    echo -en "\e]P3E1AA5D" # brown
+    echo -en "\e]P47DC1CF" # darkblue
+    echo -en "\e]P59B64FB" # darkmagenta
+    echo -en "\e]P66D878D" # darkcyan
+    echo -en "\e]P7dddddd" # lightgrey
+    echo -en "\e]P8404040" # darkgrey
+    echo -en "\e]P9D23D3D" # red
+    echo -en "\e]PAA0CF5D" # green
+    echo -en "\e]PBF39D21" # yellow
+    echo -en "\e]PC4E9FB1" # blue
+    echo -en "\e]PD8542FF" # magenta
+    echo -en "\e]PE42717B" # cyan
+    echo -en "\e]PFdddddd" # white
     clear # for background artifacting
 fi
 
