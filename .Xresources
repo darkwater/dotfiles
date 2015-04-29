@@ -11,11 +11,8 @@ URxvt.letterSpace: -1
 
 *foreground: #D7D0C7
 *background: #1d1f21
-URxvt.background: [0]#000000
 
 !black
-! *color0:     #AF875F
-! *color8:     #AF875F
 *color0:     #101010
 *color8:     #404040
 !red
@@ -40,9 +37,11 @@ URxvt.background: [0]#000000
 *color7:     #dddddd
 *color15:    #dddddd
 
+URxvt.transparent: true
+URxvt.shading: 100
 
 ! Compile xft: Attempt to find a visual with the given bit depth; option -depth.
-  URxvt.depth: 32
+! URxvt.depth: 32
 
 ! Compile xft: Turn on/off double-buffering for xft (default enabled).  On some card/driver combination enabling it
 ! URxvt.buffered: bitdepth

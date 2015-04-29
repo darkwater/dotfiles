@@ -68,8 +68,7 @@ class Panel
 
     def draw(items)
         item_width = @width / items.size
-        i = 1
-        items.each { |item| @dzen.write "^ca(1, bspc desktop -f ^#{i})^fg(#{item})^r(#{item_width}x2)^ca()"; i += 1 }
+        items.each { |item| @dzen.write "^ca(1, bspc desktop -f #{item[0]})^fg(#{item[1]})^r(#{item_width}x2)^ca()" }
         @dzen.puts
     end
 end
@@ -97,15 +96,15 @@ bspc.each_line do |line|
                 monitor = Monitor[name]
                 monitor.active = item[0] == 'M'
             when 'O' # occupied active
-                items << '#00abcd'
+                items << [ name, '#00abcd' ]
             when 'F' # free active
-                items << '#405060'
+                items << [ name, '#405060' ]
             when 'o' # occupied inactive
-                items << '#003050'
+                items << [ name, '#003050' ]
             when 'f' # free inactive
-                items << '#1d1f21'
+                items << [ name, '#1d1f21' ]
             when 'u', 'U' # urgent
-                items << '#ffaf00'
+                items << [ name, '#ffaf00' ]
             when 'L' # layout; end of desktops
                 monitor.panel.draw items unless monitor == nil
                 items = []

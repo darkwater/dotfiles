@@ -32,7 +32,9 @@ SHUFFLE=$(echo "${TRACK[5]}" | grep -o 'random: on' | sed -e's/^.*$/white/')
 REPEAT_ICON=~/dotfiles/assets/repeat_${REPEAT:-grey}_18x18.xpm
 SHUFFLE_ICON=~/dotfiles/assets/shuffle_${SHUFFLE:-grey}_18x18.xpm
 
-DIR=~/music/$(dirname $FILE)
+MUSIC_DIR=$(sed -nr 's/^ *music_directory +"(.+)"/\1/p' ~/.mpdconf)
+DIR=$MUSIC_DIR/$(dirname $FILE)
+echo $DIR
 if [[ ( ! -f "$DIR/cover.xpm" ) && ( -f "$DIR/cover.jpg" ) ]]
 then
     convert "$DIR/cover.jpg" -resize 256x256^ -gravity center -extent 256x256 "$DIR/cover.xpm"
