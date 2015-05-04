@@ -1,27 +1,51 @@
-#!/bin/sh
+#!/bin/zsh
 
 
 api="http://status.novaember.com/image"
 imageEncoding="png"
-slopargs="--nokeyboard -c 1,0.68,0 -b 1"
-maimargs="--hidecursor"
+slopargs=( --nokeyboard -c 1,0.68,0 -b 1 )
+maimargs=( --hidecursor )
 secret=$(cat ~/.nvsecret)
 
-eval $(slop $slopargs)
+eval $(slop ${slopargs[*]})
 [[ "$((W+H))" = "0" ]] && exit 2
 
-path="/tmp/screen.$imageEncoding"
-maim $maimargs -g "${W}x${H}+${X}+${Y}" "$path"
+image="/tmp/screen.$imageEncoding"
+maim ${maimargs[*]} -g "${W}x${H}+${X}+${Y}" "$image"
 
-i=-20
-while sleep 0.02s
-do
-    echo "^r($i)^r(20x2)"
-    let i+=6
-    [[ "$i" -gt "350" ]] && i=-20
-done | dzen2 -ta l -w 300 -h 4 -x -312 -y -16 &
-dzenpid=$!
+curl -# -F secret="$secret" -F file=@"$image" "$api" \
+1>>(
+    json 'return this.url' | \
+    tr -d '\n' | xclip \
+) \
+2>>(
+    unbuffer -p tr '\r' '\n' | \
+    grep --line-buffered -oP '[[:digit:].]+(?=%)' | \
+    unbuffer -p awk '
+    BEGIN {
+        last = 0
+        actuallast = 0
+        interp = 5
+        delay = 0.1667 / interp
+    }
+    {
+        delta = $0 - delta
+        print "yes"
+        for (i = 1; i <= interp; i++)
+        {
+            this = (last + delta / interp * i)
+            if (actuallast < this)
+            {
+                printf "^r(%dx2)\n", this * 3
+                system("sleep " delay "s")
+                actuallast = this
+            }
+        }
+        last = $0
+    }
+    ' | \
+    sed -u 's/\r//g' | \
+    dzen2 -ta l -w 300 -h 4 -x -312 -y -16 \
+)
 
-curl -F secret="$secret" -F file=@"$path" "$api" | json 'return this.url' | tr -d '\n' | xclip
-kill $dzenpid
 notify-send "Screenshot uploaded"
