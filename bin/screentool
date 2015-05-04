@@ -1,106 +1,27 @@
-#!/bin/bash
+#!/bin/sh
 
 
+api="http://status.novaember.com/image"
 imageEncoding="png"
-videoEncoding="webm"
-pidFile="/tmp/screen_record.pid"
-slopcmd="slop --nokeyboard -c 1,0.68,0 -b 1"
-fileFormat="%N"
+slopargs="--nokeyboard -c 1,0.68,0 -b 1"
+maimargs="--hidecursor"
+secret=$(cat ~/.nvsecret)
 
-destination="nv:s/"
-destinationPublic="http://novaember.com/s/"
- 
+eval $(slop $slopargs)
+[[ "$((W+H))" = "0" ]] && exit 2
 
-case "$1" in
-    "save")
-        eval $($slopcmd)
-        if [ "$(($W+$H))" != "0" ]; then
-            maim --hidecursor -g ${W}x${H}+${X}+${Y} "/tmp/screen.${imageEncoding}"
+path="/tmp/screen.$imageEncoding"
+maim $maimargs -g "${W}x${H}+${X}+${Y}" "$path"
 
-            number=1
-            until [ ! -e "/tmp/saved.${number}.${imageEncoding}" ]; do
-                let number=number+1
-            done
+i=-20
+while sleep 0.02s
+do
+    echo "^r($i)^r(20x2)"
+    let i+=6
+    [[ "$i" -gt "350" ]] && i=-20
+done | dzen2 -ta l -w 300 -h 4 -x -312 -y -16 &
+dzenpid=$!
 
-            mv "/tmp/screen.${imageEncoding}" "/tmp/saved.${number}.${imageEncoding}"
-            notify-send "Screenshot saved" "Saved as /tmp/saved.${number}.${imageEncoding}"
-            feh "/tmp/saved.${number}.${imageEncoding}" -g ${W}x${H}+${X}+${Y}
-        fi
-        ;;
-    "dragon")
-        eval $($slopcmd)
-        if [ "$(($W+$H))" != "0" ]; then
-            maim --hidecursor -g ${W}x${H}+${X}+${Y} "/tmp/screen.${imageEncoding}"
-
-            number=1
-            until [ ! -e "/tmp/saved.${number}.${imageEncoding}" ]; do
-                let number=number+1
-            done
-
-            mv "/tmp/screen.${imageEncoding}" "/tmp/saved.${number}.${imageEncoding}"
-            notify-send "Screenshot saved" "Saved as /tmp/saved.${number}.${imageEncoding}"
-            dragon "/tmp/saved.${number}.${imageEncoding}"
-        fi
-        ;;
-    "upload")
-        eval $($slopcmd)
-        if [ "$(($W+$H))" != "0" ]; then
-            filename="$(date +"$fileFormat").${imageEncoding}"
-            maim --hidecursor -g ${W}x${H}+${X}+${Y} "/tmp/$filename"
-            echo "Uploading screenshot..." | dzen2 -p &
-            pid=$!
-            scp "/tmp/$filename" "$destination"
-            if [ $? -eq 0 ]; then
-                notify-send "Screenshot uploaded" "$filename"
-                copy="${destinationPublic}${filename}"
-                rm "/tmp/$filename"
-            else
-                notify-send "Screenshot upload failed" "Saved as /tmp/${filename}"
-                copy="/tmp/${filename}"
-            fi
-            kill $pid
-            echo -n "$copy" | xclip
-        fi
-        ;;
-    "measure")
-        eval $($slopcmd -t 0)
-        if [ "$(($W+$H))" != "0" ]; then
-            maim --hidecursor -g ${W}x${H}+${X}+${Y} "/tmp/sample.png"
-            color="`convert /tmp/sample.png -resize 1x1 txt: | grep -oE '#[0-9A-F]+'`"
-            echo "$W x $H - $color" | dzen2 -x $X -y $Y -w 210 -p 5 -e 'button1=exit:0'
-        fi
-        ;;
-    "record")
-        if [ -f "$pidFile" ]; then
-            kill -2 `cat "$pidFile"`
-            rm "$pidFile"
-            filename="$(date +"$fileFormat").$videoEncoding"
-            mv "/tmp/screen.$videoEncoding" "/tmp/$filename"
-            echo "Uploading screencast..." | dzen2 -p &
-            pid=$!
-            scp "/tmp/$filename" "$destination"
-            if [ $? -eq 0 ]; then
-                notify-send "Screencast uploaded" "$filename"
-                copy="${destinationPublic}${filename}"
-                rm "/tmp/$filename"
-            else
-                notify-send "Screencast upload failed" "Saved as /tmp/${filename}"
-                copy="/tmp/${filename}"
-            fi
-            kill $pid
-            echo -n "$copy" | xclip
-            exit 0
-        fi
-
-        eval $($slopcmd)
-
-        W=$(( $W / 2 * 2 ))
-        H=$(( $H / 2 * 2 ))
-
-        if [ "$(($W+$H))" != "0" ]; then
-            rm "/tmp/screen.*"
-            ffmpeg -f x11grab -s "${W}x${H}" -i ":0.0+${X},${Y}" -r 60 -preset fast -qmin 18 -qmax 18 "/tmp/screen.${videoEncoding}" >/tmp/screencast.log 2>/tmp/screencast.err &
-            pid="$!"
-            echo -n "$pid" > /tmp/screen_record.pid
-        fi
-esac
+curl -F secret="$secret" -F file=@"$path" "$api" | json 'return this.url' | tr -d '\n' | xclip
+kill $dzenpid
+notify-send "Screenshot uploaded"
