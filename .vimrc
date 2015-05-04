@@ -169,7 +169,7 @@ endfunction
 let mapleader = ","
 
 " Gradle
-nnoremap <leader>gid :!gradle installDebug<CR>
+nnoremap <leader>gid :!gradle --daemon installDebug<CR>
 
 " C/C++
 nnoremap <leader>ch :call SplitHeader()<CR>

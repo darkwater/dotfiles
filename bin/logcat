@@ -4,5 +4,5 @@ adb logcat | sed \
     -e"s/^E/[31mE/" \
     -e"s/^W/[33mW/" \
     -e"s/^I/[34mI/" \
-    -e"s/^D/[35mD/" \
+    -e"s/^D/[37mD/" \
     -e"s/^V/[32mV/"

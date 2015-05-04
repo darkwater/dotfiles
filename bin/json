@@ -9,5 +9,6 @@ process.stdin.on('data', function (data)
 
 process.stdin.on('end', function ()
 {
-    eval('(function () {' + process.argv[2] + '})').call(JSON.parse(input));
+    output = eval('(function () {' + process.argv[2] + '})').call(JSON.parse(input));
+    if (output !== undefined) console.log(output);
 });
