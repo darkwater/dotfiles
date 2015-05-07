@@ -19,7 +19,7 @@ xmodmap ~/.xmodmap &
 panel &
 xset r rate 250 25 &
 
-sxhkd &
+sxhkd -r 50 &
 
 bspc config border_width        2
 bspc config window_gap         10
