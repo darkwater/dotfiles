@@ -1,150 +1,236 @@
-if &shell =~# 'fish$'
-    set shell=bash
-endif
+""""""""""""
+"" .vimrc
+"" Made by Darkwater
+"" 90% stolen from other people
+""
 
-filetype off " Pathogen needs to run before plugin indent on
+autocmd!
+
 call pathogen#incubate()
-call pathogen#helptags() " generate helptags for everything in 'runtimepath'
-filetype plugin indent on
+" call pathogen#helptags() " generate helptags for everything in 'runtimepath'
 
-set laststatus=0
-set timeoutlen=400
-set showtabline=2
+
+""""""""""""""""""""
+"" Set basic stuff
+""
+
+set backspace=start,eol,indent
+set background=dark
+set completeopt=menu,preview
 set encoding=utf8
-set pastetoggle=<F11>
+set foldcolumn=1
+set foldmethod=marker
+set hidden
+set history=1000
+set ignorecase
+set incsearch
+set laststatus=0
+set lcs=tab:··,trail:░
+set list
 set mouse=a
-set scrolloff=10
-set winwidth=80
-set winminwidth=20
-set updatetime=1500
-
-set undofile
-set undodir=~/.vim/undodir
-
-" if !exists('g:airline_symbols')
-"     let g:airline_symbols = {}
-" endif
-" let g:airline_left_sep = ''
-" let g:airline_left_alt_sep = '|'
-" let g:airline_right_sep = ' '
-" let g:airline_right_alt_sep = '│'
-" let g:airline_symbols.linenr = '¶'
-" let g:airline_symbols.branch = ''
-" let g:airline_symbols.paste = ''
-" let g:airline_symbols.whitespace = 'Ξ'
-" let g:airline_powerline_fonts=0
-" let g:airline#extensions#tabline#enabled=1
-
-set go=agit
-set gfn=Droid\ Sans\ Mono
-
+set nocompatible
+set number
+set pastetoggle=<F11>
+set ruler
+set scrolloff=5
+set showcmd
+set showmode
+set showtabline=2
+set smartcase
 set splitbelow
 set splitright
+set tabline=%!MyTabLine()
+set textwidth=0
+set timeoutlen=400
+set undodir=~/.vim/undodir
+set undofile
+set undolevels=1000
+set updatetime=1500
+set wildchar=<Tab>
+set wildmenu
+set wildmode=longest,list
+set winminwidth=20
+set winwidth=80
+set wrap
 
-set list
-"set lcs=eol:,tab:-,trail:·
-set lcs=tab:\ \ ,trail:·
+" Indentation
+set autoindent
+set expandtab
+set shiftwidth=4
+set tabstop=4
+
+colors Tomorrow-Night
+syntax on
+filetype plugin indent on
+
+
+"""""""""""""""""""""""""
+"" Plugin configuration
+""
 
 let NERDTreeChDirMode=3
 let NERDTreeIgnore=['.hex$', '.lst$', '\~$']
-"autocmd vimenter * if !argc() && !has('gui_running') | NERDTree | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-
-au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
-
-" configure tags - add additional tags here or comment out not-used ones
-set tags+=~/.vim/tags/cpp
-set tags+=~/.vim/tags/gl
-set tags+=~/.vim/tags/glm
-set tags+=~/.vim/tags/glfw
-set tags+=~/.vim/tags/sdl2
-set tags+=~/.vim/tags/enet
-
-" OmniCppComplete
 let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch = 1
 let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1      " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1    " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1    " autocomplete after ::
+let OmniCpp_ShowPrototypeInAbbr = 1
+let OmniCpp_MayCompleteDot = 1
+let OmniCpp_MayCompleteArrow = 1
+let OmniCpp_MayCompleteScope = 1
 let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-" automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest,preview
-
 let g:syntastic_cpp_compiler_options = '-std=c++11'
 
-au BufWritePost *.cpp,*.h SyntasticCheck
+"""""""""""""
+"" Autocmds
+""
 
-let g:ConqueTerm_ToggleKey = '<F8>'
+augroup Vimrc
 
-set wildignore+=*/bin/*
-set wildignore+=*/build/*
+    autocmd!
 
-if &term =~ '^screen'
-    " tmux will send xterm-style keys when its xterm-keys option is on
-    execute "set <xUp>=\e[1;*A"
-    execute "set <xDown>=\e[1;*B"
-    execute "set <xRight>=\e[1;*C"
-    execute "set <xLeft>=\e[1;*D"
-endif
+    " Use OmniCppComplete for omni completion
+    au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 
+    " Open a file on last known cursor position if valid
+    autocmd BufReadPost *
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal g`\"" |
+      \ endif
 
-" Fix Ctrl+arrows in urxvt
-map <ESC>Oa <C-Up>
-map <ESC>Ob <C-Down>
-map <ESC>Oc <C-Right>
-map <ESC>Od <C-Left>
-map! <ESC>Oa <C-Up>
-map! <ESC>Ob <C-Down>
-map! <ESC>Oc <C-Right>
-map! <ESC>Od <C-Left>
+augroup end
 
 
-" Ctrl+S for save
+"""""""""""""
+"" Mappings
+""
+
+" Fix Ctrl+arrows in urxvt for all modes
+map         <silent> <ESC>Oa    <C-Up>
+map         <silent> <ESC>Ob    <C-Down>
+map         <silent> <ESC>Oc    <C-Right>
+map         <silent> <ESC>Od    <C-Left>
+map!        <silent> <ESC>Oa    <C-Up>
+map!        <silent> <ESC>Ob    <C-Down>
+map!        <silent> <ESC>Oc    <C-Right>
+map!        <silent> <ESC>Od    <C-Left>
+
+" ^S for save
 nnoremap    <silent> <C-s>      :write<CR>
 vnoremap    <silent> <C-s>      <C-O>:write<CR>
 inoremap    <silent> <C-s>      <C-O>:write<CR>
 
-" Ctrl+j/k for tab switching
+" ^J/^K for tab switching
 nnoremap    <silent> <C-k>      :bn<CR>
 nnoremap    <silent> <C-j>      :bp<CR>
 
-" Ctrl+X to close the current buffer
+" ^X to close the current buffer
 nnoremap    <silent> <C-X>      :bp<bar>sp<bar>bn<bar>bd<CR>
 vnoremap    <silent> <C-X>      <C-c>:bp<bar>sp<bar>bn<bar>bd<CR>
 
-inoremap    <silent> <ESC>h     <Left>
-inoremap    <silent> <ESC>j     <Down>
-inoremap    <silent> <ESC>k     <Up>
-inoremap    <silent> <ESC>l     <Right>
-
+" <Home> ignores leading whitespace
 nnoremap    <silent> <Home>     ^
+vnoremap    <silent> <Home>     ^
 inoremap    <silent> <Home>     <C-o>^
 
+" ^G to jump to a tag
 nnoremap    <silent> <C-g>      :tag /^
 vnoremap    <silent> <C-g>      <C-c>:tag /^
 inoremap    <silent> <C-g>      <C-c>:tag /^
 
-imap <silent> <C-b> <C-c><C-b>
+" Easily jump to command line
+nnoremap    <silent> ;          :
+vnoremap    <silent> ;          :
+nnoremap    <silent> ;;         :
+vnoremap    <silent> ;;         :
+inoremap    <silent> ;;         <C-C>:
 
-nnoremap ; :
-vnoremap ; :
-nnoremap ;; :
-vnoremap ;; :
-inoremap ;; <C-C>:
-
+" {}| to {\n|\n}
 inoremap {} <CR>{<CR>}<Up><CR>
 
+" Use ^E/^Y in insert mode directly
 inoremap <C-e> <C-x><C-e>
 inoremap <C-y> <C-x><C-y>
 
-"" Ctrl+X for quit
-"noremap  <silent> <C-X>         :q<CR>
-"inoremap <silent> <C-X>         <C-O>:q<CR>
+" F# for buffer switching
+nnoremap <F1> :1b<CR>
+inoremap <F1> <C-c>:1b<CR>
+let i = 2
+while i <= 12
+    execute "nnoremap <F" . i . "> :1b\\|" . (i - 1) . "bn<CR>"
+    execute "inoremap <F" . i . "> <C-c>:1b\\|" . (i - 1) . "bn<CR>"
+    let i += 1
+endwhile
 
+
+""""""""""""""""""""
+"" Leader mappings
+""
+
+let mapleader = ","
+
+" Gradle
+nnoremap <leader>gid :!gradle --daemon installDebug<CR>
+
+" C++
+nnoremap <leader>ch :call SplitHeader()<CR>
+nnoremap <leader>ct :let x = system('ctags -R --language-force=C++ --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .')<CR>
+
+" Java
+nnoremap <leader>ji :JavaImport<CR>
+nnoremap <leader>js :JavaSearch<CR>
+nnoremap <leader>jt :let x = system('ctags -R --language-force=Java --sort=yes --fields=+iaS --extra=+q .')<CR>
+
+" Project
+nnoremap <leader>pp :ProjectProblems!<CR>
+
+" Comments
+nnoremap <leader>// :s/^/\1\/\//<CR>
+vnoremap <leader>// :s/^/\1\/\//<CR>
+nnoremap <leader>\\ :s/^\( *\)\/\//\1/<CR>
+vnoremap <leader>\\ :s/^\( *\)\/\//\1/<CR>
+nnoremap <leader>/# :s/^/\1#/<CR>
+vnoremap <leader>/# :s/^/\1#/<CR>
+nnoremap <leader>\# :s/^\( *\)#/\1/<CR>
+vnoremap <leader>\# :s/^\( *\)#/\1/<CR>
+
+
+"""""""""
+"" Less
+""
+
+let g:tagbar_type_less = {
+\ 'ctagstype' : 'Less',
+    \ 'kinds'     : [
+        \ 'c:classes',
+        \ 'i:identities',
+        \ 't:tags',
+        \ 'm:medias',
+        \ 'v:variables'
+    \ ]
+\ }
+
+
+"""""""""""
+"" Binary
+""
+augroup Binary
+
+    au!
+    au BufReadPre  *.bin let &bin=1
+    au BufReadPost *.bin if &bin | %!xxd
+    au BufReadPost *.bin set ft=xxd | endif
+    au BufWritePre *.bin if &bin | %!xxd -r
+    au BufWritePre *.bin endif
+    au BufWritePost *.bin if &bin | %!xxd
+    au BufWritePost *.bin set nomod | endif
+
+augroup end
+
+
+""""""""""""""
+"" Functions
+""
 
 " Open header files in a vsplit
 function SplitHeader()
@@ -166,153 +252,7 @@ function SplitHeader()
 endfunction
 
 
-let mapleader = ","
-
-" Gradle
-nnoremap <leader>gid :!gradle --daemon installDebug<CR>
-
-" C/C++
-nnoremap <leader>ch :call SplitHeader()<CR>
-nnoremap <leader>ct :let x = system('ctags -R --language-force=C++ --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .')<CR>
-
-" Java
-nnoremap <leader>ji :JavaImport<CR>
-nnoremap <leader>js :JavaSearch<CR>
-nnoremap <leader>jt :let x = system('ctags -R --language-force=Java --sort=yes --fields=+iaS --extra=+q .')<CR>
-
-" Project
-nnoremap <leader>pp :ProjectProblems!<CR>
-
-" Comments
-nnoremap <leader>// :s/^/\1\/\//<CR>
-vnoremap <leader>// :s/^/\1\/\//<CR>
-nnoremap <leader>\\ :s/^\( *\)\/\//\1/<CR>
-vnoremap <leader>\\ :s/^\( *\)\/\//\1/<CR>
-
-" F# for buffers
-nnoremap <F1> :1b<CR>
-inoremap <F1> <C-c>:1b<CR>
-let i = 2
-while i <= 12
-    execute "nnoremap <F" . i . "> :1b\\|" . (i - 1) . "bn<CR>"
-    execute "inoremap <F" . i . "> <C-c>:1b\\|" . (i - 1) . "bn<CR>"
-    let i += 1
-endwhile
-
-
-let g:tagbar_type_less = {
-\ 'ctagstype' : 'Less',
-    \ 'kinds'     : [
-        \ 'c:classes',
-        \ 'i:identities',
-        \ 't:tags',
-        \ 'm:medias',
-        \ 'v:variables'
-    \ ]
-\ }
-
-set wildmenu
-set wildmode=longest,list
-
-" Wrap too long lines
-set wrap
-
-" Tabs are 4 characters
-set tabstop=4
-
-" (Auto)indent uses 2 characters
-set shiftwidth=4
-
-" spaces instead of tabs
-set expandtab
-
-" guess indentation
-set autoindent
-
-" Expand the command line using tab
-set wildchar=<Tab>
-
-" show line numbers
-set number
-
-" Fold using markers {{{
-" like this
-" }}}
-set foldmethod=marker
-set foldcolumn=1
-
-" enable all features
-set nocompatible
-
-" needs to be called after setting nocompatible
-set showmode
-
-" powerful backspaces
-set backspace=start,eol,indent
-
-" highlight the searchterms
-"set hlsearch
-
-" jump to the matches while typing
-set incsearch
-
-" ignore case while searching
-set ignorecase
-
-" don't wrap words
-set textwidth=0
-
-" history
-set history=50
-
-" 1000 undo levels
-set undolevels=1000
-
-" show a ruler
-set ruler
-
-" show partial commands
-set showcmd
-
-" show matching braces
-set showmatch
-
-" write before hiding a buffer
-set autowrite
-
-" allows hidden buffers to stay unsaved, but we do not want this, so comment
-" it out:
-set hidden
-
-"set wmh=0
-
-" syntax highlight
-syntax on
-
-" we use a dark background, don't we?
-set bg=dark
-
-" When editing a file, always jump to the last known cursor position.
-" Don't do it when the position is invalid or when inside an event handler
-" (happens when dropping a file on gvim).
-autocmd BufReadPost *
-  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-  \   exe "normal g`\"" |
-  \ endif
-
-" vim -b : edit binary using xxd-format!
-augroup Binary
-  au!
-  au BufReadPre  *.bin let &bin=1
-  au BufReadPost *.bin if &bin | %!xxd
-  au BufReadPost *.bin set ft=xxd | endif
-  au BufWritePre *.bin if &bin | %!xxd -r
-  au BufWritePre *.bin endif
-  au BufWritePost *.bin if &bin | %!xxd
-  au BufWritePost *.bin set nomod | endif
-augroup END
-
-set tabline=%!MyTabLine()
+" Custom tab line function
 function MyTabLine()
   let s = ''
   for i in range(tabpagenr('$'))
@@ -341,6 +281,8 @@ function MyTabLine()
   return s
 endfunction
 
+
+" Custom tab label function
 function MyTabLabel(n)
   let s = ''
   let buflen = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
@@ -355,5 +297,3 @@ function MyTabLabel(n)
   let s .= bufname(buflist[winnr - 1])
   return s
 endfunction
-
-colors Tomorrow-Night
