@@ -195,11 +195,6 @@ function git_prompt_info()
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-echo -ne '\e[1m'
-(cd /usr/share/vim/vim74/doc; vim -u /dev/null -s <(echo -e ":'{+1,'}w! /tmp/fotd|q") -t $(grep -Ee '\*(i_)?(CTRL-)?..?\*' -e '\*:\w+\*'  tags | shuf | head -n 1 | cut -f 1 | tee /tmp/totd) 2>/dev/null >/dev/null; head /tmp/fotd)
-export TOTD=$(cat /tmp/totd)
-echo -ne '\e[0m'
-
 echo
 uptime
 acpi 2>/dev/null
