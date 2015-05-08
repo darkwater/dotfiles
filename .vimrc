@@ -142,20 +142,24 @@ nnoremap    <silent> ;;         :
 vnoremap    <silent> ;;         :
 inoremap    <silent> ;;         <C-C>:
 
+" Tab for autocompletion
+inoremap    <expr>   <Tab>      InsertTabWrapper()
+inoremap    <silent> <S-Tab>    <C-p>
+
 " {}| to {\n|\n}
-inoremap {} <CR>{<CR>}<Up><CR>
+inoremap    <silent> {}         <CR>{<CR>}<Up><CR>
 
 " Use ^E/^Y in insert mode directly
-inoremap <C-e> <C-x><C-e>
-inoremap <C-y> <C-x><C-y>
+inoremap    <silent> <C-e>      <C-x><C-e>
+inoremap    <silent> <C-y>      <C-x><C-y>
 
 " F# for buffer switching
-nnoremap <F1> :1b<CR>
-inoremap <F1> <C-c>:1b<CR>
+nnoremap    <silent> <F1>       :1b<CR>
+inoremap    <silent> <F1>       <C-c>:1b<CR>
 let i = 2
 while i <= 12
-    execute "nnoremap <F" . i . "> :1b\\|" . (i - 1) . "bn<CR>"
-    execute "inoremap <F" . i . "> <C-c>:1b\\|" . (i - 1) . "bn<CR>"
+    execute "nnoremap <silent> <F" . i . "> :1b\\|" . (i - 1) . "bn<CR>"
+    execute "inoremap <silent> <F" . i . "> <C-c>:1b\\|" . (i - 1) . "bn<CR>"
     let i += 1
 endwhile
 
@@ -230,7 +234,7 @@ augroup end
 ""
 
 " Open header files in a vsplit
-function SplitHeader()
+function! SplitHeader()
     let mainwin = winnr()
 
     if winnr('$') == 1
@@ -250,7 +254,7 @@ endfunction
 
 
 " Custom tab line function
-function MyTabLine()
+function! MyTabLine()
   let s = ''
   for i in range(tabpagenr('$'))
     " select the highlighting
@@ -280,7 +284,7 @@ endfunction
 
 
 " Custom tab label function
-function MyTabLabel(n)
+function! MyTabLabel(n)
   let s = ''
   let buflen = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
   if buflen > 1
@@ -293,4 +297,15 @@ function MyTabLabel(n)
   endif
   let s .= bufname(buflist[winnr - 1])
   return s
+endfunction
+
+
+" Tab completion when appropiate
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<Tab>"
+    else
+        return "\<C-n>"
+    endif
 endfunction
