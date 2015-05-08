@@ -1,13 +1,10 @@
 """"""""""""
 "" .vimrc
-"" Made by Darkwater
+"" Used by Darkwater
 "" 90% stolen from other people
 ""
 
-autocmd!
-
 call pathogen#incubate()
-" call pathogen#helptags() " generate helptags for everything in 'runtimepath'
 
 
 """"""""""""""""""""
