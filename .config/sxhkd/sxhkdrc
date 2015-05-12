@@ -81,7 +81,7 @@ super + Return
 	urxvt
 
 super + r
-	dmenu.sh run
+	dmenu_launcher run
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -97,7 +97,7 @@ Pause
     xdotool mousemove 9999 9999
 
 Scroll_Lock
-    clock.sh
+    clock
 
 XF86Audio{Play,Stop,Prev,Next}
     music {play,show,prev,next}
