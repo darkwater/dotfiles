@@ -1,0 +1,48 @@
+#!/bin/sh
+
+function usage()
+{
+    ME=$(basename $0)
+
+    echo "usage:   $ME <id> -t <seconds> <cmd> [cmdargs]"
+    echo "example: $ME dzen -t 10 dzen2 -y -100"
+    echo
+    echo "I don't even know how to describe this. Basically just use this"
+    echo "instead of dzen2's -p switch so you can share the same dzen2"
+    echo "process between multiple instances of the same script. Very useful"
+    echo "for eg. volume hotkeys."
+    echo
+    echo "WARNING: VERY EASY TO BREAK - USE WITH CARE"
+    echo "If it doesn't work, there's probably a stale tmpfile!"
+    exit $1
+}
+
+# Help switches
+test "$1" = "-h"     && usage 0
+test "$1" = "--help" && usage 0
+
+# Check parameters
+test "$#" -ge 4  || usage 1
+test "$2" = "-t" || usage 1
+
+# Fuck off if we encounter an error
+set -e
+
+# Define the instance sharing id thing
+ID="$(whoami)-$1"
+TMPFILE="/tmp/.persist-${ID//\//}"
+
+if test ! -e "$TMPFILE";
+then
+    # We're the first!
+
+    mkfifo "$TMPFILE"
+
+    (
+        ( cat "$TMPFILE"; rm "$TMPFILE"; ) | "${@:4}" # Execute the thing
+        exit 0
+    ) &
+fi
+
+# Pipe through to the thing
+( cat; sleep "$3" ) > "$TMPFILE"

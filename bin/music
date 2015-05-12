@@ -43,9 +43,10 @@ fi
 ln -fs "$DIR/cover.xpm" /tmp/cover.xpm
 
 echo "^ib(1)^pa(0;0)^i(/tmp/cover.xpm)^pa(16;264)$ARTIST^pa(16;290)$TITLE^pa(220;256)^fg(#1d1f21)^r(36x50)^fg()^pa(226;264)^i($REPEAT_ICON)^pa(226;290)^i($SHUFFLE_ICON)^pa(1;319)^r($((PROGRESS * 254 / 100))x2)" | \
+    persist music -t 5 \
     dzen2 -tw 256 -h 322 \
         -x $((SCREEN[0] * 50 / 100 - 128)) -y $((SCREEN[1] * 60 / 100)) \
-        -p 5 -ta l -fn Droid\ Sans -bg '#1d1f21' -fg '#ffffff' \
+        -ta l -fn Droid\ Sans -bg '#1d1f21' -fg '#ffffff' \
         -e 'onstart=uncollapse;
             entertitle=;
             enterslave=;leaveslave=;
