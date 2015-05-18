@@ -185,6 +185,11 @@ nnoremap <leader>jt :let x = system('ctags -R --language-force=Java --sort=yes -
 " Project
 nnoremap <leader>pp :ProjectProblems!<CR>
 
+" Tests
+nnoremap <leader>tt :call RunTestFile()<cr>
+nnoremap <leader>tn :call RunNearestTest()<cr>
+nnoremap <leader>ta :call RunTests('')<cr>
+
 " Comments
 nnoremap <leader>// :s/^/\1\/\//<CR>
 vnoremap <leader>// :s/^/\1\/\//<CR>
@@ -232,6 +237,74 @@ augroup end
 """"""""""""""
 "" Functions
 ""
+
+" Run current or last test file
+function! RunTestFile(...)
+    if a:0
+        let command_suffix = a:1
+    else
+        let command_suffix = ""
+    endif
+
+    " Run the tests for the previously-marked file.
+    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.py\)$') != -1
+    if in_test_file
+        call SetTestFile(command_suffix)
+    elseif !exists("t:grb_test_file")
+        return
+    end
+    call RunTests(t:grb_test_file . command_suffix)
+endfunction
+
+
+" Run the nearest test
+function! RunNearestTest()
+    let spec_line_number = line('.')
+    call RunTestFile(":" . spec_line_number)
+endfunction
+
+
+" Set the spec file that tests will be run for.
+function! SetTestFile(command_suffix)
+    let t:grb_test_file=@% . a:command_suffix
+endfunction
+
+
+" Write the file and run tests for the given filename
+function! RunTests(filename)
+    if expand("%") != ""
+      :w
+    end
+    silent! exec ":!echo;echo;echo -e '\e[40m\e[K\e[0m';echo"
+    if match(a:filename, '\.feature$') != -1
+        exec ":!script/features " . a:filename
+    else
+        if filereadable("script/test")
+            " First choice: project-specific test script
+            exec ":!script/test " . a:filename
+        elseif filewritable(".test-commands")
+          " Fall back to the .test-commands pipe if available, assuming someone
+          " is reading the other side and running the commands
+          let cmd = 'rspec --color --format progress --require "~/lib/vim_rspec_formatter" --format VimFormatter --out tmp/quickfix'
+          exec ":!echo " . cmd . " " . a:filename . " > .test-commands"
+
+          " Write an empty string to block until the command completes
+          sleep 100m " milliseconds
+          :!echo > .test-commands
+          redraw!
+        elseif filereadable("Gemfile")
+            " Fall back to a blocking test run with Bundler
+            exec ":!bundle exec rspec --color " . a:filename
+        elseif strlen(glob("test/**/*.py") . glob("tests/**/*.py"))
+            " If we see python-looking tests, assume they should be run with Nose
+            exec "!nosetests " . a:filename
+        else
+            " Fall back to a normal blocking test run
+            exec ":!rspec --color " . a:filename
+        end
+    end
+endfunction
+
 
 " Open header files in a vsplit
 function! SplitHeader()
