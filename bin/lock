@@ -10,16 +10,16 @@ if [[ "$1" = "prompt" ]]; then
           -w 920 -h 24                                 \
           -nb '#1d1f21' -nf '#ababab'                  \
           -sb '#111111' -sf '#ffaf00'                  > /tmp/afk.reason
+
+    sleep 0.2s
 elif [[ $# -ge 1 ]]; then
     echo $* > /tmp/afk.reason
 else
     echo > /tmp/afk.reason
 fi
 
-sleep 0.2s
-
 maim /tmp/screenshot.png && 
-convert /tmp/screenshot.png -level 0,100%,1.5 -blur 0x8 -spread 10 /tmp/screenshot.png &&
+convert /tmp/screenshot.png  -colorspace GRAY -scale $((100/6.5))% -sample 1200x1920! /tmp/screenshot.png &&
 zsh -c 'i3lock -ni /tmp/screenshot.png; killall conky; killall -USR2 dunst' &
 
 sleep 0.2s
