@@ -19,7 +19,8 @@ else
 fi
 
 maim /tmp/screenshot.png && 
-convert /tmp/screenshot.png  -colorspace GRAY -scale $((100/6.5))% -sample 1200x1920! /tmp/screenshot.png &&
+size=$(convert /tmp/screenshot.png info: | grep -o '[[:digit:]]\+x[[:digit:]]\+' | head -n 1) &&
+convert /tmp/screenshot.png  -colorspace GRAY -scale $((100/6.5))% -sample $size! /tmp/screenshot.png &&
 zsh -c 'i3lock -ni /tmp/screenshot.png; killall conky; killall -USR2 dunst' &
 
 sleep 0.2s
