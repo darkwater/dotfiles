@@ -61,7 +61,7 @@ alias kb="xset r rate 250 25; xmodmap ~/.xmodmap" # reset keyboard
 
 function startblog()
 {
-    nv -L 3000:localhost:3000 'cd blog && rails s'
+    nv -tL 3000:localhost:3000 'cd blog && rails s'
 }
 
 function px()
