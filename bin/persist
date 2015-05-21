@@ -32,6 +32,11 @@ set -e
 ID="$(whoami)-$1"
 TMPFILE="/tmp/.persist-${ID//\//}"
 
+if test -e "$TMPFILE" && ! lsof "$TMPFILE" | grep '^cat' 2>&1 >/dev/null;
+then
+    rm "$TMPFILE"
+fi
+
 if test ! -e "$TMPFILE";
 then
     # We're the first!

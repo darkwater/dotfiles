@@ -34,7 +34,6 @@ SHUFFLE_ICON=~/dotfiles/assets/shuffle_${SHUFFLE:-grey}_18x18.xpm
 
 MUSIC_DIR=$(sed -nr 's/^ *music_directory +"(.+)"/\1/p' ~/.mpdconf)
 DIR=$MUSIC_DIR/$(dirname $FILE)
-echo $DIR
 if [[ ( ! -f "$DIR/cover.xpm" ) && ( -f "$DIR/cover.jpg" ) ]]
 then
     convert "$DIR/cover.jpg" -resize 256x256^ -gravity center -extent 256x256 "$DIR/cover.xpm"
@@ -44,8 +43,17 @@ rand=$RANDOM
 rm /tmp/music-cover-*.xpm # to prevent dzen from caching art
 ln -fs "$DIR/cover.xpm" /tmp/music-cover-${rand}.xpm
 
+### DANGER ZONE ###
+
+if [[ "$2" != "0" ]]
+then
+    ( for n in $(seq 2 $2); do sleep 1s; music show 0; done ) & #YOLO
+fi
+
+###################
+
 echo "^ib(1)^pa(0;0)^i(/tmp/music-cover-${rand}.xpm)^pa(16;264)$ARTIST^pa(16;290)$TITLE^pa(220;256)^fg(#1d1f21)^r(36x50)^fg()^pa(226;264)^i($REPEAT_ICON)^pa(226;290)^i($SHUFFLE_ICON)^pa(1;319)^r($((PROGRESS * 254 / 100))x2)" | \
-    persist music -t 5 \
+    persist music -t $2 \
     dzen2 -tw 256 -h 322 \
         -x $((SCREEN[0] * 50 / 100 - 128)) -y $((SCREEN[1] * 60 / 100)) \
         -ta l -fn Droid\ Sans -bg '#1d1f21' -fg '#ffffff' \

@@ -96,11 +96,11 @@ XF86Audio{Lower,Raise}Volume
 Pause
     xdotool mousemove 9999 9999
 
-Scroll_Lock
-    clock
+{shift,_} + Scroll_Lock
+    {battery,clock} 5
 
 XF86Audio{Play,Stop,Prev,Next}
-    music {play,show,prev,next}
+    music {play,show,prev,next} 5
 
 ctrl + XF86Audio{Prev,Next}
     music {repeat,shuffle}
