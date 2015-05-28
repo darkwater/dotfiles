@@ -177,6 +177,9 @@ nnoremap <leader>gid :!gradle --daemon installDebug<CR>
 nnoremap <leader>ch :call SplitHeader()<CR>
 nnoremap <leader>ct :let x = system('ctags -R --language-force=C++ --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .')<CR>
 
+" File
+nnoremap <leader>fr :call RenameFile()<CR>
+
 " Java
 nnoremap <leader>ji :JavaImport<CR>
 nnoremap <leader>js :JavaSearch<CR>
@@ -380,5 +383,17 @@ function! InsertTabWrapper()
         return "\<Tab>"
     else
         return "\<C-n>"
+    endif
+endfunction
+
+
+" Rename current file
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
     endif
 endfunction
