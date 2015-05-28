@@ -10,9 +10,9 @@ function list()
     fi ) | tail -n +2 | sed  '1s/\x1b\[0m//'
 }
 
-if ! find -maxdepth 2 -type d -name .git 2>/dev/null | grep . >/dev/null;
+if ! find $@ -maxdepth 2 -type d -name .git 2>/dev/null | grep . >/dev/null;
 then
-    list
+    list $@
     exit $?
 fi
 
