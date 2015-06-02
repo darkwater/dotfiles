@@ -10,7 +10,7 @@ function list()
     fi ) | tail -n +2 | sed  '1s/\x1b\[0m//'
 }
 
-if ! find $@ -maxdepth 2 -type d -name .git 2>/dev/null | grep . >/dev/null;
+if ! [[ -e '../.git' ]] && ! find $@ -maxdepth 2 -name .git 2>/dev/null | grep . >/dev/null;
 then
     list $@
     exit $?
@@ -75,14 +75,21 @@ function get_git_branch()
 LIST="$(list $@)"
 INDEX="$(call_with "$LIST" index_of $'\e')"
 
+PAST_DIRS=0
+
 echo "$LIST" | while read line
 do
     name="$(get_name "$line")"
     data=
 
-    if call_with "$line" is_dir && [[ -d "$name/.git" ]]
+    if [[ "$PAST_DIRS" = 0 ]] && call_with "$line" is_dir
     then
-        data="$(get_git_branch "$name") "
+        if [[ -e "$name/.git" ]]
+        then
+            data="$(get_git_branch "$name") "
+        fi
+    else
+        PAST_DIRS=1
     fi
 
     insert_before "$INDEX" "$data" "$line"
