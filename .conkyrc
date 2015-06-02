@@ -23,7 +23,7 @@ draw_shades yes
 draw_outline no
 draw_borders no
 draw_graph_borders no
-default_color C5C8C6
+default_color C5C8CF
 default_shade_color 000000
 alignment tm
 gap_y 100
