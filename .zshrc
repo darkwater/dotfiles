@@ -88,6 +88,16 @@ function pa()
     alias run="ruby build.rb 0000-designtest run"
 }
 
+function ll()
+{
+    if test \( "$PWD" = "$HOME" -a $# = 0 \) -o "$1" = ~; then
+        ls -hlF --color=auto --group-directories-first $argv
+        return
+    fi
+
+    ls -halF --color=auto --group-directories-first $argv
+}
+
 
 if test "$TERM" = "linux"; then
     echo -en "\e]P0101010" # black
