@@ -22,7 +22,7 @@ set history=1000
 set ignorecase
 set incsearch
 set laststatus=0
-set lcs=tab:··,trail:░
+set lcs=tab:··,trail:░,nbsp:%
 set list
 set mouse=a
 set nocompatible
