@@ -26,6 +26,7 @@ ARTIST=${TRACK[0]}
 ALBUM=${TRACK[1]}
 TITLE=${TRACK[2]}
 FILE=${TRACK[3]}
+STATUS=$(echo "${TRACK[4]}" | grep -o 'playing\|paused')
 PROGRESS=$(echo "${TRACK[4]}" | grep -o '[[:digit:]]*%' | tr -d '%')
 REPEAT=$(echo "${TRACK[5]}" | grep -o 'repeat: on' | sed -e's/^.*$/white/')
 SHUFFLE=$(echo "${TRACK[5]}" | grep -o 'random: on' | sed -e's/^.*$/white/')
@@ -43,12 +44,19 @@ TARGET="$DIR/cover.xpm"
 COVERFILE=$(echo /tmp/.music-cover-*.xpm)
 
 # if the temp file isn't already pointing to the right cover...
-if [[ "$(readlink "$COVERFILE")" != "$TARGET" ]];
+if [[ "$(readlink "$COVERFILE")" != "$TARGET" ]]
 then
     # prevent dzen from caching art
     rm /tmp/.music-cover-*.xpm
     COVERFILE="/tmp/.music-cover-${RANDOM}.xpm"
     ln -fs "$DIR/cover.xpm" "$COVERFILE"
+fi
+
+STATUSINDICATOR=''
+
+if [[ "$STATUS" = "paused" ]]
+then
+    STATUSINDICATOR='^pa(64;64)^r(48x128)^pa(144;64)^r(48x128)'
 fi
 
 ### DANGER ZONE ###
@@ -60,7 +68,7 @@ fi
 
 ###################
 
-echo "^ib(1)^pa(0;0)^i($COVERFILE)^pa(16;264)$ARTIST^pa(16;290)$TITLE^pa(220;256)^fg(#1d1f21)^r(36x50)^fg()^pa(226;264)^i($REPEAT_ICON)^pa(226;290)^i($SHUFFLE_ICON)^pa(1;319)^r($((PROGRESS * 254 / 100))x2)" | \
+echo "^ib(1)^pa(0;0)^i($COVERFILE)$STATUSINDICATOR^pa(16;264)$ARTIST^pa(16;290)$TITLE^pa(220;256)^fg(#1d1f21)^r(36x50)^fg()^pa(226;264)^i($REPEAT_ICON)^pa(226;290)^i($SHUFFLE_ICON)^pa(1;319)^r($((PROGRESS * 254 / 100))x2)" | \
     persist music -t $2 \
     dzen2 -tw 256 -h 322 \
         -x $((SCREEN[0] * 50 / 100 - 128)) -y $((SCREEN[1] * 60 / 100)) \
