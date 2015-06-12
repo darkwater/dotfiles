@@ -2,8 +2,8 @@ HISTFILE=~/.zhistory
 HISTSIZE=10000
 SAVEHIST=100000
 
-setopt appendhistory autocd beep notify hist_ignore_all_dups hist_ignore_space
-unsetopt extendedglob nomatch
+setopt appendhistory autocd notify hist_ignore_all_dups hist_ignore_space
+unsetopt extendedglob nomatch beep
 
 bindkey -e
 
