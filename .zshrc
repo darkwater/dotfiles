@@ -7,7 +7,7 @@ unsetopt extendedglob nomatch beep
 
 bindkey -e
 
-zstyle :compinstall filename '/home/dark/.zshrc'
+zstyle :compinstall filename ~/.zshrc
 
 autoload -Uz compinit
 compinit
@@ -51,11 +51,8 @@ else
 fi
 
 alias irssi="ssh nv -t 'screen -xUS irssi || screen -US irssi /usr/bin/irssi'"
-alias snv="ssh nv -t 'tmux a || tmux || /usr/bin/fish'"
+alias snv="ssh nv -t 'tmux a || tmux || /usr/bin/zsh'"
 alias nv="ssh nv" # 6 characters is too much!
-
-alias mcc="ssh mc -t 'screen -xS mc'"
-alias mc="ssh mc"
 
 alias kb="xset r rate 250 25; xmodmap ~/.xmodmap" # reset keyboard
 
@@ -100,7 +97,7 @@ function ll()
 
 
 if test "$TERM" = "linux"; then
-    echo -en "\e]P0101010" # black
+    echo -en "\e]P01D1F21" # black
     echo -en "\e]P1E84F4F" # darkred
     echo -en "\e]P2B8D68C" # darkgreen
     echo -en "\e]P3E1AA5D" # brown
@@ -133,7 +130,6 @@ local current_dir='%{$fg[blue]%}%~%{$reset_color%}'
 
 local git_branch='$(git_prompt_info)%{$reset_color%}'
 
-# PROMPT="%{$fg[yellow]%}%T%{$reset_color%} ${return_code}%{$reset_color%}${current_dir}${git_branch} $ %B%b"
 
 PROMPT='$(zsh_prompt)'
 RPROMPT="%(?..%{$fg[red]%}%? ↵ %{$reset_color%})%{$fg_bold[black]%}$(hostname)  %T%{$reset_color%}"
@@ -193,7 +189,7 @@ function git_prompt_info()
 }
 
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/dotfiles/zshplugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 uptime
 acpi 2>/dev/null
