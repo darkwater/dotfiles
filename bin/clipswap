@@ -1,0 +1,9 @@
+#!/bin/sh
+
+xclip -selection clipboard -out > /tmp/clip.clip
+xclip -selection primary   -out > /tmp/prim.clip
+
+xclip -selection clipboard < /tmp/prim.clip
+xclip -selection primary   < /tmp/clip.clip
+
+rm /tmp/prim.clip /tmp/clip.clip

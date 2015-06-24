@@ -99,6 +99,9 @@ Pause
 {shift,_} + Scroll_Lock
     {battery,clock} 5
 
+ctrl + Scroll_Lock
+    clipswap
+
 XF86Audio{Play,Stop,Prev,Next}
     music {play,show,prev,next} 5
 
