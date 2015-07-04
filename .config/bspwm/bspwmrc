@@ -4,14 +4,14 @@
 source ~/.zshenv
 
 
-# Configure monitors
-if xrandr -q | grep 'HDMI-0 connected'; then
-    xrandr --output HDMI-0 --primary
-fi
+if xrandr -q | grep 'VGA1 connected'; then
+    feh --bg-fill ~/dotfiles/assets/background_portrait.png
+else
+    feh --bg-fill ~/dotfiles/assets/background_landscape.png
+fi &
 
 
 # Configure X environment
-feh --bg-scale ~/images/wallpapers/background1.png &
 compton &
 xrdb ~/.Xresources &
 xsetroot -cursor_name left_ptr &

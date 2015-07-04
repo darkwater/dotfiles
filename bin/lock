@@ -21,9 +21,4 @@ fi
 maim /tmp/screenshot.png && 
 size=$(convert /tmp/screenshot.png info: | grep -o '[[:digit:]]\+x[[:digit:]]\+' | head -n 1) &&
 convert /tmp/screenshot.png -scale $((100/6.5))% -sample $size! /tmp/screenshot.png &&
-zsh -c 'i3lock -ni /tmp/screenshot.png; killall conky; killall -USR2 dunst' &
-
-sleep 0.2s
-conky &
-
-xdotool key a Escape
+i3lock -ni /tmp/screenshot.png; killall -USR2 dunst

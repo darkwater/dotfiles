@@ -3,5 +3,5 @@
 ssh nv 'echo "start of notifications" > /tmp/notifications'
 
 ssh nv tail -f /tmp/notifications | while read line; do
-    echo $line | tr '\01' '\n' | xargs -d'\n' notify-send
+    echo "$line" | tr '\01' '\n' | xargs -d'\n' notify-send
 done
