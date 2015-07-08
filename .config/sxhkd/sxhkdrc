@@ -90,8 +90,8 @@ super + Escape
 XF86Audio{Lower,Raise}Volume
     volume {down,up}
 
-{_,shift,ctrl,super} + Print
-    screentool {upload,dragon,save,measure}
+{_,shift,ctrl} + Print
+    screentool {png,mp4,png}
 
 Pause
     xdotool mousemove 9999 9999

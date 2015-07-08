@@ -2,10 +2,17 @@
 
 # REQUIRES libnotify-id (AUR) FOR NOTIFICATIONS
 
+if [[ "$1" = 'mp4' && -e /tmp/screencast.pid ]]
+then
+    kill $(cat /tmp/screencast.pid)
+    rm /tmp/screencast.pid
+    exit
+fi
+
 api="http://status.novaember.com/image"
-imageEncoding="png"
 slopargs=( --nokeyboard -c 1,0.68,0 -b 1 )
 maimargs=( --hidecursor )
+ffmpegargs=( )
 secret=$(cat ~/.nvsecret)
 
 eval $(slop ${slopargs[*]})
@@ -13,22 +20,44 @@ eval $(slop ${slopargs[*]})
 
 start=$(date +%s%N | cut -c 1-13)
 
-(
-    image="/tmp/screenshot.$imageEncoding"
-    maim ${maimargs[*]} -g "${W}x${H}+${X}+${Y}" "$image"
+case "$1" in
+    'png'|'jpg')
+        (
+            image="/tmp/screenshot.$1"
+            maim ${maimargs[*]} -g "${W}x${H}+${X}+${Y}" "$image"
 
-    curl -F secret="$secret" -F file=@"$image" -F extension="$imageEncoding" "$api" |
-        json 'return this.url' |
-        tr -d '\n' | xclip
+            curl -F secret="$secret" -F file=@"$image" -F extension="$1" "$api" |
+                json 'return this.url' |
+                tr -d '\n' | xclip
 
-    xclip -o | xclip -selection clipboard
+            xclip -o | xclip -selection clipboard
 
-    end=$(date +%s%N | cut -c 1-13)
-    time=$((end - start))
+            end=$(date +%s%N | cut -c 1-13)
+            time=$((end - start))
 
-    notify-send -r $(cat /tmp/screentool.nid) -t 1 "Screenshot uploaded" "Took ${time}ms"
+            notify-send -r $(cat /tmp/screentool.$$.nid) -t 1 "Screenshot uploaded!" "Took ${time}ms"
 
-    rm /tmp/screentool.nid
-) &
+            rm /tmp/screentool.$$.nid
+        ) &
 
-notify-send -pt 0 'Uploading screenshot...' > /tmp/screentool.nid
+        notify-send -pt 0 'Uploading screenshot...' > /tmp/screentool.$$.nid
+        ;;
+
+    'mp4')
+        (
+            ffmpeg -video_size "${W}x${H}" -framerate 60 -f x11grab -i :0.0+"${X},${Y}" -f mp4 -movflags frag_keyframe+empty_moov - |
+                curl -F secret="$secret" -F file=@- -F extension="$1" "$api" |
+                json 'return this.url' |
+                tr -d '\n' | xclip
+
+            xclip -o | xclip -selection clipboard
+
+            end=$(date +%s%N | cut -c 1-13)
+            time=$((end - start))
+
+            notify-send -t 1 "Screencast finished!" "Took $((time / 1000))s"
+        ) &
+
+        pidof ffmpeg | cut -d ' ' -f 1 > /tmp/screencast.pid
+        ;;
+esac
