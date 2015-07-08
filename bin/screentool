@@ -1,5 +1,6 @@
-#!/bin/zsh
+#!/bin/sh
 
+# REQUIRES libnotify-id (AUR) FOR NOTIFICATIONS
 
 api="http://status.novaember.com/image"
 imageEncoding="png"
@@ -10,42 +11,24 @@ secret=$(cat ~/.nvsecret)
 eval $(slop ${slopargs[*]})
 [[ "$((W+H))" = "0" ]] && exit 2
 
-image="/tmp/screen.$imageEncoding"
-maim ${maimargs[*]} -g "${W}x${H}+${X}+${Y}" "$image"
+start=$(date +%s%N | cut -c 1-13)
 
-curl -# -F secret="$secret" -F file=@"$image" "$api" \
-1>>(
-    json 'return this.url' | \
-    tr -d '\n' | xclip \
-) \
-2>>(
-    unbuffer -p tr '\r' '\n' | \
-    grep --line-buffered -oP '[[:digit:].]+(?=%)' | \
-    unbuffer -p awk '
-    BEGIN {
-        last = 0
-        actuallast = 0
-        interp = 5
-        delay = 0.1667 / interp
-    }
-    {
-        delta = $0 - delta
-        print "yes"
-        for (i = 1; i <= interp; i++)
-        {
-            this = (last + delta / interp * i)
-            if (actuallast < this)
-            {
-                printf "^r(%dx2)\n", this * 3
-                system("sleep " delay "s")
-                actuallast = this
-            }
-        }
-        last = $0
-    }
-    ' | \
-    sed -u 's/\r//g' | \
-    dzen2 -ta l -w 300 -h 4 -x -312 -y -16 \
-)
+(
+    image="/tmp/screenshot.$imageEncoding"
+    maim ${maimargs[*]} -g "${W}x${H}+${X}+${Y}" "$image"
 
-notify-send "Screenshot uploaded"
+    curl -F secret="$secret" -F file=@"$image" -F extension="$imageEncoding" "$api" |
+        json 'return this.url' |
+        tr -d '\n' | xclip
+
+    xclip -o | xclip -selection clipboard
+
+    end=$(date +%s%N | cut -c 1-13)
+    time=$((end - start))
+
+    notify-send -r $(cat /tmp/screentool.nid) -t 1 "Screenshot uploaded" "Took ${time}ms"
+
+    rm /tmp/screentool.nid
+) &
+
+notify-send -pt 0 'Uploading screenshot...' > /tmp/screentool.nid
