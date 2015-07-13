@@ -397,3 +397,12 @@ function! RenameFile()
         redraw!
     endif
 endfunction
+
+
+""""""""""""""""""
+"" Local rc file
+""
+
+if filereadable("./.vimlocalrc")
+    source ./.vimlocalrc
+endif
