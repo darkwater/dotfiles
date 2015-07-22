@@ -102,6 +102,9 @@ Pause
 ctrl + Scroll_Lock
     clipswap
 
+ctrl + shift + Scroll_Lock
+    pastetype
+
 XF86Audio{Play,Stop,Prev,Next}
     music {play,show,prev,next} 5
 

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sleep 0.2s
+xdotool type "$(xclip -o)"
