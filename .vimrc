@@ -149,6 +149,9 @@ inoremap    <silent> <S-Tab>    <C-p>
 " {}| to {\n|\n}
 inoremap    <silent> {}         <CR>{<CR>}<Up><CR>
 
+" Make Y consistent with D and C
+nnoremap    <silent> Y          y$
+
 " Use ^E/^Y in insert mode directly
 inoremap    <silent> <C-e>      <C-x><C-e>
 inoremap    <silent> <C-y>      <C-x><C-y>
