@@ -2,6 +2,8 @@ HISTFILE=~/.zhistory
 HISTSIZE=10000
 SAVEHIST=100000
 
+export PATH=~/dotfiles/bin:$PATH
+
 setopt appendhistory autocd notify hist_ignore_all_dups hist_ignore_space
 unsetopt extendedglob nomatch beep
 
