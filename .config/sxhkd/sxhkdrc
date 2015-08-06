@@ -102,6 +102,9 @@ Pause
 ctrl + Scroll_Lock
     clipswap
 
+shift + Scroll_Lock
+    nvpaste
+
 ctrl + shift + Scroll_Lock
     pastetype
 

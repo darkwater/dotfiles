@@ -1,0 +1,17 @@
+#!/bin/sh
+
+api="http://status.novaember.com/image"
+secret=$(cat ~/.nvsecret)
+
+xclip -selection clipboard -o > /tmp/nvpaste.txt
+size=$(wc -m /tmp/nvpaste.txt | cut -d\  -f1)
+
+curl -F secret="$secret" -F file=@"/tmp/nvpaste.txt" -F extension="txt" "$api" |
+    json 'return this.url' |
+    tr -d '\n' | xclip
+
+xclip -o | xclip -selection clipboard
+
+notify-send -t 2 "Text uploaded!" "Uploaded ${size} bytes"
+
+rm /tmp/nvpaste.txt
