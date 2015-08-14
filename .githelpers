@@ -19,7 +19,7 @@ AUTHOR="%C(bold blue)<%an>%Creset"
 REFS="%C(bold red)%d%Creset"
 SUBJECT="%s"
 
-FORMAT="$HASH}$RELATIVE_TIME}$AUTHOR}$REFS $SUBJECT"
+FORMAT="${HASH}ጶ${RELATIVE_TIME}ጶ${AUTHOR}ጶ$REFS $SUBJECT"
 
 ANSI_BLACK='\033[30m'
 ANSI_BLACK_BOLD='\033[0;30;1m'
@@ -51,8 +51,12 @@ pretty_git_log() {
         sed -Ee 's/(^[^<]*) ago\)/\1)/' |
         # Replace (2 years, 5 months) with (2 years)
         sed -Ee 's/(^[^<]*), [[:digit:]]+ .*months?\)/\1)/' |
+        # Column doesn't like escape characters. Use some obscure unicode character.
+        sed -Ee 's/\x1b/ጸ/g' |
         # Line columns up based on } delimiter
-        column -s '}' -t |
+        column -s 'ጶ' -t |
+        # Some obscure unicode character back to an escape char
+        sed -Ee 's/ጸ/\x1b/g' |
         # Color merge commits specially
         sed -Ee "s/(Merge (branch|remote-tracking branch|pull request) .*$)/$(printf $ANSI_RED)\1$(printf $ANSI_RESET)/" |
         # Page only if we're asked to.
