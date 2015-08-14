@@ -10,7 +10,7 @@ unsetopt extendedglob nomatch beep
 bindkey -e
 
 zstyle :compinstall filename ~/.zshrc
-zstyle ':completion:*' matcher-list 'm:{A-ZÄÖÜÉÈËa-zäöüéèë}={a-zäöüéèëA-ZÄÖÜÉÈË} m:[-_]=[-_] r:|[-_]=** r:|=*' '+l:|=*'
+zstyle ':completion:*' matcher-list 'm:{A-ZÄÖÜÉÈËa-zäöüéèë}={a-zäöüéèëA-ZÄÖÜÉÈË} m:[-_.]=[-_.] r:|[-_.]=** r:|=*' '+l:|=*'
 
 autoload -Uz compinit
 compinit
