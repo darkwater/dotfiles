@@ -140,11 +140,7 @@ RPROMPT="%(?..%{$fg[red]%}%? ! %{$reset_color%})%{$fg_bold[black]%}$(hostname)  
 
 function zsh_prompt()
 {
-    # Time
-    # echo -n "%{$fg_bold[black]%}%T%{$reset_color%} "
-
-    # Return code
-    # echo -n "%(?..%{$fg[red]%}%? ↵ %{$reset_color%})"
+    echo -en '\a'
 
     local ref=$(git symbolic-ref HEAD 2> /dev/null)
     if [[ -n "$ref" ]]; then
