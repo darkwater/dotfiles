@@ -140,7 +140,7 @@ RPROMPT="%(?..%{$fg[red]%}%? ! %{$reset_color%})%{$fg_bold[black]%}$(hostname)  
 
 function zsh_prompt()
 {
-    echo -en '\a'
+    echo -en '%{\a%}'
 
     local ref=$(git symbolic-ref HEAD 2> /dev/null)
     if [[ -n "$ref" ]]; then
