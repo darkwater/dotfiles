@@ -14,6 +14,7 @@ call pathogen#incubate()
 set backspace=start,eol,indent
 set background=dark
 set completeopt=menu,preview
+set cursorline
 set encoding=utf8
 set foldcolumn=1
 set foldmethod=marker
