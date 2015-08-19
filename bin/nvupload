@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# REQUIRES libnotify-id (AUR) FOR NOTIFICATIONS
+
+api="http://status.novaember.com/image"
+secret=$(cat ~/.nvsecret)
+
+image="$*"
+[[ -z "$image" ]] && exit 1
+
+start=$(date +%s%N | cut -c 1-13)
+
+curl -F secret="$secret" -F file=@"$image" "$api" |
+    json 'return this.url' |
+    tee /dev/stderr | tr -d '\n' | xclip
+
+xclip -o | xclip -selection clipboard
