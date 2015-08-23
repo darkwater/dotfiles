@@ -58,6 +58,8 @@ case "$1" in
             notify-send -t 1 "Screencast finished!" "Took $((time / 1000))s"
         ) &
 
+        sleep 0.5s
+
         pidof ffmpeg | cut -d ' ' -f 1 > /tmp/screencast.pid
         ;;
 esac
