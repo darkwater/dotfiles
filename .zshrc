@@ -57,8 +57,6 @@ alias irssi="ssh nv -t 'screen -xUS irssi || screen -US irssi /usr/bin/irssi'"
 alias snv="ssh nv -t 'tmux a || tmux || /usr/bin/zsh'"
 alias nv="ssh nv" # 6 characters is too much!
 
-alias kb="xset r rate 250 25; xmodmap ~/.xmodmap" # reset keyboard
-
 function startblog()
 {
     nv -tL 3000:localhost:3000 'cd blog && rails s'

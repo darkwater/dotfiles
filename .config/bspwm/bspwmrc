@@ -15,9 +15,8 @@ fi &
 compton &
 xrdb ~/.Xresources &
 xsetroot -cursor_name left_ptr &
-xmodmap ~/.xmodmap &
 panel &
-xset r rate 250 25 &
+kb &
 for n in {8..12}; do xinput set-prop $n "Device Accel Constant Deceleration" 2.2; done & # I don't even care
 vpsnotifyc &
 
