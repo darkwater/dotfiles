@@ -21,6 +21,9 @@ xset r rate 250 25 &
 for n in {8..12}; do xinput set-prop $n "Device Accel Constant Deceleration" 2.2; done & # I don't even care
 vpsnotifyc &
 
+# Run local .xenv
+source ~/.xenv
+
 sxhkd -f 60 &
 
 bspc config border_width        1
