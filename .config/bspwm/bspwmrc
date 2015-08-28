@@ -40,7 +40,7 @@ bspc config gapless_monocle      true
 bspc config focus_by_distance    true
 bspc config focus_follows_cursor true
 
-monitors=( 'VGA1' 'LVDS1'  'HDMI-0' 'DVI-I-1' ) # order is important
+monitors=( 'VGA1' 'HDMI1' 'LVDS1'  'HDMI-0' 'DVI-I-1' ) # order is important
 i=1
 for m in ${monitors[@]}; do
     if bspc query -M | grep "$m"; then
