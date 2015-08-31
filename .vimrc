@@ -89,6 +89,7 @@ augroup Vimrc
 
     " Use OmniCppComplete for omni completion
     au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
+    au BufNewFile,BufRead,BufEnter *.rb set nocursorline " Looks like we can't always have nice things :<
 
     " Open a file on last known cursor position if valid
     autocmd BufReadPost *
