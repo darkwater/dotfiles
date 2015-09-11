@@ -77,7 +77,7 @@ fun! <SID>XmlIndentSum(lnum, style, add)
 	\  (<SID>XmlIndentWithPattern(line, b:xml_indent_open) * 2
         \ - <SID>XmlIndentWithPattern(line, b:xml_indent_open_end)
 	\ - <SID>XmlIndentWithPattern(line, b:xml_indent_close) * 2
-	\ - <SID>XmlIndentWithPattern(line, '.\{-}[/?]>'))) + a:add
+	\ - <SID>XmlIndentWithPattern(line, '.\{-}[/?-]>'))) + a:add
     else
 	return a:add
     endif
