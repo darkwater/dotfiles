@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
-adb logcat | sed -r \
+adb $@ logcat | sed -r \
     -e"s/^(.{30} )?E/[30;1m\1[31mE/" \
     -e"s/^(.{30} )?W/[30;1m\1[33mW/" \
     -e"s/^(.{30} )?I/[30;1m\1[0;34mI/" \
