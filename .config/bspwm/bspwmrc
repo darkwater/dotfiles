@@ -49,7 +49,7 @@ for m in ${monitors[@]}; do
     fi
 done
 
-bspc rule -a Chromium desktop=1-2 border=off
+bspc rule -a chromium desktop=1-2 border=off
 bspc config -d 1-2 window_gap 0
 bspc config -d 1-2 bottom_padding 2
 
