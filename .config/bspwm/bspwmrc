@@ -4,13 +4,6 @@
 source ~/.zshenv
 
 
-if xrandr -q | grep 'VGA1 connected'; then
-    feh --bg-fill ~/dotfiles/assets/background_portrait.png
-else
-    feh --bg-fill ~/dotfiles/assets/background_landscape.png
-fi &
-
-
 # Configure X environment
 compton &
 xrdb ~/.Xresources &
