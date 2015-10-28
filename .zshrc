@@ -72,6 +72,12 @@ function ll()
     ls -halF --color=auto --group-directories-first $argv
 }
 
+function downloads()
+{
+    cd ~/downloads/
+    ls -hAlt --color=always | head -n 11 | tail | tac
+}
+
 
 if test "$TERM" = "linux"; then
     echo -en "\e]P01D1F21" # black
