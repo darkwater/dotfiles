@@ -20,6 +20,7 @@ sxhkd -f 60 &
 
 bspc config border_width        1
 bspc config window_gap         10
+bspc config bottom_padding      2
 
 bspc config focused_border_color '#6D878D'
 bspc config active_border_color  '#102030'
@@ -44,7 +45,6 @@ done
 
 bspc rule -a chromium desktop=1-2 border=off
 bspc config -d 1-2 window_gap 0
-bspc config -d 1-2 bottom_padding 2
 
 bspc rule -a mplayer floating=on
 bspc rule -a mplayer2 floating=on
