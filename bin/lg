@@ -1,0 +1,96 @@
+#!/bin/bash
+
+function list()
+{
+    ( if [[ ( "$PWD" = "$HOME" && $# = 0 ) || "$1" = ~ ]]
+    then
+        ls -hlF --color=always --group-directories-first $argv
+    else
+        ls -halF --color=always --group-directories-first "$@"
+    fi ) | tail -n +2 | sed  '1s/\x1b\[0m//'
+}
+
+if ! [[ -e '../.git' ]] && ! find $@ -maxdepth 2 -name .git 2>/dev/null | grep . >/dev/null;
+then
+    list $@
+    exit $?
+fi
+
+function call_with()
+{
+    echo "$1" | ${@:2}
+}
+
+function listing_home()
+{
+    [[ ( "$PWD" = "$HOME" && $# = 0 ) || "$1" = ~ ]]
+}
+
+function index_of()
+{
+    head -n 1 | grep -oP "^.+?(?=$1)" | wc -c
+}
+
+function insert_before()
+{
+    echo "$(call_with "$3" cut -b 1-$(($1-1)))$2$(call_with "$3" cut -b $1-)"
+}
+
+function get_name()
+{
+    echo "$1" | awk '{ print $9 }' | grep -oP '^(\e.*?m)?\K([^\e]+)' | tr -d '\n'
+}
+
+function is_dotfile()
+{
+    call_with "$(get_name "$1")" grep '^\.' >/dev/null
+}
+
+function is_dir()
+{
+    grep '/$' >/dev/null
+}
+
+function get_git_branch()
+{
+    (
+        cd "$1"
+
+        local ref=$(git symbolic-ref HEAD 2> /dev/null)
+        if [[ -n "$ref" ]]; then
+
+            if [[ "$(git status 2> /dev/null | tail -n1)" != "nothing to commit, working directory clean" ]]; then
+                echo -ne "\e[33m"
+            else
+                echo -ne "\e[32m"
+            fi
+
+            echo "[${ref#refs/heads/}]"
+        else
+            echo -e "\e[34m[???]"
+        fi
+    )
+}
+
+LIST="$(list $@)"
+INDEX="$(call_with "$LIST" index_of $'\e')"
+
+PAST_DIRS=0
+
+echo "$LIST" | while read line
+do
+    name="$(get_name "$line")"
+    data=
+
+    if [[ "$PAST_DIRS" = 0 ]] && call_with "$line" is_dir
+    then
+        if [[ -e "$name/.git" ]]
+        then
+            data="$(get_git_branch "$name") "
+        fi
+    else
+        PAST_DIRS=1
+    fi
+
+    insert_before "$INDEX" "$data" "$line"
+done
