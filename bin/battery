@@ -1,0 +1,23 @@
+#!/bin/sh
+
+battery=$(acpi -b | grep -oP '[[:digit:]]+(?=%)')
+[[ "$1" = "61" && ( "$battery" -gt "40" || "$(acpi -b | grep -o 'Charging')" = "Charging" ) ]] && exit;
+
+time=$1
+
+if [[ "$battery" -le "20" ]]
+then
+    time=0
+    background=505050
+    batterycolor=ffffff
+
+    for n in $(seq 1 $1)
+    do
+        [[ "$batterycolor" = "ffffff" ]] && batterycolor=ff0000 || batterycolor=ffffff
+        echo "^ib(1)^pa(1;1)^fg(#505050)^r($((battery * 298 / 100))x18)^pa(5)^fg(#$batterycolor)$battery%"
+        sleep 1s
+    done
+else
+    echo "^ib(1)^pa(1;1)^fg(#efefef)^r($((battery * 298 / 100))x18)^pa(5)^fg(#111111)$battery%"
+fi | persist battery -t $time \
+    dzen2 -x -312 -y -32 -w 300 -h 20 -ta l -fn 'Droid Sans Mono'
