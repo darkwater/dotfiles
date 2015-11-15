@@ -22,7 +22,7 @@ stty stop '' -ixon -ixoff
 test "$TERM" = "xterm" && export TERM=xterm-256color
 test "$TERM" = "screen" && export TERM=screen-256color
 
-export EDITOR=/usr/bin/vim
+export EDITOR=/usr/bin/nvim
 export GREP_COLOR='38;5;214;48;5;236'
 
 bindkey '\e[1;5D' emacs-backward-word
