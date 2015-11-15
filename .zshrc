@@ -36,7 +36,7 @@ bindkey '\e[8~' end-of-line
 bindkey '\e[3~' delete-char
 
 
-if test -n "$(uname -a | grep -ie arch -e manjaro 2>/dev/null)"; then
+if command -v yaourt > /dev/null; then
     alias get='yaourt -S'
     alias search='yaourt -Ss'
     alias show='yaourt -Si'
