@@ -36,13 +36,13 @@ bindkey '\e[8~' end-of-line
 bindkey '\e[3~' delete-char
 
 
-if command -v yaourt > /dev/null; then
-    alias get='yaourt -S'
-    alias search='yaourt -Ss'
-    alias show='yaourt -Si'
-    alias update='yaourt -Sy'
-    alias upgrade='yaourt -Syyuua'
-    alias remove='yaourt -R'
+if command -v pacaur > /dev/null; then
+    alias get='pacaur -S'
+    alias search='pacaur -Ss'
+    alias show='pacaur -Si'
+    alias update='pacaur -Sy'
+    alias upgrade='pacaur -Syu'
+    alias remove='pacaur -R'
 else
     alias get='sudo apt-get install'
     alias search='apt-cache search'
