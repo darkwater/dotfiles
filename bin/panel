@@ -57,7 +57,7 @@ end
 
 class Panel
     def initialize(monitor)
-        height = 2
+        height = 5
 
         @monitor = monitor
         @dzen = open "|dzen2 -x #{monitor.x} -y #{monitor.y + monitor.h - height} -tw #{monitor.w} -h #{height} -ta l -e 'button2=;'", 'w+'
@@ -68,7 +68,7 @@ class Panel
 
     def draw(items)
         item_width = @width / items.size
-        items.each { |item| @dzen.write "^ca(1, bspc desktop -f #{item[0]})^fg(#{item[1]})^r(#{item_width}x2)^ca()" }
+        items.each { |item| @dzen.write "^ca(1, bspc desktop -f #{item[0]})^fg(#{item[1]})^r(#{item_width}x5)^ca()" }
         @dzen.puts
     end
 end

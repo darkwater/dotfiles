@@ -167,7 +167,3 @@ function git_prompt_info()
 
 
 source ~/dotfiles/zshplugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-uptime
-acpi 2>/dev/null
-df -h / /var /home /data 2>&- | uniq
