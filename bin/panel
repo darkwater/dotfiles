@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+Thread.abort_on_exception = true
+
 class Monitor
     @monitors = []
     @monitors_by_name = {}
@@ -31,8 +33,10 @@ class Monitor
         @res = res.split 'x', 2
         @pos = pos.split '+', 2
 
-        @res.map! { |n| n = n.to_i }
-        @pos.map! { |n| n = n.to_i }
+        @res.map!(&:to_i)
+        @pos.map!(&:to_i)
+
+        @desktops = []
 
         Monitor.add self
 
@@ -43,8 +47,21 @@ class Monitor
         @panel ||= Panel.new self
     end
 
+    def active_window
+        `bspc query -m "#{name}" -T`
+            .lines                          # Split output by lines
+            .drop(1)                        # Drop the monitor line
+            .slice_before(/^\t\S/)          # Split by desktops
+            .select{ |n| n.first[/\*$/] }   # Select the active desktop
+            .first                          # Go down to the only active desktop
+            .drop(1)                        # Drop the desktop line
+            .select{ |n| n[/\*$/] }         # Select the active window
+            .first                          # Go down to the only active window
+            .split[3]                       # Get the window ID
+    end
+
     attr_accessor :active
-    attr_reader :panel, :name
+    attr_reader :panel, :name, :desktops
     def x; @pos[0] end
     def y; @pos[1] end
     def w; @res[0] end
@@ -57,19 +74,36 @@ end
 
 class Panel
     def initialize(monitor)
-        height = 5
+        @height = `bspc config -m "#{monitor.name}" bottom_padding`.to_i
 
         @monitor = monitor
-        @dzen = open "|dzen2 -x #{monitor.x} -y #{monitor.y + monitor.h - height} -tw #{monitor.w} -h #{height} -ta l -e 'button2=;'", 'w+'
-
-        @width = monitor.w
-        @desktops = `bspc query -m #{monitor.name} -D`.lines.size
+        @bar = open "|lemonbar -g #{monitor.w}x#{@height}+#{monitor.x}+#{monitor.y + monitor.h - @height}" +
+                             " -f 'Droid Sans Mono:size=8'" +
+                             " -f '-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1'" +
+                             " -B '#e61d1f21' -o 1", 'w+'
     end
 
-    def draw(items)
-        item_width = @width / items.size
-        items.each { |item| @dzen.write "^ca(1, bspc desktop -f #{item[0]})^fg(#{item[1]})^r(#{item_width}x5)^ca()" }
-        @dzen.puts
+    def update
+        draw '  '
+
+        draw @monitor.desktops.map{ |name, color| "%{A:bspc desktop -f #{name}:}%{F#{color}} %{A}" }.join
+        draw ' '
+        draw "%{F#efefef}#{`xtitle #{@monitor.active_window}` rescue ''}"
+
+        draw '%{c}'
+
+        draw '%{r}'
+
+        draw Time.now.strftime '%H:%M'
+
+        draw '  '
+        @bar.write "\n"
+    end
+
+    private
+
+    def draw(stuff)
+        @bar.write stuff.gsub "\n", ''
     end
 end
 
@@ -79,36 +113,47 @@ end
     Monitor.new name, size, pos
 end
 
-bspc = open '|bspc control --subscribe', 'r'
-bspc.each_line do |line|
-    puts line
 
-    case line[0]
-    when 'W'
-        monitor = nil
-        items = []
+threads = []
 
-        line[1..-1].split(':').each do |item|
-            name = item[1..-1]
+# Update every second
+threads << Thread.new{ loop{ sleep 1; Monitor.each{ |n| n.panel.update } } }
 
-            case item[0]
-            when 'M', 'm'
-                monitor = Monitor[name]
-                monitor.active = item[0] == 'M'
-            when 'O' # occupied active
-                items << [ name, '#00abcd' ]
-            when 'F' # free active
-                items << [ name, '#405060' ]
-            when 'o' # occupied inactive
-                items << [ name, '#003050' ]
-            when 'f' # free inactive
-                items << [ name, '#1d1f21' ]
-            when 'u', 'U' # urgent
-                items << [ name, '#ffaf00' ]
-            when 'L' # layout; end of desktops
-                monitor.panel.draw items unless monitor == nil
-                items = []
+# Desktops
+threads << Thread.new do
+    bspc = open '|bspc control --subscribe window', 'r'
+    bspc.each_line do |line|
+        puts line
+
+        case line[0]
+        when 'W'
+            monitor = nil
+
+            line[1..-1].split(':').each do |item|
+                name = item[1..-1]
+
+                case item[0]
+                when 'M', 'm'
+                    monitor = Monitor[name]
+                    monitor.active = item[0] == 'M'
+                    monitor.desktops.clear
+                when 'L' # layout; end of desktops
+                    monitor.panel.update
+                else
+                    colors = {
+                        'O' => '#edeff1', # occupied active
+                        'F' => '#5d5f61', # free active
+                        'o' => '#7d7f81', # occupied inactive
+                        'f' => '#3d3f41', # free inactive
+                        'u' => '#ffaf00', # urgent
+                        'U' => '#ffaf00'
+                    }
+
+                    monitor.desktops << [ name, colors[item[0]] ]
+                end
             end
         end
     end
 end
+
+sleep

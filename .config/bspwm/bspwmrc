@@ -39,7 +39,7 @@ monitors=( 'VGA1' 'HDMI1' 'LVDS1'  'HDMI-0' 'DVI-I-1' ) # order is important
 i=1
 for m in ${monitors[@]}; do
     if bspc query -M | grep "$m"; then
-        bspc monitor $m -d $i-{{1..9},0}
+        bspc monitor $m -d $i-{1..6}
         let i++
     fi
 done
