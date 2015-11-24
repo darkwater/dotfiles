@@ -40,7 +40,18 @@ class Monitor
 
         Monitor.add self
 
+        # Rely on the 1-1, 1-2, 2-1, 2-2 desktop naming convention (monitor-desktop)
+        @order = `bspc query -m "#{name}" -D`[0].to_i - 1 # WARNING: FRAGILE (please work ;-;)
+
         create_panel
+    end
+
+    %i| primary secondary tertiary quaternary quinary senary septenary octonary nonary denary |
+    .each_with_index do |name, index|
+        name_question = :"#{name}?"
+
+        define_singleton_method(name) { @monitors.find{ |n| n.send name_question } }
+        define_method(name_question) { @order == index }
     end
 
     def create_panel
@@ -52,11 +63,9 @@ class Monitor
             .lines                          # Split output by lines
             .drop(1)                        # Drop the monitor line
             .slice_before(/^\t\S/)          # Split by desktops
-            .select{ |n| n.first[/\*$/] }   # Select the active desktop
-            .first                          # Go down to the only active desktop
+            .find{ |n| n.first[/\*$/] }     # Find the active desktop
             .drop(1)                        # Drop the desktop line
-            .select{ |n| n[/\*$/] }         # Select the active window
-            .first                          # Go down to the only active window
+            .find{ |n| n[/\*$/] }           # Find the active window
             .split[3]                       # Get the window ID
     end
 
@@ -72,6 +81,39 @@ class Monitor
     end
 end
 
+module Notifications
+    @notifications = []
+
+    def self.run
+        @statnot = open '|statnot /dev/stdin', 'r+'
+        @statnot.puts <<-EOF.gsub(/^ {12}/, '') # please python :<
+            import sys
+            MAX_NOTIFY_TIMEOUT = 1
+            DEFAULT_NOTIFY_TIMEOUT = 1
+            USE_STATUSTEXT = False
+            def update_text(text):
+                print(text)
+                sys.stdout.flush()
+        EOF
+        @statnot.close_write
+
+        Thread.new do
+            @statnot.each_line do |n|
+                Notifications.push n.chomp
+                Monitor.primary.panel.update
+            end
+        end
+    end
+
+    def self.push(n)
+        @notifications << n
+    end
+
+    def self.last
+        @notifications.last || ''
+    end
+end
+
 class Panel
     def initialize(monitor)
         @height = `bspc config -m "#{monitor.name}" bottom_padding`.to_i
@@ -81,23 +123,66 @@ class Panel
                              " -f 'Droid Sans Mono:size=8'" +
                              " -f '-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1'" +
                              " -B '#e61d1f21' -o 1", 'w+'
+
+        @bar_read_thread = Thread.new do
+            @bar.each_line{ |n| system n.chomp }
+        end
+
+        @drawing = false
+    end
+
+    def space(n)
+        draw " " * n
+    end
+
+    def align(where)
+        draw "%{#{where.to_s[0]}}"
+    end
+
+    def desktops
+        draw '%{A4:bspc desktop -f prev:}'
+        draw '%{A5:bspc desktop -f next:}'
+        draw @monitor.desktops.map{ |name, color| "%{A:bspc desktop -f #{name}:}%{F#{color}} %{A}" }.join
+        draw '%{A}%{A}'
+    end
+
+    def active_window_title
+        draw "%{F#efefef}#{`xtitle #{@monitor.active_window}` rescue ''}"
+    end
+
+    def time
+        draw Time.now.strftime '%H:%M'
+    end
+
+    def notifications
+        draw Notifications.last
+    end
+
+    def now_playing
+        draw ''
     end
 
     def update
-        draw '  '
+        return if @drawing
+        @drawing = true
+        space 2
 
-        draw @monitor.desktops.map{ |name, color| "%{A:bspc desktop -f #{name}:}%{F#{color}} %{A}" }.join
-        draw ' '
-        draw "%{F#efefef}#{`xtitle #{@monitor.active_window}` rescue ''}"
+        desktops
+        space 1
+        active_window_title
 
-        draw '%{c}'
+        align :center
 
-        draw '%{r}'
+        notifications if @monitor.primary?
+        now_playing if @monitor.secondary?
 
-        draw Time.now.strftime '%H:%M'
+        align :right
 
-        draw '  '
+        time
+
+        space 2
         @bar.write "\n"
+        @drawing = false
     end
 
     private
@@ -113,6 +198,8 @@ end
     Monitor.new name, size, pos
 end
 
+Notifications.run
+
 
 threads = []
 
@@ -123,8 +210,6 @@ threads << Thread.new{ loop{ sleep 1; Monitor.each{ |n| n.panel.update } } }
 threads << Thread.new do
     bspc = open '|bspc control --subscribe window', 'r'
     bspc.each_line do |line|
-        puts line
-
         case line[0]
         when 'W'
             monitor = nil
