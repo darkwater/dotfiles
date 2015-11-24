@@ -51,6 +51,7 @@ class Monitor
         name_question = :"#{name}?"
 
         define_singleton_method(name) { @monitors.find{ |n| n.send name_question } }
+        define_singleton_method(name_question) { @monitors.any?{ |n| n.send name_question } }
         define_method(name_question) { @order == index }
     end
 
@@ -99,8 +100,21 @@ module Notifications
 
         Thread.new do
             @statnot.each_line do |n|
-                Notifications.push n.chomp
+                push Notification.new(*n.chomp.split(' ', 2))
                 Monitor.primary.panel.update
+            end
+        end
+
+        Thread.new do
+            loop do
+                sleep 1
+
+                next if last.nil?
+
+                last.timeout -= 1
+                if last.timeout <= 0
+                    pop
+                end
             end
         end
     end
@@ -109,8 +123,26 @@ module Notifications
         @notifications << n
     end
 
+    def self.pop
+        @notifications.pop
+    end
+
     def self.last
-        @notifications.last || ''
+        @notifications.last
+    end
+end
+
+Notification = Struct.new :title, :body do
+    attr_accessor :timeout
+
+    def initialize(*args)
+        super(*args)
+
+        @timeout = 5
+    end
+
+    def render
+        "#{title} #{body}"
     end
 end
 
@@ -155,7 +187,7 @@ class Panel
     end
 
     def notifications
-        draw Notifications.last
+        draw Notifications.last.render rescue nil
     end
 
     def now_playing
@@ -172,10 +204,12 @@ class Panel
         active_window_title
 
         align :center
+        space 5
 
         notifications if @monitor.primary?
         now_playing if @monitor.secondary?
 
+        space 5
         align :right
 
         time
