@@ -5,7 +5,7 @@ source ~/.zshenv
 
 
 # Configure X environment
-compton &
+compton --dbus &
 xrdb ~/.Xresources &
 xsetroot -cursor_name left_ptr &
 feh --no-fehbg --bg-fill "$(ls wallpapers/* | shuf | head -n 1 )" --bg-fill "$(ls wallpapers/* | shuf | head -n 1 )" &
