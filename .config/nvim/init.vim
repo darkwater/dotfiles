@@ -57,12 +57,13 @@ set backspace=start,eol,indent
 set background=dark
 set completeopt=menu,preview
 set encoding=utf8
-set foldcolumn=1
+set foldcolumn=0
 set foldmethod=marker
 set history=1000
 set laststatus=0
 set lcs=tab:··,trail:░,nbsp:%
 set mouse=a
+set numberwidth=5
 set pastetoggle=<F11>
 set scrolloff=5
 set showtabline=2
@@ -94,6 +95,15 @@ filetype plugin indent on
 let NERDTreeChDirMode=3
 let NERDTreeIgnore=['.hex$', '.lst$', '\~$']
 
+let g:gitgutter_sign_added            = '+'
+let g:gitgutter_sign_modified         = '~'
+let g:gitgutter_sign_modified_removed = '~.'
+let g:gitgutter_sign_removed          = '_'
+
+let g:neomake_error_sign = { 'text': ' ❯', 'texthl': 'ErrorMsg' }
+let g:neomake_open_list = 2 " Preserve cursor position when window is opened
+let g:neomake_list_height = 5
+
 """""""""""""
 "" Autocmds
 ""
@@ -104,6 +114,8 @@ augroup Vimrc
 
     " Cursor line highlighting in ruby is slow as hell :<
     au BufNewFile,BufRead,BufEnter *.rb set nocursorline
+
+    au BufReadPost,BufEnter,BufWritePost * Neomake
 
     " Open a file on last known cursor position if valid
     autocmd BufReadPost *

@@ -398,3 +398,4 @@ hi SignColumn ctermbg=none
 
 hi LineNr ctermfg=240
 hi PMenu ctermbg=235
+hi ErrorMsg ctermfg=203 ctermbg=none cterm=bold
