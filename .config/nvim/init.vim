@@ -57,8 +57,8 @@ set backspace=start,eol,indent
 set background=dark
 set completeopt=menu,preview
 set encoding=utf8
-set foldcolumn=0
-set foldmethod=marker
+set foldcolumn=1
+set foldmethod=manual
 set history=1000
 set laststatus=0
 set lcs=tab:··,trail:░,nbsp:%
@@ -72,6 +72,7 @@ set textwidth=80
 set timeoutlen=400
 set undolevels=1000
 set updatetime=1500
+set viewoptions=cursor,folds
 set wildchar=<Tab>
 set wildmode=longest,list
 set winminwidth=20
@@ -113,15 +114,12 @@ augroup Vimrc
     autocmd!
 
     " Cursor line highlighting in ruby is slow as hell :<
-    au BufNewFile,BufRead,BufEnter *.rb set nocursorline
+    autocmd BufNewFile,BufRead,BufEnter *.rb set nocursorline
 
-    au BufReadPost,BufEnter,BufWritePost * Neomake
+    autocmd BufReadPost,BufEnter,BufWritePost * Neomake
 
-    " Open a file on last known cursor position if valid
-    autocmd BufReadPost *
-      \ if line("'\"") > 0 && line("'\"") <= line("$") |
-      \   exe "normal g`\"" |
-      \ endif
+    autocmd BufWinLeave * mkview
+    autocmd BufWinEnter * silent! loadview
 
 augroup end
 
