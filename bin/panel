@@ -266,8 +266,7 @@ class Panel
     end
 
     def thermal
-        /(?<value>[0-9.]+) degrees (?<scale>[CF])/ =~ `acpi -t 2>/dev/null`
-        draw "\ue01b #{value} °#{scale}"
+        draw "\ue01b #{Thermal.value} °C"
     end
 
     def update
@@ -305,6 +304,34 @@ class Panel
 end
 
 
+module System
+    def update_if_needed
+        return if Time.now.to_f - @last_update < @update_interval
+
+        update
+        @last_update = Time.now.to_f
+    end
+end
+
+module Thermal
+    extend System
+
+    @last_update = 0
+    @update_interval = 1
+
+    def self.update
+        @value = `sensors -u`.lines.grep(/temp1_input/)[1][/temp1_input: (\d+)/, 1]
+    end
+
+    def self.value
+        @value
+    end
+end
+
+
+systems = [ Thermal ]
+
+
 panels = []
 
 Bspc.tree.each do |monitor|
@@ -322,5 +349,8 @@ threads << Thread.new do
     bspc = open '|bspc control --subscribe', 'r'
     bspc.each_line do panels.each(&:update) end
 end
+
+# Update systems whenever needed
+threads << Thread.new{ loop{ systems.each(&:update_if_needed); sleep 1 } }
 
 sleep
