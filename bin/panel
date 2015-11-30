@@ -1,85 +1,150 @@
 #!/usr/bin/env ruby
+require 'json'
 
 Thread.abort_on_exception = true
+Object.send :remove_const, :Monitor # I'll need this tyvm
 
-class Monitor
-    @monitors = []
-    @monitors_by_name = {}
-
-    def self.add(instance)
-        @monitors << instance
-        @monitors_by_name[instance.name] = instance
+module Icon
+    { "\ue02e" => :information,
+      "\ue214" => :battery,
+      "\ue01b" => :thermal,
+      "\ue0fd" => :headphones,
+      "\ue0fe" => :music_note,
+      "\ue277" => :desktop_occupied,
+      "\ue278" => :desktop_free,
+      "\ue279" => :separator }
+    .each_pair do |char, name|
+        define_singleton_method(name) { char }
     end
+end
 
-    def self.[](n)
-        case n
-        when Integer
-            @monitors[n]
-        when String
-            @monitors_by_name[n]
+module Bspc
+    def self.tree
+        JSON.parse(`bspc query -T`, symbolize_names: true)[:monitors].map do |mobj|
+            Monitor.new mobj
+        end.sort
+    end
+end
+
+class JsonObject
+    def initialize(obj)
+        obj.each_pair do |key, value|
+            key = key.to_s.gsub(/[A-Z]/){ |c| "_#{c.downcase}" }.to_sym
+            instance_variable_set :"@#{key}", value
+            define_singleton_method(key) { instance_variable_get :"@#{key}" } unless respond_to? key
         end
     end
+end
 
-    def self.all
-        @monitors
+class Geometry
+    attr_reader :width, :height, :x, :y
+
+    def initialize(obj)
+        @width, @height, @x, @y = obj[:width], obj[:height], obj[:x], obj[:y]
     end
 
-    def self.each
-        @monitors.each { |m| yield m }
+    alias left x
+    alias top y
+
+    def right; left + width; end
+    def bottom; top + height; end
+
+    def area; width * height; end
+end
+
+class Padding
+    attr_reader :top, :right, :bottom, :left
+
+    def initialize(obj)
+        @top, @right, @bottom, @left = obj[:topPadding], mobj[:rightPadding], mobj[:bottomPadding], mobj[:leftPadding]
+    end
+end
+
+class Monitor < JsonObject
+    include Comparable
+
+    attr_reader :order, :geometry
+
+    def initialize(mobj)
+        super mobj
+
+        # Turn JSON hashes into Desktops
+        @desktops.map! do |dobj|
+            Desktop.new dobj, dobj[:name] == focused_desktop_name
+        end
+
+        # Rely on N-M desktop naming scheme for the Mth desktop on the Nth screen (1-indexed, eg. 1-2)
+        @order = @desktops.first.name[0].to_i - 1
+
+        @geometry = Geometry.new @rectangle
     end
 
-    def initialize(name, res, pos)
-        @name = name
-        @res = res.split 'x', 2
-        @pos = pos.split '+', 2
+    def <=>(other)
+        self.order <=> other.order
+    end
 
-        @res.map!(&:to_i)
-        @pos.map!(&:to_i)
+    def focused_desktop
+        @desktops.find{ |n| n.name == focused_desktop_name }
+    end
 
-        @desktops = []
-
-        Monitor.add self
-
-        # Rely on the 1-1, 1-2, 2-1, 2-2 desktop naming convention (monitor-desktop)
-        @order = `bspc query -m "#{name}" -D`[0].to_i - 1 # WARNING: FRAGILE (please work ;-;)
-
-        create_panel
+    def focused_window
+        focused_desktop.focused_window
     end
 
     %i| primary secondary tertiary quaternary quinary senary septenary octonary nonary denary |
     .each_with_index do |name, index|
         name_question = :"#{name}?"
 
-        define_singleton_method(name) { @monitors.find{ |n| n.send name_question } }
-        define_singleton_method(name_question) { @monitors.any?{ |n| n.send name_question } }
+        define_singleton_method(name) { Bspc.tree.find{ |n| n.send name_question } }
+        define_singleton_method(name_question) { Bspc.tree.any?{ |n| n.send name_question } }
         define_method(name_question) { @order == index }
     end
+end
 
-    def create_panel
-        @panel ||= Panel.new self
+class Desktop < JsonObject
+    attr_reader :windows, :active
+    alias active? :active
+
+    def initialize(dobj, active)
+        super dobj
+        @active = active
+
+        # Walk through desktop tree and collect a list of windows
+        pass = [ dobj[:root] ].reject(&:nil?)
+        newpass = nil
+        @windows = []
+
+        until pass.empty? do
+            newpass = []
+
+            pass.each do |node|
+                # Only add items if they're not nil
+                newpass += [ node[:firstChild], node[:secondChild] ].reject(&:nil?)
+                @windows += [ node[:client] ].reject(&:nil?)
+            end
+
+            pass = newpass
+        end
+
+        @windows.map! do |wobj|
+            Window.new wobj
+        end
     end
 
-    def active_window
-        `bspc query -m "#{name}" -T`
-            .lines                          # Split output by lines
-            .drop(1)                        # Drop the monitor line
-            .slice_before(/^\t\S/)          # Split by desktops
-            .find{ |n| n.first[/\*$/] }     # Find the active desktop
-            .drop(1)                        # Drop the desktop line
-            .find{ |n| n[/\*$/] }           # Find the active window
-            .split[3]                       # Get the window ID
+    def focused_window
+        @windows.find{ |n| n.window == @focused_window }
     end
 
-    attr_accessor :active
-    attr_reader :panel, :name, :desktops
-    def x; @pos[0] end
-    def y; @pos[1] end
-    def w; @res[0] end
-    def h; @res[1] end
-
-    def to_s
-        "Monitor #{@name} #{@res.join 'x'} #{@pos.join '+'}"
+    def free?
+        @root == nil
     end
+
+    def urgent?
+        @windows.any?{ |n| n.urgent }
+    end
+end
+
+class Window < JsonObject
 end
 
 module Notifications
@@ -119,30 +184,8 @@ module Notifications
         end
     end
 
-    def self.push(n)
-        @notifications << n
-    end
-
-    def self.pop
-        @notifications.pop
-    end
-
-    def self.last
-        @notifications.last
-    end
-end
-
-Notification = Struct.new :title, :body do
-    attr_accessor :timeout
-
-    def initialize(*args)
-        super(*args)
-
-        @timeout = 5
-    end
-
-    def render
-        "#{title} #{body}"
+    def self.method_missing(*args)
+        @notifications.send(*args)
     end
 end
 
@@ -150,11 +193,12 @@ class Panel
     def initialize(monitor)
         @height = `bspc config -m "#{monitor.name}" bottom_padding`.to_i
 
-        @monitor = monitor
-        @bar = open "|lemonbar -g #{monitor.w}x#{@height}+#{monitor.x}+#{monitor.y + monitor.h - @height}" +
-                             " -f 'Droid Sans Mono:size=8'" +
+        @monitor_name = monitor.name
+        @bar = open "|lemonbar -g #{monitor.geometry.width}x#{@height}+#{monitor.geometry.left}" +
+                                "+#{monitor.geometry.bottom - @height}" +
+                             " -f '-misc-tamsyn-medium-r-normal--14-101-100-100-c-70-iso8859-1'" +
                              " -f '-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1'" +
-                             " -B '#e61d1f21' -o 1", 'w+'
+                             " -B '#e61d1f21'", 'w+'
 
         @bar_read_thread = Thread.new do
             @bar.each_line{ |n| system n.chomp }
@@ -163,8 +207,16 @@ class Panel
         @drawing = false
     end
 
+    def monitor
+        Bspc.tree.find{ |n| n.name == @monitor_name }
+    end
+
     def space(n)
         draw " " * n
+    end
+
+    def separator
+        draw " \ue279 "
     end
 
     def align(where)
@@ -174,12 +226,25 @@ class Panel
     def desktops
         draw '%{A4:bspc desktop -f prev:}'
         draw '%{A5:bspc desktop -f next:}'
-        draw @monitor.desktops.map{ |name, color| "%{A:bspc desktop -f #{name}:}%{F#{color}} %{A}" }.join
+
+        monitor.desktops.each do |desktop|
+            draw "%{A:bspc desktop -f #{desktop.name}:}"
+
+            draw desktop.active? ? "%{F#efefef}"
+               : desktop.urgent? ? "%{F#ffaf00}"
+                                 : "%{F#707070}"
+
+            draw desktop.free? ? Icon.desktop_free
+                               : Icon.desktop_occupied
+
+            draw " %{A}"
+        end
+
         draw '%{A}%{A}'
     end
 
     def active_window_title
-        draw "%{F#efefef}#{`xtitle #{@monitor.active_window}` rescue ''}"
+        draw "%{F#efefef}#{`xtitle #{monitor.focused_window.window}`[0..70] rescue ''}"
     end
 
     def time
@@ -191,7 +256,18 @@ class Panel
     end
 
     def now_playing
-        draw ''
+        mpc = `mpc 2>/dev/null`.lines
+        draw "#{Icon.headphones} #{mpc.first}" if mpc[1][/playing/] rescue nil
+    end
+
+    def battery
+        text = `acpi -b 2>/dev/null`[/[0-9]+%/]
+        draw "#{Icon.battery} #{text}" unless text.nil?
+    end
+
+    def thermal
+        /(?<value>[0-9.]+) degrees (?<scale>[CF])/ =~ `acpi -t 2>/dev/null`
+        draw "\ue01b #{value} °#{scale}"
     end
 
     def update
@@ -206,12 +282,14 @@ class Panel
         align :center
         space 5
 
-        notifications if @monitor.primary?
-        now_playing if @monitor.secondary?
+        notifications if monitor.primary?
+        now_playing if monitor.secondary? || (!Monitor.secondary? && Notifications.empty?)
 
         space 5
         align :right
 
+        thermal && separator
+        battery && separator
         time
 
         space 2
@@ -227,52 +305,22 @@ class Panel
 end
 
 
-`bspc query -T`.scan(/^\S.*$/) do |m|
-    /(?<name>\S+) (?<size>\d+x\d+)\+(?<pos>\d+\+\d+)/ =~ m
-    Monitor.new name, size, pos
-end
+panels = []
 
-Notifications.run
+Bspc.tree.each do |monitor|
+    panels << Panel.new(monitor)
+end
 
 
 threads = []
 
-# Update every second
-threads << Thread.new{ loop{ sleep 1; Monitor.each{ |n| n.panel.update } } }
+# Update panels every second
+threads << Thread.new{ loop{ panels.each(&:update); sleep 1 } }
 
-# Desktops
+# Update panels on desktop switch
 threads << Thread.new do
-    bspc = open '|bspc control --subscribe window', 'r'
-    bspc.each_line do |line|
-        case line[0]
-        when 'W'
-            monitor = nil
-
-            line[1..-1].split(':').each do |item|
-                name = item[1..-1]
-
-                case item[0]
-                when 'M', 'm'
-                    monitor = Monitor[name]
-                    monitor.active = item[0] == 'M'
-                    monitor.desktops.clear
-                when 'L' # layout; end of desktops
-                    monitor.panel.update
-                else
-                    colors = {
-                        'O' => '#edeff1', # occupied active
-                        'F' => '#5d5f61', # free active
-                        'o' => '#7d7f81', # occupied inactive
-                        'f' => '#3d3f41', # free inactive
-                        'u' => '#ffaf00', # urgent
-                        'U' => '#ffaf00'
-                    }
-
-                    monitor.desktops << [ name, colors[item[0]] ]
-                end
-            end
-        end
-    end
+    bspc = open '|bspc control --subscribe', 'r'
+    bspc.each_line do panels.each(&:update) end
 end
 
 sleep

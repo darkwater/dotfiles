@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Set path etc.
 source ~/.zshenv
@@ -8,7 +8,8 @@ source ~/.zshenv
 compton --dbus &
 xrdb ~/.Xresources &
 xsetroot -cursor_name left_ptr &
-feh --no-fehbg --bg-fill "$(ls wallpapers/* | shuf | head -n 1 )" --bg-fill "$(ls wallpapers/* | shuf | head -n 1 )" &
+xset +fp /usr/share/fonts/local/ &
+wp &
 panel &
 kb &
 for n in {8..12}; do xinput set-prop $n "Device Accel Constant Deceleration" 2.2; done & # I don't even care
