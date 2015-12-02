@@ -265,8 +265,12 @@ class Panel
         draw "#{Icon.battery} #{text}" unless text.nil?
     end
 
-    def thermal
-        draw "\ue01b #{Thermal.value} °C"
+    def thermal(chips)
+        sensors = Thermal.sensors
+        chips.each do |name, label|
+            value = sensors[name][:temp1_input]
+            draw "\ue01b #{label}: #{value} °C"
+        end
     end
 
     def update
@@ -287,7 +291,7 @@ class Panel
         space 5
         align :right
 
-        thermal && separator
+        thermal('coretemp-isa-0000' => 'CPU') && separator
         battery && separator
         time
 
@@ -323,11 +327,20 @@ module Thermal
         @value = `sensors -u`.lines.grep(/temp1_input/)[1][/temp1_input: (\d+)/, 1]
     end
 
-    def self.value
-        @value
+    def self.sensors
+        raw = `sensors -uA`
+        chips = raw.lines.map(&:chomp).slice_after('')
+        chips.map do |chip|
+            name = chip.first
+            values = chip.map do |line|
+                /^  (?<key>[a-z0-9_]+): (?<value>[0-9.,]+)/ =~ line
+                [ key.to_sym, value.to_f ] if $~
+            end.reject(&:nil?).to_h
+
+            [ name, values ]
+        end.to_h
     end
 end
-
 
 systems = [ Thermal ]
 
