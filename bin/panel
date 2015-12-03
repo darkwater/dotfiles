@@ -5,7 +5,8 @@ Thread.abort_on_exception = true
 Object.send :remove_const, :Monitor # I'll need this tyvm
 
 module Icon
-    { "\ue02e" => :information,
+    { "\ue015" => :clock,
+      "\ue02e" => :information,
       "\ue214" => :battery,
       "\ue01b" => :thermal,
       "\ue0fd" => :headphones,
@@ -18,6 +19,38 @@ module Icon
     end
 end
 
+module Color
+    { '#101010' => :black,
+      '#e84f4f' => :red,
+      '#b8d68c' => :green,
+      '#e1aa5d' => :yellow,
+      '#7dc1cf' => :blue,
+      '#9b64fb' => :magenta,
+      '#6d878d' => :cyan,
+      '#dddddd' => :white }
+    .each_pair do |color, name|
+        define_singleton_method(name) { color }
+    end
+
+    def self.blink(even, odd)
+        send (Time.now.to_i.even?) ? even : odd
+    end
+end
+
+module Util
+    def self.threshold(value, thresholds)
+        thresholds.to_a.reverse.each do |trip, out|
+            return out if value >= trip
+        end
+    end
+end
+
+module Bar
+    def self.color(arg = '-')
+        "%{F#{arg}}"
+    end
+end
+
 module Bspc
     def self.tree
         JSON.parse(`bspc query -T`, symbolize_names: true)[:monitors].map do |mobj|
@@ -25,6 +58,7 @@ module Bspc
         end.sort
     end
 end
+
 
 class JsonObject
     def initialize(obj)
@@ -147,47 +181,6 @@ end
 class Window < JsonObject
 end
 
-module Notifications
-    @notifications = []
-
-    def self.run
-        @statnot = open '|statnot /dev/stdin', 'r+'
-        @statnot.puts <<-EOF.gsub(/^ {12}/, '') # please python :<
-            import sys
-            MAX_NOTIFY_TIMEOUT = 1
-            DEFAULT_NOTIFY_TIMEOUT = 1
-            USE_STATUSTEXT = False
-            def update_text(text):
-                print(text)
-                sys.stdout.flush()
-        EOF
-        @statnot.close_write
-
-        Thread.new do
-            @statnot.each_line do |n|
-                push Notification.new(*n.chomp.split(' ', 2))
-                Monitor.primary.panel.update
-            end
-        end
-
-        Thread.new do
-            loop do
-                sleep 1
-
-                next if last.nil?
-
-                last.timeout -= 1
-                if last.timeout <= 0
-                    pop
-                end
-            end
-        end
-    end
-
-    def self.method_missing(*args)
-        @notifications.send(*args)
-    end
-end
 
 class Panel
     def initialize(monitor)
@@ -248,7 +241,15 @@ class Panel
     end
 
     def time
-        draw Time.now.strftime '%H:%M'
+        icon = Icon.clock
+        text = Time.now.strftime('%H:%M')
+        color = Util.threshold Time.now.hour,
+                 0 => Color.cyan,
+                 6 => Color.blue,
+                12 => Color.green,
+                18 => Color.yellow
+
+        draw_system icon, text, color
     end
 
     def notifications
@@ -261,21 +262,42 @@ class Panel
     end
 
     def battery
-        text = `acpi -b 2>/dev/null`[/[0-9]+%/]
-        draw "#{Icon.battery} #{text}" unless text.nil?
+        value = Battery.value
+        return if value.nil?
+
+        icon = Icon.battery
+        text = "#{value}%"
+        color = Util.threshold value,
+                 0 => Color.blink(:red, :white),
+                10 => Color.red,
+                30 => Color.yellow,
+                50 => Color.green
+
+        draw_system icon, text, color
     end
 
-    def thermal(chips)
-        sensors = Thermal.sensors
-        chips.each do |name, label|
-            value = sensors[name][:temp1_input]
-            draw "\ue01b #{label}: #{value} °C"
-        end
+    def thermal
+        sensor = Thermal.sensors['coretemp-isa-0000']
+        value  = sensor[:temp1_input]
+        high   = sensor[:temp1_max] - 15
+        max    = sensor[:temp1_max]
+        crit   = sensor[:temp1_crit]
+
+        icon  = Icon.thermal
+        text  = "#{value} °C"
+        color = Util.threshold value,
+                0    => Color.green,
+                high => Color.yellow,
+                max  => Color.red,
+                crit => Color.blink(:red, :white)
+
+        draw_system icon, text, color
     end
 
     def update
         return if @drawing
         @drawing = true
+        @use_separator = false
         space 2
 
         desktops
@@ -291,8 +313,8 @@ class Panel
         space 5
         align :right
 
-        thermal('coretemp-isa-0000' => 'CPU') && separator
-        battery && separator
+        thermal
+        battery
         time
 
         space 2
@@ -304,6 +326,18 @@ class Panel
 
     def draw(stuff)
         @bar.write stuff.gsub "\n", ''
+    end
+
+    def draw_system(icon, text, color = '#ffffff')
+        return if icon.nil? || text.nil?
+
+        if @use_separator
+            separator
+        else
+            @use_separator = true
+        end
+
+        draw "#{Bar.color color}#{icon} #{text}#{Bar.color}"
     end
 end
 
@@ -317,20 +351,38 @@ module System
     end
 end
 
+module Battery
+    extend System
+
+    @last_update = 0
+    @update_interval = 10
+
+    def self.update
+        value = `acpi -b 2>/dev/null`[/[0-9]+/]
+
+        if value.nil?
+            @update_interval = 360
+            @value = nil
+        else
+            @value = value.to_i
+        end
+    end
+
+    def self.value
+        @value
+    end
+end
+
 module Thermal
     extend System
 
     @last_update = 0
-    @update_interval = 1
+    @update_interval = 10
 
     def self.update
-        @value = `sensors -u`.lines.grep(/temp1_input/)[1][/temp1_input: (\d+)/, 1]
-    end
-
-    def self.sensors
         raw = `sensors -uA`
         chips = raw.lines.map(&:chomp).slice_after('')
-        chips.map do |chip|
+        @sensors = chips.map do |chip|
             name = chip.first
             values = chip.map do |line|
                 /^  (?<key>[a-z0-9_]+): (?<value>[0-9.,]+)/ =~ line
@@ -340,9 +392,56 @@ module Thermal
             [ name, values ]
         end.to_h
     end
+
+    def self.sensors
+        @sensors
+    end
 end
 
-systems = [ Thermal ]
+module Notifications
+    @notifications = []
+
+    def self.run
+        @statnot = open '|statnot /dev/stdin', 'r+'
+        @statnot.puts <<-EOF.gsub(/^ {12}/, '') # please python :<
+            import sys
+            MAX_NOTIFY_TIMEOUT = 1
+            DEFAULT_NOTIFY_TIMEOUT = 1
+            USE_STATUSTEXT = False
+            def update_text(text):
+                print(text)
+                sys.stdout.flush()
+        EOF
+        @statnot.close_write
+
+        Thread.new do
+            @statnot.each_line do |n|
+                push Notification.new(*n.chomp.split(' ', 2))
+                Monitor.primary.panel.update
+            end
+        end
+
+        Thread.new do
+            loop do
+                sleep 1
+
+                next if last.nil?
+
+                last.timeout -= 1
+                if last.timeout <= 0
+                    pop
+                end
+            end
+        end
+    end
+
+    def self.method_missing(*args)
+        @notifications.send(*args)
+    end
+end
+
+systems = [ Battery, Thermal ]
+systems.each(&:update)
 
 
 panels = []
