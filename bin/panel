@@ -358,7 +358,7 @@ module Battery
     @update_interval = 10
 
     def self.update
-        value = `acpi -b 2>/dev/null`[/[0-9]+/]
+        value = `acpi -b 2>/dev/null`[/([0-9]+)%/, 1]
 
         if value.nil?
             @update_interval = 360
