@@ -49,6 +49,7 @@ set showmode
 set smartcase
 set splitbelow
 set splitright
+set title
 set undofile
 set wildmenu
 set wrap
