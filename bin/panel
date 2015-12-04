@@ -8,9 +8,9 @@ module Icon
     { "\ue015" => :clock,
       "\ue02e" => :information,
       "\ue214" => :battery,
+      "\ue215" => :battery_charging,
       "\ue01b" => :thermal,
-      "\ue0fd" => :headphones,
-      "\ue0fe" => :music_note,
+      "\ue0fd" => :music,
       "\ue277" => :desktop_occupied,
       "\ue278" => :desktop_free,
       "\ue279" => :separator }
@@ -258,14 +258,14 @@ class Panel
 
     def now_playing
         mpc = `mpc 2>/dev/null`.lines
-        draw "#{Icon.headphones} #{mpc.first}" if mpc[1][/playing/] rescue nil
+        draw "#{Icon.music} #{mpc.first}" if mpc[1][/playing/] rescue nil
     end
 
     def battery
         value = Battery.value
         return if value.nil?
 
-        icon = Icon.battery
+        icon = Battery.charging? ? Icon.battery_charging : Icon.battery
         text = "#{value}%"
         color = Util.threshold value,
                  0 => Color.blink(:red, :white),
@@ -370,6 +370,10 @@ module Battery
 
     def self.value
         @value
+    end
+
+    def self.charging?
+        `acpi -a 2>/dev/null`['off-line'].nil?
     end
 end
 
