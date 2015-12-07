@@ -6,11 +6,14 @@ Object.send :remove_const, :Monitor # I'll need this tyvm
 
 module Icon
     { "\ue015" => :clock,
+      "\ue01b" => :thermal,
+      "\ue020" => :load,
       "\ue02e" => :information,
+      "\ue060" => :net_up,
+      "\ue061" => :net_down,
+      "\ue0fd" => :music,
       "\ue214" => :battery,
       "\ue215" => :battery_charging,
-      "\ue01b" => :thermal,
-      "\ue0fd" => :music,
       "\ue277" => :desktop_occupied,
       "\ue278" => :desktop_free,
       "\ue279" => :separator }
@@ -250,9 +253,9 @@ class Panel
         draw "%{F#efefef}#{`xtitle #{monitor.focused_window.window}`[0..max_width] rescue ''}"
     end
 
-    def time
+    def time(show_date = false)
         icon = Icon.clock
-        text = Time.now.strftime('%H:%M')
+        text = Time.now.strftime("#{'%b %-d %Y ' if show_date}%H:%M")
         color = Util.threshold Time.now.hour,
                  0 => Color.cyan,
                  6 => Color.blue,
@@ -300,6 +303,42 @@ class Panel
         draw_system icon, text, color
     end
 
+    def net_down
+        icon  = Icon.net_down
+        text  = Network.rx_human
+        color = Util.threshold Network.rx_mb,
+                  0 => Color.blue,
+                  1 => Color.green,
+                  6 => Color.yellow,
+                 11 => Color.red
+
+        draw_system icon, text, color
+    end
+
+    def net_up
+        icon  = Icon.net_up
+        text  = Network.tx_human
+        color = Util.threshold Network.tx_mb,
+                0.0 => Color.blue,
+                0.1 => Color.green,
+                0.5 => Color.yellow,
+                1.0 => Color.red
+
+        draw_system icon, text, color
+    end
+
+    def loadavg
+        icon  = Icon.load
+        text  = Load.avg5
+        color = Util.threshold Load.avg5,
+                0.0 => Color.blue,
+                1.0 => Color.green,
+                4.0 => Color.yellow,
+                7.0 => Color.red
+
+        draw_system icon, text, color
+    end
+
     def update
         return if @drawing
 
@@ -331,9 +370,15 @@ class Panel
         align :right
         space 20
 
-        thermal
-        battery
-        time
+        if monitor.secondary? || !Monitor.secondary?
+            net_down
+            net_up
+            loadavg
+            thermal
+            battery
+        end
+
+        time(monitor.primary? && Monitor.secondary?)
 
         space 2
         @bar.write "\n"
@@ -361,19 +406,37 @@ end
 
 
 module System
-    def update_if_needed
-        return if Time.now.to_f - @last_update < @update_interval
+    @systems = []
 
-        update
-        @last_update = Time.now.to_f
+    def self.systems; @systems; end
+
+    def self.included(obj)
+        @systems << obj
+
+        def obj.update_if_needed
+            return if Time.now.to_f - @last_update < @update_interval
+
+            update
+            @last_update = Time.now.to_f
+        end
+
+        def obj.system_reader(*names)
+            names.each do |name|
+                define_singleton_method name do
+                    instance_variable_get :"@#{name}"
+                end
+            end
+        end
     end
 end
 
 module Battery
-    extend System
+    include System
 
     @last_update = 0
     @update_interval = 10
+
+    system_reader :value
 
     def self.update
         value = `acpi -b 2>/dev/null`[/([0-9]+)%/, 1]
@@ -386,20 +449,18 @@ module Battery
         end
     end
 
-    def self.value
-        @value
-    end
-
     def self.charging?
         `acpi -a 2>/dev/null`['off-line'].nil?
     end
 end
 
 module Thermal
-    extend System
+    include System
 
     @last_update = 0
     @update_interval = 10
+
+    system_reader :sensors
 
     def self.update
         raw = `sensors -uA`
@@ -414,14 +475,54 @@ module Thermal
             [ name, values ]
         end.to_h
     end
+end
 
-    def self.sensors
-        @sensors
+module Network
+    include System
+
+    @last_update = 0
+    @update_interval = 5
+
+    system_reader :rx_human, :tx_human
+
+    def self.update
+        Thread.new(self) do |net|
+            net.parse_vnstat `vnstat -tr 5 -ru`
+        end
+    end
+
+    def self.parse_vnstat(vnstat)
+        @rx_human = vnstat[/rx\s+(\S+\s\S)/, 1]
+        @tx_human = vnstat[/tx\s+(\S+\s\S)/, 1]
+    end
+
+    def self.rx_mb
+        @rx_human.to_f * prefix(@rx_human[-1]) / prefix('M') rescue 0
+    end
+
+    def self.tx_mb
+        @tx_human.to_f * prefix(@tx_human[-1]) / prefix('M') rescue 0
+    end
+
+    def self.prefix(p)
+        1024 ** [ '', 'K', 'M', 'G', 'T' ].find_index(p)
     end
 end
 
-systems = [ Battery, Thermal ]
-systems.each(&:update)
+module Load
+    include System
+
+    @last_update = 0
+    @update_interval = 5
+
+    system_reader :avg1, :avg5, :avg15
+
+    def self.update
+        @avg1, @avg5, @avg15 = `uptime`[/load average: [0-9., ]+$/].scan(/[0-9.]+/).map(&:to_f)
+    end
+end
+
+System.systems.each(&:update)
 
 
 panels = []
@@ -443,6 +544,6 @@ threads << Thread.new do
 end
 
 # Update systems whenever needed
-threads << Thread.new{ loop{ systems.each(&:update_if_needed); sleep 1 } }
+threads << Thread.new{ loop{ System.systems.each(&:update_if_needed); sleep 1 } }
 
 sleep
