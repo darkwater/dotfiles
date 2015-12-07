@@ -174,7 +174,11 @@ class Desktop < JsonObject
     end
 
     def urgent?
-        @windows.any?{ |n| n.urgent }
+        @windows.any?(&:urgent)
+    end
+
+    def fullscreen?
+        @windows.any?{ |n| n.state == 'fullscreen' }
     end
 end
 
@@ -298,8 +302,15 @@ class Panel
 
     def update
         return if @drawing
+
+        if monitor.focused_desktop.fullscreen?
+            @bar.write "%{B#00000000}\n"
+            return
+        end
+
         @drawing = true
         @use_separator = false
+        draw '%{B-}'
         space 2
 
         show_now_playing = `mpc 2>/dev/null`['[playing]'] && monitor.secondary? || !Monitor.secondary?
