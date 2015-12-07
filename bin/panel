@@ -191,7 +191,7 @@ class Panel
                                 "+#{monitor.geometry.bottom - @height}" +
                              " -f '-misc-tamsyn-medium-r-normal--14-101-100-100-c-70-iso8859-1'" +
                              " -f '-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1'" +
-                             " -B '#e61d1f21'", 'w+'
+                             " -B '#eb1d1f21'", 'w+'
 
         @bar_read_thread = Thread.new do
             @bar.each_line{ |n| system n.chomp }
