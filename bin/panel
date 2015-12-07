@@ -236,8 +236,14 @@ class Panel
         draw '%{A}%{A}'
     end
 
-    def active_window_title
-        draw "%{F#efefef}#{`xtitle #{monitor.focused_window.window}`[0..70] rescue ''}"
+    def active_window_title(limit_width = false)
+        # TODO: Do something about this!?
+        #  / 2: show on one half
+        #  / 7: font char width
+        # - 10: compensate for desktop icons
+        max_width = monitor.geometry.width
+        max_width = max_width / 2 / 7 - 10 if limit_width
+        draw "%{F#efefef}#{`xtitle #{monitor.focused_window.window}`[0..max_width] rescue ''}"
     end
 
     def time
@@ -250,10 +256,6 @@ class Panel
                 18 => Color.yellow
 
         draw_system icon, text, color
-    end
-
-    def notifications
-        draw Notifications.last.render rescue nil
     end
 
     def now_playing
@@ -300,18 +302,23 @@ class Panel
         @use_separator = false
         space 2
 
+        show_now_playing = `mpc 2>/dev/null`['[playing]'] && monitor.secondary? || !Monitor.secondary?
+
         desktops
         space 1
-        active_window_title
+        active_window_title(show_now_playing)
 
-        align :center
-        space 5
+        if show_now_playing
+            align :center
+            space 10
 
-        notifications if monitor.primary?
-        now_playing if monitor.secondary? || (!Monitor.secondary? && Notifications.empty?)
+            now_playing
 
-        space 5
+            space 10
+        end
+
         align :right
+        space 20
 
         thermal
         battery
@@ -399,48 +406,6 @@ module Thermal
 
     def self.sensors
         @sensors
-    end
-end
-
-module Notifications
-    @notifications = []
-
-    def self.run
-        @statnot = open '|statnot /dev/stdin', 'r+'
-        @statnot.puts <<-EOF.gsub(/^ {12}/, '') # please python :<
-            import sys
-            MAX_NOTIFY_TIMEOUT = 1
-            DEFAULT_NOTIFY_TIMEOUT = 1
-            USE_STATUSTEXT = False
-            def update_text(text):
-                print(text)
-                sys.stdout.flush()
-        EOF
-        @statnot.close_write
-
-        Thread.new do
-            @statnot.each_line do |n|
-                push Notification.new(*n.chomp.split(' ', 2))
-                Monitor.primary.panel.update
-            end
-        end
-
-        Thread.new do
-            loop do
-                sleep 1
-
-                next if last.nil?
-
-                last.timeout -= 1
-                if last.timeout <= 0
-                    pop
-                end
-            end
-        end
-    end
-
-    def self.method_missing(*args)
-        @notifications.send(*args)
     end
 end
 
