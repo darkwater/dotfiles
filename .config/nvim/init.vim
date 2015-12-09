@@ -215,17 +215,14 @@ nnoremap <leader>ct :let x = system('ctags -R --language-force=C++ --sort=yes --
 " File
 nnoremap <leader>fr :call RenameFile()<CR>
 
-" Shortcuts
-nnoremap <leader>gt :terminal<CR>
-nnoremap <leader>gr :sp term://./%<CR>a
+" Terminal
+nnoremap <leader>tt :terminal<CR>
+nnoremap <leader>tr :sp term://./%<CR>a
+nnoremap <leader>ts :sp term://
+nnoremap <leader>tv :vsp term://
 
 " Java
 nnoremap <leader>jt :let x = system('ctags -R --language-force=Java --sort=yes --fields=+iaS --extra=+q .')<CR>
-
-" Tests
-nnoremap <leader>tt :call RunTestFile()<cr>
-nnoremap <leader>tn :call RunNearestTest()<cr>
-nnoremap <leader>ta :call RunTests('')<cr>
 
 """"""""""""""""""""""""
 "" Binary file editing
