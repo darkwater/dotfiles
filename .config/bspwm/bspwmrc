@@ -12,7 +12,7 @@ xset +fp /usr/share/fonts/local/ &
 wp &
 panel &
 kb &
-for n in {8..12}; do xinput set-prop $n "Device Accel Constant Deceleration" 2.2; done & # I don't even care
+dunst &
 vpsnotifyc &
 urxvtd -f -o &
 
@@ -31,18 +31,20 @@ bspc config normal_border_color  '#242628'
 bspc config urgent_border_color  '#ffaf00'
 bspc config presel_border_color  '#5a5c5e'
 
-bspc config split_ratio           0.50
-bspc config auto_cancel           true
-bspc config borderless_monocle    true
-bspc config gapless_monocle       true
-bspc config focus_by_distance     true
-bspc config focus_follows_pointer false
+bspc config split_ratio               0.50
+bspc config auto_cancel               true
+bspc config borderless_monocle        true
+bspc config gapless_monocle           true
+bspc config focus_by_distance         true
+bspc config focus_follows_pointer     false
+bspc config remove_unplugged_monitors true
+bspc config remove_disabled_monitors  true
 
-monitors=( 'VGA1' 'HDMI1' 'LVDS1'  'HDMI-0' 'DVI-I-1' ) # order is important
+monitors=( 'VGA1' 'HDMI1' 'LVDS1'  'HDMI-0' 'DVI-D-0' 'DVI-I-1' ) # order is important
 i=1
-for m in ${monitors[@]}; do
+for m in "${monitors[@]}"; do
     if bspc query -M | grep "$m"; then
-        bspc monitor $m -d $i-{1..6}
+        bspc monitor "$m" -d $i-{1..6}
         let i++
     fi
 done

@@ -2,3 +2,4 @@
 
 xset r rate 250 25
 xmodmap ~/.xmodmap
+for n in {8..20}; do xinput set-prop $n "Device Accel Constant Deceleration" 2.2; done 2>/dev/null

@@ -1,19 +1,19 @@
-#!/bin/sh
+#!/bin/bash
 
 if [[ "$1" = "up" ]]
 then
-    VOLUME=$(($(amixer sget PCM | grep -oEm 1 'Playback [[:digit:]]+ \[' | grep -oE '[[:digit:]]+') + 10))
+    VOLUME=$(($(amixer sget Master | grep -oEm 1 'Playback [[:digit:]]+ \[' | grep -oE '[[:digit:]]+') + 6))
 fi
 
 if [[ "$1" = "down" ]]
 then
-    VOLUME=$(($(amixer sget PCM | grep -oEm 1 'Playback [[:digit:]]+ \[' | grep -oE '[[:digit:]]+') - 10))
+    VOLUME=$(($(amixer sget Master | grep -oEm 1 'Playback [[:digit:]]+ \[' | grep -oE '[[:digit:]]+') - 6))
 fi
 
-amixer sset PCM $VOLUME
+amixer sset Master $VOLUME
 
 SCREEN=($(bspc query -T | grep '^\S.*\*$' | grep -o '[[:digit:]]*x[[:digit:]]*' | tr 'x' ' '))
-MAX=$(amixer sget PCM | grep Limits | grep -o '[[:digit:]]*$')
+MAX=$(amixer sget Master | grep Limits | grep -o '[[:digit:]]*$')
 
 echo "^pa(1;1)^r($((VOLUME * 256 / MAX))x2)" | \
     persist volume -t 3 \
