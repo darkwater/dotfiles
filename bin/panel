@@ -7,7 +7,8 @@ Object.send :remove_const, :Monitor # I'll need this tyvm
 module Icon
     { "\ue015" => :clock,
       "\ue01b" => :thermal,
-      "\ue020" => :load,
+      "\ue026" => :load,
+      "\ue028" => :memory,
       "\ue02e" => :information,
       "\ue060" => :net_up,
       "\ue061" => :net_down,
@@ -254,13 +255,13 @@ class Panel
     end
 
     def time(show_date = false)
-        icon = Icon.clock
-        text = Time.now.strftime("#{'%b %-d %Y ' if show_date}%H:%M")
+        icon  = Icon.clock
+        text  = Time.now.strftime("#{'%b %-d %Y ' if show_date}%H:%M")
         color = Util.threshold Time.now.hour,
-                 0 => Color.cyan,
-                 6 => Color.blue,
-                12 => Color.green,
-                18 => Color.yellow
+            0 => Color.cyan,
+            6 => Color.blue,
+           12 => Color.green,
+           18 => Color.yellow
 
         draw_system icon, text, color
     end
@@ -274,13 +275,13 @@ class Panel
         value = Battery.value
         return if value.nil?
 
-        icon = Battery.charging? ? Icon.battery_charging : Icon.battery
-        text = "#{value}%"
+        icon  = Battery.charging? ? Icon.battery_charging : Icon.battery
+        text  = "#{value}%"
         color = Util.threshold value,
-                 0 => Color.blink(:red, :white),
-                10 => Color.red,
-                30 => Color.yellow,
-                50 => Color.green
+            0 => Color.blink(:red, :white),
+           10 => Color.red,
+           30 => Color.yellow,
+           50 => Color.green
 
         draw_system icon, text, color
     end
@@ -295,10 +296,10 @@ class Panel
         icon  = Icon.thermal
         text  = "#{value} °C"
         color = Util.threshold value,
-                0    => Color.green,
-                high => Color.yellow,
-                max  => Color.red,
-                crit => Color.blink(:red, :white)
+         0    => Color.green,
+         high => Color.yellow,
+         max  => Color.red,
+         crit => Color.blink(:red, :white)
 
         draw_system icon, text, color
     end
@@ -307,10 +308,10 @@ class Panel
         icon  = Icon.net_down
         text  = Network.rx_human
         color = Util.threshold Network.rx_mb,
-                  0 => Color.blue,
-                  1 => Color.green,
-                  6 => Color.yellow,
-                 11 => Color.red
+            0 => Color.blue,
+            1 => Color.green,
+            6 => Color.yellow,
+           11 => Color.red
 
         draw_system icon, text, color
     end
@@ -319,10 +320,10 @@ class Panel
         icon  = Icon.net_up
         text  = Network.tx_human
         color = Util.threshold Network.tx_mb,
-                0.0 => Color.blue,
-                0.1 => Color.green,
-                0.5 => Color.yellow,
-                1.0 => Color.red
+          0.0 => Color.blue,
+          0.1 => Color.green,
+          0.5 => Color.yellow,
+          1.0 => Color.red
 
         draw_system icon, text, color
     end
@@ -331,10 +332,22 @@ class Panel
         icon  = Icon.load
         text  = Load.avg5
         color = Util.threshold Load.avg5,
-                0.0 => Color.blue,
-                1.0 => Color.green,
-                4.0 => Color.yellow,
-                7.0 => Color.red
+          0.0 => Color.blue,
+          1.0 => Color.green,
+          4.0 => Color.yellow,
+          7.0 => Color.red
+
+        draw_system icon, text, color
+    end
+
+    def memory
+        icon  = Icon.memory
+        text  = "#{Memory.used}%"
+        color = Util.threshold Memory.used,
+            0 => Color.blue,
+           10 => Color.green,
+           50 => Color.yellow,
+           80 => Color.red
 
         draw_system icon, text, color
     end
@@ -374,6 +387,7 @@ class Panel
             net_down
             net_up
             loadavg
+            memory
             thermal
             battery
         end
@@ -519,6 +533,20 @@ module Load
 
     def self.update
         @avg1, @avg5, @avg15 = `uptime`[/load average: [0-9., ]+$/].scan(/[0-9.]+/).map(&:to_f)
+    end
+end
+
+module Memory
+    include System
+
+    @last_update = 0
+    @update_interval = 5
+
+    system_reader :used
+
+    def self.update
+        free = `free`.lines.grep(/^Mem/).first.split
+        @used = (free[2].to_f / free[1].to_f * 100).round
     end
 end
 
