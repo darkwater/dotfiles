@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-SCREEN=($(bspc query -T | grep '^\S.*\*$' | grep -o '[[:digit:]]*x[[:digit:]]*' | tr 'x' ' '))
+SCREEN=($(bspc query -m focused -T | json 'return this.rectangle' | grep -o '[[:digit:]]\+'))
 
-dmenu_run -w $((SCREEN[0] * 60 / 100)) -x $((SCREEN[0] * 20 / 100)) -y $((SCREEN[1] * 50 / 100)) \
+dmenu_run -w $((SCREEN[2] * 60 / 100)) -x $((SCREEN[2] * 20 / 100)) -y $((SCREEN[3] * 50 / 100)) \
     -l 10 -fn 'Droid Sans Mono-10' -p '$'
