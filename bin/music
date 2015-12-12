@@ -1,10 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
-SCREEN=($(bspc query -T | grep '^\S.*\*$' | grep -o '[[:digit:]]*x[[:digit:]]*' | tr 'x' ' '))
+SCREEN=($(bspc query -m focused -T | json 'return this.rectangle' | grep -o '[[:digit:]]\+'))
 
-DMENU_X=$((SCREEN[0] * 20 / 100))
-DMENU_Y=$((SCREEN[1] * 50 / 100))
-DMENU_WIDTH=$((SCREEN[0] * 60 / 100))
+DMENU_X=$((SCREEN[0] + SCREEN[2] * 20 / 100))
+DMENU_Y=$((SCREEN[1] + SCREEN[3] * 50 / 100))
+DMENU_WIDTH=$((SCREEN[0] + SCREEN[2] * 60 / 100))
+
+DZEN_X=$((SCREEN[0] + SCREEN[2] * 50 / 100 - 128))
+DZEN_Y=$((SCREEN[1] + SCREEN[3] * 60 / 100))
 
 case $1 in
 
@@ -16,14 +19,14 @@ case $1 in
     show) ;;
     pick) SELECTION=$(mpc playlist | dmenu -x $DMENU_X -y $DMENU_Y -w $DMENU_WIDTH -fn 'Droid Sans Mono-10' -p '>' -i -l 10)
           if [[ "$?" != 0 || -z "$SELECTION" ]]; then exit 1; fi
-          mpc play $(mpc playlist | grep -xF "$SELECTION" -n | cut -d: -f1) ;;
+          mpc play "$(mpc playlist | grep -xF "$SELECTION" -n | cut -d: -f1)" ;;
        *) echo "Unknown argument $1" >&2 ;;
 
 esac
 
 IFS=$'\n' :; TRACK=($(mpc -f '%artist%\n%album%\n%title%\n%file%'))
 ARTIST=${TRACK[0]}
-ALBUM=${TRACK[1]}
+ALBUM=${TRACK[1]} # shellcheck disable=SC2034
 TITLE=${TRACK[2]}
 FILE=${TRACK[3]}
 STATUS=$(echo "${TRACK[4]}" | grep -o 'playing\|paused')
@@ -34,7 +37,7 @@ REPEAT_ICON=~/dotfiles/assets/repeat_${REPEAT:-grey}_18x18.xpm
 SHUFFLE_ICON=~/dotfiles/assets/shuffle_${SHUFFLE:-grey}_18x18.xpm
 
 MUSIC_DIR=$(sed -nr 's/^ *music_directory +"(.+)"/\1/p' ~/.mpdconf)
-DIR=$MUSIC_DIR/$(dirname $FILE)
+DIR=$MUSIC_DIR/$(dirname "$FILE")
 if [[ ( ! -f "$DIR/cover.xpm" ) && ( -f "$DIR/cover.jpg" ) ]]
 then
     convert "$DIR/cover.jpg" -resize 256x256^ -gravity center -extent 256x256 "$DIR/cover.xpm"
@@ -63,15 +66,15 @@ fi
 
 if [[ "$2" != "0" ]]
 then
-    ( for n in $(seq 2 $2); do sleep 1s; music show 0; done ) & #YOLO
+    ( for _ in $(seq 2 "$2"); do sleep 1s; music show 0; done ) & #YOLO
 fi
 
 ###################
 
 echo "^ib(1)^pa(0;0)^i($COVERFILE)$STATUSINDICATOR^pa(16;264)$ARTIST^pa(16;290)$TITLE^pa(220;256)^fg(#1d1f21)^r(36x50)^fg()^pa(226;264)^i($REPEAT_ICON)^pa(226;290)^i($SHUFFLE_ICON)^pa(1;319)^r($((PROGRESS * 254 / 100))x2)" | \
-    persist music -t $2 \
+    persist music -t "$2" \
     dzen2 -tw 256 -h 322 \
-        -x $((SCREEN[0] * 50 / 100 - 128)) -y $((SCREEN[1] * 60 / 100)) \
+        -x $DZEN_X -y $DZEN_Y \
         -ta l -fn Droid\ Sans -bg '#1d1f21' -fg '#ffffff' \
         -e 'onstart=uncollapse;
             entertitle=;
