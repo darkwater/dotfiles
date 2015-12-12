@@ -1,22 +1,29 @@
 #!/bin/bash
 
+MIXER=Master
+STEPS=16
+
+MAX=$(amixer sget "$MIXER" | grep 'Limits' | grep -o '[[:digit:]]*$')
+STEP=$((MAX / STEPS))
+
+VOLUME=$(($(amixer sget Master | grep -oEm 1 'Playback [[:digit:]]+ \[' | grep -oE '[[:digit:]]+')))
+
 if [[ "$1" = "up" ]]
 then
-    VOLUME=$(($(amixer sget Master | grep -oEm 1 'Playback [[:digit:]]+ \[' | grep -oE '[[:digit:]]+') + 6))
+    let VOLUME+=$STEP
 fi
 
 if [[ "$1" = "down" ]]
 then
-    VOLUME=$(($(amixer sget Master | grep -oEm 1 'Playback [[:digit:]]+ \[' | grep -oE '[[:digit:]]+') - 6))
+    let VOLUME-=$STEP
 fi
 
 amixer sset Master $VOLUME
 
-SCREEN=($(bspc query -T | grep '^\S.*\*$' | grep -o '[[:digit:]]*x[[:digit:]]*' | tr 'x' ' '))
-MAX=$(amixer sget Master | grep Limits | grep -o '[[:digit:]]*$')
+SCREEN=($(bspc query -m focused -T | json 'return this.rectangle' | grep -o '[[:digit:]]\+'))
 
 echo "^pa(1;1)^r($((VOLUME * 256 / MAX))x2)" | \
     persist volume -t 3 \
     dzen2 -tw 256 -h 4 \
-        -x $((SCREEN[0] * 50 / 100 - 128)) -y $((SCREEN[1] * 80 / 100)) \
-        -bg '#1d1f21' -fg '#ffffff' -ta l
+          -x $((SCREEN[0] + SCREEN[2] * 50 / 100 - 128)) -y $((SCREEN[1] + SCREEN[3] * 80 / 100)) \
+          -bg '#1d1f21' -fg '#ffffff' -ta l
