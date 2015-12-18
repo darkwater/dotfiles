@@ -4,6 +4,10 @@ SAVEHIST=100000
 
 export PATH=~/bin:~/dotfiles/bin:$PATH
 
+if command -v cope_path > /dev/null; then
+    export PATH=$(cope_path):$PATH
+fi
+
 setopt appendhistory autocd notify hist_ignore_all_dups hist_ignore_space
 unsetopt extendedglob nomatch beep
 
