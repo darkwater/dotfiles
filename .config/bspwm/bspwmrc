@@ -3,6 +3,9 @@
 # Set path etc.
 source ~/.zshenv
 
+# xset for bitmap font
+xset +fp ~/.fonts
+xset fp rehash
 
 # Configure X environment
 compton --dbus &
