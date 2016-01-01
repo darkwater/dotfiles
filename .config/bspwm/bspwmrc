@@ -3,9 +3,6 @@
 # Set path etc.
 source ~/.zshenv
 
-# xset for bitmap font
-xset +fp ~/.fonts
-xset fp rehash
 
 # Configure X environment
 compton --dbus &
@@ -43,7 +40,7 @@ bspc config focus_follows_pointer     false
 bspc config remove_unplugged_monitors true
 bspc config remove_disabled_monitors  true
 
-monitors=( 'DVI-I-1' ) # order is important
+monitors=( 'VGA1' 'HDMI1' 'LVDS1'  'HDMI-0' 'DVI-D-0' 'DVI-I-1' ) # order is important
 i=1
 for m in "${monitors[@]}"; do
     if bspc query -M | grep "$m"; then
