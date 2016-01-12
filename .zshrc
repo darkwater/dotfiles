@@ -113,9 +113,6 @@ local return_code="%(?..%{$fg[red]%}%? ↵ %{$reset_color%})"
 local user_host='%{$fg[green]%}%n@%m%{$reset_color%}'
 local current_dir='%{$fg[blue]%}%~%{$reset_color%}'
 
-local git_branch='$(git_prompt_info)%{$reset_color%}'
-
-
 PROMPT='$(zsh_prompt)'
 RPROMPT="%(?..%{$fg[red]%}%? ! %{$reset_color%})%{$fg_bold[black]%}$(hostname)  %T%{$reset_color%}"
 
@@ -155,18 +152,6 @@ function zsh_prompt()
 
     # Shell $ prompt sign
     echo -n " %{$reset_color%}$ "
-}
-
-
-function git_prompt_info()
-{
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-    if [[ $((git status 2> /dev/null) | tail -n1) != "nothing to commit, working directory clean" ]]; then
-        echo -n "%{$fg[yellow]%}"
-    else
-        echo -n "%{$fg[green]%}"
-    fi
-    echo " [${ref#refs/heads/}]%{$reset_color%}"
 }
 
 
