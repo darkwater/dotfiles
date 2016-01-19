@@ -108,12 +108,6 @@ alt + Scroll_Lock
 ctrl + shift + Scroll_Lock
     pastetype
 
-XF86Audio{Play,Stop,Prev,Next}
-    music {play,show,prev,next} 5
-
-ctrl + XF86Audio{Prev,Next}
-    music {repeat,shuffle} 5
-
 super + p
     music pick 5
 
