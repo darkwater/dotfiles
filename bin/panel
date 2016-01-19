@@ -5,7 +5,8 @@ Thread.abort_on_exception = true
 Object.send :remove_const, :Monitor # I'll need this tyvm
 
 module Icon
-    { "\ue015" => :clock,
+    { "\ue00b" => :bluetooth,
+      "\ue015" => :clock,
       "\ue01b" => :thermal,
       "\ue026" => :load,
       "\ue028" => :memory,
@@ -129,7 +130,7 @@ class Monitor < JsonObject
         focused_desktop.focused_window
     end
 
-    %i| primary secondary tertiary quaternary quinary senary septenary octonary nonary denary |
+    %i| secondary primary tertiary quaternary quinary senary septenary octonary nonary denary |
     .each_with_index do |name, index|
         name_question = :"#{name}?"
 
@@ -195,6 +196,8 @@ class Panel
         @height = `bspc config -m "#{monitor.name}" bottom_padding`.to_i
 
         @monitor_name = monitor.name
+        p "|lemonbar -g #{monitor.geometry.width}x#{@height}+#{monitor.geometry.left}" +
+                                "+#{monitor.geometry.bottom - @height}"
         @bar = open "|lemonbar -g #{monitor.geometry.width}x#{@height}+#{monitor.geometry.left}" +
                                 "+#{monitor.geometry.bottom - @height}" +
                              " -f '-misc-tamsyn-medium-r-normal--14-101-100-100-c-70-iso8859-1'" +
@@ -269,6 +272,14 @@ class Panel
     def now_playing
         mpc = `mpc 2>/dev/null`.lines
         draw "#{Icon.music} #{mpc.first}" if mpc[1][/playing/] rescue nil
+    end
+
+    def bluetooth
+        icon  = Icon.bluetooth
+        text  = ''
+        color = Color.blue
+
+        draw_system icon, text, color
     end
 
     def battery
@@ -384,6 +395,7 @@ class Panel
         space 20
 
         if monitor.secondary? || !Monitor.secondary?
+            bluetooth if Bluetooth.connected
             net_down
             net_up
             loadavg
@@ -414,7 +426,7 @@ class Panel
             @use_separator = true
         end
 
-        draw "#{Bar.color color}#{icon} #{text}#{Bar.color}"
+        draw "#{Bar.color color}#{icon}#{' ' if text.to_s.length > 0}#{text}#{Bar.color}"
     end
 end
 
@@ -547,6 +559,19 @@ module Memory
     def self.update
         free = `free`.lines.grep(/^Mem/).first.split
         @used = (free[2].to_f / free[1].to_f * 100).round
+    end
+end
+
+module Bluetooth
+    include System
+
+    @last_update = 0
+    @update_interval = 2
+
+    system_reader :connected
+
+    def self.update
+        @connected = `hcitool con`.lines.count > 1
     end
 end
 
