@@ -21,13 +21,14 @@ Plug 'benekastah/neomake'
 Plug 'godlygeek/tabular'
 
 " Extra syntax support
-Plug 'hail2u/vim-css3-syntax',            { 'for': 'css'    }
-Plug 'dag/vim-fish',                      { 'for': 'fish'   }
-Plug 'tikhomirov/vim-glsl',               { 'for': 'glsl'   }
-Plug 'tfnico/vim-gradle',                 { 'for': 'gradle' }
-Plug 'othree/html5.vim',                  { 'for': 'html'   }
-Plug 'groenewege/vim-less',               { 'for': 'less'   }
-Plug 'derekwyatt/vim-scala',              { 'for': 'scala'  }
+Plug 'hail2u/vim-css3-syntax'
+Plug 'dag/vim-fish'
+Plug 'tikhomirov/vim-glsl'
+Plug 'tfnico/vim-gradle'
+Plug 'othree/html5.vim'
+Plug 'groenewege/vim-less'
+Plug 'derekwyatt/vim-scala'
+Plug 'udalov/kotlin-vim'
 
 call plug#end()
 
@@ -117,9 +118,9 @@ augroup Vimrc
     " Cursor line highlighting in ruby is slow as hell :<
     autocmd BufNewFile,BufRead,BufEnter *.rb set nocursorline
 
-    autocmd BufReadPost,BufEnter,BufWritePost * Neomake
+    " autocmd BufReadPost,BufEnter,BufWritePost * Neomake
 
-    autocmd BufWinLeave * mkview
+    autocmd BufWinLeave * silent! mkview
     autocmd BufWinEnter * silent! loadview
 
 augroup end
