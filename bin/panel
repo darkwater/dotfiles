@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'json'
+require 'socket'
 
 Thread.abort_on_exception = true
 Object.send :remove_const, :Monitor # I'll need this tyvm
@@ -270,8 +271,16 @@ class Panel
     end
 
     def now_playing
-        mpc = `mpc 2>/dev/null`.lines
-        draw "#{Icon.music} #{mpc.first}" if mpc[1][/playing/] rescue nil
+        return unless Music.state =~ /playing|paused/
+
+        artist = Music.artist
+        title = Music.title
+
+        icon  = Icon.music
+        text  = "#{artist} - #{title}"
+        color = (Music.state == 'playing') ? Color.green : Color.yellow
+
+        draw_system icon, text, color
     end
 
     def bluetooth
@@ -376,7 +385,7 @@ class Panel
         draw '%{B-}'
         space 2
 
-        show_now_playing = `mpc 2>/dev/null`['[playing]'] && monitor.secondary? || !Monitor.secondary?
+        show_now_playing = monitor.secondary? || !Monitor.secondary?
 
         desktops
         space 1
@@ -572,6 +581,24 @@ module Bluetooth
 
     def self.update
         @connected = `hcitool con`.lines.count > 1
+    end
+end
+
+module Music
+    include System
+
+    @last_update = 0
+    @update_interval = 1
+
+    system_reader :artist, :album, :title, :state
+
+    def self.update
+        s = TCPSocket.new 'localhost', 5704
+        json = s.gets
+        data = JSON.parse json
+        data.each do |key, value|
+            instance_variable_set :"@#{key}", value
+        end
     end
 end
 
