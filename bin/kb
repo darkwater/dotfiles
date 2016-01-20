@@ -2,4 +2,4 @@
 
 xset r rate 250 25
 xmodmap ~/.xmodmap
-for n in {8..20}; do xinput set-prop $n "Device Accel Constant Deceleration" 2.2; done 2>/dev/null
+for n in {8..20}; do xinput set-prop $n 'libinput Accel Speed' -0.74; done 2>/dev/null
