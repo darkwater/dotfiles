@@ -131,7 +131,7 @@ class Monitor < JsonObject
         focused_desktop.focused_window
     end
 
-    %i| secondary primary tertiary quaternary quinary senary septenary octonary nonary denary |
+    %i| primary secondary tertiary quaternary quinary senary septenary octonary nonary denary |
     .each_with_index do |name, index|
         name_question = :"#{name}?"
 
@@ -197,8 +197,6 @@ class Panel
         @height = `bspc config -m "#{monitor.name}" bottom_padding`.to_i
 
         @monitor_name = monitor.name
-        p "|lemonbar -g #{monitor.geometry.width}x#{@height}+#{monitor.geometry.left}" +
-                                "+#{monitor.geometry.bottom - @height}"
         @bar = open "|lemonbar -g #{monitor.geometry.width}x#{@height}+#{monitor.geometry.left}" +
                                 "+#{monitor.geometry.bottom - @height}" +
                              " -f '-misc-tamsyn-medium-r-normal--14-101-100-100-c-70-iso8859-1'" +
