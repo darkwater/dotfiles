@@ -39,7 +39,7 @@ call plug#end()
 
 set cursorline
 set hidden
-set nohlsearch
+set hlsearch
 set ignorecase
 set incsearch
 set list
