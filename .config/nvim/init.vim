@@ -70,6 +70,7 @@ set pastetoggle=<F11>
 set scrolloff=5
 set showtabline=2
 set tabline=%!MyTabLine()
+set tags+=.tags
 set textwidth=120
 set timeoutlen=400
 set undolevels=1000
