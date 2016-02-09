@@ -207,9 +207,6 @@ endwhile
 
 let mapleader = ","
 
-" Gradle
-nnoremap <leader>gid :!gradle --daemon installDebug<CR>
-
 " C++
 nnoremap <leader>ch :call SplitHeader()<CR>
 nnoremap <leader>ct :let x = system('ctags -R --language-force=C++ --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .')<CR>
@@ -217,14 +214,20 @@ nnoremap <leader>ct :let x = system('ctags -R --language-force=C++ --sort=yes --
 " File
 nnoremap <leader>fr :call RenameFile()<CR>
 
+" Gradle
+nnoremap <leader>gid :vsp term://./gradlew\ --daemon\ installDebug<CR>a
+
+" Java
+nnoremap <leader>jt :let x = system('ctags -R --language-force=Java --sort=yes --fields=+iaS --extra=+q .')<CR>
+
+" Markdown
+nnoremap <leader>mp :call jobstart(['md-preview', expand('%')])<CR>
+
 " Terminal
 nnoremap <leader>tt :terminal<CR>
 nnoremap <leader>tr :sp term://./%<CR>a
 nnoremap <leader>ts :sp term://
 nnoremap <leader>tv :vsp term://
-
-" Java
-nnoremap <leader>jt :let x = system('ctags -R --language-force=Java --sort=yes --fields=+iaS --extra=+q .')<CR>
 
 """"""""""""""""""""""""
 "" Binary file editing

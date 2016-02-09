@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+bspc rule -a chromium -o desktop=$(bspc query -H | tail -n 1 | cut -d\  -f2) border=on
+chromium --app="file://$(pwd)/$1"
