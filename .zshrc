@@ -122,6 +122,12 @@ function zsh_prompt()
     echo -en '%{\a%}'
 
     local ref=$(git symbolic-ref HEAD 2> /dev/null)
+    local attached=true
+    if [[ -z "$ref" ]]; then
+        ref=$(git rev-parse --short HEAD 2> /dev/null)
+        attached=false
+    fi
+
     if [[ -n "$ref" ]]; then
 
         local repo="$(git rev-parse --show-toplevel)"
@@ -131,7 +137,9 @@ function zsh_prompt()
             cwd=$cwd/
         fi
 
-        if [[ "$(git status 2> /dev/null | tail -n1)" != "nothing to commit, working directory clean" ]]; then
+        if [[ "$attached" = false ]]; then
+            echo -n "%{$fg[red]%}"
+        elif [[ "$(git status 2> /dev/null | tail -n1)" != "nothing to commit, working directory clean" ]]; then
             echo -n "%{$fg[yellow]%}"
         else
             echo -n "%{$fg[green]%}"
