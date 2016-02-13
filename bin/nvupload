@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # REQUIRES libnotify-id (AUR) FOR NOTIFICATIONS
 
