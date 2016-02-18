@@ -80,6 +80,11 @@ function downloads()
     ls -hAlt --color=always | head -n 11 | tail | tac
 }
 
+function fs()
+{
+    printf '\x1b]710;%s%d\x07' 'xft:Droid Sans Mono:size=' "$1"
+}
+
 
 if test "$TERM" = "linux"; then
     echo -en "\e]P01D1F21" # black
