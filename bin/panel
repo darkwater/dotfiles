@@ -59,7 +59,7 @@ end
 
 module Bspc
     def self.tree
-        JSON.parse(`bspc query -T`, symbolize_names: true)[:monitors].map do |mobj|
+        JSON.parse(`bspc wm -d`, symbolize_names: true)[:monitors].map do |mobj|
             Monitor.new mobj
         end.sort
     end
@@ -70,7 +70,8 @@ class JsonObject
     def initialize(obj)
         obj.each_pair do |key, value|
             key = key.to_s.gsub(/[A-Z]/){ |c| "_#{c.downcase}" }.to_sym
-            instance_variable_set :"@#{key}", value
+            ivname = :"@#{key}"
+            instance_variable_set ivname, value unless instance_variable_defined? ivname
             define_singleton_method(key) { instance_variable_get :"@#{key}" } unless respond_to? key
         end
     end
@@ -127,8 +128,8 @@ class Monitor < JsonObject
         @desktops.find{ |n| n.name == focused_desktop_name }
     end
 
-    def focused_window
-        focused_desktop.focused_window
+    def focused_node
+        focused_desktop.focused_node
     end
 
     %i| primary secondary tertiary quaternary quinary senary septenary octonary nonary denary |
@@ -142,17 +143,17 @@ class Monitor < JsonObject
 end
 
 class Desktop < JsonObject
-    attr_reader :windows, :active
+    attr_reader :nodes, :active
     alias active? :active
 
     def initialize(dobj, active)
         super dobj
         @active = active
 
-        # Walk through desktop tree and collect a list of windows
+        # Walk through desktop tree and collect a list of nodes
         pass = [ dobj[:root] ].reject(&:nil?)
         newpass = nil
-        @windows = []
+        @nodes = []
 
         until pass.empty? do
             newpass = []
@@ -160,19 +161,19 @@ class Desktop < JsonObject
             pass.each do |node|
                 # Only add items if they're not nil
                 newpass += [ node[:firstChild], node[:secondChild] ].reject(&:nil?)
-                @windows += [ node[:client] ].reject(&:nil?)
+                @nodes  += [ node ] if node[:client]
             end
 
             pass = newpass
         end
 
-        @windows.map! do |wobj|
-            Window.new wobj
+        @nodes.map! do |wobj|
+            Node.new wobj
         end
     end
 
-    def focused_window
-        @windows.find{ |n| n.window == @focused_window }
+    def focused_node
+        @nodes.find{ |n| n.id == @focused_node_id }
     end
 
     def free?
@@ -180,15 +181,21 @@ class Desktop < JsonObject
     end
 
     def urgent?
-        @windows.any?(&:urgent)
+        @nodes.any?{ |n| n.client.urgent }
     end
 
     def fullscreen?
-        @windows.any?{ |n| n.state == 'fullscreen' }
+        @nodes.any?{ |n| n.client.state == 'fullscreen' }
     end
 end
 
-class Window < JsonObject
+class Node < JsonObject
+    attr_reader :client
+
+    def initialize(nobj)
+        super nobj
+        @client = JsonObject.new client
+    end
 end
 
 
@@ -253,7 +260,7 @@ class Panel
         # - 10: compensate for desktop icons
         max_width = monitor.geometry.width
         max_width = max_width / 2 / 7 - 10 if limit_width
-        draw "%{F#efefef}#{`xtitle #{monitor.focused_window.window}`[0..max_width] rescue ''}"
+        draw "%{F#efefef}#{`xtitle #{monitor.focused_node.id}`[0..max_width] rescue ''}"
     end
 
     def time(show_date = false)
@@ -617,7 +624,7 @@ threads << Thread.new{ loop{ panels.each(&:update); sleep 1 } }
 
 # Update panels on desktop switch
 threads << Thread.new do
-    bspc = open '|bspc control --subscribe', 'r'
+    bspc = open '|bspc subscribe', 'r'
     bspc.each_line do panels.each(&:update) end
 end
 

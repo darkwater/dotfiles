@@ -3,89 +3,86 @@
 #
 
 super + q
-	bspc window -c
+    bspc node -c
 
 super + t
-	bspc desktop -l next
+    bspc desktop -l next
 
 super + b
-	bspc desktop -B
+    bspc desktop -B
 
 super + {s,d,f}
-	bspc window -t {floating,tiled,fullscreen}
+    bspc node -t {floating,tiled,fullscreen}
 
 super + {grave,Tab}
-	bspc {window,desktop} -f last
+    bspc {node,desktop} -f last
 
 super + apostrophe
-	bspc window -s last
+    bspc node -s last
 
 super + {o,i}
-	bspc control --record-history off; \
-	bspc window {older,newer} -f; \
-	bspc control --record-history on
+    bspc control --record-history off; \
+    bspc node {older,newer} -f; \
+    bspc control --record-history on
 
 super + y
-	bspc window -w last.manual
+    bspc node -w last.manual
 
 super + m
-	bspc window -s biggest
+    bspc node -s biggest
 
 super + {_,shift + }{h,j,k,l}
-	bspc window -{f,s} {left,down,up,right}
+    bspc node -{f,s} {west,south,north,east}
 
 super + {_,shift + }c
-	bspc window -f {next,prev}
+    bspc node -f {next,prev}
 
 super + {comma,period}
-	bspc desktop -C {backward,forward}
+    bspc desktop -C {backward,forward}
 
-super + bracket{left,right}
-	bspc desktop -f {prev,next}
+super + bracket{west,east}
+    bspc desktop -f {prev,next}
 
 super + ctrl + {h,j,k,l}
-	bspc window -p {left,down,up,right}
+    bspc node -p {west,south,north,east}
 
 super + ctrl + {_,shift + }space
-	bspc {window -p cancel,desktop -c}
+    bspc {node -p cancel,desktop -c}
 
 super + alt + {h,j,k,l}
-	bspc window -e {left -10,down +10,up -10,right +10}
+    bspc node -e {west -10,south +10,north -10,east +10}
 
 super + alt + shift + {h,j,k,l}
-	bspc window -e {right -10,up +10,down -10,left +10}
+    bspc node -e {east -10,north +10,south -10,west +10}
 
 super + ctrl + {1-9}
-	bspc window -r 0.{1-9}
+    bspc node -r 0.{1-9}
 
 super + {_,shift + }{_,alt + }{1-9,0}
-	bspc {desktop -f,window -d} {1,2}-{1-9,0}
+    bspc {desktop -f,node -d} {1,2}-{1-9,0}
 
 ~button1
-	bspc pointer -g focus
+    bspc pointer -g focus
 
 super + button{1-3}
-	bspc pointer -g {move,resize_side,resize_corner}
-
-super + !button{1-3}
-    bspc pointer -t %i %i
+    bspc pointer -g {move,resize_side,resize_corner}
 
 super + @button{1-3}
-	bspc pointer -u
+    bspc pointer -u
 
 #
 # wm independent hotkeys
 #
 
 super + Return
-	urxvtc
+    urxvtc
 
 super + r
-	dmenu_launcher run
+    dmenu_launcher run
 
 # make sxhkd reload its configuration files:
 super + Escape
-	pkill -USR1 -x sxhkd
+    pkill -USR1 -x sxhkd
 
 XF86Audio{Lower,Raise}Volume
     volume {down,up}
