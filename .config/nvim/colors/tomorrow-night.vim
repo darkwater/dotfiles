@@ -2,35 +2,36 @@
 " http://chriskempson.com
 "
 " Hex colour conversion functions borrowed from the theme "Desert256""
+" Edit by Darkwater
 
 " Default GUI Colours
 let s:foreground = "efefef"
 let s:background = "1d1f21"
-let s:selection = "373b41"
-let s:line = "282a2e"
-let s:comment = "969896"
-let s:red = "cc6666"
-let s:orange = "de935f"
-let s:yellow = "f0c674"
-let s:green = "b5bd68"
-let s:aqua = "8abeb7"
-let s:blue = "81a2be"
-let s:purple = "b294bb"
-let s:window = "4d5057"
+let s:selection  = "373b41"
+let s:line       = "282a2e"
+let s:comment    = "969896"
+let s:red        = "cc6666"
+let s:orange     = "de935f"
+let s:yellow     = "f0c674"
+let s:green      = "b5bd68"
+let s:aqua       = "8abeb7"
+let s:blue       = "81a2be"
+let s:purple     = "b294bb"
+let s:window     = "4d5057"
 
 " Console 256 Colours
 if !has("gui_running")
 	let s:background = "2a2a2a"
-	let s:window = "5e5e5e"
-	let s:line = "3a3a3a"
-	let s:selection = "404040"
+	let s:window     = "5e5e5e"
+	let s:line       = "3a3a3a"
+	let s:selection  = "404040"
 end
 
 set background=dark
 hi clear
 syntax reset
 
-let g:colors_name = "Tomorrow-Night"
+let g:colors_name = "tomorrow-night"
 
 if has("gui_running") || &t_Co == 88 || &t_Co == 256
 	" Returns an approximate grey index for the given grey level

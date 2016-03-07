@@ -87,7 +87,7 @@ set expandtab
 set shiftwidth=4
 set tabstop=4
 
-colors Tomorrow-Night
+colors tomorrow-night
 syntax on
 filetype plugin indent on
 
