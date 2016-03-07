@@ -3,6 +3,7 @@
     email = dark@novaember.com
 [core]
     editor = nvim
+    excludesfile = /home/dark/.gitignore_global
 [push]
     default = simple
 [color]
