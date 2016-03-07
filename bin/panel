@@ -205,7 +205,7 @@ class Panel
 
         @monitor_name = monitor.name
         @bar = open "|lemonbar -g #{monitor.geometry.width}x#{@height}+#{monitor.geometry.left}" +
-                                "+#{monitor.geometry.bottom - @height}" +
+                                "+#{monitor.geometry.height - @height}" +
                              " -f '-misc-tamsyn-medium-r-normal--14-101-100-100-c-70-iso8859-1'" +
                              " -f '-wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1'" +
                              " -B '#eb1d1f21'", 'w+'
