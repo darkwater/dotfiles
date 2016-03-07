@@ -7,7 +7,7 @@
 call plug#begin()
 
 " UI plugins
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 Plug 'majutsushi/tagbar',   { 'on': 'Tagbar'   }
 
@@ -19,6 +19,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'benekastah/neomake'
 Plug 'godlygeek/tabular'
+
+" Miscellaneous shit
+Plug 'vim-scripts/JavaDecompiler.vim'
+Plug 'moll/vim-bbye'
 
 " Extra syntax support
 Plug 'hail2u/vim-css3-syntax'
@@ -108,6 +112,8 @@ let g:neomake_error_sign = { 'text': ' ❯', 'texthl': 'ErrorMsg' }
 let g:neomake_open_list = 2 " Preserve cursor position when window is opened
 let g:neomake_list_height = 5
 
+let g:ctrlp_cmd = 'CtrlPMRU'
+
 """""""""""""
 "" Autocmds
 ""
@@ -131,28 +137,18 @@ augroup end
 "" Mappings
 ""
 
-" Fix Ctrl+arrows in urxvt for all modes(???)
-map         <silent> Ïa         <C-Up>
-map         <silent> Ïb         <C-Down>
-map         <silent> Ïc         <C-Right>
-map         <silent> Ïd         <C-Left>
-map!        <silent> Ïa         <C-Up>
-map!        <silent> Ïb         <C-Down>
-map!        <silent> Ïc         <C-Right>
-map!        <silent> Ïd         <C-Left>
-
 " ^S for save
-nnoremap    <silent> <C-s>      :write<CR>
-vnoremap    <silent> <C-s>      <C-O>:write<CR>
-inoremap    <silent> <C-s>      <C-O>:write<CR>
+nnoremap    <silent> <C-s>      :w<CR>
+vnoremap    <silent> <C-s>      <C-c>:w<CR>
+inoremap    <silent> <C-s>      <C-c>:w<CR>
 
 " ^J/^K for tab switching
 nnoremap    <silent> <C-k>      :bn<CR>
 nnoremap    <silent> <C-j>      :bp<CR>
 
 " ^X to close the current buffer
-nnoremap    <silent> <C-x>      :bp<bar>sp<bar>bn<bar>bd!<CR>
-vnoremap    <silent> <C-x>      <C-c>:bp<bar>sp<bar>bn<bar>bd!<CR>
+nnoremap    <silent> <C-x>      :Bdelete<CR>
+vnoremap    <silent> <C-x>      <C-c>:Bdelete<CR>
 
 " ^Q for :q!
 nnoremap    <silent> <C-q>      :q!<CR>
@@ -169,65 +165,52 @@ vnoremap    <silent> <C-g>      <C-c>:tag /\C^
 inoremap    <silent> <C-g>      <C-c>:tag /\C^
 
 " Easily jump to command line
-nnoremap    <silent> ;          :
-vnoremap    <silent> ;          :
-nnoremap    <silent> ;;         :
-vnoremap    <silent> ;;         :
-inoremap    <silent> ;;         <C-C>:
+nnoremap    <silent> \          :
+vnoremap    <silent> \          :
 
 " Tab for autocompletion
 inoremap    <expr>   <Tab>      InsertTabWrapper()
 inoremap    <silent> <S-Tab>    <C-p>
 
-" {}| to {\n|\n} (^Z to undo)
-inoremap    <silent> {}         <CR>{<CR>}<Up><CR>
-inoremap    <silent> <C-z>      <BS><Down><BS><BS>{}<BS><BS>{}
-
 " Make Y consistent with D and C
 nnoremap    <silent> Y          y$
 
-" Use ^E/^Y in insert mode directly
-inoremap    <silent> <C-e>      <C-x><C-e>
-inoremap    <silent> <C-y>      <C-x><C-y>
+" Navigate through quickfix list
+nnoremap    <silent> [q         :cp<CR>
+nnoremap    <silent> ]q         :cn<CR>
 
-" F# for buffer switching
-nnoremap    <silent> <F1>       :1b<CR>
-inoremap    <silent> <F1>       <C-c>:1b<CR>
-let i = 2
-while i <= 12
-    execute "nnoremap <silent> <F" . i . "> :1b\\|" . (i - 1) . "bn<CR>"
-    execute "inoremap <silent> <F" . i . "> <C-c>:1b\\|" . (i - 1) . "bn<CR>"
-    let i += 1
-endwhile
+" Remove hlsearch
+nnoremap    <silent> <BS>       :nohlsearch<CR>
 
 
 """"""""""""""""""""
 "" Leader mappings
 ""
 
-let mapleader = ","
+let mapleader = "\<Space>"
 
 " C++
 nnoremap <leader>ch :call SplitHeader()<CR>
-nnoremap <leader>ct :let x = system('ctags -R --language-force=C++ --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .')<CR>
+
+" Devdocs
+nnoremap <leader>dd :call jobstart(['chromium-app', 'http://devdocs.io/' . &filetype])<CR>
 
 " File
+nnoremap <leader>fd :!rm %<CR>
 nnoremap <leader>fr :call RenameFile()<CR>
 
-" Gradle
-nnoremap <leader>gid :vsp term://./gradlew\ --daemon\ installDebug<CR>a
-
-" Java
-nnoremap <leader>jt :let x = system('ctags -R --language-force=Java --sort=yes --fields=+iaS --extra=+q .')<CR>
-
 " Markdown
-nnoremap <leader>mp :call jobstart(['md-preview', expand('%')])<CR>
+nnoremap <leader>mp :call jobstart(['chromium-app', 'file://' . expand('%:p')])<CR>
+
+" Tags
+nnoremap <leader>tg :call jobstart(['ctags', '-R', '-f.tags', '.'])<CR>
 
 " Terminal
 nnoremap <leader>tt :terminal<CR>
 nnoremap <leader>tr :sp term://./%<CR>a
 nnoremap <leader>ts :sp term://
 nnoremap <leader>tv :vsp term://
+
 
 """"""""""""""""""""""""
 "" Binary file editing
