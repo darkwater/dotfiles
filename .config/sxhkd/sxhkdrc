@@ -20,11 +20,6 @@ super + {grave,Tab}
 super + apostrophe
     bspc node -s last
 
-super + {o,i}
-    bspc control --record-history off; \
-    bspc node {older,newer} -f; \
-    bspc control --record-history on
-
 super + y
     bspc node -w last.manual
 
@@ -110,3 +105,9 @@ super + p
 
 super + space
     lock
+
+super + n
+    urxvtc -e nvim
+
+super + i
+    urxvtc -e irssi
