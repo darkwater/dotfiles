@@ -5,8 +5,10 @@ source ~/.zshenv
 
 
 # Configure X environment
+xrdb ~/.Xresources
+urxvtd -f -o
+
 compton --dbus &
-xrdb ~/.Xresources &
 xsetroot -cursor_name left_ptr &
 xset +fp /usr/share/fonts/local/ &
 wp &
@@ -14,7 +16,6 @@ panel &
 kb &
 dunst &
 vpsnotifyc &
-urxvtd -f -o &
 
 # Run local .xenv
 source ~/.xenv
@@ -40,7 +41,20 @@ bspc config focus_follows_pointer     false
 bspc config remove_unplugged_monitors true
 bspc config remove_disabled_monitors  true
 
-monitors=( 'VGA1' 'HDMI1' 'LVDS1'  'HDMI-0' 'DVI-D-0' 'DVI-I-1' ) # order is important
+bspc rule -a mplayer  state=floating
+bspc rule -a mplayer2 state=floating
+bspc rule -a mpv      state=floating
+bspc rule -a feh      state=floating
+
+# Define more rules in ~/.xenv - for example:
+# > bspc config -d 1-2 window_gap 0
+# > bspc rule -a chromium desktop=1-2 border=off
+
+# Define monitors in ~/.xenv - for example:
+# > export monitors=( 'HDMI-0' 'DVI-D-0' 'DVI-I-1' )
+# Note: Order is important!
+# Desktops will be named 1-1, 1-2, ..., 1-6, 2-1, 2-2, ..., n-m where n means monitor and m means desktop
+
 i=1
 for m in "${monitors[@]}"; do
     if bspc query -M | grep "$m"; then
@@ -49,9 +63,10 @@ for m in "${monitors[@]}"; do
     fi
 done
 
-bspc rule -a chromium desktop=1-2 border=off
-bspc config -d 1-2 window_gap 0
+# Define autostart applications in ~/.xenv - for example:
+# > function bspwm-autostart() {
+# >     chromium &
+# >     steam &
+# > }
 
-bspc rule -a mplayer floating=on
-bspc rule -a mplayer2 floating=on
-bspc rule -a feh floating=on
+bspwm-autostart
