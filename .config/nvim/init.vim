@@ -23,6 +23,7 @@ Plug 'godlygeek/tabular'
 " Miscellaneous shit
 Plug 'vim-scripts/JavaDecompiler.vim'
 Plug 'moll/vim-bbye'
+Plug 'mhinz/vim-startify'
 
 " Extra syntax support
 Plug 'hail2u/vim-css3-syntax'
@@ -112,7 +113,11 @@ let g:neomake_error_sign = { 'text': ' ❯', 'texthl': 'ErrorMsg' }
 let g:neomake_open_list = 2 " Preserve cursor position when window is opened
 let g:neomake_list_height = 5
 
-let g:ctrlp_cmd = 'CtrlPMRU'
+let g:ctrlp_cmd = 'CtrlPCurWD'
+
+let g:startify_bookmarks  = [ { 'vi': '~/.config/nvim/init.vim' } ]
+let g:startify_bookmarks += [ { 'vc': '~/.config/nvim/colors/tomorrow-night.vim' } ]
+
 
 """""""""""""
 "" Autocmds
@@ -199,17 +204,14 @@ nnoremap <leader>dd :call jobstart(['chromium-app', 'http://devdocs.io/' . &file
 nnoremap <leader>fd :!rm %<CR>
 nnoremap <leader>fr :call RenameFile()<CR>
 
+" Generate tags
+nnoremap <leader>gt :call jobstart(['ctags', '-R', '-f.tags', '.'])<CR>
+
 " Markdown
 nnoremap <leader>mp :call jobstart(['chromium-app', 'file://' . expand('%:p')])<CR>
 
-" Tags
-nnoremap <leader>tg :call jobstart(['ctags', '-R', '-f.tags', '.'])<CR>
-
 " Terminal
-nnoremap <leader>tt :terminal<CR>
-nnoremap <leader>tr :sp term://./%<CR>a
-nnoremap <leader>ts :sp term://
-nnoremap <leader>tv :vsp term://
+nnoremap <leader>t  :call jobstart(['urxvtc', '-cd', getcwd()])<CR>
 
 
 """"""""""""""""""""""""
