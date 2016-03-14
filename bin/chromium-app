@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-bspc rule -a chromium -o desktop=$(bspc query -H | tail -n 1 | cut -d\  -f2) border=on
+bspc rule -a chromium -o desktop=$(bspc wm -d | json 'return this.focusHistory.pop().desktopName') border=on
 chromium --app="$1"
