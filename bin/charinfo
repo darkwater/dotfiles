@@ -1,0 +1,10 @@
+#!/bin/bash
+
+char=${1:-$(xclip -o)}
+char="$(echo -n "$char" | xxd -p | sed 's/../%25\0/g' | tr 'a-z' 'A-Z')"
+active_desktop="$(bspc wm -d | json 'return this.focusHistory.pop().desktopName')"
+
+bspc rule -a chromium -o center=on state=floating desktop="$active_desktop" border=on
+chromium --chrome-frame --app="data:text/html,<html><script>resizeTo(650, 420); location = 'http://graphemica.com/${char}#character-header'</script></html>"
+sleep 0.5s
+bspc node -t state=floating

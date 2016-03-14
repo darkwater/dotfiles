@@ -88,8 +88,8 @@ XF86Audio{Lower,Raise}Volume
 Pause
     xdotool mousemove 9999 9999
 
-{shift,_} + Scroll_Lock
-    {battery,clock} 5
+Scroll_Lock
+    charinfo
 
 ctrl + Scroll_Lock
     clipswap
