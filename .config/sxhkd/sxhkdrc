@@ -86,7 +86,7 @@ XF86Audio{Lower,Raise}Volume
     screentool {png,mp4,png}
 
 Pause
-    xdotool mousemove 9999 9999
+    xdotool mousemove_relative 0 9999
 
 Scroll_Lock
     charinfo
