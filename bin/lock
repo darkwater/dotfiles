@@ -1,24 +1,34 @@
-#!/usr/bin/zsh
+#!/bin/bash
 
 killall -USR1 dunst
 
-if [[ "$1" = "prompt" ]]; then
-    echo -n | dmenu -i -f -p 'reason:'                 \
-          -fn 'Droid Sans Mono-10'                     \
-          -q                                           \
-          -x 500 -y 500                                \
-          -w 920 -h 24                                 \
-          -nb '#1d1f21' -nf '#ababab'                  \
-          -sb '#111111' -sf '#ffaf00'                  > /tmp/afk.reason
+lockdir="/tmp/lockscreen-$(whoami)"
+rm -r "$lockdir"
+mkdir "$lockdir"
 
-    sleep 0.2s
-elif [[ $# -ge 1 ]]; then
-    echo $* > /tmp/afk.reason
-else
-    echo > /tmp/afk.reason
-fi
+montage -geometry '1920x1080+0+0' "wallpapers/0071 - 5i61fKs.jpg" "wallpapers/0081 - ms9u0xG.jpg" "$lockdir/final.png"
 
-maim /tmp/screenshot.png && 
-size=$(convert /tmp/screenshot.png info: | grep -o '[[:digit:]]\+x[[:digit:]]\+' | head -n 1) &&
-convert /tmp/screenshot.png -scale $((100/6.5))% -sample $size! /tmp/screenshot.png &&
-i3lock -ni /tmp/screenshot.png; killall -USR2 dunst
+IFS=$'\n'
+for window in $(wmctrl -lG | awk '{ print $1, $3, $4, $5, $6 }'); do
+    IFS=' ' read w_id w_x w_y w_width w_height <<< "$window"
+    let w_x/=2
+    let w_y/=2
+    let w_width+=6
+    let w_height+=6
+
+    echo "${w_id}: $w_x, $w_y (${w_width}x${w_height})"
+
+    maim -i "$w_id" -g "${w_width}x${w_height}+0+0" --format png /dev/stdout |
+        convert png:- \
+            -resize "$((w_width / 6))x$((w_height / 6))" \
+            -sample "${w_width}x${w_height}" \
+            "$lockdir/$w_id.png"
+
+    composite -blend '40%' \
+         -geometry "+${w_x}+${w_y}" \
+        "$lockdir/$w_id.png" \
+        "$lockdir/final.png" \
+        "$lockdir/final.png"
+done
+
+i3lock -ni "$lockdir/final.png"; killall -USR2 dunst
