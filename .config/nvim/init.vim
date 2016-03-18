@@ -8,8 +8,8 @@ call plug#begin()
 
 " UI plugins
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
-Plug 'majutsushi/tagbar',   { 'on': 'Tagbar'   }
+Plug 'scrooloose/nerdtree'
+Plug 'majutsushi/tagbar', { 'on': 'Tagbar' }
 
 " Git helpers
 Plug 'tpope/vim-fugitive'
@@ -101,22 +101,52 @@ filetype plugin indent on
 "" Plugin configuration
 ""
 
-let NERDTreeChDirMode=3
-let NERDTreeIgnore=['.hex$', '.lst$', '\~$']
-
-let g:gitgutter_sign_added            = '+'
-let g:gitgutter_sign_modified         = '~'
-let g:gitgutter_sign_modified_removed = '~.'
+" Gitgutter
+let g:gitgutter_sign_added            = '•'
+let g:gitgutter_sign_modified         = '•'
+let g:gitgutter_sign_modified_removed = '•'
 let g:gitgutter_sign_removed          = '_'
+hi GitGutterChangeDelete ctermfg=3 cterm=underline
+hi GitGutterDelete       ctermfg=1 cterm=underline
 
-let g:neomake_error_sign = { 'text': ' ❯', 'texthl': 'ErrorMsg' }
-let g:neomake_open_list = 2 " Preserve cursor position when window is opened
+" Neomake
+let g:neomake_error_sign  = { 'text': ' ❯', 'texthl': 'ErrorMsg' }
+let g:neomake_open_list   = 2 " Preserve cursor position when window is opened
 let g:neomake_list_height = 5
 
+" CtrlP
 let g:ctrlp_cmd = 'CtrlPCurWD'
 
-let g:startify_bookmarks  = [ { 'vi': '~/.config/nvim/init.vim' } ]
-let g:startify_bookmarks += [ { 'vc': '~/.config/nvim/colors/tomorrow-night.vim' } ]
+" Startify
+let g:startify_custom_header  = ['                      -`                     ']
+let g:startify_custom_header += ['                     .o+`                    ']
+let g:startify_custom_header += ['                    `ooo/                    ']
+let g:startify_custom_header += ['                   `+oooo:                   ']
+let g:startify_custom_header += ['                  `+oooooo:                  ']
+let g:startify_custom_header += ['                  -+oooooo+:                 ']
+let g:startify_custom_header += ['                `/:-:++oooo+:                ']
+let g:startify_custom_header += ['               `/++++/+++++++:               ']
+let g:startify_custom_header += ['              `/++++++++++++++:              ']
+let g:startify_custom_header += ['             `/+++ooooooooooooo/`            ']
+let g:startify_custom_header += ['            ./ooosssso++osssssso+`           ']
+let g:startify_custom_header += ['           .oossssso-````/ossssss+`          ']
+let g:startify_custom_header += ['          -osssssso.      :ssssssso.         ']
+let g:startify_custom_header += ['         :osssssss/        osssso+++.        ']
+let g:startify_custom_header += ['        /ossssssss/        +ssssooo/-        ']
+let g:startify_custom_header += ['      `/ossssso+/:-        -:/+osssso+-      ']
+let g:startify_custom_header += ['     `+sso+:-`                 `.-/+oso:     ']
+let g:startify_custom_header += ['    `++:.                           `-/+/    ']
+let g:startify_custom_header += ['    .`                                 `/    ']
+let g:startify_custom_header += ['']
+let g:startify_custom_header += ['']
+let g:startify_custom_header += ['']
+
+let g:startify_bookmarks  = [ { 've': '~/.nvimenv' } ]
+let g:startify_bookmarks += [ { 'vi': '~/dotfiles/.config/nvim/init.vim' } ]
+let g:startify_bookmarks += [ { 'vc': '~/dotfiles/.config/nvim/colors/tomorrow-night.vim' } ]
+
+let g:startify_change_to_dir      = 0
+let g:startify_change_to_vcs_root = 1
 
 
 """""""""""""
@@ -130,8 +160,10 @@ augroup Vimrc
     " Cursor line highlighting in ruby is slow as hell :<
     autocmd BufNewFile,BufRead,BufEnter *.rb set nocursorline
 
+    " Automatic syntax checking
     " autocmd BufReadPost,BufEnter,BufWritePost * Neomake
 
+    " Automatically save and load view data (cursor position, folds...)
     autocmd BufWinLeave * silent! mkview
     autocmd BufWinEnter * silent! loadview
 
@@ -194,24 +226,27 @@ nnoremap    <silent> <BS>       :nohlsearch<CR>
 
 let mapleader = "\<Space>"
 
-" C++
-nnoremap <leader>ch :call SplitHeader()<CR>
-
-" Devdocs
-nnoremap <leader>dd :call jobstart(['chromium-app', 'http://devdocs.io/' . &filetype])<CR>
-
-" File
-nnoremap <leader>fd :!rm %<CR>
-nnoremap <leader>fr :call RenameFile()<CR>
-
-" Generate tags
-nnoremap <leader>gt :call jobstart(['ctags', '-R', '-f.tags', '.'])<CR>
-
-" Markdown
-nnoremap <leader>mp :call jobstart(['chromium-app', 'file://' . expand('%:p')])<CR>
+" Startify
+nnoremap <silent> <leader>s  :Startify<CR>
 
 " Terminal
-nnoremap <leader>t  :call jobstart(['urxvtc', '-cd', getcwd()])<CR>
+nnoremap <silent> <leader>t  :call jobstart(['urxvtc', '-cd', getcwd()])<CR>
+
+" C++
+nnoremap <silent> <leader>ch :call SplitHeader()<CR>
+
+" Devdocs
+nnoremap <silent> <leader>dd :call jobstart(['chromium-app', 'http://devdocs.io/' . &filetype])<CR>
+
+" File operations
+nnoremap <silent> <leader>fd :!rm %<CR>
+nnoremap <silent> <leader>fr :call RenameFile()<CR>
+
+" Generate tags
+nnoremap <silent> <leader>gt :call jobstart(['ctags', '-R', '-f.tags', '.'])<CR>
+
+" Markdown
+nnoremap <silent> <leader>mp :call jobstart(['md', expand('%')])<CR>
 
 
 """"""""""""""""""""""""
@@ -219,14 +254,18 @@ nnoremap <leader>t  :call jobstart(['urxvtc', '-cd', getcwd()])<CR>
 ""
 augroup Binary
 
-    au!
-    au BufReadPre  *.bin let &bin=1
-    au BufReadPost *.bin if &bin | %!xxd
-    au BufReadPost *.bin set ft=xxd | endif
-    au BufWritePre *.bin if &bin | %!xxd -r
-    au BufWritePre *.bin endif
-    au BufWritePost *.bin if &bin | %!xxd
-    au BufWritePost *.bin set nomod | endif
+    autocmd!
+
+    autocmd BufReadPre   *.bin let &bin=1
+
+    autocmd BufReadPost  *.bin if &bin | %!xxd
+    autocmd BufReadPost  *.bin set ft=xxd | endif
+
+    autocmd BufWritePre  *.bin if &bin | %!xxd -r
+    autocmd BufWritePre  *.bin endif
+
+    autocmd BufWritePost *.bin if &bin | %!xxd
+    autocmd BufWritePost *.bin set nomod | endif
 
 augroup end
 
@@ -397,6 +436,43 @@ endfunction
 "" Local rc file
 ""
 
-if filereadable("./.vimlocalrc")
-    source ./.vimlocalrc
+if filereadable($HOME . "/.nvimenv")
+    source $HOME/.nvimenv
 endif
+
+" Example template for convenient copypasta:
+"
+" " Machine-local Neovim configuration
+"
+" function! SetupEnvironment()
+"     let l:path = expand('%:p')
+"     if l:path =~ '/home/dark/projects/almanapp-android/'
+"
+"         let &makeprg='./build.rb'
+"         let &errorformat='%A%.%#/home/dark/projects/almanapp-android/%f:%l:\ %m,%-Z%p^,%.%#%t:\ /home/dark/projects/almanapp-android/%f:\ (%l\,\ %c):\ %m,%-G%.%#'
+"         nnoremap <leader><leader> :make build debug --run<CR>
+"
+"         let g:ctrlp_custom_ignore = '\v/(build|cache|gradle)/'
+"
+"     elseif l:path =~ '/home/dark/projects/aegis/'
+"
+"         let &makeprg='./gradlew --daemon'
+"         let &errorformat='%.%#%t:\ /home/dark/projects/aegis/%f:\ (%l\,\ %c):\ %m,%-G%.%#'
+"         nnoremap <leader><leader> :make instalLDebug<CR>
+"
+"         let g:ctrlp_custom_ignore = '\v/(build|cache|gradle)/'
+"
+"     endif
+" endfunction
+"
+" augroup SetupEnvironment
+"
+"     autocmd!
+"
+"     autocmd BufReadPost,BufNewFile * call SetupEnvironment()
+"
+" augroup end
+"
+" let g:startify_bookmarks += [ { 'ag': '~/projects/aegis/build.gradle' } ]
+"
+" " vim: set ft=vim:
