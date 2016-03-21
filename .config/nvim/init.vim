@@ -1,15 +1,15 @@
 """"""""""""
 "" Neovim configuration
 "" Assembled by Darkwater
-"" 90% stolen from other people
+"" 50% stolen from other people
 ""
 
 call plug#begin()
 
 " UI plugins
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'majutsushi/tagbar', { 'on': 'Tagbar' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
+Plug 'majutsushi/tagbar',   { 'on': 'Tagbar'   }
 
 " Git helpers
 Plug 'tpope/vim-fugitive'
@@ -118,35 +118,53 @@ let g:neomake_list_height = 5
 let g:ctrlp_cmd = 'CtrlPCurWD'
 
 " Startify
-let g:startify_custom_header  = ['                      -`                     ']
-let g:startify_custom_header += ['                     .o+`                    ']
-let g:startify_custom_header += ['                    `ooo/                    ']
-let g:startify_custom_header += ['                   `+oooo:                   ']
-let g:startify_custom_header += ['                  `+oooooo:                  ']
-let g:startify_custom_header += ['                  -+oooooo+:                 ']
-let g:startify_custom_header += ['                `/:-:++oooo+:                ']
-let g:startify_custom_header += ['               `/++++/+++++++:               ']
-let g:startify_custom_header += ['              `/++++++++++++++:              ']
-let g:startify_custom_header += ['             `/+++ooooooooooooo/`            ']
-let g:startify_custom_header += ['            ./ooosssso++osssssso+`           ']
-let g:startify_custom_header += ['           .oossssso-````/ossssss+`          ']
-let g:startify_custom_header += ['          -osssssso.      :ssssssso.         ']
-let g:startify_custom_header += ['         :osssssss/        osssso+++.        ']
-let g:startify_custom_header += ['        /ossssssss/        +ssssooo/-        ']
-let g:startify_custom_header += ['      `/ossssso+/:-        -:/+osssso+-      ']
-let g:startify_custom_header += ['     `+sso+:-`                 `.-/+oso:     ']
-let g:startify_custom_header += ['    `++:.                           `-/+/    ']
-let g:startify_custom_header += ['    .`                                 `/    ']
-let g:startify_custom_header += ['']
-let g:startify_custom_header += ['']
-let g:startify_custom_header += ['']
+let g:startify_default_custom_header = [ '                      -`                     ',
+                                       \ '                     .o+`                    ',
+                                       \ '                    `ooo/                    ',
+                                       \ '                   `+oooo:                   ',
+                                       \ '                  `+oooooo:                  ',
+                                       \ '                  -+oooooo+:                 ',
+                                       \ '                `/:-:++oooo+:                ',
+                                       \ '               `/++++/+++++++:               ',
+                                       \ '              `/++++++++++++++:              ',
+                                       \ '             `/+++ooooooooooooo/`            ',
+                                       \ '            ./ooosssso++osssssso+`           ',
+                                       \ '           .oossssso-````/ossssss+`          ',
+                                       \ '          -osssssso.      :ssssssso.         ',
+                                       \ '         :osssssss/        osssso+++.        ',
+                                       \ '        /ossssssss/        +ssssooo/-        ',
+                                       \ '      `/ossssso+/:-        -:/+osssso+-      ',
+                                       \ '     `+sso+:-`                 `.-/+oso:     ',
+                                       \ '    `++:.                           `-/+/    ',
+                                       \ '    .`                                 `/    ',
+                                       \ '',
+                                       \ '',
+                                       \ '' ]
 
-let g:startify_bookmarks  = [ { 've': '~/.nvimenv' } ]
-let g:startify_bookmarks += [ { 'vi': '~/dotfiles/.config/nvim/init.vim' } ]
-let g:startify_bookmarks += [ { 'vc': '~/dotfiles/.config/nvim/colors/tomorrow-night.vim' } ]
+let g:startify_custom_header = g:startify_default_custom_header
+
+let g:startify_bookmarks = [ { '.c': '~/.config/' },
+                           \ { '.j': '~/.js/' },
+                           \ { '  ': '' },
+                           \ { 've': '~/.nvimenv' },
+                           \ { 'vi': '~/.config/nvim/init.vim' },
+                           \ { 'vc': '~/.config/nvim/colors/tomorrow-night.vim' },
+                           \ { '  ': '' },
+                           \ { 'pd': '~/dotfiles/' } ]
 
 let g:startify_change_to_dir      = 0
 let g:startify_change_to_vcs_root = 1
+let g:startify_files_number       = 20
+
+let g:startify_list_order = [ [ '  Sessions' ],
+                            \ 'sessions',
+                            \ [ '  Bookmarks' ],
+                            \ 'bookmarks',
+                            \ [ '  MRU' ],
+                            \ 'dir' ]
+
+hi StartifyBracket ctermfg=0 cterm=bold
+hi StartifyHeader  ctermfg=195
 
 
 """""""""""""
@@ -166,6 +184,10 @@ augroup Vimrc
     " Automatically save and load view data (cursor position, folds...)
     autocmd BufWinLeave * silent! mkview
     autocmd BufWinEnter * silent! loadview
+
+    " Run Startify when opening a directory
+    autocmd VimEnter          * silent! autocmd! FileExplorer
+    autocmd VimEnter,BufEnter * call OpenStartifyInDirectory(expand('<amatch>'))
 
 augroup end
 
@@ -428,6 +450,32 @@ function! RenameFile()
         exec ':saveas ' . new_name
         exec ':silent !rm ' . old_name
         redraw!
+    endif
+endfunction
+
+
+" Run Startify when opening a directory
+function! OpenStartifyInDirectory(dir)
+    if a:dir != '' && isdirectory(a:dir)
+        cd `=a:dir`
+
+        let g:startify_list_order = [ [ '  MRU ' . getcwd() ],
+                                    \ 'dir',
+                                    \ [ '  Bookmarks' ],
+                                    \ 'bookmarks',
+                                    \ [ '  Sessions' ],
+                                    \ 'sessions' ]
+
+        if isdirectory('.git')
+            let g:startify_custom_header = map(split(system('git status -b'), '\n'), '"  ". v:val')
+                                       \ + [ '' ]
+                                       \ + [ '' ]
+        else
+            let g:startify_custom_header = g:startify_default_custom_header
+        endif
+
+        Bdelete
+        Startify
     endif
 endfunction
 
