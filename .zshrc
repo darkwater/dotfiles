@@ -124,7 +124,7 @@ RPROMPT="%(?..%{$fg[red]%}%? ! %{$reset_color%})%{$fg_bold[black]%}$(hostname)  
 
 function zsh_prompt()
 {
-    echo -en '%{\a%}'
+    window_title="${USER}@$(hostname): ${PWD}"
 
     local ref=$(git symbolic-ref HEAD 2> /dev/null)
     local attached=true
@@ -152,6 +152,7 @@ function zsh_prompt()
 
         # Repository name @ branch
         echo -n "[${ref#refs/heads/}] $(basename "$repo")"
+        window_title="${window_title} [${ref#refs/heads/}]"
 
         # Internal path (relative to repository root)
         echo -n "%{$fg[blue]%}${cwd#$repo}"
@@ -165,6 +166,14 @@ function zsh_prompt()
 
     # Shell $ prompt sign
     echo -n " %{$reset_color%}$ "
+
+    # Bell and window title set
+    echo -n "%{\a\e]0;$window_title\a%}"
+}
+
+function preexec()
+{
+    echo -n "\e]0;${USER}@$(hostname): ${PWD} $ $2\a"
 }
 
 
