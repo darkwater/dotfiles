@@ -19,6 +19,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'benekastah/neomake'
 Plug 'godlygeek/tabular'
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Miscellaneous shit
 Plug 'vim-scripts/JavaDecompiler.vim'
