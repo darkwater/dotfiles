@@ -221,9 +221,9 @@ vnoremap    <silent> <Home>     ^
 inoremap    <silent> <Home>     <C-o>^
 
 " ^G to jump to a tag
-nnoremap    <silent> <C-g>      :tag /\C^
-vnoremap    <silent> <C-g>      <C-c>:tag /\C^
-inoremap    <silent> <C-g>      <C-c>:tag /\C^
+nnoremap    <silent> <C-g>      :tselect
+vnoremap    <silent> <C-g>      <C-c>:tselect
+inoremap    <silent> <C-g>      <C-c>:tselect
 
 " Easily jump to command line
 nnoremap    <silent> \          :
