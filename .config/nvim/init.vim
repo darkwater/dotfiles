@@ -20,6 +20,7 @@ Plug 'tpope/vim-commentary'
 Plug 'benekastah/neomake'
 Plug 'godlygeek/tabular'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'idanarye/vim-dutyl'
 
 " Miscellaneous shit
 Plug 'vim-scripts/JavaDecompiler.vim'
