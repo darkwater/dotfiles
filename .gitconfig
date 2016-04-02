@@ -10,7 +10,7 @@
     ui = true
 [alias]
     fuck-it = reset --hard
-    fuck-it-all = "!git fuck-it && git clean -fd"
+    fuck-it-all = "!git fuck-it && git clean -fdx"
 
     st = status
     ci = commit --verbose

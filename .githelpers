@@ -13,7 +13,7 @@
 # used to split on them. A } in the commit subject or any other field will
 # break this.
 
-FORMAT="%C(bold cyan)%h%C(reset)  %C(bold blue)%ad%C(reset) %C(blue)(%ar)%C(reset)%C(bold red)% D%C(reset)%n  %C(white)%w($(($(tput cols) - 20)),0,2)%s%C(reset)%w() %C(yellow)- %an%C(reset)%n"
+FORMAT="%C(bold cyan)%h%C(reset)  %C(blue)%ar%C(reset) %C(bold red)% D%C(reset)%n  %C(white)%w($(($(tput cols) - 20)),0,2)%s%C(reset)%w() %C(yellow)- %an%C(reset)%n"
 
 show_git_head() {
     pretty_git_log -1
@@ -21,7 +21,7 @@ show_git_head() {
 }
 
 pretty_git_log() {
-    git log --color=always --graph --pretty="tformat:${FORMAT}" --date=relative $* |
+    git log --color=always --graph --pretty="tformat:${FORMAT}" $* |
         sed -Ee 's/\|/│/g' \
              -e 's/\/(\x1b\[m)/╱\1/g' \
              -e 's/\\(\x1b\[m)/╲\1/g' \
