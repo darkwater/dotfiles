@@ -88,6 +88,9 @@ XF86Audio{Lower,Raise}Volume
 Pause
     xdotool mousemove_relative 0 9999
 
+ctrl + Pause
+    wp
+
 Scroll_Lock
     charinfo
 

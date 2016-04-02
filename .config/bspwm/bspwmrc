@@ -16,17 +16,16 @@ panel &
 kb &
 dunst &
 vpsnotifyc &
+sxhkd -f 60 &
 
 # Run local .xenv
 source ~/.xenv
 
-sxhkd -f 60 &
-
-bspc config border_width        3
-bspc config window_gap         25
+bspc config border_width        0
+bspc config window_gap          0
 bspc config bottom_padding     25
 
-bspc config focused_border_color '#2f3133'
+bspc config focused_border_color '#4d4f51'
 bspc config active_border_color  '#242628'
 bspc config normal_border_color  '#242628'
 bspc config urgent_border_color  '#ffaf00'
@@ -58,7 +57,7 @@ bspc rule -a feh      state=floating
 
 i=1
 for m in "${monitors[@]}"; do
-    if bspc query -M | grep "$m"; then
+    if bspc query -M | grep "$m" > /dev/null; then
         bspc monitor "$m" -d $i-{1..6}
         let i++
     fi
