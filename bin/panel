@@ -407,6 +407,7 @@ class Panel
 
         align :right
         space 20
+        @use_separator = false
 
         if monitor.secondary? || !Monitor.secondary?
             bluetooth if Bluetooth.connected
