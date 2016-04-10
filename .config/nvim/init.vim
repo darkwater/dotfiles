@@ -250,6 +250,9 @@ nnoremap    <silent> <BS>       :nohlsearch<CR>
 
 let mapleader = "\<Space>"
 
+" Build with make by default
+nnoremap <silent> <leader><leader> :make<CR>
+
 " Startify
 nnoremap <silent> <leader>s  :Startify<CR>
 
