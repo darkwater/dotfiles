@@ -41,7 +41,7 @@ call plug#end()
 
 
 """"""""""""""""""""
-"" Set basic stuff
+"" Settings
 ""
 
 set cursorline
@@ -76,7 +76,7 @@ set numberwidth=5
 set pastetoggle=<F11>
 set scrolloff=5
 set showtabline=2
-set tabline=%!MyTabLine()
+set tabline=%!CustomTabLine()
 set tags+=.tags
 set textwidth=120
 set timeoutlen=400
@@ -187,9 +187,12 @@ augroup Vimrc
     autocmd BufWinLeave * silent! mkview
     autocmd BufWinEnter * silent! loadview
 
-    " Run Startify when opening a directory
+    " Show Startify when opening a directory
     autocmd VimEnter          * silent! autocmd! FileExplorer
     autocmd VimEnter,BufEnter * call OpenStartifyInDirectory(expand('<amatch>'))
+
+    " Environment-specific settings
+    autocmd BufReadPost,BufNewFile * call SetupEnvironment()
 
 augroup end
 
@@ -279,6 +282,7 @@ nnoremap <silent> <leader>mp :call jobstart(['md', expand('%')])<CR>
 """"""""""""""""""""""""
 "" Binary file editing
 ""
+
 augroup Binary
 
     autocmd!
@@ -301,74 +305,6 @@ augroup end
 "" Functions
 ""
 
-" Run current or last test file
-function! RunTestFile(...)
-    if a:0
-        let command_suffix = a:1
-    else
-        let command_suffix = ""
-    endif
-
-    " Run the tests for the previously-marked file.
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.py\)$') != -1
-    if in_test_file
-        call SetTestFile(command_suffix)
-    elseif !exists("t:grb_test_file")
-        return
-    end
-    call RunTests(t:grb_test_file . command_suffix)
-endfunction
-
-
-" Run the nearest test
-function! RunNearestTest()
-    let spec_line_number = line('.')
-    call RunTestFile(":" . spec_line_number)
-endfunction
-
-
-" Set the spec file that tests will be run for.
-function! SetTestFile(command_suffix)
-    let t:grb_test_file=@% . a:command_suffix
-endfunction
-
-
-" Write the file and run tests for the given filename
-function! RunTests(filename)
-    if expand("%") != ""
-      :w
-    end
-    silent! exec ":!echo;echo;echo -e '\e[40m\e[K\e[0m';echo"
-    if match(a:filename, '\.feature$') != -1
-        exec ":!script/features " . a:filename
-    else
-        if filereadable("script/test")
-            " First choice: project-specific test script
-            exec ":!script/test " . a:filename
-        elseif filewritable(".test-commands")
-          " Fall back to the .test-commands pipe if available, assuming someone
-          " is reading the other side and running the commands
-          let cmd = 'rspec --color --format progress --require "~/lib/vim_rspec_formatter" --format VimFormatter --out tmp/quickfix'
-          exec ":!echo " . cmd . " " . a:filename . " > .test-commands"
-
-          " Write an empty string to block until the command completes
-          sleep 100m " milliseconds
-          :!echo > .test-commands
-          redraw!
-        elseif filereadable("Gemfile")
-            " Fall back to a blocking test run with Bundler
-            exec ":!bundle exec rspec --color " . a:filename
-        elseif strlen(glob("test/**/*.py") . glob("tests/**/*.py"))
-            " If we see python-looking tests, assume they should be run with Nose
-            exec "!nosetests " . a:filename
-        else
-            " Fall back to a normal blocking test run
-            exec ":!rspec --color " . a:filename
-        end
-    end
-endfunction
-
-
 " Open header files in a vsplit
 function! SplitHeader()
     let mainwin = winnr()
@@ -390,7 +326,7 @@ endfunction
 
 
 " Custom tab line function
-function! MyTabLine()
+function! CustomTabLine()
   let s = ''
   for i in range(tabpagenr('$'))
     " select the highlighting
@@ -403,8 +339,8 @@ function! MyTabLine()
     " set the tab page number (for mouse clicks)
     let s .= '%' . (i + 1) . 'T'
 
-    " the label is made by MyTabLabel()
-    let s .= ' %{MyTabLabel(' . (i + 1) . ')} '
+    " the label is made by CustomTabLabel()
+    let s .= ' %{CustomTabLabel(' . (i + 1) . ')} '
   endfor
 
   " after the last tab fill with TabLineFill and reset tab page nr
@@ -420,7 +356,7 @@ endfunction
 
 
 " Custom tab label function
-function! MyTabLabel(n)
+function! CustomTabLabel(n)
   let s = ''
   let buflen = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
   if buflen > 1
@@ -439,10 +375,10 @@ endfunction
 " Tab completion when appropiate
 function! InsertTabWrapper()
     let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
+    if !col || getline('.')[col - 1] !~ '\k\|\.\|>\|:'
         return "\<Tab>"
     else
-        return "\<C-n>"
+        return pumvisible() ? "\<C-n>" : g:tab_completion_mapping " See SetupEnvironment
     endif
 endfunction
 
@@ -453,6 +389,8 @@ function! RenameFile()
     let new_name = input('New file name: ', expand('%'), 'file')
     if new_name != '' && new_name != old_name
         exec ':saveas ' . new_name
+        edit #
+        Bdelete
         exec ':silent !rm ' . old_name
         redraw!
     endif
@@ -485,6 +423,36 @@ function! OpenStartifyInDirectory(dir)
 endfunction
 
 
+" Environment-specific settings
+function! SetupEnvironment()
+
+    if filereadable('build.gradle')
+
+        let &makeprg='./gradlew --daemon'
+        let &errorformat='%.%#%t:\ ' . getcwd() . '/%f:\ (%l\,\ %c):\ %m'
+        nnoremap <leader><leader> :make instalLDebug<CR>
+
+        let g:ctrlp_custom_ignore = '\v/(build|cache|gradle)/'
+
+    endif
+
+    if &filetype == 'd'
+
+        let g:tab_completion_mapping = "\<C-x>\<C-o>"
+
+    else
+
+        let g:tab_completion_mapping = "\<C-n>"
+
+    endif
+
+    if exists("*SetupEnvironmentLocal")
+        call SetupEnvironmentLocal()
+    end
+
+endfunction
+
+
 """"""""""""""""""
 "" Local rc file
 ""
@@ -493,39 +461,9 @@ if filereadable($HOME . "/.nvimenv")
     source $HOME/.nvimenv
 endif
 
-" Example template for convenient copypasta:
+" Example local settings:
 "
-" " Machine-local Neovim configuration
+" function! SetupEnvironmentLocal() ... endfunction
+" let g:startify_bookmarks += [ { 'xx': '~/projects/xxxxxxxx/' } ]
 "
-" function! SetupEnvironment()
-"     let l:path = expand('%:p')
-"     if l:path =~ '/home/dark/projects/almanapp-android/'
-"
-"         let &makeprg='./build.rb'
-"         let &errorformat='%A%.%#/home/dark/projects/almanapp-android/%f:%l:\ %m,%-Z%p^,%.%#%t:\ /home/dark/projects/almanapp-android/%f:\ (%l\,\ %c):\ %m,%-G%.%#'
-"         nnoremap <leader><leader> :make build debug --run<CR>
-"
-"         let g:ctrlp_custom_ignore = '\v/(build|cache|gradle)/'
-"
-"     elseif l:path =~ '/home/dark/projects/aegis/'
-"
-"         let &makeprg='./gradlew --daemon'
-"         let &errorformat='%.%#%t:\ /home/dark/projects/aegis/%f:\ (%l\,\ %c):\ %m,%-G%.%#'
-"         nnoremap <leader><leader> :make instalLDebug<CR>
-"
-"         let g:ctrlp_custom_ignore = '\v/(build|cache|gradle)/'
-"
-"     endif
-" endfunction
-"
-" augroup SetupEnvironment
-"
-"     autocmd!
-"
-"     autocmd BufReadPost,BufNewFile * call SetupEnvironment()
-"
-" augroup end
-"
-" let g:startify_bookmarks += [ { 'ag': '~/projects/aegis/build.gradle' } ]
-"
-" " vim: set ft=vim:
+" vim: ft=vim
