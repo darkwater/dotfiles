@@ -173,7 +173,8 @@ function zsh_prompt()
 
 function preexec()
 {
-    echo -n "\e]0;${USER}@$(hostname): ${PWD} $ $2\a"
+    cmd=$(echo "$2" | tr -d '\000-\037')
+    echo -n "\e]0;${USER}@$(hostname): ${PWD} $ $cmd\a"
 }
 
 
