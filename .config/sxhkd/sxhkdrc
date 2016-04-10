@@ -35,7 +35,7 @@ super + {_,shift + }c
 super + {comma,period}
     bspc desktop -C {backward,forward}
 
-super + bracket{west,east}
+super + bracket{left,right}
     bspc desktop -f {prev,next}
 
 super + ctrl + {h,j,k,l}
@@ -106,7 +106,7 @@ ctrl + shift + Scroll_Lock
 super + p
     music pick 5
 
-super + space
+alt + super + space
     lock
 
 super + n
