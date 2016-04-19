@@ -380,11 +380,6 @@ class Panel
     def update
         return if @drawing
 
-        if monitor.focused_desktop.fullscreen?
-            @bar.write "%{B#00000000}\n"
-            return
-        end
-
         @drawing = true
         @use_separator = false
         draw '%{B-}'
