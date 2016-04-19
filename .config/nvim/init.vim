@@ -19,8 +19,10 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-commentary'
 Plug 'benekastah/neomake'
 Plug 'godlygeek/tabular'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'idanarye/vim-dutyl'
+
+" Specific language enhancers
+Plug 'idanarye/vim-dutyl',  { 'for': 'd'   }
+Plug 'lervag/vimtex',       { 'for': 'tex' }
 
 " Miscellaneous shit
 Plug 'vim-scripts/JavaDecompiler.vim'
@@ -36,6 +38,7 @@ Plug 'othree/html5.vim'
 Plug 'groenewege/vim-less'
 Plug 'derekwyatt/vim-scala'
 Plug 'udalov/kotlin-vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 call plug#end()
 
@@ -168,6 +171,10 @@ let g:startify_list_order = [ [ '  Sessions' ],
 hi StartifyBracket ctermfg=0 cterm=bold
 hi StartifyHeader  ctermfg=195
 
+" Vimtex
+let g:tex_flavor = 'latex'
+let g:vimtex_enabled = 1
+
 
 """""""""""""
 "" Autocmds
@@ -252,6 +259,7 @@ nnoremap    <silent> <BS>       :nohlsearch<CR>
 ""
 
 let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
 
 " Build with make by default
 nnoremap <silent> <leader><leader> :make<CR>
