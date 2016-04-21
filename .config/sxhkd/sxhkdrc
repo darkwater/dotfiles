@@ -82,6 +82,9 @@ Pause
 ctrl + Pause
     wp
 
+super + Pause
+    toggle compton
+
 Scroll_Lock
     charinfo
 
