@@ -41,11 +41,11 @@ super + ctrl + {h,j,k,l}
 super + ctrl + space
     bspc node -p cancel
 
-super + alt + {h,j,k,l}
-    bspc node -z {right -10 0,bottom 0 +10,top 0 -10,left +10 0}
+super + alt + {h,j,k,l} # Push borders away
+    bspc node -z {left -10 0,bottom 0 +10,top 0 -10,right +10 0}
 
-super + alt + shift + {h,j,k,l}
-    bspc node -z {left -10 0,top 0 +10,bottom 0 -10,right +10 0}
+super + alt + shift + {h,j,k,l} # Pull borders back
+    bspc node -z {right -10 0,top 0 +10,bottom 0 -10,left +10 0}
 
 super + ctrl + {1-9}
     bspc node -r 0.{1-9} # broken
