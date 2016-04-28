@@ -306,51 +306,33 @@ augroup end
 "" Functions
 ""
 
+hi TabLine              ctermfg=0   ctermbg=none cterm=none
+hi TabLineInactive      ctermfg=243 ctermbg=none cterm=none
+hi TabLineInactiveBold  ctermfg=243 ctermbg=none cterm=bold
+hi TabLineActive        ctermfg=255 ctermbg=none cterm=none
+hi TabLineActiveBold    ctermfg=255 ctermbg=none cterm=bold
 
 " Custom tab line function
 function! CustomTabLine()
-  let s = ''
-  for i in range(tabpagenr('$'))
-    " select the highlighting
-    if i + 1 == tabpagenr()
-      let s .= '%#TabLineSel#'
-    else
-      let s .= '%#TabLine#'
+    let s = '%#TabLine#'
+
+    let numtabs = tabpagenr('$')
+    if numtabs > 1
+        let s .= numtabs . ' tabs! (Only one supported) '
     endif
 
-    " set the tab page number (for mouse clicks)
-    let s .= '%' . (i + 1) . 'T'
+    for n in filter(range(1, bufnr('$')), 'buflisted(v:val)')
+        let bufname  = bufname(n)
+        let dirpath  = substitute(bufname, '[^/]\+/\?$', '', '')
+        let filename = strpart(bufname, strlen(dirpath))
 
-    " the label is made by CustomTabLabel()
-    let s .= ' %{CustomTabLabel(' . (i + 1) . ')} '
-  endfor
+        let hilight     = (n == bufnr('')) ? '%#TabLineActive#'     : '%#TabLineInactive#'
+        let hilightbold = (n == bufnr('')) ? '%#TabLineActiveBold#' : '%#TabLineInactiveBold#'
 
-  " after the last tab fill with TabLineFill and reset tab page nr
-  let s .= '%#TabLineFill#%T'
+        let s .= hilight . dirpath . hilightbold . filename . '%#TabLine# '
+    endfor
 
-  " right-align the label to close the current tab page
-  if tabpagenr('$') > 1
-    let s .= '%=%#TabLine#%999Xclose'
-  endif
-
-  return s
-endfunction
-
-
-" Custom tab label function
-function! CustomTabLabel(n)
-  let s = ''
-  let buflen = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
-  if buflen > 1
-    let s .= len(filter(range(1, bufnr('%')), 'buflisted(v:val)')) . ' / ' . buflen . ' · '
-  endif
-  let buflist = tabpagebuflist(a:n)
-  let winnr = tabpagewinnr(a:n)
-  if &modified
-    let s .= '! '
-  endif
-  let s .= bufname(buflist[winnr - 1])
-  return s
+    return s
 endfunction
 
 
