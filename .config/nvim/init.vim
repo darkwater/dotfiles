@@ -221,19 +221,15 @@ nnoremap    <silent> <C-j>      :bp<CR>
 nnoremap    <silent> <C-x>      :Bdelete<CR>
 vnoremap    <silent> <C-x>      <C-c>:Bdelete<CR>
 
-" ^Q for :q!
-nnoremap    <silent> <C-q>      :q!<CR>
-vnoremap    <silent> <C-q>      <C-c>:q!<CR>
-
 " <Home> ignores leading whitespace
 nnoremap    <silent> <Home>     ^
 vnoremap    <silent> <Home>     ^
 inoremap    <silent> <Home>     <C-o>^
 
 " ^G to jump to a tag
-nnoremap    <silent> <C-g>      :tselect
-vnoremap    <silent> <C-g>      <C-c>:tselect
-inoremap    <silent> <C-g>      <C-c>:tselect
+nnoremap    <silent> <C-g>      :tselect /\C^
+vnoremap    <silent> <C-g>      <C-c>:tselect /\C^
+inoremap    <silent> <C-g>      <C-c>:tselect /\C^
 
 " Easily jump to command line
 nnoremap    <silent> \          :
@@ -270,9 +266,6 @@ nnoremap <silent> <leader>s  :Startify<CR>
 " Terminal
 nnoremap <silent> <leader>t  :call jobstart(['urxvtc', '-cd', getcwd()])<CR>
 
-" C++
-nnoremap <silent> <leader>ch :call SplitHeader()<CR>
-
 " Devdocs
 nnoremap <silent> <leader>dd :call jobstart(['chromium-app', 'http://devdocs.io/' . &filetype])<CR>
 
@@ -281,7 +274,7 @@ nnoremap <silent> <leader>fd :!rm %<CR>
 nnoremap <silent> <leader>fr :call RenameFile()<CR>
 
 " Generate tags
-nnoremap <silent> <leader>gt :call jobstart(['ctags', '-R', '-f.tags', '.'])<CR>
+nnoremap <silent> <leader>gt :call jobstart(['ctags', '-R', '.'])<CR>
 
 " Markdown
 nnoremap <silent> <leader>mp :call jobstart(['md', expand('%')])<CR>
@@ -312,25 +305,6 @@ augroup end
 """"""""""""""
 "" Functions
 ""
-
-" Open header files in a vsplit
-function! SplitHeader()
-    let mainwin = winnr()
-
-    if winnr('$') == 1
-        80vsplit
-    endif
-
-    let h = expand('%:r').'.h'
-
-    wincmd l
-    if winnr() == mainwin
-        80vsplit
-    endif
-
-    exec 'e '.h
-    wincmd p
-endfunction
 
 
 " Custom tab line function
