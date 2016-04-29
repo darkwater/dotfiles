@@ -306,15 +306,16 @@ augroup end
 "" Functions
 ""
 
-hi TabLine              ctermfg=0   ctermbg=none cterm=none
-hi TabLineInactive      ctermfg=243 ctermbg=none cterm=none
+hi TabLine              ctermfg=242 ctermbg=none cterm=none
+hi TabLineInactive      ctermfg=240 ctermbg=none cterm=none
 hi TabLineInactiveBold  ctermfg=243 ctermbg=none cterm=bold
-hi TabLineActive        ctermfg=255 ctermbg=none cterm=none
+hi TabLineActive        ctermfg=252 ctermbg=none cterm=none
 hi TabLineActiveBold    ctermfg=255 ctermbg=none cterm=bold
+hi TabLineModified      ctermfg=214 ctermbg=none cterm=bold
 
 " Custom tab line function
 function! CustomTabLine()
-    let s = '%#TabLine#'
+    let s = '%#TabLine# '
 
     let numtabs = tabpagenr('$')
     if numtabs > 1
@@ -322,14 +323,24 @@ function! CustomTabLine()
     endif
 
     for n in filter(range(1, bufnr('$')), 'buflisted(v:val)')
-        let bufname  = bufname(n)
+        let bufname  = substitute(bufname(n), $HOME, '~', '')
         let dirpath  = substitute(bufname, '[^/]\+/\?$', '', '')
         let filename = strpart(bufname, strlen(dirpath))
 
         let hilight     = (n == bufnr('')) ? '%#TabLineActive#'     : '%#TabLineInactive#'
         let hilightbold = (n == bufnr('')) ? '%#TabLineActiveBold#' : '%#TabLineInactiveBold#'
 
-        let s .= hilight . dirpath . hilightbold . filename . '%#TabLine# '
+        if n == bufnr('')
+            let leftbound  = '│ '
+            let rightbound = ' │'
+        else
+            let leftbound  = (n <= bufnr('')) ? '· ' : ''
+            let rightbound = (n >= bufnr('')) ? ' ·' : ''
+        endif
+
+        let indicator = (getbufvar(n, '&modified')) ? '%#TabLineModified#► ' : ''
+
+        let s .= hilightbold . leftbound . indicator . hilight . dirpath . hilightbold . filename . rightbound . '%#TabLine# '
     endfor
 
     return s
