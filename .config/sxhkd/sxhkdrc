@@ -9,7 +9,7 @@ super + t
     bspc desktop -l next
 
 super + b
-    bspc node -E # broken
+    bspc node -E
 
 super + {s,d,f}
     bspc node -t {floating,tiled,fullscreen}
@@ -30,7 +30,7 @@ super + {_,shift + }c
     bspc node -f {next,prev}
 
 super + {comma,period}
-    bspc node -C {backward,forward} # broken
+    bspc node -C {backward,forward}
 
 super + bracket{left,right}
     bspc desktop -f {prev,next}
@@ -41,14 +41,14 @@ super + ctrl + {h,j,k,l}
 super + ctrl + space
     bspc node -p cancel
 
-super + alt + {h,j,k,l} # Push borders away
+super + alt + {h,j,k,l}
     bspc node -z {left -10 0,bottom 0 +10,top 0 -10,right +10 0}
 
-super + alt + shift + {h,j,k,l} # Pull borders back
+super + alt + shift + {h,j,k,l}
     bspc node -z {right -10 0,top 0 +10,bottom 0 -10,left +10 0}
 
 super + ctrl + {1-9}
-    bspc node -r 0.{1-9} # broken
+    bspc node -r 0.{1-9}
 
 super + {_,shift + }{_,alt + }{1-9,0}
     bspc {desktop -f,node -d} {1,2}-{1-9,0}
