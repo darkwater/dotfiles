@@ -211,7 +211,13 @@ class Panel
                              " -B '#eb1d1f21'", 'w+'
 
         @bar_read_thread = Thread.new do
-            @bar.each_line{ |n| system n.chomp }
+            @bar.each_line do |n|
+                if n.chomp == 'QUIT'
+                    exit
+                end
+
+                system n.chomp
+            end
         end
 
         @drawing = false
@@ -383,7 +389,9 @@ class Panel
         @drawing = true
         @use_separator = false
         draw '%{B-}'
+        draw '%{A2:QUIT:}'
         space 2
+        draw '%{A}'
 
         show_now_playing = monitor.secondary? || !Monitor.secondary?
 
