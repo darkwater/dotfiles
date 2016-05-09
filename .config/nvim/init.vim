@@ -322,7 +322,15 @@ function! CustomTabLine()
         let s .= numtabs . ' tabs! (Only one supported) '
     endif
 
+    let listedbufs = {}
+    let listedbufi = 1
+
     for n in filter(range(1, bufnr('$')), 'buflisted(v:val)')
+        let listedbufs[n] = listedbufi
+        let listedbufi += 1
+
+        " TODO: Handle cases > 9
+
         let bufname  = substitute(bufname(n), $HOME, '~', '')
         let dirpath  = substitute(bufname, '[^/]\+/\?$', '', '')
         let filename = strpart(bufname, strlen(dirpath))
@@ -337,6 +345,31 @@ function! CustomTabLine()
 
         let s .= hilightbold . leftbound . indicator . hilight . dirpath . hilightbold . filename . rightbound . '%#TabLine# '
     endfor
+
+    " Set up maps to jump to buffer with <leader><number>
+    " TODO: This should probably go somewhere else
+    if len(listedbufs) > 0
+        if has_key(listedbufs, bufnr(''))
+            let curbufnr = listedbufs[bufnr('')]
+        else
+            let curbufnr = 0
+        endif
+
+        " Previous buffers
+        for n in filter(range(1, bufnr('') - 1), 'buflisted(v:val)')
+            let d = curbufnr - listedbufs[n]
+            execute 'map <buffer> <leader>' . listedbufs[n] . ' :' . d . 'bp<CR>'
+        endfor
+
+        " Unmap current
+        execute 'map <buffer> <leader>' . curbufnr . ' <Nop>'
+
+        " Next buffers
+        for n in filter(range(bufnr('') + 1, bufnr('$')), 'buflisted(v:val)')
+            let d = listedbufs[n] - curbufnr
+            execute 'map <buffer> <leader>' . listedbufs[n] . ' :' . d . 'bn<CR>'
+        endfor
+    endif
 
     return s
 endfunction
