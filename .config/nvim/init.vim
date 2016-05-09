@@ -330,13 +330,8 @@ function! CustomTabLine()
         let hilight     = (n == bufnr('')) ? '%#TabLineActive#'     : '%#TabLineInactive#'
         let hilightbold = (n == bufnr('')) ? '%#TabLineActiveBold#' : '%#TabLineInactiveBold#'
 
-        if n == bufnr('')
-            let leftbound  = '│ '
-            let rightbound = ' │'
-        else
-            let leftbound  = (n <= bufnr('')) ? '· ' : ''
-            let rightbound = (n >= bufnr('')) ? ' ·' : ''
-        endif
+        let leftbound  = ''
+        let rightbound = '  '
 
         let indicator = (getbufvar(n, '&modified')) ? '%#TabLineModified#► ' : ''
 
