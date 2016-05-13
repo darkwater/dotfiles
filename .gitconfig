@@ -12,6 +12,9 @@
     fuck-it = reset --hard
     fuck-it-all = "!git fuck-it && git clean -fdx"
 
+    push-wip = "!. ~/.githelpers && push_wip"
+    pull-wip = "!. ~/.githelpers && pull_wip"
+
     st = status
     ci = commit --verbose
     co = checkout
