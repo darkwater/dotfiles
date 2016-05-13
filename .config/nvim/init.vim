@@ -346,7 +346,7 @@ function! CustomTabLine()
         let s .= hilightbold . leftbound . indicator . hilight . dirpath . hilightbold . filename . rightbound . '%#TabLine# '
     endfor
 
-    " Set up maps to jump to buffer with <leader><number>
+    " Set up maps to jump to buffer with Alt + number
     " TODO: This should probably go somewhere else
     if len(listedbufs) > 0
         if has_key(listedbufs, bufnr(''))
@@ -358,16 +358,16 @@ function! CustomTabLine()
         " Previous buffers
         for n in filter(range(1, bufnr('') - 1), 'buflisted(v:val)')
             let d = curbufnr - listedbufs[n]
-            execute 'map <buffer> <leader>' . listedbufs[n] . ' :' . d . 'bp<CR>'
+            execute 'map <buffer> <A-' . listedbufs[n] . '> :' . d . 'bp<CR>'
         endfor
 
         " Unmap current
-        execute 'map <buffer> <leader>' . curbufnr . ' <Nop>'
+        execute 'map <buffer> <A-' . curbufnr . '> <Nop>'
 
         " Next buffers
         for n in filter(range(bufnr('') + 1, bufnr('$')), 'buflisted(v:val)')
             let d = listedbufs[n] - curbufnr
-            execute 'map <buffer> <leader>' . listedbufs[n] . ' :' . d . 'bn<CR>'
+            execute 'map <buffer> <A-' . listedbufs[n] . '> :' . d . 'bn<CR>'
         endfor
     endif
 
