@@ -40,7 +40,7 @@ pull_wip()
     tag="wip-$(whoami)"
     ref="refs/tags/$tag"
 
-    object="$(git ls-remote origin "$ref" | awk '{ print $1 }')"
+    object="$(git ls-remote "$remote" "$ref" | awk '{ print $1 }')"
     git="$(git rev-parse --show-cdup).git"
 
     # Download wip object
