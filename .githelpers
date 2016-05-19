@@ -27,7 +27,8 @@ push_wip()
 {
     branch="$(git rev-parse --abbrev-ref HEAD)"
     remote="$(git config "branch.$branch.remote")"
-    tag="wip-$(whoami)"
+    identifier="$1"
+    tag="wip-${identifier:-$(whoami)}"
 
     git stash -a
     git push "$remote" "+refs/stash:refs/tags/$tag"
@@ -37,7 +38,8 @@ pull_wip()
 {
     branch="$(git rev-parse --abbrev-ref HEAD)"
     remote="$(git config "branch.$branch.remote")"
-    tag="wip-$(whoami)"
+    identifier="$1"
+    tag="wip-${identifier:-$(whoami)}"
     ref="refs/tags/$tag"
 
     object="$(git ls-remote "$remote" "$ref" | awk '{ print $1 }')"
