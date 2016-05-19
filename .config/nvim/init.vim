@@ -358,16 +358,19 @@ function! CustomTabLine()
         " Previous buffers
         for n in filter(range(1, bufnr('') - 1), 'buflisted(v:val)')
             let d = curbufnr - listedbufs[n]
-            execute 'map <buffer> <A-' . listedbufs[n] . '> :' . d . 'bp<CR>'
+            execute 'nnoremap <buffer> <A-' . listedbufs[n] . '> :' . d . 'bp<CR>'
+            execute 'inoremap <buffer> <A-' . listedbufs[n] . '> <C-c>:' . d . 'bp<CR>'
         endfor
 
         " Unmap current
-        execute 'map <buffer> <A-' . curbufnr . '> <Nop>'
+        execute 'nnoremap <buffer> <A-' . curbufnr . '> <Nop>'
+        execute 'inoremap <buffer> <A-' . curbufnr . '> <Nop>'
 
         " Next buffers
         for n in filter(range(bufnr('') + 1, bufnr('$')), 'buflisted(v:val)')
             let d = listedbufs[n] - curbufnr
-            execute 'map <buffer> <A-' . listedbufs[n] . '> :' . d . 'bn<CR>'
+            execute 'nnoremap <buffer> <A-' . listedbufs[n] . '> :' . d . 'bn<CR>'
+            execute 'inoremap <buffer> <A-' . listedbufs[n] . '> <C-c>:' . d . 'bn<CR>'
         endfor
     endif
 
