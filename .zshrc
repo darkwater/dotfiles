@@ -135,13 +135,6 @@ function zsh_prompt()
 
     if [[ -n "$ref" ]]; then
 
-        local repo="$(git rev-parse --show-toplevel)"
-        local cwd="$(pwd)"
-
-        if [[ "$repo" = "$cwd" ]]; then
-            cwd=$cwd/
-        fi
-
         if [[ "$attached" = false ]]; then
             echo -n "%{$fg[red]%}"
         elif [[ "$(git status 2> /dev/null | tail -n1)" != "nothing to commit, working directory clean" ]]; then
@@ -151,11 +144,11 @@ function zsh_prompt()
         fi
 
         # Repository name @ branch
-        echo -n "[${ref#refs/heads/}] $(basename "$repo")"
+        echo -n "[${ref#refs/heads/}] $(basename "$(git rev-parse --show-toplevel)")"
         window_title="${window_title} [${ref#refs/heads/}]"
 
         # Internal path (relative to repository root)
-        echo -n "%{$fg[blue]%}${cwd#$repo}"
+        echo -n "%{$fg[blue]%}/$(git rev-parse --show-prefix)"
 
     else
 
