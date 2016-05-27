@@ -10,12 +10,11 @@ urxvtd -f -o
 
 compton --dbus &
 xsetroot -cursor_name left_ptr &
-xset +fp /usr/share/fonts/local/ &
+xset +fp /usr/share/fonts/local/,/home/dark/dotfiles/fonts/ &
 wp &
 panel &
 kb &
 dunst &
-vpsnotifyc &
 sxhkd &
 
 # Run local .xenv
@@ -60,6 +59,7 @@ bspc rule -a feh      state=floating
 # Note: Order is important!
 # Desktops will be named 1-1, 1-2, ..., 1-6, 2-1, 2-2, ..., n-m where n means monitor and m means desktop
 
+source ~/.xenv
 i=1
 for m in "${monitors[@]}"; do
     if [[ "$(bspc wm -d | json 'return this.monitors.some(monitor => monitor.name == "'"$m"'");')" = 'true' ]]; then
