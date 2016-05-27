@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Usage:
+# 1. Run from terminal
+# 2. Search stdout for library filenames
+# 3. `get $(pkgfile libname.so.x | grep multilib)`
+# 3a. If you can't find something, it's one of Steam's libs
+#     and you need to ldd it and find out what's missing
+# 4. Repeat until you get your games running
+
+export STEAM_RUNTIME=0
+export LD_PRELOAD=".local/share/Steam/ubuntu12_32/libtier0_s.so:.local/share/Steam/ubuntu12_32/libvstdlib_s.so:.local/share/Steam/ubuntu12_32/libv8.so:.local/share/Steam/ubuntu12_32/libvideo.so"
+
+/usr/bin/steam
