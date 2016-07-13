@@ -602,12 +602,6 @@ module Music
     system_reader :artist, :album, :title, :state
 
     def self.update
-        s = TCPSocket.new 'localhost', 5704
-        json = s.gets
-        data = JSON.parse json
-        data.each do |key, value|
-            instance_variable_set :"@#{key}", value
-        end
     end
 end
 
