@@ -279,6 +279,10 @@ nnoremap <silent> <leader>gt :call jobstart(['ctags', '-R', '.'])<CR>
 " Markdown
 nnoremap <silent> <leader>mp :call jobstart(['md', expand('%')])<CR>
 
+nnoremap <silent> <leader>vh :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+            \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name")
+            \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 
 """"""""""""""""""""""""
 "" Binary file editing
