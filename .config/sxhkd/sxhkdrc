@@ -8,9 +8,6 @@ super + q
 super + t
     bspc desktop -l next
 
-super + b
-    bspc node -E
-
 super + {s,d,f}
     bspc node -t {floating,tiled,fullscreen}
 
@@ -105,3 +102,6 @@ super + n
 
 super + i
     urxvtc -e irssi
+
+super + b
+    chromium --disable-gpu-vsync
