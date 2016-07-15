@@ -1,107 +1,261 @@
 #
-# bspwm hotkeys
+#  Assuming you use the included Neovim configs:
+#    <Space>1  to jump to description column
+#    <Space>2  to jump to hotkey column
+#    <Space>3  to jump to command column
+#    ct<Tab>   to edit a field
 #
 
+# bspwm hotkeys
+# Close window
 super + q
     bspc node -c
 
+
+# Set window to floating
+super + s
+    bspc node -t floating
+
+# Set window to tiled
+super + d
+    bspc node -t tiled
+
+# Set window to fullscreen
+super + f
+    bspc node -t fullscreen
+
+# Toggle monocle mode
 super + t
     bspc desktop -l next
 
-super + {s,d,f}
-    bspc node -t {floating,tiled,fullscreen}
 
-super + {grave,Tab}
-    bspc {node,desktop} -f last
+# Switch to last window
+super + grave
+    bspc node -f last
 
+# Switch to last desktop
+super + Tab
+    bspc desktop -f last
+
+
+# Switch current with last window
 super + apostrophe
     bspc node -s last
 
+# Switch current with biggest window
 super + m
     bspc node -s biggest
 
-super + {_,shift + }{h,j,k,l}
-    bspc node -{f,s} {west,south,north,east}
 
-super + {_,shift + }c
-    bspc node -f {next,prev}
+# Move focus left
+super + h
+    bspc node -f west
 
-super + {comma,period}
-    bspc node -C {backward,forward}
+# Move focus down
+super + j
+    bspc node -f south
 
-super + bracket{left,right}
-    bspc desktop -f {prev,next}
+# Move focus up
+super + k
+    bspc node -f north
 
-super + ctrl + {h,j,k,l}
-    bspc node -p {west,south,north,east}
+# Move focus right
+super + l
+    bspc node -f east
 
+
+# Move window left
+super + shift + h
+    bspc node -s west
+
+# Move window down
+super + shift + j
+    bspc node -s south
+
+# Move window up
+super + shift + k
+    bspc node -s north
+
+# Move window right
+super + shift + l
+    bspc node -s east
+
+
+# Switch to next window
+super + c
+    bspc node -f next
+
+# Switch to previous window
+super + shift + c
+    bspc node -f prev
+
+
+# Circulate nodes counter-clockwise
+super + comma
+    bspc node @/ -C forward
+
+# Circulate nodes clockwise
+super + period
+    bspc node @/ -C backward
+
+
+# Switch to previous desktop
+super + bracketleft
+    bspc desktop -f prev
+
+# Switch to next desktop
+super + bracketright
+    bspc desktop -f next
+
+
+# Put next window to the left
+super + ctrl + h
+    bspc node -p west
+
+# Put next window below
+super + ctrl + j
+    bspc node -p south
+
+# Put next window above
+super + ctrl + k
+    bspc node -p north
+
+# Put next window to the right
+super + ctrl + l
+    bspc node -p east
+
+# Cancel next window selection
 super + ctrl + space
     bspc node -p cancel
 
-super + alt + {h,j,k,l}
-    bspc node -z {left -10 0,bottom 0 +10,top 0 -10,right +10 0}
 
-super + alt + shift + {h,j,k,l}
-    bspc node -z {right -10 0,top 0 +10,bottom 0 -10,left +10 0}
+# Expand window to the left
+super + alt + h
+    bspc node -z left   -25   0
 
-super + ctrl + {1-9}
-    bspc node -r 0.{1-9}
+# Expand window down
+super + alt + j
+    bspc node -z bottom   0 +25
 
-super + {_,shift + }{_,alt + }{1-9,0}
-    bspc {desktop -f,node -d} {1,2}-{1-9,0}
+# Expand window up
+super + alt + k
+    bspc node -z top      0 -25
 
-#
+# Expand window to the right
+super + alt + l
+    bspc node -z right  +25   0
+
+
+# Retract window to the left
+super + alt + shift + h
+    bspc node -z right  -25   0
+
+# Retract window down
+super + alt + shift + j
+    bspc node -z top      0 +25
+
+# Retract window up
+super + alt + shift + k
+    bspc node -z bottom   0 -25
+
+# Retract window to the right
+super + alt + shift + l
+    bspc node -z left   +25   0
+
+
+# Switch to primary desktops
+super + {1-3}
+    bspc desktop -f {1-3}-1
+
+# Switch to alternative desktops
+super + alt + {1-3}
+    bspc desktop -f {1-3}-2
+
+# Move window to primary desktops
+super + shift + {1-3}
+    bspc node -d {1-3}-1
+
+# Move window to alternative desktops
+super + shift + alt + {1-3}
+    bspc node -d {1-3}-2
+
+
 # wm independent hotkeys
-#
-
+# Spawn terminal
 super + Return
     urxvtc
 
+# Run command
 super + r
     dmenu_launcher run
 
-# make sxhkd reload its configuration files:
+# Restart sxhkd
 super + Escape
     restart sxhkd
 
-XF86Audio{Lower,Raise}Volume
-    volume {down,up}
 
-Print
-    screentool -s -u novaember
-
-ctrl + Print
-    screentool -S -u novaember
-
-Pause
-    xdotool mousemove_relative 0 9999
-
-ctrl + Pause
-    wp
-
-super + Pause
-    toggle compton
-
-ctrl + Scroll_Lock
-    clipswap
-
-alt + Scroll_Lock
-    nvpaste
-
-ctrl + shift + Scroll_Lock
-    pastetype
-
-super + p
-    music pick 5
-
-alt + super + space
-    lock
-
+# Launch Neovim
 super + n
     urxvtc -e nvim
 
+# Launch IRC client
 super + i
     urxvtc -e irssi
 
+# Launch Chromium
 super + b
     chromium --disable-gpu-vsync
+
+
+# Lower volume
+XF86AudioLowerVolume
+    volume down
+
+# Raise volume
+XF86AudioRaiseVolume
+    volume up
+
+
+# Take screenshot (select area)
+Print
+    screentool -s -u novaember
+
+# Take screenshot of desktop
+ctrl + Print
+    screentool -S -u novaember
+
+# Take screenshot of window
+alt + Print
+    screentool -W -u novaember
+
+
+# Move mouse to bottom of screen
+Pause
+    xdotool mousemove_relative 0 9999
+
+# Reset wallpapers
+ctrl + Pause
+    wp
+
+# Toggle compton on/off
+super + Pause
+    toggle compton
+
+
+# Swap clipboard and primary selections
+ctrl + Scroll_Lock
+    clipswap
+
+# Upload clipboard using nvpaste
+alt + Scroll_Lock
+    nvpaste
+
+# Type contents of clipboard
+ctrl + shift + Scroll_Lock
+    pastetype
+
+
+# Lock screen
+alt + super + space
+    lock
+

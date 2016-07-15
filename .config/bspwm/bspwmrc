@@ -57,13 +57,13 @@ bspc rule -a feh      state=floating
 # Define monitors in ~/.xenv - for example:
 # > export monitors=( 'HDMI-0' 'DVI-D-0' 'DVI-I-1' )
 # Note: Order is important!
-# Desktops will be named 1-1, 1-2, ..., 1-6, 2-1, 2-2, ..., n-m where n means monitor and m means desktop
+# Desktops will be named 1-1, 1-2, 2-1, 2-2, ..., n-m where n means monitor and m means desktop
 
 source ~/.xenv
 i=1
 for m in "${monitors[@]}"; do
     if [[ "$(bspc wm -d | json 'return this.monitors.some(monitor => monitor.name == "'"$m"'");')" = 'true' ]]; then
-        bspc monitor "$m" -d $i-{1..6}
+        bspc monitor "$m" -d $i-{1..2}
         let i++
     fi
 done

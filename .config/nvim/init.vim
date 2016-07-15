@@ -148,14 +148,15 @@ let g:startify_default_custom_header = [ '                      -`              
 
 let g:startify_custom_header = g:startify_default_custom_header
 
-let g:startify_bookmarks = [ { '.c': '~/.config/' },
-                           \ { '.j': '~/.js/' },
-                           \ { '  ': '' },
-                           \ { 've': '~/.nvimenv' },
-                           \ { 'vi': '~/.config/nvim/init.vim' },
-                           \ { 'vc': '~/.config/nvim/colors/tomorrow-night.vim' },
-                           \ { '  ': '' },
-                           \ { 'pd': '~/dotfiles/' } ]
+let g:dark_config_files = [ [ 'sx', 'dotfiles/.config/sxhkd/sxhkdrc', 'Config: sxhkd' ],
+                          \ [ 'bs', 'dotfiles/.config/bspwm/bspwmrc', 'Config: bspwm' ],
+                          \ [ 'zs', 'dotfiles/.zshrc',                'Config: zsh'   ] ]
+
+let g:startify_transformations = map(copy(g:dark_config_files), '[ v:val[1], v:val[2] ]')
+let g:startify_bookmarks       = map(copy(g:dark_config_files), '{ v:val[0]: v:val[1] }')
+
+let g:startify_bookmarks += [ { '  ': '' },
+                            \ { 'pd': '~/dotfiles/' } ]
 
 let g:startify_change_to_dir      = 0
 let g:startify_change_to_vcs_root = 1
@@ -165,11 +166,12 @@ let g:startify_list_order = [ [ '  Sessions' ],
                             \ 'sessions',
                             \ [ '  Bookmarks' ],
                             \ 'bookmarks',
-                            \ [ '  MRU' ],
+                            \ [ '  MRU ' . getcwd() ],
                             \ 'dir' ]
 
 hi StartifyBracket ctermfg=0 cterm=bold
 hi StartifyHeader  ctermfg=195
+hi StartifyFile    ctermfg=9 cterm=bold
 
 " Vimtex
 let g:tex_flavor = 'latex'
@@ -285,8 +287,35 @@ nnoremap <silent> <leader>vh :echo "hi<" . synIDattr(synID(line("."),col("."),1)
 
 
 """"""""""""""""""""""""
-"" Binary file editing
+"" File transforms
 ""
+
+augroup Sxhkd
+
+    autocmd!
+
+    " Saved format:
+    "   # Description
+    "   hotkey
+    "       command
+    "
+    " Displayed format:
+    "   Description  \t  hotkey  \t command
+
+    autocmd BufReadPost  sxhkdrc setlocal ts=40 noet nolist nohlsearch
+    autocmd BufReadPost  sxhkdrc nmap <buffer> <leader>1 1\|
+    autocmd BufReadPost  sxhkdrc nmap <buffer> <leader>2 41\|
+    autocmd BufReadPost  sxhkdrc nmap <buffer> <leader>3 81\|
+    autocmd BufReadPost  sxhkdrc g/^\w/normal k^xxJr	Jr	jdd
+
+    autocmd BufWritePre  sxhkdrc normal ms
+    autocmd BufWritePre  sxhkdrc g/^\w/s/\([^\t]*\)\t\([^\t]*\)\t\([^\t]*\)/# \1\r\2\r    \3\r/
+
+    autocmd BufWritePost sxhkdrc g/^\w/normal k^xxJr	Jr	jdd
+    autocmd BufWritePost sxhkdrc set nomod | normal `szz
+
+augroup end
+
 
 augroup Binary
 
