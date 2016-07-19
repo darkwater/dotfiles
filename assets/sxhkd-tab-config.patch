@@ -1,0 +1,70 @@
+diff --git a/parse.c b/parse.c
+index 3a2ef29..a7d88e8 100644
+--- a/parse.c
++++ b/parse.c
+@@ -2373,9 +2373,6 @@ void load_config(const char *config_file)
+ 		err("Can't open configuration file: '%s'.\n", config_file);
+ 
+ 	char buf[3 * MAXLEN];
+-	char chain[MAXLEN] = {0};
+-	char command[2 * MAXLEN] = {0};
+-	int offset = 0;
+ 	char first;
+ 
+ 	while (fgets(buf, sizeof(buf), cfg) != NULL) {
+@@ -2389,23 +2386,40 @@ void load_config(const char *config_file)
+ 			char *end = rgraph(buf);
+ 			*(end + 1) = '\0';
+ 
+-			if (isgraph(first))
+-				snprintf(chain + offset, sizeof(chain) - offset, "%s", start);
+-			else
+-				snprintf(command + offset, sizeof(command) - offset, "%s", start);
++			// Scan for the first tab character
++			char *ptr = start;
++			while (ptr < end && *ptr != '\t')
++				ptr++;
+ 
+-			if (*end == PARTIAL_LINE) {
+-				offset += end - start;
+-				continue;
+-			} else {
+-				offset = 0;
+-			}
++			// Bail if we hit the end instead of a tab
++			if (ptr == end)
++				err("Invalid config line: %s\n", start);
+ 
+-			if (isspace(first) && strlen(chain) > 0 && strlen(command) > 0) {
+-				process_hotkey(chain, command);
+-				chain[0] = '\0';
+-				command[0] = '\0';
+-			}
++			// Replace tab with a null byte
++			*ptr = '\0';
++			ptr++;
++
++			// Set chain ptr after the first tab
++			char *chain = ptr;
++
++			// Scan for the second tab character
++			while (ptr < end && *ptr != '\t')
++				ptr++;
++
++			// Bail...
++			if (ptr == end)
++				err("Invalid config line: %s\n", start);
++
++			// Replace tab with a null byte
++			*ptr = '\0';
++			ptr++;
++
++			// Set command ptr after the second tab
++			char *command = ptr;
++
++			process_hotkey(chain, command);
++			chain[0] = '\0';
++			command[0] = '\0';
+ 		}
+ 	}
+ 

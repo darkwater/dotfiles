@@ -1,269 +1,91 @@
+# vim: ts=40 noet nolist nohlsearch
 #
-#  Assuming you use the included Neovim configs:
-#    <Space>1  to jump to description column
-#    <Space>2  to jump to hotkey column
-#    <Space>3  to jump to command column
+#  Tips:
+#    1|        to jump to description column
+#    41|       to jump to hotkey column
+#    81|       to jump to command column
 #    ct<Tab>   to edit a field
+#
 #
 
 # bspwm hotkeys
-# Close window
-super + q
-    bspc node -c
+Close window	super + q	bspc node -c
 
+Set window to floating	super + s	bspc node -t floating
+Set window to tiled	super + d	bspc node -t tiled
+Set window to fullscreen	super + f	bspc node -t fullscreen
+Toggle monocle mode	super + t	bspc desktop -l next
 
-# Set window to floating
-super + s
-    bspc node -t floating
+Switch to last window	super + grave	bspc node -f last
+Switch to last desktop	super + Tab	bspc desktop -f last
 
-# Set window to tiled
-super + d
-    bspc node -t tiled
+Switch current with last window	super + apostrophe	bspc node -s last
+Switch current with biggest window	super + m	bspc node -s biggest
 
-# Set window to fullscreen
-super + f
-    bspc node -t fullscreen
+Move focus left	super + h	bspc node -f west
+Move focus down	super + j	bspc node -f south
+Move focus up	super + k	bspc node -f north
+Move focus right	super + l	bspc node -f east
 
-# Toggle monocle mode
-super + t
-    bspc desktop -l next
+Move window left	super + shift + h	bspc node -s west
+Move window down	super + shift + j	bspc node -s south
+Move window up	super + shift + k	bspc node -s north
+Move window right	super + shift + l	bspc node -s east
 
+Switch to next window	super + c	bspc node -f next
+Switch to previous window	super + shift + c	bspc node -f prev
 
-# Switch to last window
-super + grave
-    bspc node -f last
+Circulate nodes counter-clockwise	super + comma	bspc node @/ -C forward
+Circulate nodes clockwise	super + period	bspc node @/ -C backward
 
-# Switch to last desktop
-super + Tab
-    bspc desktop -f last
+Switch to previous desktop	super + bracketleft	bspc desktop -f prev
+Switch to next desktop	super + bracketright	bspc desktop -f next
 
+Put next window to the left	super + ctrl + h	bspc node -p west
+Put next window below	super + ctrl + j	bspc node -p south
+Put next window above	super + ctrl + k	bspc node -p north
+Put next window to the right	super + ctrl + l	bspc node -p east
+Cancel next window selection	super + ctrl + space	bspc node -p cancel
 
-# Switch current with last window
-super + apostrophe
-    bspc node -s last
+Expand window to the left	super + alt + h	bspc node -z left   -25   0
+Expand window down	super + alt + j	bspc node -z bottom   0 +25
+Expand window up	super + alt + k	bspc node -z top      0 -25
+Expand window to the right	super + alt + l	bspc node -z right  +25   0
 
-# Switch current with biggest window
-super + m
-    bspc node -s biggest
+Retract window to the left	super + alt + shift + h	bspc node -z right  -25   0
+Retract window down	super + alt + shift + j	bspc node -z top      0 +25
+Retract window up	super + alt + shift + k	bspc node -z bottom   0 -25
+Retract window to the right	super + alt + shift + l	bspc node -z left   +25   0
 
-
-# Move focus left
-super + h
-    bspc node -f west
-
-# Move focus down
-super + j
-    bspc node -f south
-
-# Move focus up
-super + k
-    bspc node -f north
-
-# Move focus right
-super + l
-    bspc node -f east
-
-
-# Move window left
-super + shift + h
-    bspc node -s west
-
-# Move window down
-super + shift + j
-    bspc node -s south
-
-# Move window up
-super + shift + k
-    bspc node -s north
-
-# Move window right
-super + shift + l
-    bspc node -s east
-
-
-# Switch to next window
-super + c
-    bspc node -f next
-
-# Switch to previous window
-super + shift + c
-    bspc node -f prev
-
-
-# Circulate nodes counter-clockwise
-super + comma
-    bspc node @/ -C forward
-
-# Circulate nodes clockwise
-super + period
-    bspc node @/ -C backward
-
-
-# Switch to previous desktop
-super + bracketleft
-    bspc desktop -f prev
-
-# Switch to next desktop
-super + bracketright
-    bspc desktop -f next
-
-
-# Put next window to the left
-super + ctrl + h
-    bspc node -p west
-
-# Put next window below
-super + ctrl + j
-    bspc node -p south
-
-# Put next window above
-super + ctrl + k
-    bspc node -p north
-
-# Put next window to the right
-super + ctrl + l
-    bspc node -p east
-
-# Cancel next window selection
-super + ctrl + space
-    bspc node -p cancel
-
-
-# Expand window to the left
-super + alt + h
-    bspc node -z left   -25   0
-
-# Expand window down
-super + alt + j
-    bspc node -z bottom   0 +25
-
-# Expand window up
-super + alt + k
-    bspc node -z top      0 -25
-
-# Expand window to the right
-super + alt + l
-    bspc node -z right  +25   0
-
-
-# Retract window to the left
-super + alt + shift + h
-    bspc node -z right  -25   0
-
-# Retract window down
-super + alt + shift + j
-    bspc node -z top      0 +25
-
-# Retract window up
-super + alt + shift + k
-    bspc node -z bottom   0 -25
-
-# Retract window to the right
-super + alt + shift + l
-    bspc node -z left   +25   0
-
-
-# Select desktop on primary screen
-super + {1-9}
-    bspc desktop -f 1-{1-9}
-
-# Select desktop on secondary screen
-super + alt + {1-9}
-    bspc desktop -f 2-{1-9}
-
-# Select desktop on tetriary screen
-super + ctrl + {1-9}
-    bspc desktop -f 3-{1-9}
-
-# Move to desktop on primary screen
-super + shift + {1-9}
-    bspc node -d 1-{1-9}
-
-# Move to desktop on secondary screen
-super + shift + alt + {1-9}
-    bspc node -d 2-{1-9}
-
-# Move to desktop on tetriary screen
-super + shift + ctrl + {1-9}
-    bspc node -d 3-{1-9}
-
+Select desktop on primary screen	super + {1-9}	bspc desktop -f 1-{1-9}
+Select desktop on secondary screen	super + alt + {1-9}	bspc desktop -f 2-{1-9}
+Select desktop on tetriary screen	super + ctrl + {1-9}	bspc desktop -f 3-{1-9}
+Move to desktop on primary screen	super + shift + {1-9}	bspc node -d 1-{1-9}
+Move to desktop on secondary screen	super + shift + alt + {1-9}	bspc node -d 2-{1-9}
+Move to desktop on tetriary screen	super + shift + ctrl + {1-9}	bspc node -d 3-{1-9}
 
 # wm independent hotkeys
-# Spawn terminal
-super + Return
-    urxvtc
+Spawn terminal	super + Return	urxvtc
+Run command	super + r	dmenu_launcher run
+Restart sxhkd	super + Escape	restart sxhkd
 
-# Run command
-super + r
-    dmenu_launcher run
+Launch Neovim	super + n	urxvtc -e nvim
+Launch IRC client	super + i	urxvtc -e irssi
+Launch Chromium	super + b	chromium --disable-gpu-vsync
 
-# Restart sxhkd
-super + Escape
-    restart sxhkd
+Lower volume	XF86AudioLowerVolume	volume down
+Raise volume	XF86AudioRaiseVolume	volume up
 
+Take screenshot (select area)	Print	screentool -s -u novaember
+Take screenshot of desktop	ctrl + Print	screentool -S -u novaember
+Take screenshot of window	alt + Print	screentool -W -u novaember
 
-# Launch Neovim
-super + n
-    urxvtc -e nvim
+Move mouse to bottom of screen	Pause	xdotool mousemove_relative 0 9999
+Reset wallpapers	ctrl + Pause	wp
+Toggle compton on/off	super + Pause	toggle compton
 
-# Launch IRC client
-super + i
-    urxvtc -e irssi
+Swap clipboard and primary selections	ctrl + Scroll_Lock	clipswap
+Upload clipboard using nvpaste	alt + Scroll_Lock	nvpaste
+Type contents of clipboard	ctrl + shift + Scroll_Lock	pastetype
 
-# Launch Chromium
-super + b
-    chromium --disable-gpu-vsync
-
-
-# Lower volume
-XF86AudioLowerVolume
-    volume down
-
-# Raise volume
-XF86AudioRaiseVolume
-    volume up
-
-
-# Take screenshot (select area)
-Print
-    screentool -s -u novaember
-
-# Take screenshot of desktop
-ctrl + Print
-    screentool -S -u novaember
-
-# Take screenshot of window
-alt + Print
-    screentool -W -u novaember
-
-
-# Move mouse to bottom of screen
-Pause
-    xdotool mousemove_relative 0 9999
-
-# Reset wallpapers
-ctrl + Pause
-    wp
-
-# Toggle compton on/off
-super + Pause
-    toggle compton
-
-
-# Swap clipboard and primary selections
-ctrl + Scroll_Lock
-    clipswap
-
-# Upload clipboard using nvpaste
-alt + Scroll_Lock
-    nvpaste
-
-# Type contents of clipboard
-ctrl + shift + Scroll_Lock
-    pastetype
-
-
-# Lock screen
-alt + super + space
-    lock
-
+Lock screen	alt + super + space	lock

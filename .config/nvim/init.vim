@@ -290,33 +290,6 @@ nnoremap <silent> <leader>vh :echo "hi<" . synIDattr(synID(line("."),col("."),1)
 "" File transforms
 ""
 
-augroup Sxhkd
-
-    autocmd!
-
-    " Saved format:
-    "   # Description
-    "   hotkey
-    "       command
-    "
-    " Displayed format:
-    "   Description  \t  hotkey  \t command
-
-    autocmd BufReadPost  sxhkdrc setlocal ts=40 noet nolist nohlsearch
-    autocmd BufReadPost  sxhkdrc nmap <buffer> <leader>1 1\|
-    autocmd BufReadPost  sxhkdrc nmap <buffer> <leader>2 41\|
-    autocmd BufReadPost  sxhkdrc nmap <buffer> <leader>3 81\|
-    autocmd BufReadPost  sxhkdrc g/^\w/normal k^xxJr	Jr	jdd
-
-    autocmd BufWritePre  sxhkdrc normal ms
-    autocmd BufWritePre  sxhkdrc g/^\w/s/\([^\t]*\)\t\([^\t]*\)\t\([^\t]*\)/# \1\r\2\r    \3\r/
-
-    autocmd BufWritePost sxhkdrc g/^\w/normal k^xxJr	Jr	jdd
-    autocmd BufWritePost sxhkdrc set nomod | normal `szz
-
-augroup end
-
-
 augroup Binary
 
     autocmd!
