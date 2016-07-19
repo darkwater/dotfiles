@@ -163,21 +163,29 @@ super + alt + shift + l
     bspc node -z left   +25   0
 
 
-# Switch to primary desktops
-super + {1-3}
-    bspc desktop -f {1-3}-1
+# Select desktop on primary screen
+super + {1-9}
+    bspc desktop -f 1-{1-9}
 
-# Switch to alternative desktops
-super + alt + {1-3}
-    bspc desktop -f {1-3}-2
+# Select desktop on secondary screen
+super + alt + {1-9}
+    bspc desktop -f 2-{1-9}
 
-# Move window to primary desktops
-super + shift + {1-3}
-    bspc node -d {1-3}-1
+# Select desktop on tetriary screen
+super + ctrl + {1-9}
+    bspc desktop -f 3-{1-9}
 
-# Move window to alternative desktops
-super + shift + alt + {1-3}
-    bspc node -d {1-3}-2
+# Move to desktop on primary screen
+super + shift + {1-9}
+    bspc node -d 1-{1-9}
+
+# Move to desktop on secondary screen
+super + shift + alt + {1-9}
+    bspc node -d 2-{1-9}
+
+# Move to desktop on tetriary screen
+super + shift + ctrl + {1-9}
+    bspc node -d 3-{1-9}
 
 
 # wm independent hotkeys
