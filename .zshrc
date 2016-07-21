@@ -28,6 +28,7 @@ test "$TERM" = "screen" && export TERM=screen-256color
 
 export EDITOR=/usr/bin/nvim
 export GREP_COLOR='38;5;214;48;5;236'
+export RI="-Tf ansi -d doc"
 
 bindkey '\e[1;5D' emacs-backward-word
 bindkey '\e[1;5C' emacs-forward-word
