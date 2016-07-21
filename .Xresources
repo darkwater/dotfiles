@@ -6,7 +6,7 @@ Xft.rgba:       rgb
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
 
-URxvt.font: xft:Droid Sans Mono:size=8
+URxvt.font: xft:Roboto Mono:size=8
 URxvt.letterSpace: -1
 
 *foreground: #d7d0c7

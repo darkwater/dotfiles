@@ -83,7 +83,7 @@ function downloads()
 
 function fs()
 {
-    printf '\x1b]710;%s%d\x07' 'xft:Droid Sans Mono:size=' "$1"
+    printf '\x1b]710;%s%d\x07' 'xft:Roboto Mono:size=' "$1"
 }
 
 
