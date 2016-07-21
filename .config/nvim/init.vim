@@ -10,6 +10,7 @@ call plug#begin()
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 Plug 'majutsushi/tagbar',   { 'on': 'Tagbar'   }
+Plug 'mhinz/vim-startify'
 
 " Git helpers
 Plug 'tpope/vim-fugitive'
@@ -27,7 +28,7 @@ Plug 'lervag/vimtex',       { 'for': 'tex' }
 " Miscellaneous shit
 Plug 'vim-scripts/JavaDecompiler.vim'
 Plug 'moll/vim-bbye'
-Plug 'mhinz/vim-startify'
+Plug 'danchoi/ri.vim'
 
 " Extra syntax support
 Plug 'hail2u/vim-css3-syntax'
@@ -39,6 +40,8 @@ Plug 'groenewege/vim-less'
 Plug 'derekwyatt/vim-scala'
 Plug 'udalov/kotlin-vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
+
+" Plug '~/projects/agitated/'
 
 call plug#end()
 
@@ -123,6 +126,8 @@ let g:neomake_list_height = 5
 let g:ctrlp_cmd = 'CtrlPCurWD'
 
 " Startify
+let g:startify_disable_at_vimenter = 0
+
 let g:startify_default_custom_header = [ '                      -`                     ',
                                        \ '                     .o+`                    ',
                                        \ '                    `ooo/                    ',
@@ -449,13 +454,17 @@ function! SetupEnvironment()
     endif
 
     if &filetype == 'd'
-
         let g:tab_completion_mapping = "\<C-x>\<C-o>"
-
     else
-
         let g:tab_completion_mapping = "\<C-n>"
+    endif
 
+    if &filetype == 'ruby'
+        set path+=lib
+    endif
+
+    if &filetype == 'gitcommit'
+        set tw=80
     endif
 
     if exists("*SetupEnvironmentLocal")
