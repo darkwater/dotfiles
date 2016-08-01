@@ -138,7 +138,7 @@ function zsh_prompt()
 
         if [[ "$attached" = false ]]; then
             echo -n "%{$fg[red]%}"
-        elif [[ "$(git status 2> /dev/null | tail -n1)" != "nothing to commit, working directory clean" ]]; then
+        elif [[ "$(git status --porcelain)" != "" ]]; then
             echo -n "%{$fg[yellow]%}"
         else
             echo -n "%{$fg[green]%}"
