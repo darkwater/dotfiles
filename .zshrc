@@ -48,7 +48,14 @@ if command -v pacaur > /dev/null; then
     alias update='pacaur -Sy'
     alias upgrade='pacaur -Syu'
     alias remove='pacaur -R'
-else
+elif command -v pacman > /dev/null; then
+    alias get='sudo pacman -S'
+    alias search='pacman -Ss'
+    alias show='pacman -Si'
+    alias update='sudo pacman -Sy'
+    alias upgrade='sudo pacman -Syu'
+    alias remove='sudo pacman -R'
+elif command -v apt-get > /dev/null; then
     alias get='sudo apt-get install'
     alias search='apt-cache search'
     alias show='apt-cache show'
@@ -56,6 +63,8 @@ else
     alias upgrade='sudo apt-get upgrade'
     alias remove='sudo apt-get remove'
     alias purge='sudo apt-get purge'
+else
+    echo 'Warning! No package manager found for get/upgrade/... aliases.'
 fi
 
 alias nv="ssh nv" # 6 characters is too much!
