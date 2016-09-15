@@ -1,29 +1,76 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-MIXER=Master
-STEPS=16
+require 'json'
+require 'open3'
 
-MAX=$(amixer sget "$MIXER" | grep 'Limits' | grep -o '[[:digit:]]*$')
-STEP=$((MAX / STEPS))
+MIXER = 'Master'
+STEPS = 16
+TIME  = 2
 
-VOLUME=$(($(amixer sget Master | grep -oEm 1 'Playback [[:digit:]]+ \[' | grep -oE '[[:digit:]]+')))
 
-if [[ "$1" = "up" ]]
-then
-    let VOLUME+=$STEP
-fi
+max = %x( amixer sget "#{MIXER}" )[/^  Limits: Playback (?<min>\d+) - (?<max>\d+)$/, 'max'].to_i
+step = max / STEPS
 
-if [[ "$1" = "down" ]]
-then
-    let VOLUME-=$STEP
-fi
+volume = %x( amixer sget "#{MIXER}" )[/^  Mono: Playback (?<vol>\d+)/, 'vol'].to_i
 
-amixer sset Master $VOLUME
+volume += step if ARGV.first == 'up'
+volume -= step if ARGV.first == 'down'
 
-SCREEN=($(bspc query -m focused -T | json 'return this.rectangle' | grep -o '[[:digit:]]\+'))
+%x( amixer sset #{MIXER} #{volume} )
 
-echo "^pa(1;1)^r($((VOLUME * 256 / MAX))x2)" | \
-    persist volume -t 3 \
-    dzen2 -tw 256 -h 4 \
-          -x $((SCREEN[0] + SCREEN[2] * 50 / 100 - 128)) -y $((SCREEN[1] + SCREEN[3] * 80 / 100)) \
-          -bg '#1d1f21' -fg '#ffffff' -ta l
+
+module Progressbits
+    { full_left_0:  "\ue27a",
+      full_left_1:  "\ue27d",
+      full_left_2:  "\ue27e",
+      full_left_3:  "\ue27f",
+      full_mid_0:   "\ue27b",
+      full_mid_1:   "\ue280",
+      full_mid_2:   "\ue281",
+      full_mid_3:   "\ue282",
+      full_right_0: "\ue27c",
+      full_right_1: "\ue283",
+      full_right_2: "\ue284",
+      full_right_3: "\ue285",
+      semi_left_0:  "\ue27a",
+      semi_left_1:  "\ue286",
+      semi_left_2:  "\ue287",
+      semi_left_3:  "\ue288",
+      semi_mid_0:   "\ue27b",
+      semi_mid_1:   "\ue289",
+      semi_mid_2:   "\ue28a",
+      semi_mid_3:   "\ue28b",
+      semi_right_0: "\ue27c",
+      semi_right_1: "\ue28c",
+      semi_right_2: "\ue28d",
+      semi_right_3: "\ue28e" }
+    .each_pair do |name, char|
+        define_singleton_method(name) { char }
+    end
+end
+
+def progressbar(progress, width, type = :semi)
+    subsegs = (progress * width * 3).round
+
+    (0...width).map do |n|
+        part = (n == 0) ? :left : (n == width - 1) ? :right : :mid
+        segs = [ 0, subsegs - n * 3, 3 ].sort[1]
+
+        Progressbits.send :"#{type}_#{part}_#{segs}"
+    end.join
+end
+
+
+screen = JSON.parse(%x( bspc query -m focused -T ))['rectangle']
+
+width = 256
+x = screen['x'] + (screen['width'] - width) / 2
+y = screen['y'] + (screen['height'] * 0.8).to_i
+
+stdin, stdout, wait = Open3.popen2 *%W( persist volume -t #{TIME} lemonbar -g #{width}x28+#{x}+#{y}
+    -F #efefef -B #ef101010
+    -f -*-tamsyn-medium-*-*-*-16-*-*-*-*-*-*-*
+    -f -*-tamsyn-bold-*-*-*-16-*-*-*-*-*-*-*
+    -f -*-siji-medium-*-*-*-10-*-*-*-*-*-*-* )
+
+stdin.puts %Q(%{c} Vol  #{progressbar(volume.to_f / max, 16)} )
