@@ -73,8 +73,17 @@ Launch Neovim	super + n	urxvtc -e nvim
 Launch IRC client	super + i	urxvtc -e irssi
 Launch Chromium	super + b	chromium --disable-gpu-vsync
 
-Lower volume	XF86AudioLowerVolume	volume down
-Raise volume	XF86AudioRaiseVolume	volume up
+Lower master volume	XF86AudioLowerVolume	volume Master down
+Raise master volume	XF86AudioRaiseVolume	volume Master up
+Mute master audio	XF86AudioMute	volume Master mute
+
+Lower headphone volume	alt + XF86AudioLowerVolume	volume Headphone down HPN
+Raise headphone volume	alt + XF86AudioRaiseVolume	volume Headphone up   HPN
+Mute headphone audio	alt + XF86AudioMute	volume Headphone mute HPN
+
+Lower speaker volume	ctrl + XF86AudioLowerVolume	volume Speaker down SPK
+Raise speaker volume	ctrl + XF86AudioRaiseVolume	volume Speaker up   SPK
+Mute speaker audio	ctrl + XF86AudioMute	volume Speaker mute SPK
 
 Take screenshot (select area)	Print	screentool -s -u novaember
 Take screenshot of desktop	ctrl + Print	screentool -S -u novaember

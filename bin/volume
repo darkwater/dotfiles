@@ -3,21 +3,41 @@
 require 'json'
 require 'open3'
 
-MIXER = 'Master'
 STEPS = 16
 TIME  = 2
 
+mixer  = ARGV[0]
+action = ARGV[1]
+label  = ARGV[2] || 'Vol'
 
-max = %x( amixer sget "#{MIXER}" )[/^  Limits: Playback (?<min>\d+) - (?<max>\d+)$/, 'max'].to_i
-step = max / STEPS
 
-volume = %x( amixer sget "#{MIXER}" )[/^  Mono: Playback (?<vol>\d+)/, 'vol'].to_i
+amixer = %x( amixer sget "#{mixer}" )
+md = amixer.match(/Playback (?<vol>\d+) \[(?<volp>\d+)%\] \[(?<voldb>[\d.-]+)dB\] \[(?<enabled>on|off)\]/)
 
-volume += step if ARGV.first == 'up'
-volume -= step if ARGV.first == 'down'
+# md contains:
+# - vol:     volume in ALSA steps
+# - volp:    volume per cent
+# - voldb:   volume in relative decibels
+# - enabled: gee i dunno
 
-%x( amixer sset #{MIXER} #{volume} )
+volume = md[:volp].to_f
+enabled = md[:enabled] == 'on'
 
+case action
+when /up|down/
+    step = (volume / 100 * STEPS).round.to_f
+
+    step += 1 if action == 'up'
+    step -= 1 if action == 'down'
+
+    volume = (step / STEPS * 100).round
+
+    %x( amixer sset #{mixer} #{volume}% )
+when /mute/
+    enabled = !enabled
+
+    %x( amixer sset #{mixer} #{enabled ? 'on' : 'off'} )
+end
 
 module Progressbits
     { full_left_0:  "\ue27a",
@@ -61,6 +81,8 @@ def progressbar(progress, width, type = :semi)
 end
 
 
+barcolor = enabled ? '' : '%{F#505050}'
+
 screen = JSON.parse(%x( bspc query -m focused -T ))['rectangle']
 
 width = 256
@@ -73,4 +95,4 @@ stdin, stdout, wait = Open3.popen2 *%W( persist volume -t #{TIME} lemonbar -g #{
     -f -*-tamsyn-bold-*-*-*-16-*-*-*-*-*-*-*
     -f -*-siji-medium-*-*-*-10-*-*-*-*-*-*-* )
 
-stdin.puts %Q(%{c} Vol  #{progressbar(volume.to_f / max, 16)} )
+stdin.puts %Q(%{F-}%{c} #{label}  #{barcolor}#{progressbar(volume.to_f / 100, 16)} )
