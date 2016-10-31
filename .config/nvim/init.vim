@@ -1,7 +1,9 @@
 """"""""""""
-"" Neovim configuration
-"" Assembled by Darkwater
-"" 50% stolen from other people
+"" Darkwater's Neovim configuration
+"" https://github.com/Darkwater/dotfiles
+""
+"" Evolved from snippets of other people's configs,
+"" probably mostly unique by now.
 ""
 
 call plug#begin()
@@ -63,20 +65,24 @@ set showmode
 set smartcase
 set splitbelow
 set splitright
+set termguicolors
 set title
 set undofile
 set wildmenu
 set wrap
 
-set backspace=start,eol,indent
 set background=dark
+set backspace=start,eol,indent
 set completeopt=menu,preview
 set encoding=utf8
+set fillchars+=vert:/
 set foldcolumn=1
-set foldmethod=manual
+set foldmethod=marker
 set history=1000
 set laststatus=0
-set lcs=tab:··,trail:░,nbsp:%
+set listchars+=nbsp:%
+set listchars+=tab:]-
+set listchars+=trail:#
 set mouse=a
 set numberwidth=5
 set pastetoggle=<F11>
@@ -109,13 +115,15 @@ filetype plugin indent on
 "" Plugin configuration
 ""
 
+" NERDTree
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
+
 " Gitgutter
-let g:gitgutter_sign_added            = '•'
-let g:gitgutter_sign_modified         = '•'
-let g:gitgutter_sign_modified_removed = '•'
-let g:gitgutter_sign_removed          = '_'
-hi GitGutterChangeDelete ctermfg=3 cterm=underline
-hi GitGutterDelete       ctermfg=1 cterm=underline
+let g:gitgutter_sign_added            = '--'
+let g:gitgutter_sign_modified         = '--'
+let g:gitgutter_sign_modified_removed = '__'
+let g:gitgutter_sign_removed          = '__'
 
 " Neomake
 let g:neomake_error_sign  = { 'text': ' ❯', 'texthl': 'ErrorMsg' }
@@ -317,13 +325,6 @@ augroup end
 "" Functions
 ""
 
-hi TabLine              ctermfg=242 ctermbg=none cterm=none
-hi TabLineInactive      ctermfg=240 ctermbg=none cterm=none
-hi TabLineInactiveBold  ctermfg=243 ctermbg=none cterm=bold
-hi TabLineActive        ctermfg=252 ctermbg=none cterm=none
-hi TabLineActiveBold    ctermfg=255 ctermbg=none cterm=bold
-hi TabLineModified      ctermfg=214 ctermbg=none cterm=bold
-
 " Custom tab line function
 function! CustomTabLine()
     let s = '%#TabLine# '
@@ -352,7 +353,7 @@ function! CustomTabLine()
         let leftbound  = ''
         let rightbound = '  '
 
-        let indicator = (getbufvar(n, '&modified')) ? '%#TabLineModified#► ' : ''
+        let indicator = (getbufvar(n, '&modified')) ? '%#TabLineModified#! ' : ''
 
         let s .= hilightbold . leftbound . indicator . hilight . dirpath . hilightbold . filename . rightbound . '%#TabLine# '
     endfor
@@ -447,7 +448,7 @@ function! SetupEnvironment()
 
         let &makeprg='./gradlew --daemon'
         let &errorformat='%.%#%t:\ ' . getcwd() . '/%f:\ (%l\,\ %c):\ %m'
-        nnoremap <leader><leader> :make instalLDebug<CR>
+        nnoremap <leader><leader> :make installDebug<CR>
 
         let g:ctrlp_custom_ignore = '\v/(build|cache|gradle)/'
 
