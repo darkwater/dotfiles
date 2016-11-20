@@ -278,9 +278,6 @@ nnoremap <silent> <leader><leader> :make<CR>
 " Startify
 nnoremap <silent> <leader>s  :Startify<CR>
 
-" Terminal
-nnoremap <silent> <leader>t  :call jobstart(['urxvtc', '-cd', getcwd()])<CR>
-
 " Devdocs
 nnoremap <silent> <leader>dd :call jobstart(['chromium-app', 'http://devdocs.io/' . &filetype])<CR>
 

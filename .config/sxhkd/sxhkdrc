@@ -1,12 +1,4 @@
-# vim: ts=40 noet nolist nohlsearch
-#
-#  Tips:
-#    1|        to jump to description column
-#    41|       to jump to hotkey column
-#    81|       to jump to command column
-#    ct<Tab>   to edit a field
-#
-#
+# vim: ts=40 noet nolist
 
 # bspwm hotkeys
 Close window	super + q	bspc node -c
@@ -65,12 +57,12 @@ Move to desktop on secondary screen	super + shift + alt + {1-9}	bspc node -d 2-{
 Move to desktop on tetriary screen	super + shift + ctrl + {1-9}	bspc node -d 3-{1-9}
 
 # wm independent hotkeys
-Spawn terminal	super + Return	urxvtc
+Spawn terminal	super + Return	st
 Run command	super + r	dmenu_launcher run
 Restart sxhkd	super + Escape	restart sxhkd
 
-Launch Neovim	super + n	urxvtc -e nvim
-Launch IRC client	super + i	urxvtc -e irssi
+Launch Neovim	super + n	st -e nvim
+Launch IRC client	super + i	st -e irc
 Launch Chromium	super + b	chromium --disable-gpu-vsync
 
 Lower master volume	XF86AudioLowerVolume	volume Master down
