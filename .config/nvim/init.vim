@@ -40,7 +40,7 @@ Plug 'tfnico/vim-gradle'
 Plug 'othree/html5.vim'
 Plug 'groenewege/vim-less'
 Plug 'derekwyatt/vim-scala'
-Plug 'udalov/kotlin-vim'
+Plug 'Darkwater/kotlin-vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Plug '~/projects/agitated/'
@@ -73,7 +73,7 @@ set wrap
 
 set background=dark
 set backspace=start,eol,indent
-set completeopt=menu,preview
+set completeopt=menu,menuone,longest,noselect
 set encoding=utf8
 set fillchars+=vert:/
 set foldcolumn=1
@@ -264,6 +264,8 @@ nnoremap    <silent> ]q         :cn<CR>
 " Remove hlsearch
 nnoremap    <silent> <BS>       :nohlsearch<CR>
 
+nnoremap    <silent> <Tab>      <C-w><C-w>
+
 
 """"""""""""""""""""
 "" Leader mappings
@@ -389,11 +391,15 @@ endfunction
 
 " Tab completion when appropiate
 function! InsertTabWrapper()
+    if pumvisible()
+        return "\<C-n>"
+    endif
+
     let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k\|\.\|>\|:'
+    if !col || getline('.')[col - 1] !~ '\S'
         return "\<Tab>"
     else
-        return pumvisible() ? "\<C-n>" : g:tab_completion_mapping " See SetupEnvironment
+        return &omnifunc == '' ? "\<C-n>" : "\<C-x>\<C-o>"
     endif
 endfunction
 
