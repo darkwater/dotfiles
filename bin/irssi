@@ -1,3 +1,0 @@
-#!/bin/sh
-
-ssh nv -t 'screen -xUS irssi || screen -US irssi /usr/bin/irssi'
