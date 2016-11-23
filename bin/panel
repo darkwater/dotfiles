@@ -282,14 +282,13 @@ class Panel
     end
 
     def now_playing
-        return unless Music.state =~ /playing|paused/
+        mpc = `mpc 2>/dev/null`.lines
 
-        artist = Music.artist
-        title = Music.title
+        return unless mpc[1]
 
         icon  = Icon.music
-        text  = "#{artist} - #{title}"
-        color = (Music.state == 'playing') ? Color.green : Color.yellow
+        text  = mpc.first
+        color = (mpc[1][/playing/]) ? Color.green : Color.yellow
 
         draw_system icon, text, color
     end
@@ -590,18 +589,6 @@ module Bluetooth
 
     def self.update
         @connected = `hcitool con`.lines.count > 1
-    end
-end
-
-module Music
-    include System
-
-    @last_update = 0
-    @update_interval = 1
-
-    system_reader :artist, :album, :title, :state
-
-    def self.update
     end
 end
 
