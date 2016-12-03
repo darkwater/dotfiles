@@ -1,84 +1,77 @@
-#!/bin/bash
+#!/usr/bin/env ruby
 
-SCREEN=($(bspc query -m focused -T | json 'return this.rectangle' | grep -o '[[:digit:]]\+'))
+require 'json'
+require 'open3'
 
-DMENU_X=$((SCREEN[0] + SCREEN[2] * 20 / 100))
-DMENU_Y=$((SCREEN[1] + SCREEN[3] * 50 / 100))
-DMENU_WIDTH=$((SCREEN[0] + SCREEN[2] * 60 / 100))
+action = ARGV[0]
 
-DZEN_X=$((SCREEN[0] + SCREEN[2] * 50 / 100 - 128))
-DZEN_Y=$((SCREEN[1] + SCREEN[3] * 60 / 100))
+mpc = %x( mpc ).lines
+title = mpc[0]
+playing = mpc[1][/playing/] == 'playing'
 
-case $1 in
+case action
+when /toggle/
+    mpc = %x( mpc toggle ).lines
+    title = mpc[0]
+when /next/
+    mpc = %x( mpc next ).lines
+    title = mpc[0]
+when /prev/
+    mpc = %x( mpc prev ).lines
+    title = mpc[0]
+end
 
-    play) mpc toggle ;;
-    prev) mpc prev ;;
-    next) mpc next ;;
-  repeat) mpc repeat ;;
- shuffle) mpc random ;;
-    show) ;;
-    pick) SELECTION=$(mpc playlist | dmenu -x $DMENU_X -y $DMENU_Y -w $DMENU_WIDTH -fn 'Droid Sans Mono-10' -p '>' -i -l 10)
-          if [[ "$?" != 0 || -z "$SELECTION" ]]; then exit 1; fi
-          mpc play "$(mpc playlist | grep -xF "$SELECTION" -n | cut -d: -f1)" ;;
-       *) echo "Unknown argument $1" >&2 ;;
+module Progressbits
+    { full_left_0:  "\ue27a",
+      full_left_1:  "\ue27d",
+      full_left_2:  "\ue27e",
+      full_left_3:  "\ue27f",
+      full_mid_0:   "\ue27b",
+      full_mid_1:   "\ue280",
+      full_mid_2:   "\ue281",
+      full_mid_3:   "\ue282",
+      full_right_0: "\ue27c",
+      full_right_1: "\ue283",
+      full_right_2: "\ue284",
+      full_right_3: "\ue285",
+      semi_left_0:  "\ue27a",
+      semi_left_1:  "\ue286",
+      semi_left_2:  "\ue287",
+      semi_left_3:  "\ue288",
+      semi_mid_0:   "\ue27b",
+      semi_mid_1:   "\ue289",
+      semi_mid_2:   "\ue28a",
+      semi_mid_3:   "\ue28b",
+      semi_right_0: "\ue27c",
+      semi_right_1: "\ue28c",
+      semi_right_2: "\ue28d",
+      semi_right_3: "\ue28e" }
+    .each_pair do |name, char|
+        define_singleton_method(name) { char }
+    end
+end
 
-esac
+def progressbar(progress, width, type = :semi)
+    subsegs = (progress * width * 3).round
 
-IFS=$'\n' :; TRACK=($(mpc -f '%artist%\n%album%\n%title%\n%file%'))
-ARTIST=${TRACK[0]}
-ALBUM=${TRACK[1]} # shellcheck disable=SC2034
-TITLE=${TRACK[2]}
-FILE=${TRACK[3]}
-STATUS=$(echo "${TRACK[4]}" | grep -o 'playing\|paused')
-PROGRESS=$(echo "${TRACK[4]}" | grep -o '[[:digit:]]*%' | tr -d '%')
-REPEAT=$(echo "${TRACK[5]}" | grep -o 'repeat: on' | sed -e's/^.*$/white/')
-SHUFFLE=$(echo "${TRACK[5]}" | grep -o 'random: on' | sed -e's/^.*$/white/')
-REPEAT_ICON=~/dotfiles/assets/repeat_${REPEAT:-grey}_18x18.xpm
-SHUFFLE_ICON=~/dotfiles/assets/shuffle_${SHUFFLE:-grey}_18x18.xpm
+    (0...width).map do |n|
+        part = (n == 0) ? :left : (n == width - 1) ? :right : :mid
+        segs = [ 0, subsegs - n * 3, 3 ].sort[1]
 
-MUSIC_DIR=$(sed -nr 's/^ *music_directory +"(.+)"/\1/p' ~/.mpdconf)
-DIR=$MUSIC_DIR/$(dirname "$FILE")
-if [[ ( ! -f "$DIR/cover.xpm" ) && ( -f "$DIR/cover.jpg" ) ]]
-then
-    convert "$DIR/cover.jpg" -resize 256x256^ -gravity center -extent 256x256 "$DIR/cover.xpm"
-fi
+        Progressbits.send :"#{type}_#{part}_#{segs}"
+    end.join
+end
 
-TARGET="$DIR/cover.xpm"
-COVERFILE=$(echo /tmp/.music-cover-*.xpm)
 
-# if the temp file isn't already pointing to the right cover...
-if [[ "$(readlink "$COVERFILE")" != "$TARGET" ]]
-then
-    # prevent dzen from caching art
-    rm /tmp/.music-cover-*.xpm
-    COVERFILE="/tmp/.music-cover-${RANDOM}.xpm"
-    ln -fs "$DIR/cover.xpm" "$COVERFILE"
-fi
+screen = JSON.parse(%x( bspc query -m focused -T ))['rectangle']
 
-STATUSINDICATOR=''
+TIME = 5
+HEIGHT = 28
 
-if [[ "$STATUS" = "paused" ]]
-then
-    STATUSINDICATOR='^pa(64;64)^r(48x128)^pa(144;64)^r(48x128)'
-fi
+stdin, stdout, wait = Open3.popen2 *%W( persist bar -t #{TIME} lemonbar
+    -g #{screen['width']}x#{HEIGHT}+#{screen['x']}+#{screen['y'] + screen['height'] - HEIGHT}
+    -f -*-tamsyn-medium-*-*-*-16-*-*-*-*-*-*-*
+    -f -*-tamsyn-bold-*-*-*-16-*-*-*-*-*-*-*
+    -f -*-siji-medium-*-*-*-10-*-*-*-*-*-*-* )
 
-### DANGER ZONE ###
-
-if [[ "$2" != "0" ]]
-then
-    ( for _ in $(seq 2 "$2"); do sleep 1s; music show 0; done ) & #YOLO
-fi
-
-###################
-
-echo "^ib(1)^pa(0;0)^i($COVERFILE)$STATUSINDICATOR^pa(16;264)$ARTIST^pa(16;290)$TITLE^pa(220;256)^fg(#1d1f21)^r(36x50)^fg()^pa(226;264)^i($REPEAT_ICON)^pa(226;290)^i($SHUFFLE_ICON)^pa(1;319)^r($((PROGRESS * 254 / 100))x2)" | \
-    persist music -t "$2" \
-    dzen2 -tw 256 -h 322 \
-        -x $DZEN_X -y $DZEN_Y \
-        -ta l -fn Droid\ Sans -bg '#1d1f21' -fg '#ffffff' \
-        -e 'onstart=uncollapse;
-            entertitle=;
-            enterslave=;leaveslave=;
-            button1=exit;button2=;button3=exit;
-            button4=;button5=;
-            key_Escape=exit'
+stdin.puts %Q(%{c}%{B#EF101010}    %{F#5ED633}#{title.chomp}    %{B-})

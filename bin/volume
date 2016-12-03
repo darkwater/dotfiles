@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+Process.daemon
+
 require 'json'
 require 'open3'
 
@@ -8,7 +10,7 @@ TIME  = 2
 
 mixer  = ARGV[0]
 action = ARGV[1]
-label  = ARGV[2] || 'Vol'
+label  = ARGV[2] || 'Volume'
 
 
 amixer = %x( amixer sget "#{mixer}" )
@@ -32,9 +34,12 @@ when /up|down/
 
     volume = (step / STEPS * 100).round
 
+    volume = [ 0, volume, 100 ].sort[1]
+
     %x( amixer sset #{mixer} #{volume}% )
 when /mute/
     enabled = !enabled
+    volume = volume.round
 
     %x( amixer sset #{mixer} #{enabled ? 'on' : 'off'} )
 end
@@ -84,15 +89,12 @@ end
 barcolor = enabled ? '' : '%{F#505050}'
 
 screen = JSON.parse(%x( bspc query -m focused -T ))['rectangle']
+HEIGHT = 28
 
-width = 256
-x = screen['x'] + (screen['width'] - width) / 2
-y = screen['y'] + (screen['height'] * 0.8).to_i
-
-stdin, stdout, wait = Open3.popen2 *%W( persist volume -t #{TIME} lemonbar -g #{width}x28+#{x}+#{y}
-    -F #efefef -B #ef101010
+stdin, stdout, wait = Open3.popen2 *%W( persist bar -t #{TIME} lemonbar
+    -g #{screen['width']}x#{HEIGHT}+#{screen['x']}+#{screen['y'] + screen['height'] - HEIGHT}
     -f -*-tamsyn-medium-*-*-*-16-*-*-*-*-*-*-*
     -f -*-tamsyn-bold-*-*-*-16-*-*-*-*-*-*-*
     -f -*-siji-medium-*-*-*-10-*-*-*-*-*-*-* )
 
-stdin.puts %Q(%{F-}%{c} #{label}  #{barcolor}#{progressbar(volume.to_f / 100, 16)} )
+stdin.puts %Q(%{c}%{B#EF101010}    %{F#DD9777}#{label}   %{F##{enabled ? 'D66733' : '444444'}}#{progressbar(volume.to_f / 100, 20)}   %{F#DD9777}#{enabled ? "#{volume.to_s.rjust(3)}%" : ' off'}    %{B-})
