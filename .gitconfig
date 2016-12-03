@@ -1,6 +1,6 @@
 [user]
     name = Sam Lakerveld
-    email = dark@novaember.com
+    email = darkwater124@gmail.com
 [core]
     editor = nvim
     excludesfile = /home/dark/.gitignore_global
