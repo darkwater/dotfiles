@@ -77,6 +77,12 @@ Lower speaker volume	ctrl + XF86AudioLowerVolume	volume Speaker down SPK
 Raise speaker volume	ctrl + XF86AudioRaiseVolume	volume Speaker up   SPK
 Mute speaker audio	ctrl + XF86AudioMute	volume Speaker mute SPK
 
+Play/pause music	XF86AudioPlay	music toggle
+Show currently playing	XF86AudioStop	music show
+Next track	XF86AudioNext	music next
+Prev track	XF86AudioPrev	music prev
+Select track	super + p	music select
+
 Take screenshot (select area)	Print	screentool -s -u novaember
 Take screenshot of desktop	ctrl + Print	screentool -S -u novaember
 Take screenshot of window	alt + Print	screentool -W -u novaember
