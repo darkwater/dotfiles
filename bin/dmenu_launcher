@@ -1,6 +1,5 @@
 #!/bin/bash
 
-screen=($(bspc query -m focused -T | json 'return this.rectangle' | grep -o '[[:digit:]]\+'))
-width=500
-
-dmenu_run -w $width -x $((screen[2] / 2 - width / 2)) -y $((screen[3] * 50 / 100)) -l 10 -fn 'Droid Sans Mono-10' -p '$'
+dmenu_run -i -l 5 -p 'Run ' -w 800 \
+        -nf '#5433d6' -nb '#101010' \
+        -sf '#d6d6d6' -sb '#221556'
