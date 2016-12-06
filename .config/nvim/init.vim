@@ -223,6 +223,9 @@ augroup end
 "" Mappings
 ""
 
+" Fix delete in st
+map <F1> <Del>
+
 " ^S for save
 nnoremap    <silent> <C-s>      :w<CR>
 vnoremap    <silent> <C-s>      <C-c>:w<CR>

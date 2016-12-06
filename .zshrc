@@ -30,15 +30,11 @@ export EDITOR=/usr/bin/nvim
 export GREP_COLOR='38;5;214;48;5;236'
 export RI="-Tf ansi -d doc"
 
-bindkey '\e[1;5D' emacs-backward-word
-bindkey '\e[1;5C' emacs-forward-word
-bindkey '\eOd' emacs-backward-word
-bindkey '\eOc' emacs-forward-word
-bindkey '\e[H' beginning-of-line
-bindkey '\e[F' end-of-line
-bindkey '\e[7~' beginning-of-line
-bindkey '\e[8~' end-of-line
-bindkey '\e[3~' delete-char
+bindkey '^[[1;5D' emacs-backward-word
+bindkey '^[[1;5C' emacs-forward-word
+bindkey '^[[H'    beginning-of-line
+bindkey '^[[4~'   end-of-line
+bindkey '^[[P'    delete-char
 
 
 if command -v pacaur > /dev/null; then
