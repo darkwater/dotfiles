@@ -6,19 +6,15 @@ require 'open3'
 action = ARGV[0]
 
 mpc = %x( mpc ).lines
-title = mpc[0]
 playing = mpc[1][/playing/] == 'playing'
 
 case action
 when /toggle/
     mpc = %x( mpc toggle ).lines
-    title = mpc[0]
 when /next/
     mpc = %x( mpc next ).lines
-    title = mpc[0]
 when /prev/
     mpc = %x( mpc prev ).lines
-    title = mpc[0]
 when /select/
     playlist = %x( mpc playlist ).lines.each_with_index.map { |song, i|
         [ song.chomp, i + 1 ]
@@ -41,52 +37,18 @@ when /select/
     exit
 end
 
-module Progressbits
-    { full_left_0:  "\ue27a",
-      full_left_1:  "\ue27d",
-      full_left_2:  "\ue27e",
-      full_left_3:  "\ue27f",
-      full_mid_0:   "\ue27b",
-      full_mid_1:   "\ue280",
-      full_mid_2:   "\ue281",
-      full_mid_3:   "\ue282",
-      full_right_0: "\ue27c",
-      full_right_1: "\ue283",
-      full_right_2: "\ue284",
-      full_right_3: "\ue285",
-      semi_left_0:  "\ue27a",
-      semi_left_1:  "\ue286",
-      semi_left_2:  "\ue287",
-      semi_left_3:  "\ue288",
-      semi_mid_0:   "\ue27b",
-      semi_mid_1:   "\ue289",
-      semi_mid_2:   "\ue28a",
-      semi_mid_3:   "\ue28b",
-      semi_right_0: "\ue27c",
-      semi_right_1: "\ue28c",
-      semi_right_2: "\ue28d",
-      semi_right_3: "\ue28e" }
-    .each_pair do |name, char|
-        define_singleton_method(name) { char }
-    end
-end
+title = mpc[0]
+progress = mpc[1][/(\d+)%/, 1].to_f / 100
 
-def progressbar(progress, width, type = :semi)
-    subsegs = (progress * width * 3).round
-
-    (0...width).map do |n|
-        part = (n == 0) ? :left : (n == width - 1) ? :right : :mid
-        segs = [ 0, subsegs - n * 3, 3 ].sort[1]
-
-        Progressbits.send :"#{type}_#{part}_#{segs}"
-    end.join
-end
-
-
-screen = JSON.parse(%x( bspc query -m focused -T ))['rectangle']
+text = "    #{title.chomp}    "
+progress_chars = text.length * progress
+text.insert(progress_chars, '%{-u}')
+text.insert(0, '%{+u}')
 
 TIME = 5
 HEIGHT = 28
+
+screen = JSON.parse(%x( bspc query -m focused -T ))['rectangle']
 
 stdin, stdout, wait = Open3.popen2 *%W( persist bar -t #{TIME} lemonbar
     -g #{screen['width']}x#{HEIGHT}+#{screen['x']}+#{screen['y'] + screen['height'] - HEIGHT}
@@ -94,4 +56,4 @@ stdin, stdout, wait = Open3.popen2 *%W( persist bar -t #{TIME} lemonbar
     -f -*-tamsyn-bold-*-*-*-16-*-*-*-*-*-*-*
     -f -*-siji-medium-*-*-*-10-*-*-*-*-*-*-* )
 
-stdin.puts %Q(%{c}%{B#EF101010}    %{F#5ED633}#{title.chomp}    %{B-})
+stdin.puts %Q(%{c}%{B#EF101010}%{F#5ed633}%{U#5ed633}#{text}%{B-})
