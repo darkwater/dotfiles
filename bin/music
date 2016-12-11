@@ -22,9 +22,7 @@ when /select/
     playlist.shuffle!
 
     selection = []
-    Open3.popen2 *%W( dmenu -i -l 5 -p #{"Play "} -w 800
-        -nf #5ed633 -nb #101010
-        -sf #d6d6d6 -sb #265615 ) do |stdin, stdout, wait|
+    Open3.popen2 *%W( dmenu -p Play -nf #5ed633 -sb #265615 ) do |stdin, stdout, wait|
         stdin.puts(playlist.map(&:first))
         stdin.close
 
@@ -34,7 +32,6 @@ when /select/
 
     i = selection.last
     mpc = %x( mpc play #{i} ).lines
-    exit
 end
 
 title = mpc[0]
