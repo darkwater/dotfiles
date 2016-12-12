@@ -245,9 +245,9 @@ vnoremap    <silent> <Home>     ^
 inoremap    <silent> <Home>     <C-o>^
 
 " ^G to jump to a tag
-nnoremap    <silent> <C-g>      :tselect /\C^
-vnoremap    <silent> <C-g>      <C-c>:tselect /\C^
-inoremap    <silent> <C-g>      <C-c>:tselect /\C^
+nnoremap             <C-g>      :tselect /\C^
+vnoremap             <C-g>      <C-c>:tselect /\C^
+inoremap             <C-g>      <C-c>:tselect /\C^
 
 " Easily jump to command line
 nnoremap    <silent> \          :
@@ -278,7 +278,7 @@ let mapleader = "\<Space>"
 let maplocalleader = "\<Space>"
 
 " Build with make by default
-nnoremap <silent> <leader><leader> :make<CR>
+nnoremap          <leader><leader> :nnoremap <silent> <LT>leader><LT>leader> :!
 
 " Startify
 nnoremap <silent> <leader>s  :Startify<CR>
