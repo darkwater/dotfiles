@@ -58,7 +58,7 @@ Move to desktop on tetriary screen	super + shift + ctrl + {1-9}	bspc node -d 3-{
 
 # wm independent hotkeys
 Spawn terminal	super + Return	st
-Run command	super + r	dmenu_launcher run
+Run command	super + r	priv-cmd
 Restart sxhkd	super + Escape	restart sxhkd
 
 Launch Neovim	super + n	st -e nvim
