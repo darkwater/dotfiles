@@ -24,8 +24,8 @@ Move window down	super + shift + j	bspc node -s south
 Move window up	super + shift + k	bspc node -s north
 Move window right	super + shift + l	bspc node -s east
 
-Switch to next window	super + c	bspc node -f next
-Switch to previous window	super + shift + c	bspc node -f prev
+Switch to next window	super + c	bspc node -f prev.local
+Switch to previous window	super + shift + c	bspc node -f next.local
 
 Circulate nodes counter-clockwise	super + comma	bspc node @/ -C forward
 Circulate nodes clockwise	super + period	bspc node @/ -C backward
