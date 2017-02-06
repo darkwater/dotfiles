@@ -24,8 +24,9 @@ Plug 'benekastah/neomake'
 Plug 'godlygeek/tabular'
 
 " Specific language enhancers
-Plug 'idanarye/vim-dutyl',  { 'for': 'd'   }
-Plug 'lervag/vimtex',       { 'for': 'tex' }
+Plug 'idanarye/vim-dutyl',   { 'for': 'd'   }
+Plug 'lervag/vimtex',        { 'for': 'tex' }
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 
 " Miscellaneous shit
 Plug 'vim-scripts/JavaDecompiler.vim'
@@ -42,6 +43,8 @@ Plug 'groenewege/vim-less'
 Plug 'derekwyatt/vim-scala'
 Plug 'Darkwater/kotlin-vim'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml'
 
 " Plug '~/projects/agitated/'
 
@@ -61,7 +64,7 @@ set list
 set number
 set ruler
 set showcmd
-set showmode
+set noshowmode
 set smartcase
 set splitbelow
 set splitright
@@ -114,6 +117,12 @@ filetype plugin indent on
 """""""""""""""""""""""""
 "" Plugin configuration
 ""
+
+" Neovim (I know)
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+
+" Racer
+let g:racer_experimental_completer = 1
 
 " NERDTree
 let g:NERDTreeDirArrowExpandable = '+'
@@ -460,10 +469,12 @@ function! SetupEnvironment()
 
     endif
 
-    if &filetype == 'd'
-        let g:tab_completion_mapping = "\<C-x>\<C-o>"
-    else
-        let g:tab_completion_mapping = "\<C-n>"
+    if filereadable('dub.sdl') || filereadable('dub.json')
+
+        let &makeprg='dub'
+        let &errorformat='%f(%l\,%c):\ Error:\ %m'
+        nnoremap <leader><leader> :make<CR>
+
     endif
 
     if &filetype == 'ruby'
