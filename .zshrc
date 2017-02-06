@@ -2,7 +2,7 @@ HISTFILE=~/.zhistory
 HISTSIZE=10000
 SAVEHIST=100000
 
-export PATH=~/bin:~/dotfiles/bin:$PATH
+export PATH="~/.cargo/bin:~/bin:~/dotfiles/bin:$PATH:/usr/sbin:/sbin"
 
 if command -v cope_path > /dev/null; then
     export PATH=$(cope_path):$PATH
@@ -11,13 +11,15 @@ fi
 setopt appendhistory autocd notify hist_ignore_all_dups hist_ignore_space
 unsetopt extendedglob nomatch beep
 
-bindkey -e
+bindkey -v
 
 zstyle :compinstall filename ~/.zshrc
 zstyle ':completion:*' matcher-list 'm:{A-ZÄÖÜÉÈËa-zäöüéèë}={a-zäöüéèëA-ZÄÖÜÉÈË}' '+l:|=*'
+zstyle ':completion::complete:*' use-cache 1
 
-autoload -Uz compinit
+autoload -Uz compinit promptinit
 compinit
+promptinit; prompt gentoo
 
 
 stty stop '' -ixon -ixoff
