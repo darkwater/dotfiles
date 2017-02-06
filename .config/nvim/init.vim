@@ -278,6 +278,9 @@ nnoremap    <silent> <BS>       :nohlsearch<CR>
 
 nnoremap    <silent> <Tab>      <C-w><C-w>
 
+nnoremap    <silent> <PageUp>   <C-u>
+nnoremap    <silent> <PageDown> <C-d>
+
 
 """"""""""""""""""""
 "" Leader mappings
