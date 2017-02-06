@@ -2,7 +2,7 @@ HISTFILE=~/.zhistory
 HISTSIZE=10000
 SAVEHIST=100000
 
-export PATH="~/.cargo/bin:~/bin:~/dotfiles/bin:$PATH:/usr/sbin:/sbin"
+export PATH="$HOME/.cargo/bin:$HOME/bin:$HOME/dotfiles/bin:$PATH:/usr/sbin:/sbin"
 
 if command -v cope_path > /dev/null; then
     export PATH=$(cope_path):$PATH
