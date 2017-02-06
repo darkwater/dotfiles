@@ -6,7 +6,7 @@ require 'open3'
 action = ARGV[0]
 
 mpc = %x( mpc ).lines
-playing = mpc[1][/playing/] == 'playing'
+playing = mpc[1][/playing/] == 'playing' rescue false
 
 case action
 when /toggle/
