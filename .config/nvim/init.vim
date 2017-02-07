@@ -276,8 +276,13 @@ nnoremap    <silent> ]q         :cn<CR>
 " Remove hlsearch
 nnoremap    <silent> <BS>       :nohlsearch<CR>
 
+" Jump to next window
 nnoremap    <silent> <Tab>      <C-w><C-w>
 
+" Select pum items with enter
+inoremap    <expr>   <Enter>    InsertEnterWrapper()
+
+" Scroll half pages with pgup/dn
 nnoremap    <silent> <PageUp>   <C-u>
 nnoremap    <silent> <PageDown> <C-d>
 
@@ -416,6 +421,16 @@ function! InsertTabWrapper()
     else
         return &omnifunc == '' ? "\<C-n>" : "\<C-x>\<C-o>"
     endif
+endfunction
+
+
+" Select current pum item, or insert newline when no pum visible
+function! InsertEnterWrapper()
+    if pumvisible()
+        return "\<C-x>"
+    endif
+
+    return "\<Enter>"
 endfunction
 
 
