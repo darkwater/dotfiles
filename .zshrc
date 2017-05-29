@@ -84,7 +84,7 @@ local time="%{$fg[yellow]%}%T"
 local user_host="%{$fg[green]%}%n@%m"
 local current_dir="%{$fg[blue]%}%~"
 
-local prompt_indicator="%{$fg_bold[yellow]%}>"
+local prompt_indicator="%{$fg_bold[white]%}$"
 
 PROMPT='$(zsh_prompt)'
 
@@ -123,10 +123,12 @@ function git_info() {
 }
 
 function zsh_prompt() {
+    local line="%{$fg_bold[green]%(?..$fg_bold[red])%} ▎"
+
     echo
-    echo -n "$return_code"
-    echo    " $time $separator $user_host $separator $current_dir $(git_info)"
-    echo -n "$prompt_indicator "
+    echo -n "%(?..$line %?\n)"
+    echo    "$line $time $separator $user_host $separator $current_dir $(git_info)"
+    echo -n "$line $prompt_indicator "
 
     # color reset
     echo -n "%{$reset_color%}"
