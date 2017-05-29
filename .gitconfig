@@ -49,7 +49,7 @@
     head = !git r -1
     h = !git head
     hp = "!. ~/.githelpers && show_git_head"
-    r = !GIT_NO_PAGER=1 git l -20
+    r = !GIT_NO_PAGER=1 git l "-$(($(tput lines) / 6))"
     ra = !git r --all
     l = "!. ~/.githelpers && pretty_git_log"
     la = !git l --all
