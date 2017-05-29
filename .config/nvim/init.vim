@@ -9,7 +9,6 @@
 call plug#begin()
 
 " UI plugins
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 Plug 'majutsushi/tagbar',   { 'on': 'Tagbar'   }
 Plug 'mhinz/vim-startify'
@@ -24,27 +23,25 @@ Plug 'benekastah/neomake'
 Plug 'godlygeek/tabular'
 
 " Specific language enhancers
-Plug 'idanarye/vim-dutyl',   { 'for': 'd'   }
-Plug 'lervag/vimtex',        { 'for': 'tex' }
-Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+Plug 'lervag/vimtex', { 'for': 'tex' }
 
 " Miscellaneous shit
-Plug 'vim-scripts/JavaDecompiler.vim'
-Plug 'moll/vim-bbye'
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 Plug 'danchoi/ri.vim'
+Plug 'moll/vim-bbye'
+Plug 'Shougo/echodoc.vim'
 
 " Extra syntax support
-Plug 'hail2u/vim-css3-syntax'
-Plug 'dag/vim-fish'
-Plug 'tikhomirov/vim-glsl'
-Plug 'tfnico/vim-gradle'
-Plug 'othree/html5.vim'
-Plug 'groenewege/vim-less'
-Plug 'derekwyatt/vim-scala'
-Plug 'Darkwater/kotlin-vim'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
+Plug 'darkwater/kotlin-vim'
+Plug 'groenewege/vim-less'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'mboughaba/i3config.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'othree/html5.vim'
+Plug 'rust-lang/rust.vim'
+Plug 'tfnico/vim-gradle'
+Plug 'tikhomirov/vim-glsl'
 
 " Plug '~/projects/agitated/'
 
@@ -120,6 +117,11 @@ filetype plugin indent on
 
 " Neovim (I know)
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ }
 
 " Racer
 let g:racer_experimental_completer = 1
@@ -286,6 +288,11 @@ inoremap    <expr>   <Enter>    InsertEnterWrapper()
 nnoremap    <silent> <PageUp>   <C-u>
 nnoremap    <silent> <PageDown> <C-d>
 
+" Language server features
+nnoremap    <silent> K          :call LanguageClient_textDocument_hover()<CR>
+nnoremap    <silent> gd         :call LanguageClient_textDocument_definition()<CR>
+nnoremap    <silent> gr         :call LanguageClient_textDocument_rename()<CR>
+
 
 """"""""""""""""""""
 "" Leader mappings
@@ -316,6 +323,14 @@ nnoremap <silent> <leader>mp :call jobstart(['md', expand('%')])<CR>
 nnoremap <silent> <leader>vh :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
             \ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name")
             \ . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" Tabular
+nnoremap <silent> <leader>t= :Tabularize / \zs=\ze <CR>
+nnoremap <silent> <leader>t. :Tabularize /=><CR>
+nnoremap <silent> <leader>t> :Tabularize /=><CR>
+nnoremap <silent> <leader>t; :Tabularize /:\zs /l0<CR>
+nnoremap <silent> <leader>t: :Tabularize /:\zs /l0<CR>
+nnoremap <silent> <leader>t, :Tabularize /,\zs /l0<CR>
 
 
 """"""""""""""""""""""""

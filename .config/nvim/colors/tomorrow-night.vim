@@ -281,7 +281,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("MoreMsg",       s:green,       "",            "none")
     call <SID>X("Question",      s:green,       "",            "none")
     call <SID>X("WarningMsg",    s:red,         "",            "none")
-    call <SID>X("MatchParen",    "",            s:selection,   "none")
+    call <SID>X("MatchParen",    s:red,         s:black,       "none")
     call <SID>X("Folded",        s:comment,     s:background,  "none")
     call <SID>X("FoldColumn",    "",            s:background,  "none")
     call <SID>X("ErrorMsg",      s:red,         s:black,       "bold")
