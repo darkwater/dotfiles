@@ -304,7 +304,7 @@ if has("gui_running") || &t_Co == 88 || &t_Co == 256
     call <SID>X("TabLineModified",      s:accent,   "",  "bold")
 
     " Standard
-    call <SID>X("Comment",       s:comment,     "",         "")
+    call <SID>X("Comment",       s:comment,     "",         "italic")
     call <SID>X("Constant",      s:orange,      "",         "")
     call <SID>X("String",        s:green,       "",         "")
     call <SID>X("Character",     s:orange,      "",         "")

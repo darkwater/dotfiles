@@ -78,6 +78,7 @@ set encoding=utf8
 set fillchars+=vert:/
 set foldcolumn=1
 set foldmethod=marker
+set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
 set history=1000
 set laststatus=0
 set listchars+=nbsp:%
