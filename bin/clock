@@ -1,3 +1,0 @@
-#!/bin/sh
-
-date +%H:%M | persist clock -t $1 dzen2 -x -80 -y -31 -w 80 -h 30 -fn "Droid Sans Mono"

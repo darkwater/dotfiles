@@ -1,3 +1,0 @@
-#!/bin/bash
-
-dmenu_run -p Run -nf '#5433d6' -sb '#221556'

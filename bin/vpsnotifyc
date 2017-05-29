@@ -1,7 +1,0 @@
-#!/usr/bin/bash
-
-ssh nv 'echo "start of notifications" > /tmp/notifications-'$(whoami)
-
-ssh nv tail -f /tmp/notifications-$(whoami) | while read line; do
-    echo "$line" | tr '\01' '\n' | xargs -d'\n' notify-send
-done
