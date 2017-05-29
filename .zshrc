@@ -11,7 +11,7 @@ fi
 setopt appendhistory autocd notify hist_ignore_all_dups hist_ignore_space
 unsetopt extendedglob nomatch beep
 
-bindkey -v
+bindkey -e
 
 zstyle :compinstall filename ~/.zshrc
 zstyle ':completion:*' matcher-list 'm:{A-ZÄÖÜÉÈËa-zäöüéèë}={a-zäöüéèëA-ZÄÖÜÉÈË}' '+l:|=*'
@@ -75,11 +75,11 @@ function startblog()
 function ll()
 {
     if test \( "$PWD" = "$HOME" -a $# = 0 \) -o "$1" = ~; then
-        ls -hlF --color=auto --group-directories-first $argv
+        ls -hlF --color=auto --group-directories-first "$@"
         return
     fi
 
-    ls -halF --color=auto --group-directories-first $argv
+    ls -halF --color=auto --group-directories-first "$@"
 }
 
 function downloads()
