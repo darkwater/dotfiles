@@ -1,8 +1,4 @@
 dotfiles
 ========
 
-NOTHING WORKS
-
-EVERYTHING IS BROKEN
-
-YELL AT ME IN #NOVAEMBER ON FREENODE
+i dont use this repo anymore, i'll soon come up with a better way
