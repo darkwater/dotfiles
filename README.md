@@ -1,4 +1,4 @@
 dotfiles
 ========
 
-i dont use this repo anymore, i'll soon come up with a better way
+im using this repo again, maybe ill even document it someday
