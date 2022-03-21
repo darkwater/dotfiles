@@ -15,11 +15,39 @@ alias g="git"
 alias s="ssh"
 alias x="cargo xtask"
 
-alias ssc="sudo systemctl"
 alias scu="systemctl --user"
+alias ssc="sudo systemctl"
+alias svim="sudo nvim"
+alias sps="sudo pacman -S"
+alias spsyu="sudo pacman -Syu"
+alias pss="pacman -Ss"
+alias pql="pacman -Ql"
+
+alias ip="ip --color=always"
 
 exists() { command -v $1 >/dev/null }
 exists exa && alias ls=exa
+
+l() {
+    # -aa only in $HOME and without arguments
+    aa="$([[ "$(pwd)" = "$HOME" && "$#" = 0 ]] || echo -n aa)"
+    ls -Flg$aa --group-directories-first "$@"
+}
+
+sl() {
+    # ls -aa only in $HOME and without arguments
+    aa="$([[ "$(pwd)" = "$HOME" && "$#" = 0 ]] || echo -n aa)"
+    sudo ls -Flg$aa --group-directories-first "$@"
+}
+
+downloads() {
+    cd ~/?ownloads/
+    ls -Fal -tcreated --color=always | head -n 11 | tail | tac
+}
+
+man() {
+    nvim +"Man $*" +only
+}
 
 autoload -Uz compinit promptinit colors
 compinit
@@ -50,23 +78,6 @@ export EDITOR="nvim"
 # program settings
 export GREP_COLORS='sl=:cx=38;5;242:rv:mt=38;5;214'
 export LS_COLORS='rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;40:st=37;44:ex=01;32:'
-
-l() {
-    # -aa only in $HOME and without arguments
-    aa="$([[ "$(pwd)" = "$HOME" && "$#" = 0 ]] || echo -n aa)"
-    ls -Flg$aa --group-directories-first "$@"
-}
-
-sl() {
-    # ls -aa only in $HOME and without arguments
-    aa="$([[ "$(pwd)" = "$HOME" && "$#" = 0 ]] || echo -n aa)"
-    sudo ls -Flg$aa --group-directories-first "$@"
-}
-
-function downloads() {
-    cd ~/?ownloads/
-    ls -hAlt --color=always | head -n 11 | tail | tac
-}
 
 # tty colorscheme
 if test "$TERM" = "linux"; then
@@ -125,7 +136,7 @@ genps1() {
     fi
 
     echo -n " $blue%~"
-    echo -n "%(!.$bred # .$aqua ◆ )$reset"
+    echo -n "%(!.$bred # .$aqua %{\xe2\x97%}\x86 )$reset"
 }
 PS1="$(genps1)"
 
@@ -179,7 +190,7 @@ export GPG_TTY=$(tty)
 
 test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
 
-if it2check; then
+if it2check 2>/dev/null; then
     _update_it2_touchbar() {
         it2setkeylabel push zsh_$$
 
