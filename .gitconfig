@@ -1,3 +1,6 @@
+[core]
+    pager = delta
+
 [user]
 	email = dark@dark.red
 	name = Sam Lakerveld
@@ -24,6 +27,7 @@
     pou = "push -u origin"
 
 [pager]
+    blame = delta
     diff = delta
     log = delta
     reflog = delta
@@ -32,8 +36,15 @@
 [delta]
     plus-style = "syntax #012800"
     minus-style = "syntax #340001"
-    syntax-theme = Monokai Extended
+    syntax-theme = base16
     navigate = true
+    hyperlinks = true
 
 [interactive]
     diffFilter = delta --color-only
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
