@@ -16,6 +16,7 @@ check() {
 }
 
 check ~/.config/dunst
+check ~/.config/i3
 check ~/.config/nvim
 check ~/.gitconfig
 check ~/.Xresources
