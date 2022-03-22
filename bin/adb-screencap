@@ -1,7 +1,0 @@
-#!/bin/sh
-
-adb shell 'screencap /sdcard/adb-screencap.png'
-adb pull /sdcard/adb-screencap.png /tmp/
-adb shell 'rm /sdcard/adb-screencap.png'
-
-feh /tmp/adb-screencap.png

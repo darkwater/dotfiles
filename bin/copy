@@ -1,4 +1,0 @@
-#!/bin/sh
-
-echo "$*" | xclip
-xclip -o | xclip -selection c

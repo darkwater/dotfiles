@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-chromium-app "file://$(realpath "$1")"
