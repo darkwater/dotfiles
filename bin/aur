@@ -1,0 +1,55 @@
+#!/bin/bash
+
+set -e
+
+main() {
+    if [[ $# -eq 2 ]]; then
+        cd ~/aur/
+        git clone "https://aur.archlinux.org/$2.git"
+        cd "$2"
+        export ZSH_PROMPT_AUR_PKG="$2"
+        exec zsh
+    fi
+
+    query "$@"
+}
+
+query() {
+    query="$*"
+
+    curl --get -s \
+        --data-urlencode "v=5" \
+        --data-urlencode "type=search" \
+        --data-urlencode "arg=$query" \
+        "https://aur.archlinux.org/rpc" \
+        | jq -r '
+                "\u001b[31;1m" as $bold_red |
+                "\u001b[32;1m" as $bold_green |
+                "\u001b[33;1m" as $bold_yellow |
+                "\u001b[34;1m" as $bold_blue |
+                "\u001b[35;1m" as $bold_purple |
+                "\u001b[36;1m" as $bold_teal |
+                "\u001b[37;1m" as $bold_white |
+                "\u001b[0m" as $reset |
+
+                if .type == "search"
+                then .results
+                    | sort_by(.Popularity)
+                    | map("\($bold_yellow)\(.Maintainer)/"
+                        + "\($bold_white)\(.Name) "
+                        + "\($bold_green)\(.Version) "
+                        + "\($bold_purple)[\(.NumVotes) votes |"
+                            + " pop \(.Popularity * 10 | floor | . / 10)]"
+                        + (if .OutOfDate != null
+                            then " \($bold_red)[Outdated \(.OutOfDate | strftime("%d %b %Y"))]"
+                            else ""
+                            end)
+                        + "\($reset)\n"
+                        + "    \(.Description)")
+                    | .[]
+                else .
+                end
+            '
+}
+
+main "$@"

@@ -129,6 +129,7 @@ genps1() {
     echo -n "%}"
 
     echo
+    [[ -n "$ZSH_PROMPT_AUR_PKG" ]] && echo -n "%{\e[33;1m%}[$ZSH_PROMPT_AUR_PKG] "
     echo -n "%{\e]133;A\a$(hostname_color "$(hostname)")%} %m $reset"
 
     if [[ "$(whoami)" != "dark" ]]; then
