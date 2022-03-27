@@ -39,7 +39,6 @@ bindsym $Super+Shift+c reload
 bindsym $Super+Shift+r restart
 
 bindsym $Super+Return       exec --no-startup-id alacritty
-bindsym $Super+$Alt+p       exec --no-startup-id alacritty -e /home/dark/sd/bw-shell
 bindsym $Super+$Alt+Return  exec rofi -modi ssh -show ssh
 bindsym $Super+Tab          exec rofi -modi window -show window
 bindsym $Super+r            exec "rofi -modi drun,run -show drun"
