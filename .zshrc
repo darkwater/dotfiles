@@ -7,6 +7,8 @@ setopt notify
 setopt prompt_subst
 unsetopt beep
 
+export PATH="$HOME/dotfiles/bin:$PATH"
+
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
