@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec mpv "https://twitch.tv/$1"
