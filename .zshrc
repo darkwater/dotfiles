@@ -23,6 +23,7 @@ alias svim="sudo nvim"
 alias sps="sudo pacman -S"
 alias spsyu="sudo pacman -Syu"
 alias pss="pacman -Ss"
+alias psi="pacman -Si"
 alias pql="pacman -Ql"
 
 alias ip="ip --color=always"
