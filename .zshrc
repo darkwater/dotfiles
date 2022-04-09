@@ -26,7 +26,7 @@ alias pss="pacman -Ss"
 alias psi="pacman -Si"
 alias pql="pacman -Ql"
 
-alias ip="ip --color=always"
+alias ip="ip --color=auto"
 
 exists() { command -v $1 >/dev/null }
 exists exa && alias ls=exa
@@ -191,6 +191,10 @@ bindkey "^T" transpose-chars
 bindkey "^F" fzf-file-widget
 
 export GPG_TTY=$(tty)
+
+NPM_PACKAGES="${HOME}/.npm-packages"
+export PATH="$PATH:$NPM_PACKAGES/bin"
+export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
 test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
 
