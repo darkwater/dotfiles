@@ -26,6 +26,8 @@ alias spsyu="sudo pacman -Syu"
 alias pss="pacman -Ss"
 alias psi="pacman -Si"
 alias pql="pacman -Ql"
+alias sai="sudo apt install"
+alias apts="apt search"
 
 alias ip="ip --color=auto"
 
