@@ -17,6 +17,7 @@ alias g="git"
 alias s="ssh"
 alias x="cargo xtask"
 
+alias sysa="sysz -s active"
 alias scu="systemctl --user"
 alias ssc="sudo systemctl"
 alias svim="sudo nvim"
