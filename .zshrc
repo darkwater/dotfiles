@@ -43,7 +43,11 @@ l() {
 sl() {
     # ls -aa only in $HOME and without arguments
     aa="$([[ "$(pwd)" = "$HOME" && "$#" = 0 ]] || echo -n aa)"
-    sudo ls -Flg$aa --group-directories-first "$@"
+    if exists exa; then
+        sudo exa -Flg$aa --group-directories-first "$@"
+    else
+        sudo ls -Flg$aa --group-directories-first "$@"
+    fi
 }
 
 downloads() {
