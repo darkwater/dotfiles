@@ -21,11 +21,14 @@ alias sysa="sysz -s active"
 alias scu="systemctl --user"
 alias ssc="sudo systemctl"
 alias svim="sudo nvim"
+alias sd="sudo docker"
+
 alias sps="sudo pacman -S"
 alias spsyu="sudo pacman -Syu"
 alias pss="pacman -Ss"
 alias psi="pacman -Si"
 alias pql="pacman -Ql"
+
 alias sai="sudo apt install"
 alias apts="apt search"
 
