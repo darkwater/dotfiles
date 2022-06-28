@@ -26,11 +26,11 @@ FileUtils.cd File.dirname(__FILE__) do
         case line
         when /^ M/, /^MM/
             added, deleted = `git diff --numstat #{Shellwords.escape(filename)}`.split("\t")[0..1].map(&:to_i)
-            commit filename, "Modified +#{added} -#{deleted} in #{filename}"
+            commit filename, "modified +#{added} -#{deleted} in #{filename}"
         when /^ A/, /^A./, /^\?\?/
-            commit filename, "Added #{filename}"
+            commit filename, "added #{filename}"
         when /^ D/, /^D./
-            commit filename, "Deleted #{filename}"
+            commit filename, "deleted #{filename}"
         end
     end
 
