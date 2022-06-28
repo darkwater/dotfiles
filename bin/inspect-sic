@@ -1,0 +1,15 @@
+#!/bin/bash
+
+case "$1" in
+    hub) offset=0x080ff800 ;;
+    rly) offset=0x0803f800 ;;
+esac
+
+if [[ -z "$offset" ]]; then
+    echo "expected hub or rly";
+    exit 1
+fi
+
+rm -f /tmp/conf.bin
+st-flash read /tmp/conf.bin $offset 64
+sicc parse /tmp/conf.bin
