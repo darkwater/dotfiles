@@ -145,15 +145,27 @@ if exists("g:vscode")
     nnoremap <Space>wq <Cmd>call VSCodeNotify("workbench.action.closeActiveEditor")<CR>
     nnoremap <Space>wQ <Cmd>call VSCodeNotify("workbench.action.closeOtherEditors")<CR>
     nnoremap <Space>w= <Cmd>call VSCodeNotify("workbench.action.evenEditorWidths")<CR>
+    nnoremap <Space>wh <Cmd>call VSCodeNotify("workbench.action.focusLeftGroup")<CR>
+    nnoremap <Space>wj <Cmd>call VSCodeNotify("workbench.action.focusBelow")<CR>
+    nnoremap <Space>wk <Cmd>call VSCodeNotify("workbench.action.focusAboveGroup")<CR>
+    nnoremap <Space>wl <Cmd>call VSCodeNotify("workbench.action.focusRightGroup")<CR>
+    nnoremap <Space>wH <Cmd>call VSCodeNotify("workbench.action.moveEditorToLeftGroup")<CR>
+    nnoremap <Space>wJ <Cmd>call VSCodeNotify("workbench.action.moveEditorToBelowGroup")<CR>
+    nnoremap <Space>wK <Cmd>call VSCodeNotify("workbench.action.moveEditorToAboveGroup")<CR>
+    nnoremap <Space>wL <Cmd>call VSCodeNotify("workbench.action.moveEditorToRightGroup")<CR>
+    nnoremap <Space>w< <Cmd>call VSCodeNotify("workbench.action.moveEditorLeftInGroup")<CR>
+    nnoremap <Space>w> <Cmd>call VSCodeNotify("workbench.action.moveEditorRightInGroup")<CR>
 
     nnoremap <Space>dd <Cmd>call VSCodeNotify("workbench.action.debug.start")<CR>
     nnoremap <Space>dD <Cmd>call VSCodeNotify("workbench.action.debug.run")<CR>
     nnoremap <Space>dc <Cmd>call VSCodeNotify("workbench.action.debug.continue")<CR>
+    nnoremap <Space>dC <Cmd>call VSCodeNotify("workbench.action.debug.pause")<CR>
+    nnoremap <Space>dr <Cmd>call VSCodeNotify("workbench.action.debug.restart")<CR>
     nnoremap <Space>ds <Cmd>call VSCodeNotify("workbench.action.debug.stop")<CR>
     nnoremap <Space>dS <Cmd>call VSCodeNotify("workbench.action.debug.disconnect")<CR>
     nnoremap <Space>db <Cmd>call VSCodeNotify("editor.debug.action.toggleBreakpoint")<CR>
     nnoremap <Space>dB <Cmd>call VSCodeNotify("editor.debug.action.toggleInlineBreakpoint")<CR>
-    nnoremap <Space>ds <Cmd>call VSCodeNotify("workbench.action.debug.stepInto")<CR>
+    nnoremap <Space>di <Cmd>call VSCodeNotify("workbench.action.debug.stepInto")<CR>
     nnoremap <Space>do <Cmd>call VSCodeNotify("workbench.action.debug.stepOver")<CR>
     nnoremap <Space>df <Cmd>call VSCodeNotify("workbench.action.debug.stepOut")<CR>
 
