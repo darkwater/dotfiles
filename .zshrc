@@ -14,6 +14,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 alias g="git"
+alias r="bundle exec rails"
 alias s="ssh"
 alias x="cargo xtask"
 
@@ -242,3 +243,6 @@ if it2check 2>/dev/null; then
     add-zsh-hook precmd _update_it2_touchbar
     add-zsh-hook preexec _restore_it2_touchbar
 fi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
