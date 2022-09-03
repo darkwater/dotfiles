@@ -98,7 +98,7 @@ set numberwidth=6
 set pastetoggle=<F11>
 set pumblend=8
 set switchbuf=useopen
-set textwidth=80
+set textwidth=0
 set tildeop
 set timeoutlen=800
 set ttimeoutlen=5
