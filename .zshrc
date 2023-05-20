@@ -16,7 +16,9 @@ SAVEHIST=10000
 alias g="git"
 alias r="bundle exec rails"
 alias s="ssh"
+alias c="cargo"
 alias x="cargo xtask"
+alias om="overmind"
 
 alias sysa="sysz -s active"
 alias scu="systemctl --user"
@@ -44,6 +46,9 @@ l() {
     ls -Flg$aa --group-directories-first "$@"
 }
 
+alias lr="ls -Flgaa -snew"
+alias lt="ls -Flg --tree --level=3"
+
 sl() {
     # ls -aa only in $HOME and without arguments
     aa="$([[ "$(pwd)" = "$HOME" && "$#" = 0 ]] || echo -n aa)"
@@ -56,7 +61,7 @@ sl() {
 
 downloads() {
     cd ~/?ownloads/
-    ls -Fal -tcreated --color=always | head -n 11 | tail | tac
+    exa -Fal -snew --color=always | tail
 }
 
 man() {
@@ -116,11 +121,12 @@ fi
 
 # prompt
 hostname_color() {
-    case "$1" in
+    case "$(hostname | cut -d. -f1)" in
         tetsuya) echo -n "\e[1;38;2;159;204;225;48;2;27;27;38m"   ;;
         nagumo)  echo -n "\e[1;38;2;206;16;21;48;2;36;28;22m"     ;;
         fubuki)  echo -n "\e[1;38;2;250;250;250;48;2;81;114;142m" ;;
         sinon)   echo -n "\e[1;38;2;196;252;227;48;2;48;42;3m"    ;;
+        atsushi) echo -n "\e[1;38;2;189;155;235;48;2;50;50;50m"   ;;
         *)       echo -n "\e[1;38;2;200;200;200;48;2;50;50;50m"   ;;
     esac
 }
@@ -144,7 +150,7 @@ genps1() {
 
     echo
     [[ -n "$ZSH_PROMPT_AUR_PKG" ]] && echo -n "%{\e[33;1m%}[$ZSH_PROMPT_AUR_PKG] "
-    echo -n "%{\e]133;A\a$(hostname_color "$(hostname)")%} %m $reset"
+    echo -n "%{\e]133;A\a$(hostname_color)%} %m $reset"
 
     if [[ "$(whoami)" != "dark" ]]; then
         echo -n " ${bred}[%n]$reset"
@@ -242,6 +248,12 @@ if it2check 2>/dev/null; then
     autoload add-zsh-hook
     add-zsh-hook precmd _update_it2_touchbar
     add-zsh-hook preexec _restore_it2_touchbar
+fi
+
+unsetopt extendedglob
+
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
