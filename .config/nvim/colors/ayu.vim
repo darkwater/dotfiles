@@ -16,7 +16,7 @@ let s:palette = {}
 
 let s:palette.bg        = {'dark': "#0F1419",  'light': "#FAFAFA",  'mirage': ""} " #212733
 
-let s:palette.comment   = {'dark': "#5C6773",  'light': "#ABB0B6",  'mirage': "#5C6773"}
+let s:palette.comment   = {'dark': "#5C6773",  'light': "#ABB0B6",  'mirage': "#6C7783"}
 let s:palette.markup    = {'dark': "#F07178",  'light': "#F07178",  'mirage': "#F07178"}
 let s:palette.constant  = {'dark': "#FFEE99",  'light': "#A37ACC",  'mirage': "#D4BFFF"}
 let s:palette.operator  = {'dark': "#E7C547",  'light': "#E7C547",  'mirage': "#80D4FF"}
@@ -268,10 +268,15 @@ hi! link diffAdded String
 "   diffSubname
 "   diffComment
 
+" Other stuff
+
+hi! link helpExample String
+hi! link helpCommand String
+
 "}}}
 "
 " This is needed for some reason: {{{
 
-let &background = s:style
+"let &background = s:style
 
 " }}}
