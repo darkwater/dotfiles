@@ -13,10 +13,16 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
+alias f="flutter"
+alias fr="flutter run"
+alias fp="flutter pub"
+alias fpbr="flutter pub run build_runner run"
+alias fpbw="flutter pub run build_runner watch"
+
+alias c="cargo"
 alias g="git"
 alias r="bundle exec rails"
 alias s="ssh"
-alias c="cargo"
 alias x="cargo xtask"
 alias om="overmind"
 
@@ -127,6 +133,7 @@ hostname_color() {
         fubuki)  echo -n "\e[1;38;2;250;250;250;48;2;81;114;142m" ;;
         sinon)   echo -n "\e[1;38;2;196;252;227;48;2;48;42;3m"    ;;
         atsushi) echo -n "\e[1;38;2;189;155;235;48;2;50;50;50m"   ;;
+        winbox)  echo -n "\e[1;38;2;159;204;225;48;2;27;27;88m"   ;;
         *)       echo -n "\e[1;38;2;200;200;200;48;2;50;50;50m"   ;;
     esac
 }
