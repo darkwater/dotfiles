@@ -14,7 +14,7 @@ let g:colors_name = "ayu"
 
 let s:palette = {}
 
-let s:palette.bg        = {'dark': "#0F1419",  'light': "#FAFAFA",  'mirage': ""} " #212733
+let s:palette.bg        = {'dark': "#0F1419",  'light': "#FAFAFA",  'mirage': "#212733"} " #212733
 
 let s:palette.comment   = {'dark': "#5C6773",  'light': "#ABB0B6",  'mirage': "#6C7783"}
 let s:palette.markup    = {'dark': "#F07178",  'light': "#F07178",  'mirage': "#F07178"}
@@ -81,9 +81,15 @@ exe "let s:fmt_revb = ' gui=NONE".s:r.s:b.  " cterm=NONE".s:r.s:b.  " term=NONE"
 "}}}
 
 
+exe "hi! TelescopePromptNormal"    .s:fg_fg        .s:bg_bg     .s:fmt_none
+exe "hi! TelescopeResultsNormal"   .s:fg_fg        .s:bg_panel  .s:fmt_none
+
+exe "hi! FloatBorder"              .s:fg_constant  .s:bg_none   .s:fmt_none
+
+
 " Vim Highlighting: (see :help highlight-groups)"{{{
 " ----------------------------------------------------------------------------
-exe "hi! Normal"        .s:fg_fg          .s:bg_bg          .s:fmt_none
+exe "hi! Normal"        .s:fg_fg          .s:bg_none        .s:fmt_none
 exe "hi! ColorColumn"   .s:fg_none        .s:bg_line        .s:fmt_none
 " Conceal, Cursor, CursorIM
 exe "hi! CursorColumn"  .s:fg_none        .s:bg_line        .s:fmt_none
@@ -94,12 +100,13 @@ exe "hi! LineNr"        .s:fg_guide       .s:bg_none        .s:fmt_none
 exe "hi! Directory"     .s:fg_fg_idle     .s:bg_none        .s:fmt_none
 exe "hi! DiffAdd"       .s:fg_string      .s:bg_panel       .s:fmt_none
 exe "hi! DiffChange"    .s:fg_tag         .s:bg_panel       .s:fmt_none
+exe "hi! DiffDelete"    .s:fg_markup      .s:bg_panel       .s:fmt_none
 exe "hi! DiffText"      .s:fg_fg          .s:bg_panel       .s:fmt_none
 exe "hi! ErrorMsg"      .s:fg_fg          .s:bg_error       .s:fmt_stnd
 exe "hi! VertSplit"     .s:fg_bg          .s:bg_none        .s:fmt_none
 exe "hi! Folded"        .s:fg_fg_idle     .s:bg_panel       .s:fmt_none
 exe "hi! FoldColumn"    .s:fg_none        .s:bg_panel       .s:fmt_none
-exe "hi! SignColumn"    .s:fg_none        .s:bg_panel       .s:fmt_none
+exe "hi! SignColumn"    .s:fg_none        .s:bg_none        .s:fmt_none
 "   Incsearch"
 
 exe "hi! MatchParen"    .s:fg_fg          .s:bg_bg          .s:fmt_undr
@@ -111,7 +118,7 @@ exe "hi! PmenuSel"      .s:fg_fg          .s:bg_selection   .s:fmt_revr
 "   PmenuSbar"
 "   PmenuThumb"
 exe "hi! Question"      .s:fg_string      .s:bg_none        .s:fmt_none
-exe "hi! Search"        .s:fg_bg          .s:bg_constant    .s:fmt_none
+exe "hi! Search"        .s:fg_bg          .s:bg_regexp      .s:fmt_none
 exe "hi! SpecialKey"    .s:fg_selection   .s:bg_none        .s:fmt_none
 exe "hi! SpellCap"      .s:fg_tag         .s:bg_none        .s:fmt_undr
 exe "hi! SpellLocal"    .s:fg_keyword     .s:bg_none        .s:fmt_undr
@@ -241,10 +248,10 @@ exe "hi! NERDTreeDirSlash"          .s:fg_accent     .s:bg_none        .s:fmt_no
 
 " GitGutter
 " ---------
-exe "hi! GitGutterAdd"          .s:fg_string     .s:bg_none        .s:fmt_none
-exe "hi! GitGutterChange"       .s:fg_tag        .s:bg_none        .s:fmt_none
-exe "hi! GitGutterDelete"       .s:fg_markup     .s:bg_none        .s:fmt_none
-exe "hi! GitGutterChangeDelete" .s:fg_function   .s:bg_none        .s:fmt_none
+exe "hi! GitSignsAdd"          .s:fg_string     .s:bg_none        .s:fmt_none
+exe "hi! GitSignsChange"       .s:fg_keyword    .s:bg_none        .s:fmt_none
+exe "hi! GitSignsDelete"       .s:fg_markup     .s:bg_none        .s:fmt_none
+exe "hi! GitSignsChangeDelete" .s:fg_function   .s:bg_none        .s:fmt_none
 
 "}}}
 
