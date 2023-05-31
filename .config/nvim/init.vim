@@ -1,19 +1,32 @@
 if $USER != "root"
     call plug#begin()
+
     Plug 'tpope/vim-characterize' " better ga
     Plug 'tpope/vim-commentary'   " toggle comments with gc
     Plug 'tpope/vim-repeat'       " more support for .
     Plug 'tpope/vim-rsi'          " readline-style insertion
     Plug 'tpope/vim-surround'     " surround with pairs
     Plug 'godlygeek/tabular'      " tabularize code
+
     if !exists("g:vscode")
+        Plug 'tpope/vim-surround'
+        Plug 'folke/which-key.nvim'
         Plug 'github/copilot.vim'
-        let g:copilot_filetypes = {
-            \ 'yaml': v:true,
-            \ }
+        Plug 'nvim-lua/plenary.nvim'
+        Plug 'stevearc/dressing.nvim' " optional for vim.ui.select
+        Plug 'akinsho/flutter-tools.nvim'
+        Plug 'nvchad/nvterm'
+        Plug 'nvim-telescope/telescope.nvim'
+        Plug 'lewis6991/gitsigns.nvim'
     endif
+
     call plug#end()
 endif
+
+nnoremap K <Cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap gd <Cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <Space>ca <Cmd>lua vim.lsp.buf.code_action()<CR>
+xnoremap <Space>ca <Cmd>lua vim.lsp.buf.range_code_action()<CR>
 
 nmap <F2> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
@@ -27,6 +40,8 @@ hi link helpExample Constant
 hi link helpCommand Constant
 
 " === mappings ===
+
+let g:mapleader = "\<Space>"
 
 " <Ctrl-s> to save
 nnoremap <C-s> :<C-u>w<CR>
@@ -48,6 +63,9 @@ cnoremap <C-e> <End>
 inoremap <C-U> <C-G>u<C-U>
 inoremap <C-W> <C-G>u<C-W>
 
+nmap <C-/> gcc
+vmap <C-/> gc
+
 " === settings ===
 
 " backup
@@ -66,7 +84,7 @@ set wildmenu
 
 " display
 set list
-set nowrap
+set wrap
 set number
 set relativenumber
 set scrolloff=5
@@ -101,7 +119,7 @@ set splitright
 set background=dark
 set backspace=start,eol,indent
 set cmdheight=1
-set completeopt=menu,longest,noselect
+set completeopt=menu,longest,noselect,preview
 set conceallevel=2
 set fillchars=fold:\ ,vert:\ ,
 set history=10000
@@ -117,12 +135,12 @@ set pumblend=8
 set switchbuf=useopen
 set textwidth=0
 set tildeop
-set timeoutlen=800
+set timeoutlen=300
 set ttimeoutlen=5
 set updatetime=400
 set viewoptions=cursor
 " set wildchar=<Tab>
-" set wildmode=longest
+set wildmode=longest:full
 set wildoptions=pum,tagfile
 set winblend=8
 set winminwidth=8
@@ -160,4 +178,11 @@ if exists("g:vscode")
     nnoremap <Space>  <Cmd>call VSCodeNotify("whichkey.show")<CR>
 
     nnoremap gf <Cmd>e <cWORD><CR>
+elseif $USER != "root"
+    lua require "config.dressing"
+    lua require "config.flutter"
+    lua require "config.git"
+    lua require "config.keybinds"
+    lua require "config.telescope"
+    lua require "config.terminal"
 endif
