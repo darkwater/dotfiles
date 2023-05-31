@@ -6,7 +6,7 @@
 	name = Sam Lakerveld
 
 [commit]
-	gpgsign = yes
+	gpgsign = no
 
 [init]
 	defaultBranch = master
