@@ -13,13 +13,17 @@ require 'fileutils'
 require 'shellwords'
 
 def commit(filename, message)
+    puts "committing #{filename}"
+
     `git add #{Shellwords.escape(filename)}`
     `git commit -m #{Shellwords.escape("auto: #{message}")}`
 end
 
 FileUtils.cd File.dirname(__FILE__) do
+    puts "resetting"
     `git reset`
 
+    puts "pulling"
     `git pull`
 
     `git status --porcelain`.each_line do |line|
@@ -36,5 +40,6 @@ FileUtils.cd File.dirname(__FILE__) do
         end
     end
 
+    puts "pushing"
     `git push`
 end
