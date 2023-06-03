@@ -33,22 +33,16 @@ keymap["<leader>"]["<leader>"].f.h = { Cmd("FlutterReload"), "Hot reload" }
 keymap["<leader>"]["<leader>"].f.d = { Cmd("FlutterDevices"), "Devices" }
 keymap["<leader>"]["<leader>"].f.s = { Cmd("FlutterQuit"), "Stop" }
 
-keymap["<leader>"]["'"] = {
-    function()
-        require("nvterm.terminal").toggle "vertical"
-    end,
-    "Toggle terminal",
-}
-
 keymap["<leader>"].f = { name = "+file" }
 keymap["<leader>"].f.s = { Cmd("source %"), "Source file" }
+keymap["<leader>"].f.f = { vim.lsp.buf.format, "Format file" }
 
 keymap["<leader>"].g = { name = "+git" }
 keymap["<leader>"].g.b = { Cmd("Telescope git_branches"), "Branches" }
 keymap["<leader>"].g.B = { Cmd("Gitsigns blame_line"), "Blame line" }
 keymap["<leader>"].g.c = { Cmd("Telescope git_commits"), "Commits" }
 keymap["<leader>"].g.d = {
-    Cmd("Gitsignstoggle_linehl") ..
+    Cmd("Gitsigns toggle_linehl") ..
     Cmd("Gitsigns toggle_deleted"),
     "Toggle inline diff",
 }
@@ -62,6 +56,9 @@ keymap["<leader>"].p.u = { Cmd("PlugUpdate"), "Install plugins" }
 keymap["<leader>"].p.f = { Cmd("Telescope find_files"), "Find file" }
 keymap["<leader>"].p[","] = { Cmd("Telescope find_files cwd="..nvimdir), "Editor config" }
 
+keymap["<leader>"].s = { name = "+symbol" }
+keymap["<leader>"].s.e = { vim.lsp.buf.rename, "Rename symbol" }
+
 keymap["<leader>"].w = { name = "+window" }
 keymap["<leader>"].w.h = { "<C-w>h", "Move left" }
 keymap["<leader>"].w.j = { "<C-w>j", "Move down" }
@@ -72,6 +69,9 @@ keymap["<leader>"].w.s = { "<C-w>s", "Split horizontally" }
 keymap["<leader>"].w.q = { "<C-w>q", "Close window" }
 keymap["<leader>"].w.Q = { Cmd("qa"), "Close all windows" }
 keymap["<leader>"].w.o = { Cmd("only"), "Close other windows" }
+keymap["<leader>"].w.t = { Cmd("Neotree"), "Toggle Neotree" } -- also see neotree.lua mappings
+
+keymap["<leader>"].K = { vim.diagnostic.open_float, "Show diagnostic details" }
 
 keymap["["] = { name = "+previous" }
 keymap["["].g = { Cmd("Gitsigns prev_hunk"), "Previous hunk" }
@@ -84,5 +84,13 @@ keymap["]"].q = { Cmd("cnext"), "Next quickfix" }
 keymap["]"].l = { Cmd("lnext"), "Next location" }
 
 keymap["<S-space>"] = { Cmd("b#"), "Last buffer" }
+
+keymap["<C-'>"] = {
+    function()
+        require("nvterm.terminal").toggle "vertical"
+    end,
+    "Toggle terminal",
+}
+vim.keymap.set( "t", "<C-'>", "<Cmd>lua require('nvterm.terminal').toggle('vertical')<CR>" )
 
 wk.register(keymap)
