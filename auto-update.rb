@@ -20,6 +20,8 @@ end
 FileUtils.cd File.dirname(__FILE__) do
     `git reset`
 
+    `git pull`
+
     `git status --porcelain`.each_line do |line|
         filename = line[3..-2]
 
