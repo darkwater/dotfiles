@@ -9,7 +9,6 @@ if $USER != "root"
     Plug 'godlygeek/tabular'      " tabularize code
 
     if !exists("g:vscode")
-        Plug 'tpope/vim-surround'
         Plug 'folke/which-key.nvim'
         Plug 'github/copilot.vim'
         Plug 'nvim-lua/plenary.nvim'
@@ -18,6 +17,11 @@ if $USER != "root"
         Plug 'nvchad/nvterm'
         Plug 'nvim-telescope/telescope.nvim'
         Plug 'lewis6991/gitsigns.nvim'
+        Plug 'MunifTanjim/nui.nvim',
+        Plug 'nvim-neo-tree/neo-tree.nvim'
+        Plug 'Shatur/neovim-ayu'
+        Plug 'rcarriga/nvim-notify'
+        Plug 'neovim/nvim-lspconfig'
     endif
 
     call plug#end()
@@ -28,7 +32,7 @@ nnoremap gd <Cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <Space>ca <Cmd>lua vim.lsp.buf.code_action()<CR>
 xnoremap <Space>ca <Cmd>lua vim.lsp.buf.range_code_action()<CR>
 
-nmap <F2> :call <SID>SynStack()<CR>
+nmap <Space>ss :call <SID>SynStack()<CR>
 function! <SID>SynStack()
     if !exists("*synstack")
         return
@@ -51,7 +55,7 @@ inoremap <C-s> <C-o>:<C-u>w<CR>
 nnoremap Y  y$
 nnoremap gg gg0
 nnoremap G  G0
-nnoremap <C-l> <C-l>:noh<CR>
+nnoremap <C-l> :<C-u>noh<CR><C-l>
 
 inoremap <Up>   <C-g><Up>
 inoremap <Down> <C-g><Down>
@@ -77,12 +81,13 @@ else
 endif
 
 " buffers
-set hidden
+set nohidden
 
 " completion
 set wildmenu
 
 " display
+set cursorline
 set list
 set wrap
 set number
@@ -131,7 +136,7 @@ set mouse=a
 set nrformats=bin,hex,octal,alpha
 set numberwidth=6
 set pastetoggle=<F11>
-set pumblend=8
+set pumblend=0
 set switchbuf=useopen
 set textwidth=0
 set tildeop
@@ -142,7 +147,7 @@ set viewoptions=cursor
 " set wildchar=<Tab>
 set wildmode=longest:full
 set wildoptions=pum,tagfile
-set winblend=8
+set winblend=0
 set winminwidth=8
 set winwidth=80
 
@@ -163,8 +168,8 @@ endif
 
 nohlsearch
 
-let g:ayucolor = "mirage"
-colorscheme ayu
+" let g:ayucolor = "mirage"
+" colorscheme ayu
 
 if $TERM =~ "^screen"
     set notermguicolors
@@ -179,10 +184,13 @@ if exists("g:vscode")
 
     nnoremap gf <Cmd>e <cWORD><CR>
 elseif $USER != "root"
+    lua require "config.colors"
     lua require "config.dressing"
     lua require "config.flutter"
     lua require "config.git"
     lua require "config.keybinds"
+    lua require "config.lsp"
+    lua require "config.neotree"
     lua require "config.telescope"
     lua require "config.terminal"
 endif
