@@ -9,4 +9,5 @@ require("ayu").setup {
 vim.cmd[[
 colorscheme ayu
 hi link StorageClass Keyword
+hi link NeoTreeFileIcon Normal
 ]]
