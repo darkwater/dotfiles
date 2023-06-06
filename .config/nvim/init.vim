@@ -193,4 +193,5 @@ elseif $USER != "root"
     lua require "config.neotree"
     lua require "config.telescope"
     lua require "config.terminal"
+    lua require "config.title"
 endif
