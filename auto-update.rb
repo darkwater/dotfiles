@@ -41,5 +41,5 @@ FileUtils.cd File.dirname(__FILE__) do
     end
 
     puts "pushing"
-    `git push`
+    `git push -q`
 end
