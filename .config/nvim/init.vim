@@ -9,6 +9,7 @@ if $USER != "root"
     Plug 'godlygeek/tabular'      " tabularize code
 
     if !exists("g:vscode")
+        Plug 'nvim-treesitter/nvim-treesitter'
         Plug 'folke/which-key.nvim'
         Plug 'github/copilot.vim'
         Plug 'nvim-lua/plenary.nvim'
@@ -22,6 +23,7 @@ if $USER != "root"
         Plug 'Shatur/neovim-ayu'
         Plug 'rcarriga/nvim-notify'
         Plug 'neovim/nvim-lspconfig'
+        Plug 'nvim-orgmode/orgmode'
     endif
 
     call plug#end()
@@ -191,6 +193,7 @@ elseif $USER != "root"
     lua require "config.keybinds"
     lua require "config.lsp"
     lua require "config.neotree"
+    lua require "config.orgmode"
     lua require "config.telescope"
     lua require "config.terminal"
     lua require "config.title"
