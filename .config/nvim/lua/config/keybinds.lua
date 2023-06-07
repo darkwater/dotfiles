@@ -91,6 +91,7 @@ keymap["<C-'>"] = {
     end,
     "Toggle terminal",
 }
+keymap["<leader>"]["'"] = keymap["<C-'>"]
 vim.keymap.set( "t", "<C-'>", "<Cmd>lua require('nvterm.terminal').toggle('vertical')<CR>" )
 
 wk.register(keymap)
