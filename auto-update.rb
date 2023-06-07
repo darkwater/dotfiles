@@ -16,15 +16,20 @@ def commit(filename, message)
     puts "committing #{filename}"
 
     `git add #{Shellwords.escape(filename)}`
+    exit $?.exitstatus unless $?.success?
+
     `git commit -m #{Shellwords.escape("auto: #{message}")}`
+    exit $?.exitstatus unless $?.success?
 end
 
 FileUtils.cd File.dirname(__FILE__) do
     puts "resetting"
     `git reset`
+    exit $?.exitstatus unless $?.success?
 
     puts "pulling"
     `git pull`
+    exit $?.exitstatus unless $?.success?
 
     `git status --porcelain`.each_line do |line|
         filename = line[3..-2]
@@ -42,4 +47,5 @@ FileUtils.cd File.dirname(__FILE__) do
 
     puts "pushing"
     `git push -q`
+    exit $?.exitstatus unless $?.success?
 end
