@@ -128,7 +128,6 @@ set backspace=start,eol,indent
 set cmdheight=1
 set completeopt=menu,longest,noselect,preview
 set conceallevel=2
-set fillchars=fold:\ ,vert:\ ,
 set history=10000
 set inccommand=nosplit
 set iskeyword=@,48-57,_,192-255
