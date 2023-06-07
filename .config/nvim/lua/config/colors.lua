@@ -3,6 +3,8 @@ require("ayu").setup {
     overrides = {
         Normal = { bg = "NONE" },
         NormalFloat = { bg = "#333844" },
+        SignColumn = { bg = "NONE" },
+        WinSeparator = { fg = "#606873" },
     },
 }
 
