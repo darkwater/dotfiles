@@ -10,6 +10,7 @@ if $USER != "root"
 
     if !exists("g:vscode")
         Plug 'nvim-treesitter/nvim-treesitter'
+        Plug 'nvim-treesitter/nvim-treesitter-textobjects'
         Plug 'folke/which-key.nvim'
         Plug 'github/copilot.vim'
         Plug 'nvim-lua/plenary.nvim'
@@ -51,7 +52,7 @@ let g:mapleader = "\<Space>"
 
 " <Ctrl-s> to save
 nnoremap <C-s> :<C-u>w<CR>
-inoremap <C-s> <C-o>:<C-u>w<CR>
+inoremap <C-s> <C-c>:<C-u>w<CR>
 
 " fix these keys
 nnoremap Y  y$
@@ -185,6 +186,10 @@ if exists("g:vscode")
 
     nnoremap gf <Cmd>e <cWORD><CR>
 elseif $USER != "root"
+    lua require("orgmode").setup_ts_grammar()
+
+    lua require "config.treesitter"
+
     lua require "config.colors"
     lua require "config.dressing"
     lua require "config.flutter"
