@@ -27,10 +27,6 @@ FileUtils.cd File.dirname(__FILE__) do
     `git reset`
     exit $?.exitstatus unless $?.success?
 
-    puts "pulling"
-    `git pull`
-    exit $?.exitstatus unless $?.success?
-
     `git status --porcelain`.each_line do |line|
         filename = line[3..-2]
 
@@ -44,6 +40,10 @@ FileUtils.cd File.dirname(__FILE__) do
             commit filename, "deleted #{filename}"
         end
     end
+
+    puts "pulling"
+    `git pull`
+    exit $?.exitstatus unless $?.success?
 
     puts "pushing"
     `git push -q`
