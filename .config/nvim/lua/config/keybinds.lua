@@ -74,11 +74,13 @@ keymap["<leader>"].w.t = { Cmd("Neotree"), "Toggle Neotree" } -- also see neotre
 keymap["<leader>"].K = { vim.diagnostic.open_float, "Show diagnostic details" }
 
 keymap["["] = { name = "+previous" }
+keymap["["].e = { vim.diagnostic.goto_prev, "Previous error" }
 keymap["["].h = { Cmd("Gitsigns prev_hunk"), "Previous hunk" }
 keymap["["].q = { Cmd("cprev"), "Previous quickfix" }
 keymap["["].l = { Cmd("lprev"), "Previous location" }
 
 keymap["]"] = { name = "+next" }
+keymap["]"].e = { vim.diagnostic.goto_next, "Next error" }
 keymap["]"].h = { Cmd("Gitsigns next_hunk"), "Next hunk" }
 keymap["]"].q = { Cmd("cnext"), "Next quickfix" }
 keymap["]"].l = { Cmd("lnext"), "Next location" }
