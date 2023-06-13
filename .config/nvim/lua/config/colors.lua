@@ -5,6 +5,7 @@ require("ayu").setup {
         NormalFloat = { bg = "#333844" },
         SignColumn = { bg = "NONE" },
         WinSeparator = { fg = "#606873" },
+        WhichKeyFloat = { bg = "NONE" },
     },
 }
 
