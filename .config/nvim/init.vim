@@ -30,11 +30,6 @@ if $USER != "root"
     call plug#end()
 endif
 
-nnoremap K <Cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap gd <Cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <Space>ca <Cmd>lua vim.lsp.buf.code_action()<CR>
-xnoremap <Space>ca <Cmd>lua vim.lsp.buf.range_code_action()<CR>
-
 nmap <Space>ss :call <SID>SynStack()<CR>
 function! <SID>SynStack()
     if !exists("*synstack")
