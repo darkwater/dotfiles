@@ -43,6 +43,11 @@ alias apts="apt search"
 
 alias ip="ip --color=auto"
 
+ssh() {
+    set_window_title "ssh $*"
+    command ssh "$@"
+}
+
 exists() { command -v $1 >/dev/null }
 exists exa && alias ls=exa
 
@@ -158,7 +163,7 @@ genps1() {
 
     # bell and window title set
     echo -n "%{\a"
-    set_window_title "${USER}@$(hostname): ${PWD}"
+    set_window_title "%m: %~"
     echo -n "%}"
 
     echo
@@ -178,7 +183,7 @@ preexec() {
     preexec_called=1
 
     cmd="$(echo "$2" | tr -d '\000-\037')"
-    set_window_title "${USER}@$(hostname): ${PWD} $ $cmd"
+    set_window_title "%m: %~ $ $cmd"
 }
 precmd() {
     local exit_status="$?"
