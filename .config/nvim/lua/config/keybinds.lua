@@ -2,6 +2,10 @@ local wk = require("which-key")
 
 wk.setup {
     show_help = false,
+    operators = {
+        gc = "Comment",
+        ["gc"] = "Comment",
+    },
 }
 
 function Cmd(cmd)
@@ -10,9 +14,34 @@ end
 
 local nvimdir = vim.fn.stdpath "config"
 
+local telescope = require("telescope.builtin")
+function with_input(prompt, name, fn)
+    return function()
+        vim.ui.input(prompt, function(input)
+            local opts = { [name] = input }
+            fn(opts)
+        end)
+    end
+end
+function with_opts(fn, opts)
+    return function()
+        fn(opts)
+    end
+end
+
 local keymap = {}
+
+keymap.K = { vim.lsp.buf.hover, "Hover" }
+keymap["<C-k>"] = { vim.lsp.buf.signature_help, "Signature help" }
+vim.keymap.set("i", "<C-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", { noremap = true })
+
+keymap.g = {}
+keymap.g.d = { telescope.lsp_definitions, "Go to definition" }
+keymap.g.t = { telescope.lsp_type_definitions, "Go to type definition" }
+
 keymap["<leader>"] = { name = "+leader" }
 
+keymap["\\"] = { "<leader><leader>", "+language-specific", noremap = false }
 keymap["<leader>"]["<leader>"] = { name = "+language-specific" }
 keymap["<leader>"]["<leader>"].f = { name = "+flutter" }
 keymap["<leader>"]["<leader>"].f.a = { name = "+android" }
@@ -49,6 +78,19 @@ keymap["<leader>"].g.d = {
 keymap["<leader>"].g.f = { Cmd("Telescope git_bcommits"), "File history" }
 keymap["<leader>"].g.p = { Cmd("Gitsigns preview_hunk_inline"), "Preview hunk" }
 keymap["<leader>"].g.s = { Cmd("Telescope git_status"), "Status" }
+keymap["<leader>"].g.S = { Cmd("Telescope git_stash"), "Stash" }
+
+local diag_opts = { severity_limit = "warn", disable_coordinates = true }
+keymap["<leader>"].l = { name = "+lsp" }
+keymap["<leader>"].l.a = { vim.lsp.buf.code_action, "Code actions" }
+keymap["<leader>"].l.c = { telescope.lsp_incoming_calls, "Incoming calls" }
+keymap["<leader>"].l.C = { telescope.lsp_outgoing_calls, "Outgoing calls" }
+keymap["<leader>"].l.e = { with_opts(telescope.diagnostics, diag_opts), "Errors/warnings" }
+keymap["<leader>"].l.d = { telescope.diagnostics, "All diagnostics" }
+keymap["<leader>"].l.i = { telescope.lsp_implementations, "Implementations" }
+keymap["<leader>"].l.r = { telescope.lsp_references, "References" }
+keymap["<leader>"].l.s = { telescope.lsp_document_symbols, "Symbols (document)" }
+keymap["<leader>"].l.S = { telescope.lsp_workspace_symbols, "Symbols (workspace)" }
 
 keymap["<leader>"].p = { name = "+project/plugins" }
 keymap["<leader>"].p.i = { Cmd("PlugInstall"), "Install plugins" }
@@ -59,16 +101,33 @@ keymap["<leader>"].p[","] = { Cmd("Telescope find_files cwd="..nvimdir), "Editor
 keymap["<leader>"].s = { name = "+symbol" }
 keymap["<leader>"].s.e = { vim.lsp.buf.rename, "Rename symbol" }
 
+keymap["<leader>"].T = { name = "+Telescope" }
+keymap["<leader>"].T.T = { telescope.builtin, "Telescope pickers" }
+keymap["<leader>"].T.A = { telescope.autocommands, "Autocommands" }
+keymap["<leader>"].T.b = { telescope.buffers, "Buffers" }
+keymap["<leader>"].T.c = { telescope.loclist, "Location list" }
+keymap["<leader>"].T.C = { telescope.commands, "Plugin/user commands" }
+keymap["<leader>"].T.f = { telescope.git_files, "Find git files" }
+keymap["<leader>"].T.F = { with_opts(telescope.find_files, { hidden = true }), "Find all files" }
+keymap["<leader>"].T.g = { with_input("Grep for:", "search", telescope.grep_string), "Grep" }
+keymap["<leader>"].T.G = { telescope.live_grep, "Live grep" }
+keymap["<leader>"].T.H = { telescope.highlights, "Highlights" }
+keymap["<leader>"].T.M = { telescope.man_pages, "Man pages" }
+keymap["<leader>"].T.o = { telescope.vim_options, "Vim options" }
+keymap["<leader>"].T.P = { telescope.planets, "Use the telescope..." }
+keymap["<leader>"].T.q = { telescope.quickfix, "Quickfix" }
+keymap["<leader>"].T.r = { telescope.oldfiles, "Recent files" }
+keymap["<leader>"].T.t = { telescope.colorscheme, "Colorschemes" }
+keymap["<leader>"].T["'"] = { telescope.marks, "Marks" }
+keymap["<leader>"].T['"'] = { telescope.registers, "Registers" }
+keymap["<leader>"].T[":"] = { telescope.command_history, "Command history" }
+keymap["<leader>"].T["/"] = { telescope.search_history, "Search history" }
+keymap["<leader>"].T["?"] = { telescope.help_tags, "Help tags" }
+keymap["<leader>"].T["."] = { telescope.resume, "Resume last picker" }
+
 keymap["<leader>"].w = { name = "+window" }
-keymap["<leader>"].w.h = { "<C-w>h", "Move left" }
-keymap["<leader>"].w.j = { "<C-w>j", "Move down" }
-keymap["<leader>"].w.k = { "<C-w>k", "Move up" }
-keymap["<leader>"].w.l = { "<C-w>l", "Move right" }
-keymap["<leader>"].w.v = { "<C-w>v", "Split vertically" }
-keymap["<leader>"].w.s = { "<C-w>s", "Split horizontally" }
-keymap["<leader>"].w.q = { "<C-w>q", "Close window" }
+keymap["<leader>"].w.s = { Cmd("Neotree document_symbols"), "Document symbols" }
 keymap["<leader>"].w.Q = { Cmd("qa"), "Close all windows" }
-keymap["<leader>"].w.o = { Cmd("only"), "Close other windows" }
 keymap["<leader>"].w.t = { Cmd("Neotree"), "Toggle Neotree" } -- also see neotree.lua mappings
 
 keymap["<leader>"].K = { vim.diagnostic.open_float, "Show diagnostic details" }
@@ -94,6 +153,6 @@ keymap["<C-'>"] = {
     "Toggle terminal",
 }
 keymap["<leader>"]["'"] = keymap["<C-'>"]
-vim.keymap.set( "t", "<C-'>", "<Cmd>lua require('nvterm.terminal').toggle('vertical')<CR>" )
+vim.keymap.set("t", "<C-'>", "<Cmd>lua require('nvterm.terminal').toggle('vertical')<CR>")
 
 wk.register(keymap)
