@@ -16,7 +16,7 @@ SAVEHIST=10000
 alias f="flutter"
 alias fr="flutter run"
 alias fp="flutter pub"
-alias fbr="dart run build_runner run"
+alias fbb="dart run build_runner build"
 alias fbw="dart run build_runner watch"
 
 alias c="cargo"
