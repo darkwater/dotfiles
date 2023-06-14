@@ -9,15 +9,20 @@ vim.diagnostic.config {
 lsp.rust_analyzer.setup {
     settings = {
         ["rust-analyzer"] = {
-            checkOnSave = {
-                command = "clippy",
-            },
             cargo = {
                 loadOutDirsFromCheck = true,
+            },
+            check = {
+                command = "clippy",
+            },
+            completion = {
+                postfix = {
+                    enable = false,
+                },
             },
             procMacro = {
                 enable = true,
             },
         },
-    }
+    },
 }
