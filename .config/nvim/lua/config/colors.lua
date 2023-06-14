@@ -6,6 +6,8 @@ require("ayu").setup {
         SignColumn = { bg = "NONE" },
         WinSeparator = { fg = "#606873" },
         WhichKeyFloat = { bg = "NONE" },
+        Visual = { fg = "#e0e0e0", bg = "#606873" },
+        LineNr = { fg = "#606873" },
     },
 }
 
