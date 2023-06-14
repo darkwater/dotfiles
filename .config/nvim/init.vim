@@ -25,6 +25,14 @@ if $USER != "root"
         Plug 'rcarriga/nvim-notify'
         Plug 'neovim/nvim-lspconfig'
         Plug 'nvim-orgmode/orgmode'
+        Plug 'hrsh7th/cmp-nvim-lsp'
+        Plug 'hrsh7th/cmp-buffer'
+        Plug 'hrsh7th/cmp-path'
+        Plug 'hrsh7th/cmp-nvim-lua'
+        Plug 'hrsh7th/nvim-cmp'
+        Plug 'onsails/lspkind.nvim'
+        Plug 'nvim-tree/nvim-web-devicons'
+        Plug 'l3mon4d3/luasnip'
     endif
 
     call plug#end()
@@ -184,13 +192,14 @@ elseif $USER != "root"
     lua require("orgmode").setup_ts_grammar()
 
     lua require "config.treesitter"
+    lua require "config.lsp"
 
     lua require "config.colors"
+    lua require "config.completion"
     lua require "config.dressing"
     lua require "config.flutter"
     lua require "config.git"
     lua require "config.keybinds"
-    lua require "config.lsp"
     lua require "config.neotree"
     lua require "config.orgmode"
     lua require "config.telescope"
