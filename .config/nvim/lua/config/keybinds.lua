@@ -35,6 +35,11 @@ keymap.K = { vim.lsp.buf.hover, "Hover" }
 keymap["<C-k>"] = { vim.lsp.buf.signature_help, "Signature help" }
 vim.keymap.set("i", "<C-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", { noremap = true })
 
+keymap.d = {}
+keymap.d.s = {}
+-- TODO: doesn't work
+keymap.d.s.f = { "dt(ds)", "Delete surrounding function", { noremap = false } }
+
 keymap.g = {}
 keymap.g.d = { telescope.lsp_definitions, "Go to definition" }
 keymap.g.t = { telescope.lsp_type_definitions, "Go to type definition" }
@@ -96,6 +101,8 @@ keymap["<leader>"].p = { name = "+project/plugins" }
 keymap["<leader>"].p.i = { Cmd("PlugInstall"), "Install plugins" }
 keymap["<leader>"].p.u = { Cmd("PlugUpdate"), "Install plugins" }
 keymap["<leader>"].p.f = { Cmd("Telescope find_files"), "Find file" }
+keymap["<leader>"].p.g = { with_input("Grep for:", "search", telescope.grep_string), "Grep" }
+keymap["<leader>"].p.G = { telescope.live_grep, "Live grep" }
 keymap["<leader>"].p[","] = { Cmd("Telescope find_files cwd="..nvimdir), "Editor config" }
 
 keymap["<leader>"].s = { name = "+symbol" }
@@ -104,13 +111,12 @@ keymap["<leader>"].s.e = { vim.lsp.buf.rename, "Rename symbol" }
 keymap["<leader>"].T = { name = "+Telescope" }
 keymap["<leader>"].T.T = { telescope.builtin, "Telescope pickers" }
 keymap["<leader>"].T.A = { telescope.autocommands, "Autocommands" }
-keymap["<leader>"].T.b = { telescope.buffers, "Buffers" }
+keymap["<leader>"].T.b = { telescope.current_buffer_fuzzy_find, "Current buffer" }
+keymap["<leader>"].T.B = { telescope.buffers, "Buffers" }
 keymap["<leader>"].T.c = { telescope.loclist, "Location list" }
 keymap["<leader>"].T.C = { telescope.commands, "Plugin/user commands" }
 keymap["<leader>"].T.f = { telescope.git_files, "Find git files" }
 keymap["<leader>"].T.F = { with_opts(telescope.find_files, { hidden = true }), "Find all files" }
-keymap["<leader>"].T.g = { with_input("Grep for:", "search", telescope.grep_string), "Grep" }
-keymap["<leader>"].T.G = { telescope.live_grep, "Live grep" }
 keymap["<leader>"].T.H = { telescope.highlights, "Highlights" }
 keymap["<leader>"].T.M = { telescope.man_pages, "Man pages" }
 keymap["<leader>"].T.o = { telescope.vim_options, "Vim options" }
