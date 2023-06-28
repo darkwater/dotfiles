@@ -13,7 +13,7 @@ require("neo-tree").setup {
     },
     default_component_configs = {
         indent = {
-            indent_marker = "├",
+            -- indent_marker = "├",
         },
         icon = {
             default = "",
