@@ -33,9 +33,14 @@ if $USER != "root"
         Plug 'onsails/lspkind.nvim'
         Plug 'nvim-tree/nvim-web-devicons'
         Plug 'l3mon4d3/luasnip'
+        Plug 'andythigpen/nvim-coverage'
     endif
 
     call plug#end()
+endif
+
+if !exists("g:vscode")
+    autocmd FocusGained * lua f = io.open("/tmp/nvim.pid", "w"); f:write(vim.loop.os_getpid()); f:flush(); f:close()
 endif
 
 nmap <Space>ss :call <SID>SynStack()<CR>
@@ -87,7 +92,7 @@ else
 endif
 
 " buffers
-set nohidden
+set hidden
 
 " completion
 set wildmenu
@@ -194,6 +199,7 @@ elseif $USER != "root"
     lua require "config.treesitter"
     lua require "config.lsp"
 
+    lua require "config.autoformat"
     lua require "config.colors"
     lua require "config.completion"
     lua require "config.dressing"
