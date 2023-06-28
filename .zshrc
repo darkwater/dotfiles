@@ -183,7 +183,7 @@ preexec() {
     preexec_called=1
 
     cmd="$(echo "$2" | tr -d '\000-\037')"
-    set_window_title "%m: %~ $ $cmd"
+    set_window_title "$(hostname -s) $ $cmd"
 }
 precmd() {
     local exit_status="$?"
