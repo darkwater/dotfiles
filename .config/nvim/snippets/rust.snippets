@@ -1,0 +1,28 @@
+snippet bevp "bevy plugin"
+	use bevy::prelude::*;
+
+	#[derive(Default)]
+	pub struct $1Plugin;
+
+	impl Plugin for $1Plugin {
+		fn build(&self, app: &mut App) {
+			app.add_systems(Update, $2);
+		}
+	}
+
+	#[derive(Component)]
+	struct $3 {
+		$4
+	}
+
+	// impl Default for $3 {
+	// 	fn default() -> Self {
+	// 		Self {
+	// 			$4
+	// 		}
+	// 	}
+	// }
+
+	fn $2($5) {
+		$6
+	}

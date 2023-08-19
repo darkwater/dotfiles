@@ -1,0 +1,45 @@
+snippet constless "ConsumerWidget"
+	class ${1:MyWidget} extends ConsumerWidget {
+		$2
+
+		const $1({super.key});
+
+		@override
+		Widget build(BuildContext context, WidgetRef ref) {
+			${0:return Container();}
+		}
+	}
+
+snippet constful "ConsumerStatefulWidget"
+	class ${1:MyWidget} extends ConsumerStatefulWidget {
+		const $1({super.key});
+
+		@override
+		ConsumerState<$1> createState() => $1State();
+	}
+
+	class $1State extends ConsumerState<$1> {
+		$2
+
+		@override
+		void initState() {
+			super.initState();
+		}
+
+		@override
+		Widget build(BuildContext context) {
+			${0:return Container();}
+		}
+	}
+
+snippet frz "Freezed"
+	@freezed
+	class ${1:MyClass} with _$$1 {
+		const $1._();
+
+		const factory $1({
+			${0:required String name,}
+		}) = _$1;
+
+		// factory $1.fromJson(Map<String, Object?> json) => _$$1FromJson(json);
+	}
