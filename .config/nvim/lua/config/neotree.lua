@@ -27,6 +27,17 @@ require("neo-tree").setup {
             },
         },
     },
+    filesystem = {
+        filtered_items = {
+            hide_by_name = {
+                "__generated__",
+            },
+            hide_by_pattern = {
+                "*.g.dart",
+                "*.freezed.dart",
+            },
+        },
+    },
     document_symbols = {
         kinds = {
             File = { icon = "󰈙", hl = "Tag" },
