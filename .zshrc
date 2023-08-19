@@ -1,5 +1,6 @@
 setopt append_history
 setopt auto_cd
+setopt extended_history
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt nomatch
