@@ -6,10 +6,13 @@ cmp.setup {
         { name = "buffer" },
         { name = "path" },
         { name = "nvim_lua" },
+        { name = "snippy" },
+        { name = "crates" },
     }),
     snippet = {
         expand = function(args)
-            require('luasnip').lsp_expand(args.body)
+            -- require('luasnip').lsp_expand(args.body)
+            require("snippy").expand_snippet(args.body)
         end,
     },
     mapping = cmp.mapping.preset.insert({
@@ -18,12 +21,12 @@ cmp.setup {
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
-        ["<CR>"] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Replace,
+        ["<C-y>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
             select = true,
         }),
-        ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
+        -- ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
+        -- ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
     }),
     formatting = {
         format = function(entry, vim_item)
@@ -37,10 +40,6 @@ cmp.setup {
             end
 
             return require('lspkind').cmp_format{ with_text = false }(entry, vim_item)
-        end
+        end,
     },
-}
-
-require("lspconfig")["rust_analyzer"].setup {
-    capabilities = require("cmp_nvim_lsp").default_capabilities(),
 }
