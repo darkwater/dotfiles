@@ -9,6 +9,8 @@ if $USER != "root"
     Plug 'godlygeek/tabular'      " tabularize code
 
     if !exists("g:vscode")
+        Plug 'file:///Users/dark/github/darkwater/flutter.nvim'
+
         Plug 'nvim-treesitter/nvim-treesitter'
         Plug 'nvim-treesitter/nvim-treesitter-textobjects'
         Plug 'folke/which-key.nvim'
@@ -20,11 +22,13 @@ if $USER != "root"
         Plug 'nvim-telescope/telescope.nvim'
         Plug 'lewis6991/gitsigns.nvim'
         Plug 'MunifTanjim/nui.nvim',
-        Plug 'nvim-neo-tree/neo-tree.nvim'
+        Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' }
         Plug 'Shatur/neovim-ayu'
         Plug 'rcarriga/nvim-notify'
         Plug 'neovim/nvim-lspconfig'
         Plug 'nvim-orgmode/orgmode'
+        Plug 'dcampos/nvim-snippy'
+        Plug 'dcampos/cmp-snippy'
         Plug 'hrsh7th/cmp-nvim-lsp'
         Plug 'hrsh7th/cmp-buffer'
         Plug 'hrsh7th/cmp-path'
@@ -32,8 +36,12 @@ if $USER != "root"
         Plug 'hrsh7th/nvim-cmp'
         Plug 'onsails/lspkind.nvim'
         Plug 'nvim-tree/nvim-web-devicons'
-        Plug 'l3mon4d3/luasnip'
         Plug 'andythigpen/nvim-coverage'
+        Plug 'phaazon/hop.nvim'
+        Plug 'jparise/vim-graphql'
+        Plug 'stevearc/overseer.nvim'
+        Plug 'simrat39/rust-tools.nvim'
+        Plug 'Saecki/crates.nvim'
     endif
 
     call plug#end()
@@ -203,12 +211,18 @@ elseif $USER != "root"
     lua require "config.colors"
     lua require "config.completion"
     lua require "config.dressing"
+    " lua require "config.executor"
     lua require "config.flutter"
     lua require "config.git"
+    lua require "config.hop"
     lua require "config.keybinds"
     lua require "config.neotree"
+    lua require "config.notify"
     lua require "config.orgmode"
+    lua require "config.overseer"
+    lua require "config.rust"
+    lua require "config.snippets"
     lua require "config.telescope"
-    lua require "config.terminal"
+    " lua require "config.terminal"
     lua require "config.title"
 endif
