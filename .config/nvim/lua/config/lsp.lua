@@ -6,44 +6,53 @@ vim.diagnostic.config {
     float = { source = "if_many" },
 }
 
-lsp.rust_analyzer.setup {
-    settings = {
-        ["rust-analyzer"] = {
-            cargo = {
-                loadOutDirsFromCheck = true,
-            },
-            checkOnSave = {
-                command = "clippy",
-            },
-            check = {
-                command = "clippy",
-            },
-            completion = {
-                postfix = {
-                    enable = false,
-                },
-            },
-            linkedProjects = {},
-            procMacro = {
-                enable = true,
-            },
-        },
-    },
-    on_init = function(client)
-        local path = client.workspace_folders[1].name
-        local config = client.config.settings["rust-analyzer"]
+-- lsp.rust_analyzer.setup {
+--     settings = {
+--         ["rust-analyzer"] = {
+--             cargo = {
+--                 loadOutDirsFromCheck = true,
+--             },
+--             checkOnSave = {
+--                 command = "clippy",
+--             },
+--             check = {
+--                 command = "clippy",
+--             },
+--             completion = {
+--                 postfix = {
+--                     enable = false,
+--                 },
+--             },
+--             -- linkedProjects = {},
+--             procMacro = {
+--                 enable = true,
+--             },
+--         },
+--     },
+--     capabilities = require("cmp_nvim_lsp").default_capabilities(),
+--     -- on_init = function(client)
+--     --     local config = client.config.settings["rust-analyzer"]
 
-        if path == "/Users/dark/gitea/comforest/firmware" then
-            config.linkedProjects = {
-                "Cargo.toml",
-                "cross/sensor/Cargo.toml",
-                "cross/hub/Cargo.toml",
-                "cross/powerbox/Cargo.toml",
-                "cross/bootloader/Cargo.toml",
-            }
-        end
+--     --     for k,folder in pairs(client.workspace_folders) do
+--     --         local path = folder.name
 
-        client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
-        return true
-    end,
-}
+--     --         if path == "/Users/dark/gitea/comforest/firmware" then
+--     --             config.linkedProjects = {
+--     --                 "Cargo.toml",
+--     --                 "cross/sensor/Cargo.toml",
+--     --                 "cross/hub/Cargo.toml",
+--     --                 "cross/powerbox/Cargo.toml",
+--     --                 "cross/bootloader/Cargo.toml",
+--     --             }
+--     --             config.procMacro = {
+--     --                 enable = true,
+--     --             }
+
+--     --             client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
+--     --             return true
+--     --         end
+--     --     end
+
+--     --     return true
+--     -- end,
+-- }
