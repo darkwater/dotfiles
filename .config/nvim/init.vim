@@ -42,6 +42,7 @@ if $USER != "root"
         Plug 'stevearc/overseer.nvim'
         Plug 'simrat39/rust-tools.nvim'
         Plug 'Saecki/crates.nvim'
+        Plug 'nvim-lua/lsp-status.nvim'
     endif
 
     call plug#end()
