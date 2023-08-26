@@ -1,6 +1,9 @@
 require("nvim-treesitter.configs").setup {
     highlight = {
         enable = true,
+        disable = {
+            "vim", -- unacceptably slow; ships with neovim
+        },
         additional_vim_regex_highlighting = { "org" },
     },
     textobjects = {
@@ -82,5 +85,5 @@ require("nvim-treesitter.configs").setup {
             },
         },
     },
-    ensure_installed = { "org", "python", "lua", "bash", "json", "yaml", "toml", "html", "css", "javascript", "typescript", "cpp", "rust", "go", "dart", "java", "regex", "comment" },
+    ensure_installed = { "org", "python", "lua", "bash", "json", "yaml", "toml", "html", "css", "javascript", "typescript", "cpp", "rust", "go", "dart", "java", "regex", "comment", "vim" },
 }
