@@ -14,7 +14,7 @@ require("rust-tools").setup {
                     importPrefix = "by_self",
                 },
                 cargo = {
-                    loadOutDirsFromCheck = true,
+                    -- loadOutDirsFromCheck = true,
                 },
                 checkOnSave = {
                     command = "clippy",
@@ -32,7 +32,7 @@ require("rust-tools").setup {
                     },
                 },
                 procMacro = {
-                    enable = true,
+                    -- enable = true,
                 },
             },
         },
