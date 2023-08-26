@@ -1,4 +1,22 @@
-require('crates').setup {}
+require('null-ls').setup {}
+
+require('crates').setup {
+    null_ls = {
+        enabled = true,
+        name = "crates.nvim",
+    },
+}
+
+local function get_rust_analyzer_path()
+    local handle = io.popen("rustup which rust-analyzer")
+    local result = handle:read("*a")
+    handle:close()
+    return result:match("^(.-)%s*$") -- Trim the result
+end
+
+local rust_analyzer_path = get_rust_analyzer_path()
+print(rust_analyzer_path)
+
 require("rust-tools").setup {
     tools = {
         executor = require("rust-tools.executors").quickfix,
@@ -6,6 +24,7 @@ require("rust-tools").setup {
         },
     },
     server = {
+        cmd = { rust_analyzer_path },
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
         settings = {
             ["rust-analyzer"] = {

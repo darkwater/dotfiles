@@ -9,7 +9,8 @@ if $USER != "root"
     Plug 'godlygeek/tabular'      " tabularize code
 
     if !exists("g:vscode")
-        Plug 'file:///Users/dark/github/darkwater/flutter.nvim'
+        " Plug 'file:///Users/dark/github/darkwater/flutter.nvim'
+        Plug 'darkwater/flutter.nvim'
 
         Plug 'nvim-treesitter/nvim-treesitter'
         Plug 'nvim-treesitter/nvim-treesitter-textobjects'
@@ -43,6 +44,8 @@ if $USER != "root"
         Plug 'simrat39/rust-tools.nvim'
         Plug 'Saecki/crates.nvim'
         Plug 'nvim-lua/lsp-status.nvim'
+        Plug 'jose-elias-alvarez/null-ls.nvim'
+        Plug 'nvim-lualine/lualine.nvim'
     endif
 
     call plug#end()
