@@ -6,6 +6,10 @@ vim.diagnostic.config {
     float = { source = "if_many" },
 }
 
+lsp.denols.setup {
+    root_dir = lsp.util.root_pattern("deno.json"),
+}
+
 -- lsp.rust_analyzer.setup {
 --     settings = {
 --         ["rust-analyzer"] = {
