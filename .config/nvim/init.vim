@@ -43,9 +43,10 @@ if $USER != "root"
         Plug 'stevearc/overseer.nvim'
         Plug 'simrat39/rust-tools.nvim'
         Plug 'Saecki/crates.nvim'
-        Plug 'nvim-lua/lsp-status.nvim'
+        Plug 'linrongbin16/lsp-progress.nvim'
         Plug 'jose-elias-alvarez/null-ls.nvim'
         Plug 'nvim-lualine/lualine.nvim'
+        Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
     endif
 
     call plug#end()
@@ -160,6 +161,7 @@ set numberwidth=6
 set pastetoggle=<F11>
 set pumblend=0
 set switchbuf=useopen
+set shortmess=filnxtToOFS
 set textwidth=0
 set tildeop
 set timeoutlen=300

@@ -9,6 +9,8 @@ require("ayu").setup {
         Visual = { fg = "#e0e0e0", bg = "#606873" },
         LineNr = { fg = "#606873" },
         SpecialKey = { fg = "#aaafff" },
+        FidgetTitle = { fg = "#ffaf00", bg = "NONE" },
+        FidgetTask = { fg = "#00afff", bg = "NONE" },
     },
 }
 

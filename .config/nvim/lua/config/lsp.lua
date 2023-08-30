@@ -1,4 +1,33 @@
 local lsp = require("lspconfig")
+-- local lsp_status = require("lsp-status")
+
+require("lsp-progress").setup {}
+require("fidget").setup {
+    text = {
+        spinner = {
+            "[    ]",
+            "[=   ]",
+            "[==  ]",
+            "[=== ]",
+            "[ ===]",
+            "[  ==]",
+            "[   =]",
+        },
+        done = "",
+    },
+    window = {
+        -- try setting this to 100 and see if the background is still black
+        blend = 0, -- https://github.com/neovim/neovim/issues/10685
+    },
+}
+
+-- lsp_status.register_progress()
+-- lsp_status.config {
+--     diagnostics = false,
+--     indicator_separator = "////",
+--     component_separator = "/",
+--     status_symbol = {},
+-- }
 
 vim.diagnostic.config {
     virtual_text = true,

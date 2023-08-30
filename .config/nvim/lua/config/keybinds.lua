@@ -115,9 +115,8 @@ end
 local keymap = {}
 
 keymap.K = { hover, "Hover" }
-keymap["<C-k>"] = { vim.lsp.buf.signature_help, "Signature help" }
-vim.keymap.set("i", "<C-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", { noremap = true })
-vim.keymap.set("i", "<C-S-k>", "<C-k>", { noremap = true })
+keymap["<C-S-k>"] = { vim.lsp.buf.signature_help, "Signature help" }
+vim.keymap.set("i", "<C-S-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", { noremap = true })
 
 keymap.d = {}
 keymap.d.s = {}
