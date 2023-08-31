@@ -15,7 +15,11 @@ local function get_rust_analyzer_path()
 end
 
 local rust_analyzer_path = get_rust_analyzer_path()
-print(rust_analyzer_path)
+
+if rust_analyzer_path == "" then
+    print("rust-analyzer not found")
+    return
+end
 
 require("rust-tools").setup {
     tools = {
