@@ -81,8 +81,11 @@ require("lualine").setup {
         lualine_z = {"location", "progress"},
     },
     inactive_sections = {
-        lualine_a = {"filename"},
-        lualine_b = {"branch", "diagnostics"},
+        lualine_a = {{
+            "filename",
+            path = 1,
+        }},
+        lualine_b = {"diagnostics"},
         lualine_c = {},
         lualine_x = {},
         lualine_y = {"diff", "filetype"},
