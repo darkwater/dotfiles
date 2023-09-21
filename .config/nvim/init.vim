@@ -47,6 +47,9 @@ if $USER != "root"
         Plug 'jose-elias-alvarez/null-ls.nvim'
         Plug 'nvim-lualine/lualine.nvim'
         Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
+        Plug 'othree/html5.vim'
+        Plug 'pangloss/vim-javascript'
+        Plug 'evanleck/vim-svelte', {'branch': 'main'}
     endif
 
     call plug#end()
