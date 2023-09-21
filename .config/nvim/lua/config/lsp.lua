@@ -1,6 +1,14 @@
 local lsp = require("lspconfig")
 -- local lsp_status = require("lsp-status")
 
+local null_ls = require('null-ls')
+null_ls.setup {
+    sources = {
+        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.formatting.prettier,
+    },
+}
+
 require("lsp-progress").setup {}
 require("fidget").setup {
     text = {
