@@ -130,9 +130,9 @@ keymap.g.t = { telescope.lsp_type_definitions, "Go to type definition" }
 keymap["<leader>"] = { name = "+leader" }
 
 keymap["<M-Bslash>"] = { "<Nop>", "No-op" }
-keymap["<Bslash>"] = { function()
-    require("flutter").toggle_flutter_terminal("flutter run")
-end, "Run Executor" }
+-- keymap["<Bslash>"] = { function()
+--     require("flutter").toggle_flutter_terminal("flutter run")
+-- end, "Run Executor" }
 
 -- keymap["<Bslash>"] = { "<leader><leader>", "+language-specific", noremap = false }
 -- keymap["<leader>"] = { name = "+language-specific" }
