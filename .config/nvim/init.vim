@@ -41,7 +41,7 @@ if $USER != "root"
         Plug 'phaazon/hop.nvim'
         Plug 'jparise/vim-graphql'
         Plug 'stevearc/overseer.nvim'
-        Plug 'simrat39/rust-tools.nvim'
+        Plug 'mrcjkb/rustaceanvim'
         Plug 'Saecki/crates.nvim'
         Plug 'linrongbin16/lsp-progress.nvim'
         Plug 'jose-elias-alvarez/null-ls.nvim'
