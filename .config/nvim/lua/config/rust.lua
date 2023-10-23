@@ -19,42 +19,40 @@ if rust_analyzer_path == "" then
     return
 end
 
-require("rust-tools").setup {
+vim.g.rustaceanvim = {
     tools = {
-        executor = require("rust-tools.executors").quickfix,
+        -- executor = require("rust-tools.executors").quickfix,
         inlay_hints = {
         },
     },
     server = {
         cmd = { rust_analyzer_path },
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
-        settings = {
-            ["rust-analyzer"] = {
-                assist = {
-                    importMergeBehavior = "last",
-                    importPrefix = "by_self",
+        ["rust-analyzer"] = {
+            assist = {
+                importMergeBehavior = "last",
+                importPrefix = "by_self",
+            },
+            cargo = {
+                -- loadOutDirsFromCheck = true,
+            },
+            checkOnSave = {
+                command = "clippy",
+            },
+            completion = {
+                postfix = {
+                    enable = false,
                 },
-                cargo = {
-                    -- loadOutDirsFromCheck = true,
+            },
+            diagnostics = {
+                enable = true,
+                disabled = {
+                    -- "unresolved-proc-macro",
+                    "inactive-code",
                 },
-                checkOnSave = {
-                    command = "clippy",
-                },
-                completion = {
-                    postfix = {
-                        enable = false,
-                    },
-                },
-                diagnostics = {
-                    enable = true,
-                    disabled = {
-                        -- "unresolved-proc-macro",
-                        "inactive-code",
-                    },
-                },
-                procMacro = {
-                    -- enable = true,
-                },
+            },
+            procMacro = {
+                -- enable = true,
             },
         },
     },
