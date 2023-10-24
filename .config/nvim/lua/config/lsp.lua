@@ -9,7 +9,7 @@ null_ls.setup {
     },
 }
 
-require("lsp-progress").setup {}
+-- require("lsp-progress").setup {}
 require("fidget").setup {
     text = {
         spinner = {
