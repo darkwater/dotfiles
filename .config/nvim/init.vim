@@ -20,6 +20,7 @@ if $USER != "root"
         Plug 'stevearc/dressing.nvim' " optional for vim.ui.select
         Plug 'akinsho/flutter-tools.nvim'
         Plug 'nvchad/nvterm'
+        Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
         Plug 'nvim-telescope/telescope.nvim'
         Plug 'lewis6991/gitsigns.nvim'
         Plug 'MunifTanjim/nui.nvim',
@@ -43,7 +44,6 @@ if $USER != "root"
         Plug 'stevearc/overseer.nvim'
         Plug 'mrcjkb/rustaceanvim'
         Plug 'Saecki/crates.nvim'
-        " Plug 'linrongbin16/lsp-progress.nvim'
         Plug 'jose-elias-alvarez/null-ls.nvim'
         Plug 'nvim-lualine/lualine.nvim'
         Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
@@ -233,6 +233,6 @@ elseif $USER != "root"
     lua require "config.snippets"
     lua require "config.statusline"
     lua require "config.telescope"
-    " lua require "config.terminal"
+    lua require "config.terminal"
     lua require "config.title"
 endif
