@@ -116,6 +116,7 @@ local keymap = {}
 
 keymap.K = { hover, "Hover" }
 keymap["<C-S-k>"] = { vim.lsp.buf.signature_help, "Signature help" }
+vim.keymap.set("v", "K", hover)
 vim.keymap.set("i", "<C-S-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", { noremap = true })
 
 keymap.d = {}
@@ -155,20 +156,6 @@ keymap["<leader>"].F.R = { flutter.send_to_flutter("R"), "Hot restart" }
 keymap["<leader>"].F.q = { flutter.send_to_flutter("q"), "Stop" }
 keymap["<leader>"].F.b = { run_cmd("Build runner", "dart run build_runner build", 5), "Build runner" }
 
-keymap["<leader>"].c = { name = "+cargo" }
-keymap["<leader>"].c.a = {
-    function()
-        vim.ui.input(
-            "Cargo add:",
-            function(args)
-                vim.cmd("!cargo add " .. args)
-            end
-        )
-    end,
-    "Add dependency",
-}
-keymap["<leader>"].c.r = { with_opts(flutter.toggle_flutter_terminal, "cargo run"), "Run" }
-
 keymap["<leader>"].f = { name = "+file" }
 keymap["<leader>"].f.s = { Cmd("source %"), "Source file" }
 keymap["<leader>"].f.f = { vim.lsp.buf.format, "Format file" }
@@ -206,6 +193,50 @@ keymap["<leader>"].p.f = { Cmd("Telescope find_files"), "Find file" }
 keymap["<leader>"].p.g = { with_input("Grep for:", "search", telescope.grep_string), "Grep" }
 keymap["<leader>"].p.G = { telescope.live_grep, "Live grep" }
 keymap["<leader>"].p[","] = { Cmd("Telescope find_files cwd="..nvimdir), "Editor config" }
+
+keymap["<leader>"].r = { name = "+rust" }
+keymap["<leader>"].r.c = { Cmd("RustLsp openCargo"), "Open Cargo.toml" }
+-- keymap["<leader>"].r.R = { Cmd("RustLsp runnables"), "Run..." }
+keymap["<leader>"].r.R = { function()
+    require("toggleterm.terminal").Terminal
+    :new({
+        dir = vim.fn.getcwd(),
+        cmd = "cargo run",
+        close_on_exit = false,
+        on_open = function(t)
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes([[<C-\><C-n>]], true, true, true), '', true)
+            vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
+        end,
+    })
+    :toggle()
+end, "Run" }
+keymap["<leader>"].r.r = { function()
+    require("toggleterm.terminal").Terminal
+    :new({
+        dir = vim.fn.getcwd(),
+        cmd = "cargo run",
+        close_on_exit = true,
+        on_open = function(t)
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes([[<C-\><C-n>]], true, true, true), '', true)
+            vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
+        end,
+    })
+    :toggle()
+end, "Run" }
+keymap["<leader>"].r.J = { Cmd("RustLsp joinLines"), "Join lines" }
+keymap["<leader>"].r.u = { Cmd("RustLsp parentModule"), "Jump to parent module" }
+keymap["<leader>"].r.m = { Cmd("RustLsp expandMacro"), "Expand macro" }
+keymap["<leader>"].r.a = {
+    function()
+        vim.ui.input(
+            "Cargo add:",
+            function(args)
+                vim.cmd("!cargo add " .. args)
+            end
+        )
+    end,
+    "Add dependency",
+}
 
 keymap["<leader>"].s = { name = "+symbol" }
 keymap["<leader>"].s.e = { vim.lsp.buf.rename, "Rename symbol" }
