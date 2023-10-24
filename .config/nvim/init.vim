@@ -43,7 +43,7 @@ if $USER != "root"
         Plug 'stevearc/overseer.nvim'
         Plug 'mrcjkb/rustaceanvim'
         Plug 'Saecki/crates.nvim'
-        Plug 'linrongbin16/lsp-progress.nvim'
+        " Plug 'linrongbin16/lsp-progress.nvim'
         Plug 'jose-elias-alvarez/null-ls.nvim'
         Plug 'nvim-lualine/lualine.nvim'
         Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
@@ -211,7 +211,7 @@ if exists("g:vscode")
 
     nnoremap gf <Cmd>e <cWORD><CR>
 elseif $USER != "root"
-    lua require("orgmode").setup_ts_grammar()
+    " lua require("orgmode").setup_ts_grammar()
 
     lua require "config.treesitter"
     lua require "config.lsp"
@@ -227,7 +227,7 @@ elseif $USER != "root"
     lua require "config.keybinds"
     lua require "config.neotree"
     lua require "config.notify"
-    lua require "config.orgmode"
+    " lua require "config.orgmode"
     lua require "config.overseer"
     lua require "config.rust"
     lua require "config.snippets"
