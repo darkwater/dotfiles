@@ -1,1 +1,4 @@
-require("nvterm").setup {}
+require("toggleterm").setup {
+    direction = "vertical",
+    size = 100,
+}
