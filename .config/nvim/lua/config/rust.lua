@@ -21,7 +21,7 @@ end
 
 vim.g.rustaceanvim = {
     tools = {
-        -- executor = require("rust-tools.executors").quickfix,
+        executor = require("rustaceanvim.executors.toggleterm"),
         inlay_hints = {
         },
     },
