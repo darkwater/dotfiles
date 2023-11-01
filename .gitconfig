@@ -24,6 +24,7 @@
     s = "status"
     st = "status"
     l = "log --oneline --graph"
+    la = "log --oneline --graph --all"
     pou = "push -u origin"
 
 [pager]
