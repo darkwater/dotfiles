@@ -85,5 +85,5 @@ require("nvim-treesitter.configs").setup {
             },
         },
     },
-    ensure_installed = { "org", "python", "lua", "bash", "json", "yaml", "toml", "html", "css", "javascript", "typescript", "cpp", "rust", "go", "dart", "java", "regex", "comment", "vim", "markdown" },
+    ensure_installed = { "org", "python", "lua", "bash", "json", "yaml", "toml", "html", "css", "javascript", "typescript", "cpp", "rust", "go", "dart", "java", "regex", "comment", "vim", "markdown", "markdown_inline" },
 }
