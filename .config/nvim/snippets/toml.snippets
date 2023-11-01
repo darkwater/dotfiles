@@ -2,3 +2,19 @@ snippet rust-toolchain
 	[toolchain]
 	channel = "nightly-`strftime('%Y-%m-%d')`"
 	components = ["rust-src", "rustfmt", "clippy", "llvm-tools", "rust-analyzer"]
+snippet profile
+	[profile.dev]
+	opt-level = 0
+	debug = true
+	debug-assertions = true
+	overflow-checks = true
+	lto = false
+	codegen-units = 256
+	
+	[profile.release]
+	opt-level = 3
+	debug = false
+	debug-assertions = false
+	overflow-checks = false
+	lto = false
+	codegen-units = 16
