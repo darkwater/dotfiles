@@ -173,6 +173,7 @@ keymap["<leader>"].g.f = { Cmd("Telescope git_bcommits"), "File history" }
 keymap["<leader>"].g.p = { Cmd("Gitsigns preview_hunk_inline"), "Preview hunk" }
 keymap["<leader>"].g.s = { Cmd("Telescope git_status"), "Status" }
 keymap["<leader>"].g.S = { Cmd("Telescope git_stash"), "Stash" }
+keymap["<leader>"].g.u = { Cmd("Gitsigns reset_hunk"), "Undo hunk" }
 
 local diag_opts = { severity_limit = "error", disable_coordinates = true }
 keymap["<leader>"].l = { name = "+lsp" }
