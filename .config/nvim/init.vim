@@ -55,6 +55,7 @@ if $USER != "root"
         Plug 'kevinhwang91/promise-async'
         Plug 'kevinhwang91/nvim-ufo'
         Plug 'folke/noice.nvim'
+        Plug 'tikhomirov/vim-glsl'
     endif
 
     call plug#end()
