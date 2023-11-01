@@ -12,6 +12,8 @@ if $USER != "root"
         " Plug 'file:///Users/dark/github/darkwater/flutter.nvim'
         Plug 'darkwater/flutter.nvim'
 
+        Plug 'glts/vim-magnum'
+        Plug 'glts/vim-radical'
         Plug 'nvim-treesitter/nvim-treesitter'
         Plug 'nvim-treesitter/nvim-treesitter-textobjects'
         Plug 'folke/which-key.nvim'
@@ -50,6 +52,9 @@ if $USER != "root"
         Plug 'othree/html5.vim'
         Plug 'pangloss/vim-javascript'
         Plug 'evanleck/vim-svelte', {'branch': 'main'}
+        Plug 'kevinhwang91/promise-async'
+        Plug 'kevinhwang91/nvim-ufo'
+        Plug 'folke/noice.nvim'
     endif
 
     call plug#end()
@@ -164,7 +169,7 @@ set numberwidth=6
 set pastetoggle=<F11>
 set pumblend=0
 set switchbuf=useopen
-set shortmess=filnxtToOFS
+set shortmess=filnxtToOFW
 set textwidth=0
 set tildeop
 set timeoutlen=300
@@ -226,6 +231,7 @@ elseif $USER != "root"
     lua require "config.hop"
     lua require "config.keybinds"
     lua require "config.neotree"
+    lua require "config.noice"
     lua require "config.notify"
     " lua require "config.orgmode"
     lua require "config.overseer"
