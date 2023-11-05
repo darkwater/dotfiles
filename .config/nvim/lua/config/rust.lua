@@ -28,31 +28,33 @@ vim.g.rustaceanvim = {
     server = {
         cmd = { rust_analyzer_path },
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
-        ["rust-analyzer"] = {
-            assist = {
-                importMergeBehavior = "last",
-                importPrefix = "by_self",
-            },
-            cargo = {
-                -- loadOutDirsFromCheck = true,
-            },
-            checkOnSave = {
-                command = "clippy",
-            },
-            completion = {
-                postfix = {
-                    enable = false,
+        settings = {
+            ["rust-analyzer"] = {
+                assist = {
+                    importMergeBehavior = "last",
+                    importPrefix = "by_self",
                 },
-            },
-            diagnostics = {
-                enable = true,
-                disabled = {
-                    -- "unresolved-proc-macro",
-                    "inactive-code",
+                cargo = {
+                    -- loadOutDirsFromCheck = true,
                 },
-            },
-            procMacro = {
-                -- enable = true,
+                checkOnSave = {
+                    command = "clippy",
+                },
+                completion = {
+                    postfix = {
+                        enable = false,
+                    },
+                },
+                diagnostics = {
+                    enable = true,
+                    disabled = {
+                        -- "unresolved-proc-macro",
+                        "inactive-code",
+                    },
+                },
+                procMacro = {
+                    enable = true,
+                },
             },
         },
     },
