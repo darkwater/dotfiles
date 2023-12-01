@@ -88,7 +88,7 @@ local nvimdir = vim.fn.stdpath "config"
 
 local telescope = require("telescope.builtin")
 local hop = require("hop")
-local flutter = require("flutter")
+-- local flutter = require("flutter")
 
 function with_input(prompt, name, fn)
     return function()
@@ -150,10 +150,10 @@ keymap["<leader>"].F.a.c = {
     end,
     "Connect over TCP",
 }
-keymap["<leader>"].F.f = { with_opts(flutter.toggle_flutter_terminal, "flutter run"), "Run" }
-keymap["<leader>"].F.r = { flutter.send_to_flutter("r"), "Hot reload" }
-keymap["<leader>"].F.R = { flutter.send_to_flutter("R"), "Hot restart" }
-keymap["<leader>"].F.q = { flutter.send_to_flutter("q"), "Stop" }
+-- keymap["<leader>"].F.f = { with_opts(flutter.toggle_flutter_terminal, "flutter run"), "Run" }
+-- keymap["<leader>"].F.r = { flutter.send_to_flutter("r"), "Hot reload" }
+-- keymap["<leader>"].F.R = { flutter.send_to_flutter("R"), "Hot restart" }
+-- keymap["<leader>"].F.q = { flutter.send_to_flutter("q"), "Stop" }
 keymap["<leader>"].F.b = { run_cmd("Build runner", "dart run build_runner build", 5), "Build runner" }
 
 keymap["<leader>"].f = { name = "+file" }
@@ -293,6 +293,7 @@ keymap["<leader>"].T["?"] = { telescope.help_tags, "Help tags" }
 keymap["<leader>"].T["."] = { telescope.resume, "Resume last picker" }
 
 keymap["<leader>"].w = { name = "+window" }
+keymap["<leader>"].w.e = { Cmd("TroubleToggle"), "Toggle problems" }
 keymap["<leader>"].w.s = { Cmd("Neotree document_symbols"), "Document symbols" }
 keymap["<leader>"].w.Q = { Cmd("qa"), "Close all windows" }
 keymap["<leader>"].w.t = { Cmd("Neotree"), "Toggle Neotree" } -- also see neotree.lua mappings
