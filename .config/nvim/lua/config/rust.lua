@@ -3,6 +3,11 @@ require('crates').setup {
         enabled = true,
         name = "crates.nvim",
     },
+    src = {
+        cmp = {
+            enabled = true,
+        },
+    },
 }
 
 local function get_rust_analyzer_path()
@@ -28,35 +33,47 @@ vim.g.rustaceanvim = {
     server = {
         cmd = { rust_analyzer_path },
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
-        settings = {
-            ["rust-analyzer"] = {
-                assist = {
-                    importMergeBehavior = "last",
-                    importPrefix = "by_self",
-                },
-                cargo = {
-                    -- loadOutDirsFromCheck = true,
-                },
-                checkOnSave = {
-                    command = "clippy",
-                },
-                completion = {
-                    postfix = {
-                        enable = false,
+        settings = function (path)
+            local linkedProjects
+            if path == "/Users/dark/gitea/comforest/firmware"
+            or path == "/Users/dark/gitea/comforest/firmware/cross" then
+                linkedProjects = {
+                    "/Users/dark/gitea/comforest/firmware/Cargo.toml",
+                    "/Users/dark/gitea/comforest/firmware/cross/Cargo.toml",
+                }
+            end
+
+            return {
+                ["rust-analyzer"] = {
+                    assist = {
+                        importMergeBehavior = "last",
+                        importPrefix = "by_self",
                     },
-                },
-                diagnostics = {
-                    enable = true,
-                    disabled = {
-                        -- "unresolved-proc-macro",
-                        "inactive-code",
+                    cargo = {
+                        -- loadOutDirsFromCheck = true,
                     },
+                    checkOnSave = {
+                        command = "clippy",
+                    },
+                    completion = {
+                        postfix = {
+                            enable = false,
+                        },
+                    },
+                    diagnostics = {
+                        enable = true,
+                        disabled = {
+                            -- "unresolved-proc-macro",
+                            "inactive-code",
+                        },
+                    },
+                    procMacro = {
+                        enable = true,
+                    },
+                    linkedProjects = linkedProjects,
                 },
-                procMacro = {
-                    enable = true,
-                },
-            },
-        },
+            }
+        end,
     },
     -- on_init = function(client)
     --     local config = client.config.settings["rust-analyzer"]
