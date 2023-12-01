@@ -10,51 +10,52 @@ if $USER != "root"
 
     if !exists("g:vscode")
         " Plug 'file:///Users/dark/github/darkwater/flutter.nvim'
-        Plug 'darkwater/flutter.nvim'
+        " Plug 'darkwater/flutter.nvim'
 
-        Plug 'glts/vim-magnum'
-        Plug 'glts/vim-radical'
-        Plug 'nvim-treesitter/nvim-treesitter'
-        Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+        Plug 'MunifTanjim/nui.nvim',
+        Plug 'Saecki/crates.nvim'
+        Plug 'Shatur/neovim-ayu'
+        Plug 'akinsho/flutter-tools.nvim'
+        Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+        Plug 'andythigpen/nvim-coverage'
+        Plug 'dcampos/cmp-snippy'
+        Plug 'dcampos/nvim-snippy'
+        Plug 'evanleck/vim-svelte', {'branch': 'main'}
+        Plug 'folke/noice.nvim'
+        Plug 'folke/trouble.nvim'
         Plug 'folke/which-key.nvim'
         Plug 'github/copilot.vim'
-        Plug 'nvim-lua/plenary.nvim'
-        Plug 'stevearc/dressing.nvim' " optional for vim.ui.select
-        Plug 'akinsho/flutter-tools.nvim'
-        Plug 'nvchad/nvterm'
-        Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
-        Plug 'nvim-telescope/telescope.nvim'
-        Plug 'lewis6991/gitsigns.nvim'
-        Plug 'MunifTanjim/nui.nvim',
-        Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' }
-        Plug 'Shatur/neovim-ayu'
-        Plug 'rcarriga/nvim-notify'
-        Plug 'neovim/nvim-lspconfig'
-        Plug 'nvim-orgmode/orgmode'
-        Plug 'dcampos/nvim-snippy'
-        Plug 'dcampos/cmp-snippy'
-        Plug 'hrsh7th/cmp-nvim-lsp'
+        Plug 'glts/vim-magnum'
+        Plug 'glts/vim-radical'
         Plug 'hrsh7th/cmp-buffer'
-        Plug 'hrsh7th/cmp-path'
+        Plug 'hrsh7th/cmp-nvim-lsp'
         Plug 'hrsh7th/cmp-nvim-lua'
+        Plug 'hrsh7th/cmp-path'
         Plug 'hrsh7th/nvim-cmp'
-        Plug 'onsails/lspkind.nvim'
-        Plug 'nvim-tree/nvim-web-devicons'
-        Plug 'andythigpen/nvim-coverage'
-        Plug 'phaazon/hop.nvim'
-        Plug 'jparise/vim-graphql'
-        Plug 'stevearc/overseer.nvim'
-        Plug 'mrcjkb/rustaceanvim'
-        Plug 'Saecki/crates.nvim'
-        Plug 'jose-elias-alvarez/null-ls.nvim'
-        Plug 'nvim-lualine/lualine.nvim'
         Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
+        Plug 'jose-elias-alvarez/null-ls.nvim'
+        Plug 'jparise/vim-graphql'
+        Plug 'kevinhwang91/nvim-ufo'
+        Plug 'kevinhwang91/promise-async'
+        Plug 'lewis6991/gitsigns.nvim'
+        Plug 'mrcjkb/rustaceanvim'
+        Plug 'neovim/nvim-lspconfig'
+        Plug 'nvchad/nvterm'
+        Plug 'nvim-lua/plenary.nvim'
+        Plug 'nvim-lualine/lualine.nvim'
+        Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' }
+        Plug 'nvim-orgmode/orgmode'
+        Plug 'nvim-telescope/telescope.nvim'
+        Plug 'nvim-tree/nvim-web-devicons'
+        Plug 'nvim-treesitter/nvim-treesitter'
+        Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+        Plug 'onsails/lspkind.nvim'
         Plug 'othree/html5.vim'
         Plug 'pangloss/vim-javascript'
-        Plug 'evanleck/vim-svelte', {'branch': 'main'}
-        Plug 'kevinhwang91/promise-async'
-        Plug 'kevinhwang91/nvim-ufo'
-        Plug 'folke/noice.nvim'
+        Plug 'phaazon/hop.nvim'
+        Plug 'rcarriga/nvim-notify'
+        Plug 'stevearc/dressing.nvim' " optional for vim.ui.select
+        Plug 'stevearc/overseer.nvim'
         Plug 'tikhomirov/vim-glsl'
     endif
 
@@ -242,4 +243,6 @@ elseif $USER != "root"
     lua require "config.telescope"
     lua require "config.terminal"
     lua require "config.title"
+    lua require "config.trouble"
+    lua require "config.ufo"
 endif
