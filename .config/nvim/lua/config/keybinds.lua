@@ -195,62 +195,33 @@ keymap["<leader>"].p.g = { with_input("Grep for:", "search", telescope.grep_stri
 keymap["<leader>"].p.G = { telescope.live_grep, "Live grep" }
 keymap["<leader>"].p[","] = { Cmd("Telescope find_files cwd="..nvimdir), "Editor config" }
 
+function cargo_cmd(cmd, close_on_exit)
+    return function()
+        require("toggleterm.terminal").Terminal
+            :new({
+                dir = vim.fn.getcwd(),
+                cmd = cmd,
+                close_on_exit = close_on_exit,
+                on_open = function(t)
+                    -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes([[<C-\><C-n>]], true, true, true), '', true)
+                    -- vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
+                end,
+            })
+            :toggle()
+    end
+end
+
 keymap["<leader>"].r = { name = "+rust" }
-keymap["<leader>"].r.c = { Cmd("RustLsp openCargo"), "Open Cargo.toml" }
+keymap["<leader>"].r.c = { cargo_cmd("cargo clippy", false), "Clippy" }
+keymap["<leader>"].r.C = { Cmd("RustLsp openCargo"), "Open Cargo.toml" }
 keymap["<leader>"].r.F = { require("crates").show_features_popup, "Show crate features" }
+keymap["<leader>"].r.D = { require("crates").show_dependencies_popup, "Show crate features" }
+keymap["<leader>"].r["?"] = { require("crates").open_documentation, "Show crate features" }
 -- keymap["<leader>"].r.R = { Cmd("RustLsp runnables"), "Run..." }
-keymap["<leader>"].r.R = { function()
-    require("toggleterm.terminal").Terminal
-    :new({
-        dir = vim.fn.getcwd(),
-        cmd = "cargo run",
-        close_on_exit = false,
-        on_open = function(t)
-            -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes([[<C-\><C-n>]], true, true, true), '', true)
-            -- vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
-        end,
-    })
-    :toggle()
-end, "Run" }
-keymap["<leader>"].r.r = { function()
-    require("toggleterm.terminal").Terminal
-    :new({
-        dir = vim.fn.getcwd(),
-        cmd = "cargo run",
-        close_on_exit = true,
-        on_open = function(t)
-            -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes([[<C-\><C-n>]], true, true, true), '', true)
-            -- vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
-        end,
-    })
-    :toggle()
-end, "Run" }
-keymap["<leader>"].r.t = { function()
-    require("toggleterm.terminal").Terminal
-    :new({
-        dir = vim.fn.getcwd(),
-        cmd = "cargo test",
-        close_on_exit = false,
-        on_open = function(t)
-            -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes([[<C-\><C-n>]], true, true, true), '', true)
-            -- vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
-        end,
-    })
-    :toggle()
-end, "Test" }
-keymap["<leader>"].r.b = { function()
-    require("toggleterm.terminal").Terminal
-    :new({
-        dir = vim.fn.getcwd(),
-        cmd = "cargo bench",
-        close_on_exit = false,
-        on_open = function(t)
-            -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes([[<C-\><C-n>]], true, true, true), '', true)
-            -- vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
-        end,
-    })
-    :toggle()
-end, "Bench" }
+keymap["<leader>"].r.R = { cargo_cmd("cargo run", false), "Run (keep terminal)" }
+keymap["<leader>"].r.r = { cargo_cmd("cargo run", true), "Run" }
+keymap["<leader>"].r.t = { cargo_cmd("cargo test", false), "Test" }
+keymap["<leader>"].r.b = { cargo_cmd("cargo bench", false), "Bench" }
 keymap["<leader>"].r.J = { Cmd("RustLsp joinLines"), "Join lines" }
 keymap["<leader>"].r.u = { Cmd("RustLsp parentModule"), "Jump to parent module" }
 keymap["<leader>"].r.m = { Cmd("RustLsp expandMacro"), "Expand macro" }
