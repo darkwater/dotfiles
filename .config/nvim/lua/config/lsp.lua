@@ -9,6 +9,8 @@ null_ls.setup {
     -- },
 }
 
+require("pest-vim").setup {}
+
 -- require("lsp-progress").setup {}
 -- require("fidget").setup {
 --     text = {
