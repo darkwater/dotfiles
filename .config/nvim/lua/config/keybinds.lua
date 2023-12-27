@@ -175,6 +175,9 @@ keymap["<leader>"].g.s = { Cmd("Telescope git_status"), "Status" }
 keymap["<leader>"].g.S = { Cmd("Telescope git_stash"), "Stash" }
 keymap["<leader>"].g.u = { Cmd("Gitsigns reset_hunk"), "Undo hunk" }
 
+keymap["<leader>"].i = { name = "+insert" }
+keymap["<leader>"].i.u = { Cmd("read !uuidgen"), "Insert UUID" }
+
 local diag_opts = { severity_limit = "error", disable_coordinates = true }
 keymap["<leader>"].l = { name = "+lsp" }
 keymap["<leader>"].l.a = { vim.lsp.buf.code_action, "Code actions" }
