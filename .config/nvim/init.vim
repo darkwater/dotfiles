@@ -58,6 +58,8 @@ if $USER != "root"
         Plug 'stevearc/overseer.nvim'
         Plug 'tikhomirov/vim-glsl'
         Plug 'pest-parser/pest.vim'
+        Plug 'mfussenegger/nvim-dap'
+        Plug 'rcarriga/nvim-dap-ui'
     endif
 
     call plug#end()
@@ -227,6 +229,7 @@ elseif $USER != "root"
     lua require "config.autoformat"
     lua require "config.colors"
     lua require "config.completion"
+    lua require "config.dap"
     lua require "config.dressing"
     " lua require "config.executor"
     lua require "config.flutter"
