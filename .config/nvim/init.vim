@@ -57,6 +57,7 @@ if $USER != "root"
         Plug 'stevearc/dressing.nvim' " optional for vim.ui.select
         Plug 'stevearc/overseer.nvim'
         Plug 'tikhomirov/vim-glsl'
+        Plug 'pest-parser/pest.vim'
     endif
 
     call plug#end()
