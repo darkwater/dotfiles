@@ -1,0 +1,43 @@
+local dap = require("dap")
+require("dapui").setup {}
+-- dap.adapters.probe_rs = {
+--     type = "server",
+--     port = 50000,
+--     -- executable = {
+--     --     command = os.getenv("HOME") .. "/.cargo/bin/probe-rs-debugger",
+--     --     args = { "debug", "--port", "50000" },
+--     --     options = {
+--     --         env = {
+--     --             RUST_LOG = "debug",
+--     --         },
+--     --     },
+--     -- }
+-- }
+
+-- dap.configurations.rust = {
+--     {
+--         type = "probe_rs",
+--         request = "launch",
+--         name = "Debug Firmware",
+--         program = "${workspaceFolder}/cross/target/thumbv7em-none-eabihf/debug/powerbox",
+--         chip = "STM32L433RCTx",
+--         wireProtocol = "Swd",
+--         flashingConfig = {
+--             flashingEnabled = false,
+--             haltAfterReset = true,
+--             formatOptions = { format = "elf" },
+--         },
+--         coreConfigs = {{
+--             coreIndex = 0,
+--             programBinary = "${workspaceFolder}/cross/target/thumbv7em-none-eabihf/debug/powerbox",
+--             svdFile = "${workspaceFolder}/.svd/STM32L4x3.svd",
+--             rttEnabled = true,
+--             rttChannelFormats = {
+--                 {
+--                     channelNumber = 0,
+--                     dataFormat = "Defmt",
+--                 },
+--             },
+--         }},
+--     }
+-- }
