@@ -1,4 +1,4 @@
-require('crates').setup {
+require("crates").setup {
     null_ls = {
         enabled = true,
         name = "crates.nvim",
@@ -9,6 +9,8 @@ require('crates').setup {
         },
     },
 }
+
+require("ferris").setup {}
 
 vim.g.rustaceanvim = function()
     local function get_rust_analyzer_path()
@@ -38,6 +40,7 @@ vim.g.rustaceanvim = function()
         tools = {
             executor = require("rustaceanvim.executors.toggleterm"),
             inlay_hints = {
+                auto = false,
             },
         },
         server = {
