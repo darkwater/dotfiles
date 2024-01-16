@@ -39,6 +39,8 @@ if $USER != "root"
         Plug 'kevinhwang91/promise-async'
         Plug 'lewis6991/gitsigns.nvim'
         Plug 'mrcjkb/rustaceanvim'
+        Plug 'darkwater/ferris.nvim'
+        Plug 'lvimuser/lsp-inlayhints.nvim'
         Plug 'neovim/nvim-lspconfig'
         Plug 'nvchad/nvterm'
         Plug 'nvim-lua/plenary.nvim'
