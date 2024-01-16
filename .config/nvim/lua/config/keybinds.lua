@@ -218,7 +218,7 @@ keymap["<leader>"].r = { name = "+rust" }
 keymap["<leader>"].r.c = { cargo_cmd("cargo clippy", false), "Clippy" }
 keymap["<leader>"].r.C = { Cmd("RustLsp openCargo"), "Open Cargo.toml" }
 keymap["<leader>"].r.F = { require("crates").show_features_popup, "Show crate features" }
-keymap["<leader>"].r.D = { require("crates").show_dependencies_popup, "Show crate features" }
+keymap["<leader>"].r.D = { require("crates").show_dependencies_popup, "Show crate dependencies" }
 keymap["<leader>"].r["?"] = { require("crates").open_documentation, "Show crate features" }
 -- keymap["<leader>"].r.R = { Cmd("RustLsp runnables"), "Run..." }
 keymap["<leader>"].r.R = { cargo_cmd("cargo run", false), "Run (keep terminal)" }
