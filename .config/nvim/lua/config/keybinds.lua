@@ -186,7 +186,8 @@ keymap["<leader>"].l.C = { telescope.lsp_outgoing_calls, "Outgoing calls" }
 keymap["<leader>"].l.e = { with_opts(telescope.diagnostics, diag_opts), "Errors" }
 keymap["<leader>"].l.d = { telescope.diagnostics, "All diagnostics" }
 keymap["<leader>"].l.i = { telescope.lsp_implementations, "Implementations" }
-keymap["<leader>"].l.r = { telescope.lsp_references, "References" }
+keymap["<leader>"].l.r = { vim.lsp.buf.rename, "Rename symbol" }
+keymap["<leader>"].l.R = { telescope.lsp_references, "References" }
 keymap["<leader>"].l.s = { telescope.lsp_document_symbols, "Symbols (document)" }
 keymap["<leader>"].l.S = { with_input("Workspace symbol search:", "query", telescope.lsp_workspace_symbols), "Symbols (workspace)" }
 
@@ -239,9 +240,6 @@ keymap["<leader>"].r.a = {
     end,
     "Add dependency",
 }
-
-keymap["<leader>"].s = { name = "+symbol" }
-keymap["<leader>"].s.e = { vim.lsp.buf.rename, "Rename symbol" }
 
 keymap["<leader>"].T = { name = "+Telescope" }
 keymap["<leader>"].T.T = { telescope.builtin, "Telescope pickers" }
