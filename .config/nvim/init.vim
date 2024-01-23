@@ -33,7 +33,8 @@ if $USER != "root"
         Plug 'hrsh7th/cmp-path'
         Plug 'hrsh7th/nvim-cmp'
         Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
-        Plug 'jose-elias-alvarez/null-ls.nvim'
+        " Plug 'jose-elias-alvarez/null-ls.nvim'
+        Plug 'nvimtools/none-ls.nvim'
         Plug 'jparise/vim-graphql'
         Plug 'kevinhwang91/nvim-ufo'
         Plug 'kevinhwang91/promise-async'
@@ -62,6 +63,7 @@ if $USER != "root"
         Plug 'pest-parser/pest.vim'
         Plug 'mfussenegger/nvim-dap'
         Plug 'rcarriga/nvim-dap-ui'
+        Plug 'vimoutliner/vimoutliner'
     endif
 
     call plug#end()
