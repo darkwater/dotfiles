@@ -2,11 +2,126 @@ local lsp = require("lspconfig")
 -- local lsp_status = require("lsp-status")
 
 local null_ls = require('null-ls')
+
+local jira_completion = {}
+jira_completion.name = "jira_completion"
+jira_completion.method = null_ls.methods.COMPLETION
+jira_completion.filetypes = {}
+jira_completion.generator = {
+    async = true,
+    fn = function(params, done)
+        local cword = vim.fn.expand("<cWORD>"):match("([A-Z]+%-)")
+
+        if cword ~= "SIC-" then
+            done {
+                isIncomplete = true,
+            }
+            return
+        end
+
+        -- read lines from ~/.jira/issues.txt
+        local issues = {}
+        local f = io.open(os.getenv("HOME") .. "/.jira/issues.txt", "r")
+        if f then
+            for line in f:lines() do
+                local fields = {}
+                for field in line:gmatch("[^\t]+") do
+                    table.insert(fields, field)
+                end
+                local kind = fields[1]
+                local id = fields[2]
+                local summary = fields[3]
+                local status = fields[4]
+                local priority = fields[5]
+                local assignee = fields[6] or "-"
+
+                table.insert(issues, {
+                    label = id .. "  " .. summary,
+                    insertText = id .. " " .. summary,
+                    documentation = {
+                        id,
+                        "Kind:     " .. kind,
+                        "Summary:  " .. summary,
+                        "Status:   " .. status,
+                        "Priority: " .. priority,
+                        "Assignee: " .. assignee,
+                        "",
+                        summary,
+                    },
+                    data = {
+                        jira_issue = true,
+                        status = status,
+                    },
+                })
+            end
+            f:close()
+        end
+
+        -- local s = ""
+        -- s = s .. (vim.inspect(5))
+        -- s = s .. (vim.inspect(issues))
+        -- s = s .. (vim.inspect(10))
+        -- vim.notify(s)
+
+        -- return completion items
+        done {
+            {
+                items = issues,
+                isIncomplete = false,
+            },
+        }
+    end
+}
+
+local jira_hover = {}
+jira_hover.name = "jira_hover"
+jira_hover.method = null_ls.methods.HOVER
+jira_hover.filetypes = {}
+jira_hover.generator = {
+    async = true,
+    fn = function(params, done)
+        local cword = vim.fn.expand("<cWORD>"):match("([A-Z]+%-[0-9]+)")
+
+        local f = io.open(os.getenv("HOME") .. "/.jira/issues.txt", "r")
+        if f then
+            for line in f:lines() do
+                local fields = {}
+                for field in line:gmatch("[^\t]+") do
+                    table.insert(fields, field)
+                end
+                local id = fields[2]
+
+                if cword == id then
+                    local kind = fields[1]
+                    local summary = fields[3]
+                    local status = fields[4]
+                    local priority = fields[5]
+                    local assignee = fields[6] or "-"
+
+                    done {
+                        id,
+                        "Kind:     " .. kind,
+                        "Summary:  " .. summary,
+                        "Status:   " .. status,
+                        "Priority: " .. priority,
+                        "Assignee: " .. assignee,
+                        "",
+                        summary,
+                    }
+                    return
+                end
+            end
+        end
+
+        done()
+    end
+}
+
 null_ls.setup {
-    -- sources = {
-    --     null_ls.builtins.diagnostics.eslint,
-    --     null_ls.builtins.formatting.prettier,
-    -- },
+    sources = {
+        jira_completion,
+        jira_hover,
+    },
 }
 
 require("pest-vim").setup {}
