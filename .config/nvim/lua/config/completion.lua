@@ -39,6 +39,21 @@ cmp.setup {
                 end
             end
 
+            local item = entry:get_completion_item()
+            if item.data ~= nil and item.data.jira_issue then
+                local map = {
+                    ["Done"] = "@constant",
+                    ["Closed"] = "@constant",
+                    ["In Progress"] = "@property",
+                    ["Todo"] = "@string",
+                    ["Ready for preparation Client"] = "@comment",
+                }
+
+                vim_item.kind = item.data.status
+                vim_item.kind_hl_group = map[item.data.status] or "@function"
+                return vim_item
+            end
+
             return require('lspkind').cmp_format{ with_text = false }(entry, vim_item)
         end,
     },
