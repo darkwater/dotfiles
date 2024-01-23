@@ -42,8 +42,11 @@ FileUtils.cd File.dirname(__FILE__) do
     end
 
     puts "pulling"
-    `git pull`
+    res = `git pull`
     exit $?.exitstatus unless $?.success?
+    unless res.include? "Already up to date."
+      system "nvim +PlugUpdate +qa"
+    end
 
     puts "pushing"
     `git push -q`
