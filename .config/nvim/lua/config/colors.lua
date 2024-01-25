@@ -11,6 +11,13 @@ require("ayu").setup {
         SpecialKey = { fg = "#aaafff" },
         FidgetTitle = { fg = "#ffaf00", bg = "NONE" },
         FidgetTask = { fg = "#00afff", bg = "NONE" },
+        DiffAdd = { fg = "#87d96c", bg = "NONE" },
+        DiffDelete = { fg = "#f27983", bg = "NONE" },
+        DiffChange = { fg = "#80bfff", bg = "NONE" },
+        CurSearch = { bg = "#695380" },
+        Search = { bg = "#423a56" },
+        NoiceVirtualText = { fg = "#606873" },
+        Visual = { bg = "#37486d" },
     },
 }
 
