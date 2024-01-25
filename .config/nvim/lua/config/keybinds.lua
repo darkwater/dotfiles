@@ -85,6 +85,7 @@ function run_cmd(title, cmd, max_lines)
 end
 
 local nvimdir = vim.fn.stdpath "config"
+local tododir = vim.fn.expand "$HOME/sync/todo"
 
 local telescope = require("telescope.builtin")
 local hop = require("hop")
@@ -198,6 +199,7 @@ keymap["<leader>"].p.f = { Cmd("Telescope find_files"), "Find file" }
 keymap["<leader>"].p.g = { with_input("Grep for:", "search", telescope.grep_string), "Grep" }
 keymap["<leader>"].p.G = { telescope.live_grep, "Live grep" }
 keymap["<leader>"].p[","] = { Cmd("Telescope find_files cwd="..nvimdir), "Editor config" }
+keymap["<leader>"].p.t = { Cmd("Telescope find_files cwd="..tododir), "Todo lists" }
 
 function cargo_cmd(cmd, close_on_exit)
     return function()
@@ -269,6 +271,7 @@ keymap["<leader>"].w.e = { Cmd("TroubleToggle"), "Toggle problems" }
 keymap["<leader>"].w.s = { Cmd("Neotree document_symbols"), "Document symbols" }
 keymap["<leader>"].w.Q = { Cmd("qa"), "Close all windows" }
 keymap["<leader>"].w.t = { Cmd("Neotree"), "Toggle Neotree" } -- also see neotree.lua mappings
+keymap["<leader>"].w.T = { Cmd("Neotree reveal"), "Reveal file in Neotree" } -- also see neotree.lua mappings
 
 keymap["<leader>"].K = { vim.diagnostic.open_float, "Show diagnostic details" }
 
