@@ -243,6 +243,22 @@ keymap["<leader>"].r.a = {
     "Add dependency",
 }
 
+local copilot_enabled = true
+function toggle_copilot()
+    copilot_enabled = not copilot_enabled
+    if copilot_enabled then
+        vim.cmd "Copilot enable"
+        vim.notify "Copilot enabled"
+    else
+        vim.cmd "Copilot disable"
+        vim.notify "Copilot disabled"
+    end
+end
+
+keymap["<leader>"].t = { name = "+toggle" }
+keymap["<leader>"].t.c = { toggle_copilot, "Copilot" }
+keymap["<leader>"].t.w = { Cmd("set wrap!"), "Text wrapping" }
+
 keymap["<leader>"].T = { name = "+Telescope" }
 keymap["<leader>"].T.T = { telescope.builtin, "Telescope pickers" }
 keymap["<leader>"].T.A = { telescope.autocommands, "Autocommands" }
@@ -265,6 +281,11 @@ keymap["<leader>"].T[":"] = { telescope.command_history, "Command history" }
 keymap["<leader>"].T["/"] = { telescope.search_history, "Search history" }
 keymap["<leader>"].T["?"] = { telescope.help_tags, "Help tags" }
 keymap["<leader>"].T["."] = { telescope.resume, "Resume last picker" }
+
+keymap["<leader>"]["\t"] = { name = "+tabular" }
+keymap["<leader>"]["\t"]["="] = { Cmd("Tabularize /^[^=]*\\zs="), "=" }
+keymap["<leader>"]["\t"]['"'] = { Cmd("Tabularize /\""), '"'}
+keymap["<leader>"]["\t"][":"] = { Cmd("Tabularize /:/l0r1"), ":"}
 
 keymap["<leader>"].w = { name = "+window" }
 keymap["<leader>"].w.e = { Cmd("TroubleToggle"), "Toggle problems" }
