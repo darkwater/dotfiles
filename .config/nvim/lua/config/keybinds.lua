@@ -201,13 +201,14 @@ keymap["<leader>"].p.G = { telescope.live_grep, "Live grep" }
 keymap["<leader>"].p[","] = { Cmd("Telescope find_files cwd="..nvimdir), "Editor config" }
 keymap["<leader>"].p.t = { Cmd("Telescope find_files cwd="..tododir), "Todo lists" }
 
-function cargo_cmd(cmd, close_on_exit)
+function cargo_cmd(cmd, close_on_exit, env)
     return function()
         require("toggleterm.terminal").Terminal
             :new({
                 dir = vim.fn.getcwd(),
                 cmd = cmd,
                 close_on_exit = close_on_exit,
+                env = env,
                 on_open = function(t)
                     -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes([[<C-\><C-n>]], true, true, true), '', true)
                     -- vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
@@ -224,7 +225,7 @@ keymap["<leader>"].r.F = { require("crates").show_features_popup, "Show crate fe
 keymap["<leader>"].r.D = { require("crates").show_dependencies_popup, "Show crate dependencies" }
 keymap["<leader>"].r["?"] = { require("crates").open_documentation, "Show crate features" }
 -- keymap["<leader>"].r.R = { Cmd("RustLsp runnables"), "Run..." }
-keymap["<leader>"].r.R = { cargo_cmd("cargo run", false), "Run (keep terminal)" }
+keymap["<leader>"].r.R = { cargo_cmd("cargo run", false, { RUST_BACKTRACE = "1" }), "Run (keep terminal)" }
 keymap["<leader>"].r.r = { cargo_cmd("cargo run", true), "Run" }
 keymap["<leader>"].r.t = { cargo_cmd("cargo test", false), "Test" }
 keymap["<leader>"].r.b = { cargo_cmd("cargo bench", false), "Bench" }
