@@ -10,7 +10,7 @@ jira_completion.filetypes = {}
 jira_completion.generator = {
     async = true,
     fn = function(params, done)
-        local cword = vim.fn.expand("<cWORD>"):match("([A-Z]+%-)")
+        local cword = vim.fn.getline("."):sub(1, vim.fn.col(".") - 1):match("([A-Z]+%-)$")
 
         if cword ~= "SIC-" then
             done {
@@ -39,10 +39,8 @@ jira_completion.generator = {
                     label = id .. "  " .. summary,
                     insertText = id .. " " .. summary,
                     documentation = {
-                        id,
+                        id .. "  \\[" .. status .. "\\]",
                         "Kind:     " .. kind,
-                        "Summary:  " .. summary,
-                        "Status:   " .. status,
                         "Priority: " .. priority,
                         "Assignee: " .. assignee,
                         "",
@@ -99,10 +97,8 @@ jira_hover.generator = {
                     local assignee = fields[6] or "-"
 
                     done {
-                        id,
+                        id .. "  \\[" .. status .. "\\]",
                         "Kind:     " .. kind,
-                        "Summary:  " .. summary,
-                        "Status:   " .. status,
                         "Priority: " .. priority,
                         "Assignee: " .. assignee,
                         "",
@@ -117,10 +113,55 @@ jira_hover.generator = {
     end
 }
 
+local jira_actions = {}
+jira_actions.name = "jira_actions"
+jira_actions.method = null_ls.methods.CODE_ACTION
+jira_actions.filetypes = {}
+jira_actions.generator = {
+    async = true,
+    fn = function(params, done)
+        -- read lines from ~/.jira/states.txt
+        local states = {}
+        local f = io.open(os.getenv("HOME") .. "/.jira/states.txt", "r")
+        if f then
+            for line in f:lines() do
+                local line = line:gsub("\n", "")
+                table.insert(states, line)
+            end
+            f:close()
+        end
+
+        local actions = {}
+
+        local issue_ids = vim.fn.getline("."):gmatch("(SIC%-[0-9]+)")
+
+        for id in issue_ids do
+            for _, state in ipairs(states) do
+                table.insert(actions, {
+                    title = id .. ": Move to: " .. state,
+                    action = function()
+                        vim.fn.jobstart {
+                            "jira",
+                            "issue",
+                            "move",
+                            id,
+                            state,
+                        }
+                    end,
+                })
+            end
+        end
+
+        -- return completion items
+        done(actions)
+    end
+}
+
 null_ls.setup {
     sources = {
         jira_completion,
         jira_hover,
+        jira_actions,
     },
 }
 
