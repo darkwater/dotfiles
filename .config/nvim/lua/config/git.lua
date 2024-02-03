@@ -1,5 +1,5 @@
 require("gitsigns").setup {
-    numhl = true,
+    -- numhl = true,
     signs = {
         delete = { text = "▁" },
     },
