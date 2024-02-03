@@ -1,12 +1,15 @@
 if $USER != "root"
     call plug#begin()
 
-    Plug 'tpope/vim-characterize' " better ga
-    Plug 'tpope/vim-commentary'   " toggle comments with gc
-    Plug 'tpope/vim-repeat'       " more support for .
-    Plug 'tpope/vim-rsi'          " readline-style insertion
-    Plug 'tpope/vim-surround'     " surround with pairs
-    Plug 'godlygeek/tabular'      " tabularize code
+    Plug 'tpope/vim-characterize'    " better ga
+    Plug 'tpope/vim-commentary'      " toggle comments with gc
+    Plug 'tpope/vim-endwise'         " auto-end
+    Plug 'tpope/vim-repeat'          " more support for .
+    Plug 'tpope/vim-rsi'             " readline-style insertion
+    Plug 'tpope/vim-speeddating'     " increment dates
+    Plug 'tpope/vim-surround'        " surround with pairs
+    Plug 'godlygeek/tabular'         " tabularize code
+    Plug 'AndrewRadev/splitjoin.vim' " split/join lines
 
     if !exists("g:vscode")
         " Plug 'file:///Users/dark/github/darkwater/flutter.nvim'
@@ -71,6 +74,11 @@ endif
 
 if !exists("g:vscode")
     autocmd FocusGained * lua f = io.open("/tmp/nvim.pid", "w"); f:write(vim.loop.os_getpid()); f:flush(); f:close()
+
+    let g:copilot_filetypes = {
+                \ "votl": v:false,
+                \ "markdown": v:false,
+                \ }
 endif
 
 nmap <Space>ss :call <SID>SynStack()<CR>
