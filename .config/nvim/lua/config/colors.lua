@@ -1,7 +1,9 @@
+local neovide = vim.g.neovide
+
 require("ayu").setup {
     mirage = true,
     overrides = {
-        Normal = { bg = "NONE" },
+        Normal = { bg = neovide and "#1f2430" or "NONE" },
         NormalFloat = { bg = "#333844" },
         SignColumn = { bg = "NONE" },
         WinSeparator = { fg = "#606873" },
