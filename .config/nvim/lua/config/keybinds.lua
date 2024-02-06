@@ -164,7 +164,8 @@ keymap["<leader>"].f.f = { vim.lsp.buf.format, "Format file" }
 keymap["<leader>"].g = { name = "+git" }
 keymap["<leader>"].g.b = { Cmd("Telescope git_branches"), "Branches" }
 keymap["<leader>"].g.B = { Cmd("Gitsigns blame_line"), "Blame line" }
-keymap["<leader>"].g.c = { Cmd("Telescope git_commits"), "Commits" }
+keymap["<leader>"].g.l = { Cmd("Telescope git_commits"), "Commit log" }
+keymap["<leader>"].g.C = { Cmd("Git commit"), "Commit" }
 keymap["<leader>"].g.d = {
     Cmd("Gitsigns toggle_linehl") ..
     Cmd("Gitsigns toggle_deleted"),
@@ -313,13 +314,8 @@ keymap["'"] = { hop.hint_words, "Last buffer" }
 
 keymap["<Enter>"] = { Cmd("b#"), "Last buffer" }
 
-keymap["<C-'>"] = {
-    function()
-        require("nvterm.terminal").toggle "vertical"
-    end,
-    "Toggle terminal",
-}
+keymap["<C-'>"] = { Cmd("ToggleTerm"), "Toggle terminal" }
 keymap["<leader>"]["'"] = keymap["<C-'>"]
-vim.keymap.set("t", "<C-'>", "<Cmd>lua require('nvterm.terminal').toggle('vertical')<CR>")
+vim.keymap.set("t", "<C-'>", "<Cmd>ToggleTerm<CR>")
 
 wk.register(keymap)
