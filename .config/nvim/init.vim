@@ -77,15 +77,18 @@ if exists("g:neovide")
     nmap <D-v> "+p
     imap <D-v> <C-r>+
 
-    set guifont=Hack,SauceCodePro\ Nerd\ Font:h14.1
-    set linespace=0
+    if hostname() == "atsushi"
+        set guifont=Hack,SauceCodePro\ Nerd\ Font:h14.1
+        let g:neovide_fullscreen = v:true
+    else
+        set guifont=Hack,SauceCodePro\ Nerd\ Font:h10.1
+    endif
 
     let g:neovide_transparency = 0.96
     let g:transparency = 0.96
     let g:neovide_scroll_animation_length = 0.12
     let g:neovide_scroll_animation_far_lines = 500
     let g:neovide_hide_mouse_when_typing = v:true
-    let g:neovide_fullscreen = v:true
     let g:neovide_remember_window_size = v:true
     let g:neovide_cursor_animation_length = 0.05
     let g:neovide_cursor_antialiasing = v:false
