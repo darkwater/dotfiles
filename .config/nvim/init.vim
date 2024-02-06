@@ -4,6 +4,7 @@ if $USER != "root"
     Plug 'tpope/vim-characterize'    " better ga
     Plug 'tpope/vim-commentary'      " toggle comments with gc
     Plug 'tpope/vim-endwise'         " auto-end
+    Plug 'tpope/vim-fugitive'        " git
     Plug 'tpope/vim-repeat'          " more support for .
     Plug 'tpope/vim-rsi'             " readline-style insertion
     Plug 'tpope/vim-speeddating'     " increment dates
