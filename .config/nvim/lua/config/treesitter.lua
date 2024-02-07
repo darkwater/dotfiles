@@ -2,7 +2,7 @@ require("nvim-treesitter.configs").setup {
     highlight = {
         enable = true,
         disable = {
-            "vim", -- unacceptably slow; ships with neovim
+            -- "vim", -- unacceptably slow; ships with neovim
             "vimdoc", -- broken
         },
         additional_vim_regex_highlighting = { "org" },
