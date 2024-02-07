@@ -85,7 +85,8 @@ function run_cmd(title, cmd, max_lines)
 end
 
 local nvimdir = vim.fn.stdpath "config"
-local tododir = vim.fn.expand "$HOME/sync/todo"
+local homedir = vim.fn.expand "$HOME"
+local tododir = homedir .. "/sync/todo"
 
 local telescope = require("telescope.builtin")
 local hop = require("hop")
@@ -196,11 +197,37 @@ keymap["<leader>"].l.S = { with_input("Workspace symbol search:", "query", teles
 keymap["<leader>"].p = { name = "+project/plugins" }
 keymap["<leader>"].p.i = { Cmd("PlugInstall"), "Install plugins" }
 keymap["<leader>"].p.u = { Cmd("PlugUpdate"), "Install plugins" }
-keymap["<leader>"].p.f = { Cmd("Telescope find_files"), "Find file" }
+keymap["<leader>"].p.f = { telescope.find_files, "Find file" }
 keymap["<leader>"].p.g = { with_input("Grep for:", "search", telescope.grep_string), "Grep" }
 keymap["<leader>"].p.G = { telescope.live_grep, "Live grep" }
-keymap["<leader>"].p[","] = { Cmd("Telescope find_files cwd="..nvimdir), "Editor config" }
-keymap["<leader>"].p.t = { Cmd("Telescope find_files cwd="..tododir), "Todo lists" }
+keymap["<leader>"].p.p = {
+    function() 
+        telescope.find_files {
+            find_command = {
+                "fd", "--exact-depth", "2", "--type", "directory", ".",
+                homedir .. "/gitea", homedir .. "/github"
+            },
+            opts = {
+                layout_stategy = "vertical",
+                preview = true,
+                file_previewer = require("telescope.previewers").new_termopen_previewer {
+                    get_command = function(entry)
+                        return { "tree", "-C", "-L", "1", entry.path }
+                    end,
+                },
+            }
+        }
+    end,
+    "Projects",
+}
+keymap["<leader>"].p[","] = {
+    function() telescope.find_files { cwd = nvimdir } end,
+    "Editor config",
+}
+keymap["<leader>"].p.t = {
+    function() telescope.find_files { cwd = tododir } end,
+    "Todo lists",
+}
 
 function cargo_cmd(cmd, close_on_exit, env)
     return function()
