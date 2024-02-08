@@ -77,7 +77,7 @@ if exists("g:neovide")
     nmap <D-v> "+p
     imap <D-v> <C-r>+
 
-    if hostname() == "atsushi"
+    if hostname() == "atsushi.local"
         set guifont=Hack,SauceCodePro\ Nerd\ Font:h14.1
         let g:neovide_fullscreen = v:true
     else
