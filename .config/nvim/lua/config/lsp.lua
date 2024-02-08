@@ -205,6 +205,9 @@ lsp.denols.setup {
     root_dir = lsp.util.root_pattern("deno.json"),
 }
 
+lsp.slint_lsp.setup {}
+vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
+
 -- lsp.rust_analyzer.setup {
 --     settings = {
 --         ["rust-analyzer"] = {
