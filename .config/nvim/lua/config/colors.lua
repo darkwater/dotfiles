@@ -27,4 +27,8 @@ vim.cmd[[
 colorscheme ayu
 hi link StorageClass Keyword
 hi link NeoTreeFileIcon Normal
+hi link @lsp.type.keyword Keyword
+hi link @lsp.type.string String
+hi link @lsp.type.number Number
+hi link @lsp.type.operator Operator
 ]]
