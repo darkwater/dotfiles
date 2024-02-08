@@ -200,6 +200,7 @@ keymap["<leader>"].p.u = { Cmd("PlugUpdate"), "Install plugins" }
 keymap["<leader>"].p.f = { telescope.find_files, "Find file" }
 keymap["<leader>"].p.g = { with_input("Grep for:", "search", telescope.grep_string), "Grep" }
 keymap["<leader>"].p.G = { telescope.live_grep, "Live grep" }
+keymap["<leader>"].p.r = { telescope.oldfiles, "Editor config" }
 keymap["<leader>"].p.p = {
     function() 
         telescope.find_files {
@@ -337,12 +338,13 @@ keymap["]"].h = { Cmd("Gitsigns next_hunk"), "Next hunk" }
 keymap["]"].q = { Cmd("cnext"), "Next quickfix" }
 keymap["]"].l = { Cmd("lnext"), "Next location" }
 
-keymap["'"] = { hop.hint_words, "Last buffer" }
+-- keymap["'"] = { hop.hint_words, "Last buffer" }
 
 keymap["<Enter>"] = { Cmd("b#"), "Last buffer" }
 
-keymap["<C-'>"] = { Cmd("ToggleTerm"), "Toggle terminal" }
-keymap["<leader>"]["'"] = keymap["<C-'>"]
+keymap["'"]             = { Cmd("ToggleTerm"), "Toggle terminal" }
+keymap["<C-'>"]         = keymap["'"]
+keymap["<leader>"]["'"] = keymap["'"]
 vim.keymap.set("t", "<C-'>", "<Cmd>ToggleTerm<CR>")
 
 wk.register(keymap)
