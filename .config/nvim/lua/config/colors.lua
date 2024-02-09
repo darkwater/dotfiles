@@ -20,6 +20,17 @@ require("ayu").setup {
         Search = { bg = "#423a56" },
         NoiceVirtualText = { fg = "#606873" },
         Visual = { bg = "#37486d" },
+        JiraTodo = { fg = "#d5ff80", bg = "#172b4d" },
+        JiraDone = { fg = "#dfbfff", bg = "#172b4d" },
+        OL1 = { fg = "#409fff" },
+        OL2 = { fg = "#4e99e5" },
+        OL3 = { fg = "#5791cc" },
+        OL4 = { fg = "#5c87b2" },
+        OL5 = { fg = "#5d7b99" },
+        OL6 = { fg = "#5d7b99" },
+        OL7 = { fg = "#5d7b99" },
+        OL8 = { fg = "#5d7b99" },
+        OL9 = { fg = "#5d7b99" },
     },
 }
 
@@ -31,4 +42,12 @@ hi link @lsp.type.keyword Keyword
 hi link @lsp.type.string String
 hi link @lsp.type.number Number
 hi link @lsp.type.operator Operator
+hi link LspInlayHint Comment
+hi link JiraInProgress JiraTodo
+hi link JiraReadyForReview JiraInProgress
+hi link JiraInReview JiraInProgress
+hi link JiraReadyForTest JiraInProgress
+hi link JiraInTest JiraInProgress
+hi link JiraReleased JiraDone
+hi link JiraClosed JiraDone
 ]]
