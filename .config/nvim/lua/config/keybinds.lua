@@ -130,15 +130,12 @@ keymap.g = {}
 keymap.g.d = { telescope.lsp_definitions, "Go to definition" }
 keymap.g.t = { telescope.lsp_type_definitions, "Go to type definition" }
 
-keymap["<leader>"] = { name = "+leader" }
-
-keymap["<M-Bslash>"] = { "<Nop>", "No-op" }
 keymap["<Bslash>"] = { function()
     vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
 end, "Toggle inlay hints" }
 
--- keymap["<Bslash>"] = { "<leader><leader>", "+language-specific", noremap = false }
--- keymap["<leader>"] = { name = "+language-specific" }
+keymap["<leader>"] = { name = "+leader" }
+
 keymap["<leader>"].F = { name = "+flutter" }
 keymap["<leader>"].F.a = { name = "+android" }
 keymap["<leader>"].F.a.c = {
