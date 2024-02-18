@@ -133,9 +133,9 @@ keymap.g.t = { telescope.lsp_type_definitions, "Go to type definition" }
 keymap["<leader>"] = { name = "+leader" }
 
 keymap["<M-Bslash>"] = { "<Nop>", "No-op" }
--- keymap["<Bslash>"] = { function()
---     require("flutter").toggle_flutter_terminal("flutter run")
--- end, "Run Executor" }
+keymap["<Bslash>"] = { function()
+    vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+end, "Toggle inlay hints" }
 
 -- keymap["<Bslash>"] = { "<leader><leader>", "+language-specific", noremap = false }
 -- keymap["<leader>"] = { name = "+language-specific" }
@@ -157,6 +157,7 @@ keymap["<leader>"].F.a.c = {
 -- keymap["<leader>"].F.R = { flutter.send_to_flutter("R"), "Hot restart" }
 -- keymap["<leader>"].F.q = { flutter.send_to_flutter("q"), "Stop" }
 keymap["<leader>"].F.b = { run_cmd("Build runner", "dart run build_runner build", 5), "Build runner" }
+-- keymap["<leader>"].F.F = { run_cmd("Build runner", "dart run build_runner build", 5), "Build runner" }
 
 keymap["<leader>"].f = { name = "+file" }
 keymap["<leader>"].f.s = { Cmd("source %"), "Source file" }
@@ -201,26 +202,7 @@ keymap["<leader>"].p.f = { telescope.find_files, "Find file" }
 keymap["<leader>"].p.g = { with_input("Grep for:", "search", telescope.grep_string), "Grep" }
 keymap["<leader>"].p.G = { telescope.live_grep, "Live grep" }
 keymap["<leader>"].p.r = { telescope.oldfiles, "Editor config" }
-keymap["<leader>"].p.p = {
-    function() 
-        telescope.find_files {
-            find_command = {
-                "fd", "--exact-depth", "2", "--type", "directory", ".",
-                homedir .. "/gitea", homedir .. "/github"
-            },
-            opts = {
-                layout_stategy = "vertical",
-                preview = true,
-                file_previewer = require("telescope.previewers").new_termopen_previewer {
-                    get_command = function(entry)
-                        return { "tree", "-C", "-L", "1", entry.path }
-                    end,
-                },
-            }
-        }
-    end,
-    "Projects",
-}
+keymap["<leader>"].p.p = { require("config.telescope").projects, "Projects" }
 keymap["<leader>"].p[","] = {
     function() telescope.find_files { cwd = nvimdir } end,
     "Editor config",
