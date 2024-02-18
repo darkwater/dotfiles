@@ -225,6 +225,12 @@ M.actions.generator = {
                             id,
                             state,
                         }
+
+                        vim.fn.jobstart {
+                            "sh",
+                            "-c",
+                            "sleep 10; exec ~/.jira/update.sh",
+                        }
                     end,
                 })
             end
