@@ -119,14 +119,14 @@ hi link helpCommand Constant
 let g:mapleader = "\<Space>"
 
 " <Ctrl-s> to save
-nnoremap <C-s> :<C-u>w<CR>
-inoremap <C-s> <C-c>:<C-u>w<CR>
+nnoremap <C-s> <Cmd>w<CR>
+inoremap <C-s> <C-c><Cmd>w<CR>
 
 " fix these keys
 nnoremap Y  y$
 nnoremap gg gg0
 nnoremap G  G0
-nnoremap <C-l> :<C-u>noh<CR><C-l>
+nnoremap <C-l> <Cmd>noh<CR><C-l>
 
 inoremap <Up>   <C-g><Up>
 inoremap <Down> <C-g><Down>
