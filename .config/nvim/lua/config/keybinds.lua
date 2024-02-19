@@ -149,6 +149,24 @@ keymap["<leader>"].F.a.c = {
     end,
     "Connect over TCP",
 }
+keymap["<leader>"].F.F = {
+    function()
+        require("toggleterm.terminal").Terminal
+            :new({
+                dir = vim.fn.getcwd(),
+                cmd = "flutter run",
+                close_on_exit = false,
+                env = env,
+                on_open = function(t)
+                    -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes([[<C-\><C-n>]], true, true, true), '', true)
+                    -- vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
+                end,
+            })
+            :toggle()
+    end,
+    "Flutter run",
+}
+
 -- keymap["<leader>"].F.f = { with_opts(flutter.toggle_flutter_terminal, "flutter run"), "Run" }
 -- keymap["<leader>"].F.r = { flutter.send_to_flutter("r"), "Hot reload" }
 -- keymap["<leader>"].F.R = { flutter.send_to_flutter("R"), "Hot restart" }
