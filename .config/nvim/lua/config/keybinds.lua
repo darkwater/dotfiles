@@ -171,7 +171,7 @@ keymap["<leader>"].F.F = {
 -- keymap["<leader>"].F.r = { flutter.send_to_flutter("r"), "Hot reload" }
 -- keymap["<leader>"].F.R = { flutter.send_to_flutter("R"), "Hot restart" }
 -- keymap["<leader>"].F.q = { flutter.send_to_flutter("q"), "Stop" }
-keymap["<leader>"].F.b = { run_cmd("Build runner", "dart run build_runner build", 5), "Build runner" }
+keymap["<leader>"].F.b = { run_cmd("Build runner", "dart run build_runner build -d", 5), "Build runner" }
 -- keymap["<leader>"].F.F = { run_cmd("Build runner", "dart run build_runner build", 5), "Build runner" }
 
 keymap["<leader>"].f = { name = "+file" }
