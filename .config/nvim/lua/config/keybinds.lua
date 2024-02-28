@@ -166,6 +166,11 @@ keymap["<leader>"].F.F = {
     end,
     "Flutter run",
 }
+keymap["<leader>"].F.r = { Cmd("TermExec cmd=r"), "Hot reload" }
+keymap["<leader>"].F.R = { Cmd("TermExec cmd=R"), "Hot restart" }
+keymap["<leader>"].F.q = { Cmd("TermExec cmd=q"), "Stop" }
+keymap["<leader>"].F.P = { Cmd("TermExec cmd=P"), "Toggle performance overlay" }
+keymap["<leader>"].F.p = { Cmd("TermExec cmd=p"), "Toggle debug painting" }
 
 -- keymap["<leader>"].F.f = { with_opts(flutter.toggle_flutter_terminal, "flutter run"), "Run" }
 -- keymap["<leader>"].F.r = { flutter.send_to_flutter("r"), "Hot reload" }
