@@ -9,6 +9,7 @@ require("neo-tree").setup {
     window = {
         mappings = {
             ["<leader>wt"] = "close_window",
+            ["E"] = "expand_all_nodes",
         }
     },
     default_component_configs = {
