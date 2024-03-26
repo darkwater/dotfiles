@@ -161,6 +161,7 @@ set wildmenu
 set cursorline
 set list
 set wrap
+set showbreak=󱞩
 set number
 set relativenumber
 set scrolloff=5
