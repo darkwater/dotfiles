@@ -191,6 +191,8 @@ precmd() {
     local exit_status="$?"
     if [ "$exit_status" != 0 ] && [ "$preexec_called" = 1 ]
     then echo "\e[1;31mexit $exit_status\e[0m"; unset preexec_called; fi
+
+    tput cvvis
 }
 
 zstyle ':completion:*' auto-description $'\e[38;5;247m=> %d\e[0m'
