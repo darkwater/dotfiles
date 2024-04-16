@@ -57,6 +57,20 @@ local ayu_mirage = require("lualine.themes.ayu_mirage")
 ayu_mirage.normal.a.bg = "#59c2ff"
 -- ayu_mirage.normal.c.fg = "#000000"
 
+local function xcodebuild_device()
+  if vim.g.xcodebuild_platform == "macOS" then
+    return " macOS"
+  end
+
+  if vim.g.xcodebuild_os then
+    return " " .. vim.g.xcodebuild_device_name .. " (" .. vim.g.xcodebuild_os .. ")"
+  end
+
+  return " " .. vim.g.xcodebuild_device_name
+end
+
+------
+
 require("lualine").setup {
     options = {
         -- hh ─  9472   HH ━  9473   vv │  9474   VV ┃  9475   3- ┄  9476   3_ ┅  9477   3! ┆  9478   3/ ┇  9479   4- ┈  9480   4_ ┉  9481   4! ┊  9482   4/ ┋  9483   dr ┌  9484   dR ┍  9485   Dr ┎  9486   DR ┏  9487   dl ┐  9488   dL ┑  9489   Dl ┒  9490   LD ┓  9491   ur └  9492   uR ┕  9493   Ur ┖  9494   UR ┗  9495
@@ -76,7 +90,12 @@ require("lualine").setup {
         }},
         lualine_b = {"diagnostics"},
         lualine_c = {},
-        lualine_x = { LspClients },
+        lualine_x = {
+            LspClients,
+            { "' ' .. vim.g.xcodebuild_last_status", color = { fg = "Gray" } },
+            { "'󰙨 ' .. vim.g.xcodebuild_test_plan", color = { fg = "#a6e3a1", bg = "#161622" } },
+            { xcodebuild_device, color = { fg = "#f9e2af", bg = "#161622" } },
+        },
         lualine_y = {"diff", "filetype"},
         lualine_z = {"location", "progress"},
     },
