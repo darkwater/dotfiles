@@ -1,5 +1,8 @@
 local lsp = require("lspconfig")
--- local lsp_status = require("lsp-status")
+
+lsp.sourcekit.setup {
+    cmd = {'/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp'}
+}
 
 local null_ls = require('null-ls')
 local jira = require("config.jira")
@@ -8,6 +11,7 @@ null_ls.setup {
         jira.completion,
         jira.hover,
         jira.actions,
+        null_ls.builtins.formatting.swift_format
     },
 }
 
