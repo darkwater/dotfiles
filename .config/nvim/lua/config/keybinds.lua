@@ -84,6 +84,23 @@ function run_cmd(title, cmd, max_lines)
     end
 end
 
+function shell(cmd, close_on_exit, env)
+    return function()
+        require("toggleterm.terminal").Terminal
+            :new({
+                dir = vim.fn.getcwd(),
+                cmd = cmd,
+                close_on_exit = close_on_exit,
+                env = env,
+                on_open = function(t)
+                    -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes([[<C-\><C-n>]], true, true, true), '', true)
+                    -- vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
+                end,
+            })
+            :toggle()
+    end
+end
+
 local nvimdir = vim.fn.stdpath "config"
 local homedir = vim.fn.expand "$HOME"
 local tododir = homedir .. "/sync/todo"
@@ -209,6 +226,7 @@ keymap["<leader>"].l.c = { telescope.lsp_incoming_calls, "Incoming calls" }
 keymap["<leader>"].l.C = { telescope.lsp_outgoing_calls, "Outgoing calls" }
 keymap["<leader>"].l.e = { with_opts(telescope.diagnostics, diag_opts), "Errors" }
 keymap["<leader>"].l.d = { telescope.diagnostics, "All diagnostics" }
+keymap["<leader>"].l.f = { vim.lsp.buf.format, "Format buffer" }
 keymap["<leader>"].l.i = { telescope.lsp_implementations, "Implementations" }
 keymap["<leader>"].l.r = { vim.lsp.buf.rename, "Rename symbol" }
 keymap["<leader>"].l.R = { telescope.lsp_references, "References" }
@@ -221,7 +239,7 @@ keymap["<leader>"].p.u = { Cmd("PlugUpdate"), "Install plugins" }
 keymap["<leader>"].p.f = { telescope.find_files, "Find file" }
 keymap["<leader>"].p.g = { with_input("Grep for:", "search", telescope.grep_string), "Grep" }
 keymap["<leader>"].p.G = { telescope.live_grep, "Live grep" }
-keymap["<leader>"].p.r = { telescope.oldfiles, "Editor config" }
+keymap["<leader>"].p.r = { telescope.oldfiles, "Recent files" }
 keymap["<leader>"].p.p = { require("config.telescope").projects, "Projects" }
 keymap["<leader>"].p[","] = {
     function() telescope.find_files { cwd = nvimdir } end,
@@ -232,34 +250,17 @@ keymap["<leader>"].p.t = {
     "Todo lists",
 }
 
-function cargo_cmd(cmd, close_on_exit, env)
-    return function()
-        require("toggleterm.terminal").Terminal
-            :new({
-                dir = vim.fn.getcwd(),
-                cmd = cmd,
-                close_on_exit = close_on_exit,
-                env = env,
-                on_open = function(t)
-                    -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes([[<C-\><C-n>]], true, true, true), '', true)
-                    -- vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
-                end,
-            })
-            :toggle()
-    end
-end
-
 keymap["<leader>"].r = { name = "+rust" }
-keymap["<leader>"].r.c = { cargo_cmd("cargo clippy", false), "Clippy" }
+keymap["<leader>"].r.c = { shell("cargo clippy", false), "Clippy" }
 keymap["<leader>"].r.C = { Cmd("RustLsp openCargo"), "Open Cargo.toml" }
 keymap["<leader>"].r.F = { require("crates").show_features_popup, "Show crate features" }
 keymap["<leader>"].r.D = { require("crates").show_dependencies_popup, "Show crate dependencies" }
 keymap["<leader>"].r["?"] = { require("crates").open_documentation, "Show crate features" }
 -- keymap["<leader>"].r.R = { Cmd("RustLsp runnables"), "Run..." }
-keymap["<leader>"].r.R = { cargo_cmd("cargo run", false, { RUST_BACKTRACE = "1" }), "Run (keep terminal)" }
-keymap["<leader>"].r.r = { cargo_cmd("cargo run", true), "Run" }
-keymap["<leader>"].r.t = { cargo_cmd("cargo test", false), "Test" }
-keymap["<leader>"].r.b = { cargo_cmd("cargo bench", false), "Bench" }
+keymap["<leader>"].r.R = { shell("cargo run", false, { RUST_BACKTRACE = "1" }), "Run (keep terminal)" }
+keymap["<leader>"].r.r = { shell("cargo run", true), "Run" }
+keymap["<leader>"].r.t = { shell("cargo test", false), "Test" }
+keymap["<leader>"].r.b = { shell("cargo bench", false), "Bench" }
 keymap["<leader>"].r.J = { Cmd("RustLsp joinLines"), "Join lines" }
 keymap["<leader>"].r.u = { Cmd("RustLsp parentModule"), "Jump to parent module" }
 keymap["<leader>"].r.m = { Cmd("RustLsp expandMacro"), "Expand macro" }
@@ -286,6 +287,21 @@ function toggle_copilot()
         vim.notify "Copilot disabled"
     end
 end
+
+keymap["<leader>"].s = { name = "+sic" }
+keymap["<leader>"].s.i = { shell("cargo sic inspect", false), "Inspect" }
+keymap["<leader>"].s.d = { shell("cargo sic dev", false), "Develop" }
+keymap["<leader>"].s.D = { shell("cargo sic dev --dfu", false), "Develop (dfu)" }
+keymap["<leader>"].s.r = { shell("cargo sic dev --release", false), "Develop (release)" }
+keymap["<leader>"].s.R = { shell("cargo sic dev --release --dfu", false), "Develop (release, dfu)" }
+keymap["<leader>"].s.h = { shell("cargo sic dev --hwtest", false), "Develop (hwtest)" }
+keymap["<leader>"].s.H = { shell("cargo sic dev --hwtest --release", false), "Develop (hwtest, release)" }
+keymap["<leader>"].s.a = { shell("cargo sic attach --reset", false), "Attach" }
+keymap["<leader>"].s.A = { shell("cargo sic attach", false), "Attach (no reset)" }
+keymap["<leader>"].s.e = { name = "+env" }
+keymap["<leader>"].s.e.s = { shell("cargo sic env status", false), "Status" }
+keymap["<leader>"].s.e.S = { shell("cargo sic env status --details", false), "Status (details)" }
+keymap["<leader>"].s.e.l = { shell("cargo sic env list", false), "List" }
 
 keymap["<leader>"].t = { name = "+toggle" }
 keymap["<leader>"].t.c = { toggle_copilot, "Copilot" }
@@ -327,6 +343,8 @@ keymap["<leader>"].w.t = { Cmd("Neotree"), "Toggle Neotree" } -- also see neotre
 keymap["<leader>"].w.T = { Cmd("Neotree reveal"), "Reveal file in Neotree" } -- also see neotree.lua mappings
 
 keymap["<leader>"].K = { vim.diagnostic.open_float, "Show diagnostic details" }
+
+keymap["<leader>"].x = { function() require("config.xcode") end, "Load xcodebuild" }
 
 keymap["["] = { name = "+previous" }
 keymap["["].e = { vim.diagnostic.goto_prev, "Previous error" }
