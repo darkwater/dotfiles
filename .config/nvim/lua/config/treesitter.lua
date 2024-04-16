@@ -3,7 +3,7 @@ require("nvim-treesitter.configs").setup {
         enable = true,
         disable = {
             -- "vim", -- unacceptably slow; ships with neovim
-            "vimdoc", -- broken
+            -- "vimdoc", -- broken
         },
         additional_vim_regex_highlighting = { "org" },
     },
@@ -86,5 +86,5 @@ require("nvim-treesitter.configs").setup {
             },
         },
     },
-    ensure_installed = { "org", "python", "lua", "bash", "json", "yaml", "toml", "html", "css", "javascript", "typescript", "cpp", "rust", "go", "dart", "java", "regex", "comment", "markdown", "markdown_inline" },
+    ensure_installed = { "org", "python", "lua", "bash", "json", "yaml", "toml", "html", "css", "javascript", "typescript", "cpp", "rust", "go", "dart", "java", "regex", "comment", "markdown", "markdown_inline", "swift" },
 }
