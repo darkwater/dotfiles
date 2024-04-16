@@ -74,10 +74,12 @@ vim.g.rustaceanvim = function()
                             },
                         },
                         diagnostics = {
-                            enable = true,
+                            enable = false,
                             disabled = {
                                 -- "unresolved-proc-macro",
                                 "inactive-code",
+                                "trait-impl-incorrect-safety",
+                                "remove-unnecessary-else",
                             },
                         },
                         procMacro = {
