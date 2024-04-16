@@ -66,11 +66,19 @@ if $USER != "root"
         Plug 'tikhomirov/vim-glsl'
         Plug 'pest-parser/pest.vim'
         Plug 'mfussenegger/nvim-dap'
+        Plug 'nvim-neotest/nvim-nio'
         Plug 'rcarriga/nvim-dap-ui'
         Plug 'vimoutliner/vimoutliner'
+        Plug 'wojciech-kulik/xcodebuild.nvim'
+
+        if hostname() == "atsushi.local"
+            Plug 'ActivityWatch/aw-watcher-vim'
+        endif
     endif
 
     call plug#end()
+
+    autocmd FileType swift setlocal commentstring=//\ %s
 endif
 
 if exists("g:neovide")
@@ -103,7 +111,7 @@ if !exists("g:vscode")
                 \ }
 endif
 
-nmap <Space>ss :call <SID>SynStack()<CR>
+nmap <Space>S :call <SID>SynStack()<CR>
 function! <SID>SynStack()
     if !exists("*synstack")
         return
@@ -121,6 +129,8 @@ let g:mapleader = "\<Space>"
 " <Ctrl-s> to save
 nnoremap <C-s> <Cmd>w<CR>
 inoremap <C-s> <C-c><Cmd>w<CR>
+nmap <D-s> <C-s>
+imap <D-s> <C-s>
 
 " fix these keys
 nnoremap Y  y$
@@ -133,6 +143,8 @@ inoremap <Down> <C-g><Down>
 
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
+
+tnoremap <S-Space> <Space>
 
 " break the undo sequence after these insert-mode commands
 inoremap <C-U> <C-G>u<C-U>
@@ -247,6 +259,13 @@ if $TERM =~ "^screen"
     set notermguicolors
 endif
 
+function! ClearTrailingWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfunction
+command! ClearTrailingWhitespace call ClearTrailingWhitespace()
+
 if exists("g:vscode")
     nnoremap gr <Cmd>call VSCodeNotify("editor.action.rename")<CR>
     nnoremap gt <Cmd>call VSCodeNotify("editor.action.goToTypeDefinition")<CR>
@@ -284,4 +303,5 @@ elseif $USER != "root"
     lua require "config.title"
     lua require "config.trouble"
     lua require "config.ufo"
+    " lua require "config.xcode" -- triggered by <leader>x
 endif
