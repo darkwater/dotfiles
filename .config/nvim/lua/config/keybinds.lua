@@ -202,45 +202,45 @@ keymap["<leader>"].f.f = { vim.lsp.buf.format, "Format file" }
 
 keymap["<leader>"].g = { name = "+git" }
 keymap["<leader>"].g.b = { Cmd("Telescope git_branches"), "Branches" }
-keymap["<leader>"].g.B = { Cmd("Gitsigns blame_line"), "Blame line" }
-keymap["<leader>"].g.l = { Cmd("Telescope git_commits"), "Commit log" }
-keymap["<leader>"].g.C = { Cmd("Git commit"), "Commit" }
+keymap["<leader>"].g.B = { Cmd("Gitsigns blame_line"),    "Blame line" }
+keymap["<leader>"].g.l = { Cmd("Telescope git_commits"),  "Commit log" }
+keymap["<leader>"].g.C = { Cmd("Git commit"),             "Commit" }
 keymap["<leader>"].g.d = {
     Cmd("Gitsigns toggle_linehl") ..
     Cmd("Gitsigns toggle_deleted"),
     "Toggle inline diff",
 }
-keymap["<leader>"].g.f = { Cmd("Telescope git_bcommits"), "File history" }
+keymap["<leader>"].g.f = { Cmd("Telescope git_bcommits"),       "File history" }
 keymap["<leader>"].g.p = { Cmd("Gitsigns preview_hunk_inline"), "Preview hunk" }
-keymap["<leader>"].g.s = { Cmd("Telescope git_status"), "Status" }
-keymap["<leader>"].g.S = { Cmd("Telescope git_stash"), "Stash" }
-keymap["<leader>"].g.u = { Cmd("Gitsigns reset_hunk"), "Undo hunk" }
+keymap["<leader>"].g.s = { Cmd("Telescope git_status"),         "Status" }
+keymap["<leader>"].g.S = { Cmd("Telescope git_stash"),          "Stash" }
+keymap["<leader>"].g.u = { Cmd("Gitsigns reset_hunk"),          "Undo hunk" }
 
 keymap["<leader>"].i = { name = "+insert" }
 keymap["<leader>"].i.u = { Cmd("read !uuidgen"), "Insert UUID" }
 
 local diag_opts = { severity_limit = "error", disable_coordinates = true }
 keymap["<leader>"].l = { name = "+lsp" }
-keymap["<leader>"].l.a = { vim.lsp.buf.code_action, "Code actions" }
-keymap["<leader>"].l.c = { telescope.lsp_incoming_calls, "Incoming calls" }
-keymap["<leader>"].l.C = { telescope.lsp_outgoing_calls, "Outgoing calls" }
-keymap["<leader>"].l.e = { with_opts(telescope.diagnostics, diag_opts), "Errors" }
-keymap["<leader>"].l.d = { telescope.diagnostics, "All diagnostics" }
-keymap["<leader>"].l.f = { vim.lsp.buf.format, "Format buffer" }
-keymap["<leader>"].l.i = { telescope.lsp_implementations, "Implementations" }
-keymap["<leader>"].l.r = { vim.lsp.buf.rename, "Rename symbol" }
-keymap["<leader>"].l.R = { telescope.lsp_references, "References" }
-keymap["<leader>"].l.s = { telescope.lsp_document_symbols, "Symbols (document)" }
+keymap["<leader>"].l.a = { vim.lsp.buf.code_action,                      "Code actions" }
+keymap["<leader>"].l.c = { telescope.lsp_incoming_calls,                 "Incoming calls" }
+keymap["<leader>"].l.C = { telescope.lsp_outgoing_calls,                 "Outgoing calls" }
+keymap["<leader>"].l.e = { with_opts(telescope.diagnostics, diag_opts),  "Errors" }
+keymap["<leader>"].l.d = { telescope.diagnostics,                        "All diagnostics" }
+keymap["<leader>"].l.f = { vim.lsp.buf.format,                           "Format buffer" }
+keymap["<leader>"].l.i = { telescope.lsp_implementations,                "Implementations" }
+keymap["<leader>"].l.r = { vim.lsp.buf.rename,                           "Rename symbol" }
+keymap["<leader>"].l.R = { telescope.lsp_references,                     "References" }
+keymap["<leader>"].l.s = { telescope.lsp_document_symbols,               "Symbols (document)" }
 keymap["<leader>"].l.S = { with_input("Workspace symbol search:", "query", telescope.lsp_workspace_symbols), "Symbols (workspace)" }
 
 keymap["<leader>"].p = { name = "+project/plugins" }
-keymap["<leader>"].p.i = { Cmd("PlugInstall"), "Install plugins" }
-keymap["<leader>"].p.u = { Cmd("PlugUpdate"), "Install plugins" }
-keymap["<leader>"].p.f = { telescope.find_files, "Find file" }
+keymap["<leader>"].p.i = { Cmd("PlugInstall"),                                       "Install plugins" }
+keymap["<leader>"].p.u = { Cmd("PlugUpdate"),                                        "Install plugins" }
+keymap["<leader>"].p.f = { telescope.find_files,                                     "Find file" }
 keymap["<leader>"].p.g = { with_input("Grep for:", "search", telescope.grep_string), "Grep" }
-keymap["<leader>"].p.G = { telescope.live_grep, "Live grep" }
-keymap["<leader>"].p.r = { telescope.oldfiles, "Recent files" }
-keymap["<leader>"].p.p = { require("config.telescope").projects, "Projects" }
+keymap["<leader>"].p.G = { telescope.live_grep,                                      "Live grep" }
+keymap["<leader>"].p.r = { telescope.oldfiles,                                       "Recent files" }
+keymap["<leader>"].p.p = { require("config.telescope").projects,                     "Projects" }
 keymap["<leader>"].p[","] = {
     function() telescope.find_files { cwd = nvimdir } end,
     "Editor config",
@@ -251,19 +251,18 @@ keymap["<leader>"].p.t = {
 }
 
 keymap["<leader>"].r = { name = "+rust" }
-keymap["<leader>"].r.c = { shell("cargo clippy", false), "Clippy" }
-keymap["<leader>"].r.C = { Cmd("RustLsp openCargo"), "Open Cargo.toml" }
-keymap["<leader>"].r.F = { require("crates").show_features_popup, "Show crate features" }
+keymap["<leader>"].r.c = { shell("cargo clippy", false),              "Clippy" }
+keymap["<leader>"].r.C = { Cmd("RustLsp openCargo"),                  "Open Cargo.toml" }
+keymap["<leader>"].r.F = { require("crates").show_features_popup,     "Show crate features" }
 keymap["<leader>"].r.D = { require("crates").show_dependencies_popup, "Show crate dependencies" }
-keymap["<leader>"].r["?"] = { require("crates").open_documentation, "Show crate features" }
--- keymap["<leader>"].r.R = { Cmd("RustLsp runnables"), "Run..." }
+keymap["<leader>"].r["?"] = { require("crates").open_documentation,   "Show crate docs" }
 keymap["<leader>"].r.R = { shell("cargo run", false, { RUST_BACKTRACE = "1" }), "Run (keep terminal)" }
-keymap["<leader>"].r.r = { shell("cargo run", true), "Run" }
-keymap["<leader>"].r.t = { shell("cargo test", false), "Test" }
-keymap["<leader>"].r.b = { shell("cargo bench", false), "Bench" }
-keymap["<leader>"].r.J = { Cmd("RustLsp joinLines"), "Join lines" }
-keymap["<leader>"].r.u = { Cmd("RustLsp parentModule"), "Jump to parent module" }
-keymap["<leader>"].r.m = { Cmd("RustLsp expandMacro"), "Expand macro" }
+keymap["<leader>"].r.r = { shell("cargo run", true),                  "Run" }
+keymap["<leader>"].r.t = { shell("cargo test", false),                "Test" }
+keymap["<leader>"].r.b = { shell("cargo bench", false),               "Bench" }
+keymap["<leader>"].r.J = { Cmd("RustLsp joinLines"),                  "Join lines" }
+keymap["<leader>"].r.u = { Cmd("RustLsp parentModule"),               "Jump to parent module" }
+keymap["<leader>"].r.m = { Cmd("RustLsp expandMacro"),                "Expand macro" }
 keymap["<leader>"].r.a = {
     function()
         vim.ui.input(
@@ -289,51 +288,54 @@ function toggle_copilot()
 end
 
 keymap["<leader>"].s = { name = "+sic" }
-keymap["<leader>"].s.i = { shell("cargo sic inspect", false), "Inspect" }
-keymap["<leader>"].s.d = { shell("cargo sic dev", false), "Develop" }
-keymap["<leader>"].s.D = { shell("cargo sic dev --dfu", false), "Develop (dfu)" }
-keymap["<leader>"].s.r = { shell("cargo sic dev --release", false), "Develop (release)" }
-keymap["<leader>"].s.R = { shell("cargo sic dev --release --dfu", false), "Develop (release, dfu)" }
-keymap["<leader>"].s.h = { shell("cargo sic dev --hwtest", false), "Develop (hwtest)" }
+keymap["<leader>"].s.i = { shell("cargo sic inspect", false),                "Inspect" }
+keymap["<leader>"].s.d = { shell("cargo sic dev", false),                    "Develop" }
+keymap["<leader>"].s.D = { shell("cargo sic dev --dfu", false),              "Develop (dfu)" }
+keymap["<leader>"].s.r = { shell("cargo sic dev --release", false),          "Develop (release)" }
+keymap["<leader>"].s.R = { shell("cargo sic dev --release --dfu", false),    "Develop (release, dfu)" }
+keymap["<leader>"].s.h = { shell("cargo sic dev --hwtest", false),           "Develop (hwtest)" }
 keymap["<leader>"].s.H = { shell("cargo sic dev --hwtest --release", false), "Develop (hwtest, release)" }
-keymap["<leader>"].s.a = { shell("cargo sic attach --reset", false), "Attach" }
-keymap["<leader>"].s.A = { shell("cargo sic attach", false), "Attach (no reset)" }
+keymap["<leader>"].s.a = { shell("cargo sic attach --reset", false),         "Attach" }
+keymap["<leader>"].s.A = { shell("cargo sic attach", false),                 "Attach (no reset)" }
+keymap["<leader>"].s.c = { shell("cargo sic config-builder", false),         "Config builder" }
 keymap["<leader>"].s.e = { name = "+env" }
-keymap["<leader>"].s.e.s = { shell("cargo sic env status", false), "Status" }
+keymap["<leader>"].s.e.s = { shell("cargo sic env status", false),           "Status" }
 keymap["<leader>"].s.e.S = { shell("cargo sic env status --details", false), "Status (details)" }
-keymap["<leader>"].s.e.l = { shell("cargo sic env list", false), "List" }
+keymap["<leader>"].s.e.l = { shell("cargo sic env list", false),             "List" }
+keymap["<leader>"].s.m = { shell("cargo sic monitor", false),                "Monitor traffic" }
 
 keymap["<leader>"].t = { name = "+toggle" }
 keymap["<leader>"].t.c = { toggle_copilot, "Copilot" }
 keymap["<leader>"].t.w = { Cmd("set wrap!"), "Text wrapping" }
 
 keymap["<leader>"].T = { name = "+Telescope" }
-keymap["<leader>"].T.T = { telescope.builtin, "Telescope pickers" }
-keymap["<leader>"].T.A = { telescope.autocommands, "Autocommands" }
+keymap["<leader>"].T.T = { telescope.builtin,                   "Telescope pickers" }
+keymap["<leader>"].T.A = { telescope.autocommands,              "Autocommands" }
 keymap["<leader>"].T.b = { telescope.current_buffer_fuzzy_find, "Current buffer" }
-keymap["<leader>"].T.B = { telescope.buffers, "Buffers" }
-keymap["<leader>"].T.c = { telescope.loclist, "Location list" }
-keymap["<leader>"].T.C = { telescope.commands, "Plugin/user commands" }
-keymap["<leader>"].T.f = { telescope.git_files, "Find git files" }
+keymap["<leader>"].T.B = { telescope.buffers,                   "Buffers" }
+keymap["<leader>"].T.c = { telescope.loclist,                   "Location list" }
+keymap["<leader>"].T.C = { telescope.commands,                  "Plugin/user commands" }
+keymap["<leader>"].T.f = { telescope.git_files,                 "Find git files" }
 keymap["<leader>"].T.F = { with_opts(telescope.find_files, { hidden = true }), "Find all files" }
-keymap["<leader>"].T.H = { telescope.highlights, "Highlights" }
-keymap["<leader>"].T.M = { telescope.man_pages, "Man pages" }
-keymap["<leader>"].T.o = { telescope.vim_options, "Vim options" }
-keymap["<leader>"].T.P = { telescope.planets, "Use the telescope..." }
-keymap["<leader>"].T.q = { telescope.quickfix, "Quickfix" }
-keymap["<leader>"].T.r = { telescope.oldfiles, "Recent files" }
-keymap["<leader>"].T.t = { telescope.colorscheme, "Colorschemes" }
-keymap["<leader>"].T["'"] = { telescope.marks, "Marks" }
-keymap["<leader>"].T['"'] = { telescope.registers, "Registers" }
-keymap["<leader>"].T[":"] = { telescope.command_history, "Command history" }
-keymap["<leader>"].T["/"] = { telescope.search_history, "Search history" }
-keymap["<leader>"].T["?"] = { telescope.help_tags, "Help tags" }
-keymap["<leader>"].T["."] = { telescope.resume, "Resume last picker" }
+keymap["<leader>"].T.H = { telescope.highlights,                "Highlights" }
+keymap["<leader>"].T.M = { telescope.man_pages,                 "Man pages" }
+keymap["<leader>"].T.o = { telescope.vim_options,               "Vim options" }
+keymap["<leader>"].T.P = { telescope.planets,                   "Use the telescope..." }
+keymap["<leader>"].T.q = { telescope.quickfix,                  "Quickfix" }
+keymap["<leader>"].T.r = { telescope.oldfiles,                  "Recent files" }
+keymap["<leader>"].T.t = { telescope.colorscheme,               "Colorschemes" }
+keymap["<leader>"].T["'"] = { telescope.marks,                  "Marks" }
+keymap["<leader>"].T['"'] = { telescope.registers,              "Registers" }
+keymap["<leader>"].T[":"] = { telescope.command_history,        "Command history" }
+keymap["<leader>"].T["/"] = { telescope.search_history,         "Search history" }
+keymap["<leader>"].T["?"] = { telescope.help_tags,              "Help tags" }
+keymap["<leader>"].T["."] = { telescope.resume,                 "Resume last picker" }
 
 keymap["<leader>"]["\t"] = { name = "+tabular" }
 keymap["<leader>"]["\t"]["="] = { Cmd("Tabularize /^[^=]*\\zs="), "=" }
 keymap["<leader>"]["\t"]['"'] = { Cmd("Tabularize /\""), '"'}
-keymap["<leader>"]["\t"][":"] = { Cmd("Tabularize /:/l0r1"), ":"}
+keymap["<leader>"]["\t"][":"] = { Cmd("Tabularize /^[^:]*:\\zs/l0r1"), ":"}
+keymap["<leader>"]["\t"][","] = { Cmd("Tabularize /^[^,]*,\\zs/l0r1"), ","}
 
 keymap["<leader>"].w = { name = "+window" }
 keymap["<leader>"].w.e = { Cmd("TroubleToggle"), "Toggle problems" }
