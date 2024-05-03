@@ -148,7 +148,7 @@ keymap.g.d = { telescope.lsp_definitions, "Go to definition" }
 keymap.g.t = { telescope.lsp_type_definitions, "Go to type definition" }
 
 keymap["<Bslash>"] = { function()
-    vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled())
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, "Toggle inlay hints" }
 
 keymap["<leader>"] = { name = "+leader" }
@@ -251,18 +251,18 @@ keymap["<leader>"].p.t = {
 }
 
 keymap["<leader>"].r = { name = "+rust" }
-keymap["<leader>"].r.c = { shell("cargo clippy", false),              "Clippy" }
-keymap["<leader>"].r.C = { Cmd("RustLsp openCargo"),                  "Open Cargo.toml" }
-keymap["<leader>"].r.F = { require("crates").show_features_popup,     "Show crate features" }
-keymap["<leader>"].r.D = { require("crates").show_dependencies_popup, "Show crate dependencies" }
-keymap["<leader>"].r["?"] = { require("crates").open_documentation,   "Show crate docs" }
-keymap["<leader>"].r.R = { shell("cargo run", false, { RUST_BACKTRACE = "1" }), "Run (keep terminal)" }
-keymap["<leader>"].r.r = { shell("cargo run", true),                  "Run" }
-keymap["<leader>"].r.t = { shell("cargo test", false),                "Test" }
-keymap["<leader>"].r.b = { shell("cargo bench", false),               "Bench" }
-keymap["<leader>"].r.J = { Cmd("RustLsp joinLines"),                  "Join lines" }
-keymap["<leader>"].r.u = { Cmd("RustLsp parentModule"),               "Jump to parent module" }
-keymap["<leader>"].r.m = { Cmd("RustLsp expandMacro"),                "Expand macro" }
+keymap["<leader>"].r.c = { shell("cargo clippy", false),                         "Clippy" }
+keymap["<leader>"].r.C = { Cmd("RustLsp openCargo"),                             "Open Cargo.toml" }
+keymap["<leader>"].r.F = { require("crates").show_features_popup,                "Show crate features" }
+keymap["<leader>"].r.D = { require("crates").show_dependencies_popup,            "Show crate dependencies" }
+keymap["<leader>"].r["?"] = { require("crates").open_documentation,              "Show crate docs" }
+keymap["<leader>"].r.R = { shell("cargo run", false, { RUST_BACKTRACE = "1" }),  "Run (keep terminal)" }
+keymap["<leader>"].r.r = { shell("cargo run", true, { RUST_BACKTRACE = "1" }),   "Run" }
+keymap["<leader>"].r.t = { shell("cargo test", false, { RUST_BACKTRACE = "1" }), "Test" }
+keymap["<leader>"].r.b = { shell("cargo bench", false),                          "Bench" }
+keymap["<leader>"].r.J = { Cmd("RustLsp joinLines"),                             "Join lines" }
+keymap["<leader>"].r.u = { Cmd("RustLsp parentModule"),                          "Jump to parent module" }
+keymap["<leader>"].r.m = { Cmd("RustLsp expandMacro"),                           "Expand macro" }
 keymap["<leader>"].r.a = {
     function()
         vim.ui.input(
