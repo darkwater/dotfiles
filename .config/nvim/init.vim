@@ -70,6 +70,7 @@ if $USER != "root"
         Plug 'rcarriga/nvim-dap-ui'
         Plug 'vimoutliner/vimoutliner'
         Plug 'wojciech-kulik/xcodebuild.nvim'
+        Plug 's1n7ax/nvim-window-picker'
 
         if hostname() == "atsushi.local"
             Plug 'ActivityWatch/aw-watcher-vim'
@@ -295,6 +296,7 @@ elseif $USER != "root"
     lua require "config.notify"
     " lua require "config.orgmode"
     lua require "config.overseer"
+    lua require "config.roomlang"
     lua require "config.rust"
     lua require "config.snippets"
     lua require "config.statusline"
