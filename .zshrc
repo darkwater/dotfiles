@@ -55,26 +55,26 @@ exists exa && alias ls=exa
 
 l() {
     # -aa only in $HOME and without arguments
-    aa="$([[ "$(pwd)" = "$HOME" && "$#" = 0 ]] || echo -n aa)"
-    ls -Flg$aa --group-directories-first "$@"
+    aa="$([[ "$(pwd)" = "$HOME" && "$#" = 0 ]] || echo -n -aa)"
+    ls -lgF $aa --group-directories-first "$@"
 }
 
-alias lr="ls -Flgaa -snew"
-alias lt="ls -Flg --tree --level=3"
+alias lr="ls -lgaaF -snew"
+alias lt="ls -lgF --tree --level=3"
 
 sl() {
     # ls -aa only in $HOME and without arguments
-    aa="$([[ "$(pwd)" = "$HOME" && "$#" = 0 ]] || echo -n aa)"
+    aa="$([[ "$(pwd)" = "$HOME" && "$#" = 0 ]] || echo -n -aa)"
     if exists exa; then
-        sudo exa -Flg$aa --group-directories-first "$@"
+        sudo exa -lgF $aa --group-directories-first "$@"
     else
-        sudo ls -Flg$aa --group-directories-first "$@"
+        sudo ls -lgF $aa --group-directories-first "$@"
     fi
 }
 
 downloads() {
     cd ~/?ownloads/
-    exa -Fal -snew --color=always | tail
+    exa -alF -snew --color=always | tail
 }
 
 man() {
