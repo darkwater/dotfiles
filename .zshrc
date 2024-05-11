@@ -46,7 +46,8 @@ alias apts="apt search"
 alias ip="ip --color=auto"
 
 ssh() {
-    set_window_title "ssh $*"
+    # interferes with `ssh host foo > bar`
+    # set_window_title "ssh $*"
     command ssh "$@"
 }
 
