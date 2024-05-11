@@ -348,6 +348,9 @@ keymap["<leader>"].K = { vim.diagnostic.open_float, "Show diagnostic details" }
 
 keymap["<leader>"].x = { function() require("config.xcode") end, "Load xcodebuild" }
 
+keymap["<leader>"][">"] = { "!ipsort<CR>", "Sort paragraph" }
+keymap["<leader>"]["<"] = { "!ipsort -r<CR>", "Sort paragraph (reverse)" }
+
 keymap["["] = { name = "+previous" }
 keymap["["].e = { vim.diagnostic.goto_prev, "Previous error" }
 keymap["["].h = { Cmd("Gitsigns prev_hunk"), "Previous hunk" }
