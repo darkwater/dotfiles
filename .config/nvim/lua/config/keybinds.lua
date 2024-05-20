@@ -123,19 +123,11 @@ function with_opts(fn, opts)
     end
 end
 
-function hover()
-    if vim.fn.expand('%:t') == 'Cargo.toml' and require('crates').popup_available() then
-        require('crates').show_popup()
-    else
-        vim.lsp.buf.hover()
-    end
-end
-
 local keymap = {}
 
-keymap.K = { hover, "Hover" }
+keymap.K = { vim.lsp.buf.hover, "Hover" }
 keymap["<C-S-k>"] = { vim.lsp.buf.signature_help, "Signature help" }
-vim.keymap.set("v", "K", hover)
+vim.keymap.set("v", "K", vim.lsp.buf.hover)
 vim.keymap.set("i", "<C-S-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", { noremap = true })
 
 keymap.d = {}
