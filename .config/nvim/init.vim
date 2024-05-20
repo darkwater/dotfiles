@@ -71,6 +71,7 @@ if $USER != "root"
         Plug 'vimoutliner/vimoutliner'
         Plug 'wojciech-kulik/xcodebuild.nvim'
         Plug 's1n7ax/nvim-window-picker'
+        Plug 'aklt/plantuml-syntax'
 
         if hostname() == "atsushi.local"
             Plug 'ActivityWatch/aw-watcher-vim'
