@@ -325,6 +325,8 @@ keymap["<leader>"].T["."] = { telescope.resume,                 "Resume last pic
 
 keymap["<leader>"]["\t"] = { name = "+tabular" }
 keymap["<leader>"]["\t"]["="] = { Cmd("Tabularize /^[^=]*\\zs="), "=" }
+keymap["<leader>"]["\t"]["<"] = { Cmd("Tabularize /<-"), "<-" }
+keymap["<leader>"]["\t"][">"] = { Cmd("Tabularize /->"), "->" }
 keymap["<leader>"]["\t"]['"'] = { Cmd("Tabularize /\""), '"'}
 keymap["<leader>"]["\t"][":"] = { Cmd("Tabularize /^[^:]*:\\zs/l0r1"), ":"}
 keymap["<leader>"]["\t"][","] = { Cmd("Tabularize /^[^,]*,\\zs/l0r1"), ","}
