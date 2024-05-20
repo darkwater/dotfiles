@@ -130,8 +130,10 @@ let g:mapleader = "\<Space>"
 " <Ctrl-s> to save
 nnoremap <C-s> <Cmd>w<CR>
 inoremap <C-s> <C-c><Cmd>w<CR>
+vnoremap <C-s> <C-c><Cmd>w<CR>
 nmap <D-s> <C-s>
 imap <D-s> <C-s>
+vmap <D-s> <C-s>
 
 " fix these keys
 nnoremap Y  y$
