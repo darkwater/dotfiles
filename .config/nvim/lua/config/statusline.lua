@@ -1,7 +1,7 @@
 local function LspStatus()
     return require("lsp-progress").progress({
         format = function(messages)
-            local active_clients = vim.lsp.get_active_clients()
+            local active_clients = vim.lsp.get_clients()
             local client_count = #active_clients
             if #messages > 0 then
                 return " "
@@ -31,7 +31,7 @@ end
 local function LspClients()
     return require("lsp-progress").progress({
         format = function(messages)
-            local active_clients = vim.lsp.get_active_clients()
+            local active_clients = vim.lsp.get_clients()
             local client_count = #active_clients
             if #active_clients <= 0 then
                 return " none"
