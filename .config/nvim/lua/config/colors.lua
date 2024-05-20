@@ -22,6 +22,8 @@ require("ayu").setup {
         Visual = { bg = "#37486d" },
         JiraTodo = { fg = "#d5ff80", bg = "#172b4d" },
         JiraDone = { fg = "#dfbfff", bg = "#172b4d" },
+        CratesNvimPopupPillText = { fg = "#e0e0e0", bg = "#806010" },
+        CratesNvimPopupPillBorder = { fg = "#806010" },
         -- OL1 = { fg = "#409fff" },
         -- OL2 = { fg = "#4e99e5" },
         -- OL3 = { fg = "#5791cc" },
@@ -34,7 +36,7 @@ require("ayu").setup {
     },
 }
 
-vim.cmd[[
+vim.cmd [[
 colorscheme ayu
 hi link StorageClass Keyword
 hi link NeoTreeFileIcon Normal
