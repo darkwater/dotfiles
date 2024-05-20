@@ -1,11 +1,32 @@
 require("crates").setup {
-    null_ls = {
+    thousands_separator = "_",
+    enable_update_available_warning = false,
+    -- null_ls = {
+    lsp = {
         enabled = true,
-        name = "crates.nvim",
+        name = "crates",
+
+        actions = true,
+        completion = true,
+        hover = true,
     },
-    src = {
+    text = {
+        loading = "     Loading",
+        version = "     %s",
+        prerelease = "     %s",
+        yanked = "     %s",
+        nomatch = "     No match",
+        upgrade = "     %s",
+        error = "     Error fetching crate",
+    },
+    completion = {
         cmp = {
             enabled = true,
+        },
+        crates = {
+            enabled = true,
+            min_chars = 2,
+            max_results = 15,
         },
     },
 }
