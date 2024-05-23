@@ -43,3 +43,7 @@ snippet frz "Freezed"
 
 		// factory $1.fromJson(Map<String, Object?> json) => _$$1FromJson(json);
 	}
+
+snippet stroute "static Route route()"
+	static Route route($2) =>
+		MaterialPageRoute<void>(builder: (_) => const $1($2));
