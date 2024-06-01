@@ -364,6 +364,6 @@ keymap["<Enter>"] = { Cmd("b#"), "Last buffer" }
 keymap["'"]             = { Cmd("ToggleTerm"), "Toggle terminal" }
 keymap["<C-'>"]         = keymap["'"]
 keymap["<leader>"]["'"] = keymap["'"]
-vim.keymap.set("t", "<C-'>", "<Cmd>ToggleTerm<CR>")
+vim.keymap.set("t", "<C-'>", Cmd("ToggleTerm"))
 
 wk.register(keymap)
