@@ -30,6 +30,10 @@ require("telescope").setup {
                 ["<C-k>"] = require('telescope.actions').move_selection_previous,
             },
         },
+
+        file_ignore_patterns = {
+            "%.g.dart",
+        },
     },
     pickers = {
         find_files = {
