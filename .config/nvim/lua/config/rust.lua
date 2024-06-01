@@ -69,11 +69,20 @@ vim.g.rustaceanvim = function()
             capabilities = require("cmp_nvim_lsp").default_capabilities(),
             settings = function (path)
                 local linkedProjects
+
                 if path == "/Users/dark/gitea/comforest/firmware"
                     or path == "/Users/dark/gitea/comforest/firmware/cross" then
                     linkedProjects = {
                         "/Users/dark/gitea/comforest/firmware/Cargo.toml",
                         "/Users/dark/gitea/comforest/firmware/cross/Cargo.toml",
+                    }
+                end
+
+                if path == "/Users/dark/github/sinewave-ee/fouling-sensor"
+                    or path == "/Users/dark/github/sinewave-ee/fouling-sensor/cross" then
+                    linkedProjects = {
+                        "/Users/dark/github/sinewave-ee/fouling-sensor/Cargo.toml",
+                        "/Users/dark/github/sinewave-ee/fouling-sensor/cross/Cargo.toml",
                     }
                 end
 
