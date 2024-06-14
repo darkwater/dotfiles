@@ -83,11 +83,11 @@ if $USER != "root"
     autocmd FileType swift setlocal commentstring=//\ %s
 endif
 
-if exists("g:neovide")
+if exists("g:neovide") || $NEOVIDE_REMOTE == "1"
     nmap <D-v> "+p
     imap <D-v> <C-r>+
 
-    if hostname() == "atsushi.local"
+    if hostname() == "atsushi.local" && $NEOVIDE_REMOTE != "1"
         set guifont=Hack,SauceCodePro\ Nerd\ Font:h14.1
         let g:neovide_fullscreen = v:true
     else
@@ -220,6 +220,7 @@ set iskeyword=@,48-57,_,192-255
 set laststatus=2
 set listchars=extends:+,nbsp:%,precedes:+,tab:┃·,trail:░
 set mouse=a
+set mousemodel=extend
 set nrformats=bin,hex,octal,alpha
 set numberwidth=6
 set pastetoggle=<F11>
