@@ -1,4 +1,4 @@
-local neovide = vim.g.neovide
+local neovide = vim.g.neovide or (vim.env.NEOVIDE_REMOTE == "1")
 
 require("ayu").setup {
     mirage = true,
