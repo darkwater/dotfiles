@@ -23,7 +23,6 @@ alias fbw="dart run build_runner watch"
 
 alias c="cargo"
 alias g="git"
-alias r="bundle exec rails"
 alias s="ssh"
 alias x="cargo xtask"
 alias om="overmind"
