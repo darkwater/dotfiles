@@ -59,7 +59,7 @@ ssh() {
 }
 
 exists() { command -v $1 >/dev/null }
-exists exa && alias ls=exa
+exists eza && alias ls=eza
 
 l() {
     # -aa only in $HOME and without arguments
@@ -73,8 +73,8 @@ alias lt="ls -lgF --tree --level=3"
 sl() {
     # ls -aa only in $HOME and without arguments
     aa="$([[ "$(pwd)" = "$HOME" && "$#" = 0 ]] || echo -n -aa)"
-    if exists exa; then
-        sudo exa -lgF $aa --group-directories-first "$@"
+    if exists eza; then
+        sudo eza -lgF $aa --group-directories-first "$@"
     else
         sudo ls -lgF $aa --group-directories-first "$@"
     fi
@@ -82,7 +82,7 @@ sl() {
 
 downloads() {
     cd ~/?ownloads/
-    exa -alF -snew --color=always | tail
+    eza -alF -snew --color=always | tail
 }
 
 man() {
@@ -225,7 +225,7 @@ if [[ -e ~/.ssh/config ]]; then
     zstyle ':completion:*:ssh:*' users
 fi
 
-source ~/dotfiles/zshplugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || source ~/dotfiles/zshplugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/dotfiles/zshplugins/fzf-key-bindings.zsh
 source ~/dotfiles/zshplugins/fzf-completion.zsh
 source ~/.nix-profile/etc/profile.d/nix.sh 2>/dev/null
