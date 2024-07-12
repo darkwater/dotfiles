@@ -1,6 +1,3 @@
-[core]
-    pager = delta
-
 [user]
 	email = dark@dark.red
 	name = Sam Lakerveld
@@ -23,9 +20,15 @@
     dc = "diff --cached"
     s = "status"
     st = "status"
-    l = "log --oneline --graph"
-    la = "log --oneline --graph --all"
+    l = "log --graph --abbrev=8"
+    la = "log --all --graph --abbrev=8"
     pou = "push -u origin"
+
+[log]
+    date = relative
+
+[format]
+    pretty = format:%C(auto,yellow)%h %C(auto,blue)%>(8,trunc)%ad %C(auto,green)%<(7,trunc)%aN  %C(auto,reset)%s%C(auto,red)% gD% D
 
 [pager]
     blame = delta
@@ -37,7 +40,7 @@
 [delta]
     plus-style = "syntax #012800"
     minus-style = "syntax #340001"
-    syntax-theme = base16
+    syntax-theme = Monokai Extended
     navigate = true
     hyperlinks = true
 
