@@ -70,19 +70,27 @@ vim.g.rustaceanvim = function()
             settings = function (path)
                 local linkedProjects
 
-                if path == "/Users/dark/gitea/comforest/firmware"
-                    or path == "/Users/dark/gitea/comforest/firmware/cross" then
+                if path == "/home/dark/gitea/comforest/firmware"
+                    or path == "/home/dark/gitea/comforest/firmware/cross" then
                     linkedProjects = {
-                        "/Users/dark/gitea/comforest/firmware/Cargo.toml",
-                        "/Users/dark/gitea/comforest/firmware/cross/Cargo.toml",
+                        "/home/dark/gitea/comforest/firmware/Cargo.toml",
+                        "/home/dark/gitea/comforest/firmware/cross/Cargo.toml",
                     }
                 end
 
-                if path == "/Users/dark/github/sinewave-ee/fouling-sensor"
-                    or path == "/Users/dark/github/sinewave-ee/fouling-sensor/cross" then
+                if path == "/home/dark/atsushi/firmware"
+                    or path == "/home/dark/atsushi/firmware/cross" then
                     linkedProjects = {
-                        "/Users/dark/github/sinewave-ee/fouling-sensor/Cargo.toml",
-                        "/Users/dark/github/sinewave-ee/fouling-sensor/cross/Cargo.toml",
+                        "/home/dark/atsushi/firmware/Cargo.toml",
+                        "/home/dark/atsushi/firmware/cross/Cargo.toml",
+                    }
+                end
+
+                if path == "/home/dark/github/sinewave-ee/fouling-sensor"
+                    or path == "/home/dark/github/sinewave-ee/fouling-sensor/cross" then
+                    linkedProjects = {
+                        "/home/dark/github/sinewave-ee/fouling-sensor/Cargo.toml",
+                        "/home/dark/github/sinewave-ee/fouling-sensor/cross/Cargo.toml",
                     }
                 end
 
