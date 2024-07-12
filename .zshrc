@@ -25,7 +25,6 @@ alias c="cargo"
 alias g="git"
 alias s="ssh"
 alias x="cargo xtask"
-alias om="overmind"
 
 alias sysa="sysz -s active"
 alias scu="systemctl --user"
@@ -225,9 +224,9 @@ if [[ -e ~/.ssh/config ]]; then
     zstyle ':completion:*:ssh:*' users
 fi
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh || source ~/dotfiles/zshplugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/dotfiles/zshplugins/fzf-key-bindings.zsh
-source ~/dotfiles/zshplugins/fzf-completion.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
 source ~/.nix-profile/etc/profile.d/nix.sh 2>/dev/null
 
 typeset -A ZSH_HIGHLIGHT_PATTERNS
@@ -243,43 +242,6 @@ NPM_PACKAGES="${HOME}/.npm-packages"
 export PATH="$PATH:$NPM_PACKAGES/bin"
 export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
-[[ -n "$ITERM_SESSION_ID" ]] && test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
-
-# if it2check 2>/dev/null; then
-#     _update_it2_touchbar() {
-#         it2setkeylabel push zsh_$$
-
-#         fnkeys=( "^[OP" "^[OQ" "^[OR" "^[OS"
-#                  "^[[15~" "^[[17~" "^[[18~" "^[[19~"
-#                  "^[[20~" "^[[21~" "^[[23~" "^[[24~"
-#                  "^[[1;2P" "^[[1;2Q" "^[[1;2R" "^[[1;2S"
-#                  "^[[15;2~" "^[[17;2~" "^[[18;2~" "^[[19;2~"
-#                  "^[[20;2~" "^[[21;2~" "^[[23;2~" "^[[24;2~" )
-
-#         IFS=$'\n' list=( / '..' $(ls -d */) ) 2>/dev/null
-#         for n in {1..24}; do
-#             if [[ "$list[$n]" = "/" ]]; then
-#                 it2setkeylabel set "F$n" "直す"
-#                 bindkey -s "$fnkeys[$n]" "^Q^[[A^M"
-#             elif [[ "$list[$n]" = "" ]]; then
-#                 it2setkeylabel set "F$n" " "
-#                 bindkey -r "$fnkeys[$n]"
-#             else
-#                 it2setkeylabel set "F$n" "$list[$n]"
-#                 bindkey -s "$fnkeys[$n]" "^Qcd '$list[$n]'^M"
-#             fi
-#         done
-#     }
-
-#     _restore_it2_touchbar() {
-#         it2setkeylabel pop zsh_$$
-#     }
-
-#     autoload add-zsh-hook
-#     add-zsh-hook precmd _update_it2_touchbar
-#     add-zsh-hook preexec _restore_it2_touchbar
-# fi
-
 unsetopt extendedglob
 
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
@@ -288,5 +250,3 @@ fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
-
-export STM32CubeMX_PATH=/Applications/STMicroelectronics/STM32CubeMX.app/Contents/Resources
