@@ -130,6 +130,9 @@ keymap["<C-S-k>"] = { vim.lsp.buf.signature_help, "Signature help" }
 vim.keymap.set("v", "K", vim.lsp.buf.hover)
 vim.keymap.set("i", "<C-S-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", { noremap = true })
 
+keymap["<C-S-v>"] = { "\"+p", "Paste from +" }
+vim.keymap.set("i", "<C-S-v>", "<C-c>\"+p`]a", { noremap = true })
+
 keymap.d = {}
 keymap.d.s = {}
 -- TODO: doesn't work
