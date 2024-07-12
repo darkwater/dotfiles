@@ -52,4 +52,5 @@ hi link JiraReadyForTest JiraInProgress
 hi link JiraInTest JiraInProgress
 hi link JiraReleased JiraDone
 hi link JiraClosed JiraDone
+hi link CratesNvimVersion Comment
 ]]
