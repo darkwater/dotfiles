@@ -79,9 +79,12 @@ if $USER != "root"
     endif
 
     call plug#end()
-
-    autocmd FileType swift setlocal commentstring=//\ %s
 endif
+
+autocmd FileType swift setlocal commentstring=//\ %s
+autocmd FileType c     setlocal commentstring=//\ %s
+autocmd FileType cpp   setlocal commentstring=//\ %s
+autocmd FileType dart  setlocal shiftwidth=2 tabstop=2
 
 if exists("g:neovide") || $NEOVIDE_REMOTE == "1"
     nmap <D-v> "+p
@@ -90,12 +93,14 @@ if exists("g:neovide") || $NEOVIDE_REMOTE == "1"
     if hostname() == "atsushi.local" && $NEOVIDE_REMOTE != "1"
         set guifont=Hack,SauceCodePro\ Nerd\ Font:h14.1
         let g:neovide_fullscreen = v:true
+    elseif hostname() == "nagumo" && $NEOVIDE_REMOTE != "1"
+        set guifont=Hack,SauceCodePro\ Nerd\ Font:h10.0
     else
         set guifont=Hack,SauceCodePro\ Nerd\ Font:h10.1
     endif
 
-    let g:neovide_transparency = 0.96
-    let g:transparency = 0.96
+    let g:neovide_transparency = 0.92
+    let g:transparency = 0.92
     let g:neovide_scroll_animation_length = 0.12
     let g:neovide_scroll_animation_far_lines = 500
     let g:neovide_hide_mouse_when_typing = v:true
