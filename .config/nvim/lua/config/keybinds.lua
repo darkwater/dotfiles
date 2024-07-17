@@ -101,6 +101,31 @@ function shell(cmd, close_on_exit, env)
     end
 end
 
+function bg_cmd(cmd, class)
+    return function()
+        vim.system({
+            "kitty",
+            "--directory", vim.fn.getcwd(),
+            "--app-id", class,
+            "--hold",
+            "sh", "-c", cmd,
+            detach = true,
+        })
+    end
+end
+
+function bg_key(class, modifier, key)
+    return function()
+        vim.system({
+            "hyprctl",
+            "dispatch",
+            "sendshortcut",
+            modifier..","..key..",class:"..class,
+            detach = true,
+        })
+    end
+end
+
 local nvimdir = vim.fn.stdpath "config"
 local homedir = vim.fn.expand "$HOME"
 local tododir = homedir .. "/sync/todo"
@@ -161,35 +186,31 @@ keymap["<leader>"].F.a.c = {
     end,
     "Connect over TCP",
 }
-keymap["<leader>"].F.F = {
-    function()
-        require("toggleterm.terminal").Terminal
-            :new({
-                dir = vim.fn.getcwd(),
-                cmd = "flutter run",
-                close_on_exit = false,
-                env = env,
-                on_open = function(t)
-                    -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes([[<C-\><C-n>]], true, true, true), '', true)
-                    -- vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
-                end,
-            })
-            :toggle()
-    end,
-    "Flutter run",
-}
-keymap["<leader>"].F.r = { Cmd("TermExec cmd=r"), "Hot reload" }
-keymap["<leader>"].F.R = { Cmd("TermExec cmd=R"), "Hot restart" }
-keymap["<leader>"].F.q = { Cmd("TermExec cmd=q"), "Stop" }
-keymap["<leader>"].F.P = { Cmd("TermExec cmd=P"), "Toggle performance overlay" }
-keymap["<leader>"].F.p = { Cmd("TermExec cmd=p"), "Toggle debug painting" }
+-- keymap["<leader>"].F.F = {
+--     function()
+--         require("toggleterm.terminal").Terminal
+--             :new({
+--                 dir = vim.fn.getcwd(),
+--                 cmd = "flutter run",
+--                 close_on_exit = false,
+--                 env = env,
+--                 on_open = function(t)
+--                     -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes([[<C-\><C-n>]], true, true, true), '', true)
+--                     -- vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
+--                 end,
+--             })
+--             :toggle()
+--     end,
+--     "Flutter run",
+-- }
+keymap["<leader>"].F.F = { bg_cmd("flutter run", "flutter"), "Flutter run" }
+keymap["<leader>"].F.r = { bg_key("flutter", "", "r"),       "Hot reload" }
+keymap["<leader>"].F.R = { bg_key("flutter", "SHIFT", "R"),  "Hot restart" }
+keymap["<leader>"].F.q = { bg_key("flutter", "", "q"),       "Stop" }
+keymap["<leader>"].F.P = { bg_key("flutter", "SHIFT", "P"),  "Toggle performance overlay" }
+keymap["<leader>"].F.p = { bg_key("flutter", "", "p"),       "Toggle debug painting" }
 
--- keymap["<leader>"].F.f = { with_opts(flutter.toggle_flutter_terminal, "flutter run"), "Run" }
--- keymap["<leader>"].F.r = { flutter.send_to_flutter("r"), "Hot reload" }
--- keymap["<leader>"].F.R = { flutter.send_to_flutter("R"), "Hot restart" }
--- keymap["<leader>"].F.q = { flutter.send_to_flutter("q"), "Stop" }
-keymap["<leader>"].F.b = { run_cmd("Build runner", "dart run build_runner build -d", 5), "Build runner" }
--- keymap["<leader>"].F.F = { run_cmd("Build runner", "dart run build_runner build", 5), "Build runner" }
+keymap["<leader>"].F.b = { bg_cmd("dart run build_runner watch", "build_runner"), "Build runner" }
 
 keymap["<leader>"].f = { name = "+file" }
 keymap["<leader>"].f.s = { Cmd("source %"), "Source file" }
@@ -364,9 +385,17 @@ keymap["]"].l = { Cmd("lnext"), "Next location" }
 
 keymap["<Enter>"] = { Cmd("b#"), "Last buffer" }
 
-keymap["'"]             = { Cmd("ToggleTerm"), "Toggle terminal" }
-keymap["<C-'>"]         = keymap["'"]
-keymap["<leader>"]["'"] = keymap["'"]
+keymap["<C-'>"] = { Cmd("ToggleTerm"), "Toggle terminal" }
 vim.keymap.set("t", "<C-'>", Cmd("ToggleTerm"))
+
+keymap["'"] = {
+    function()
+        vim.system({ "kitty" }, {
+            args = { "--directory", vim.fn.getcwd() },
+            detach = true,
+        })
+    end,
+    "Toggle terminal",
+}
 
 wk.register(keymap)
