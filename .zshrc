@@ -23,6 +23,7 @@ alias fbw="dart run build_runner watch"
 
 alias c="cargo"
 alias g="git"
+alias h="hyprctl"
 alias s="ssh"
 alias x="cargo xtask"
 
