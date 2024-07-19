@@ -128,9 +128,9 @@ vim.g.rustaceanvim = function()
                 }
             end,
         },
-        dap = {
-            adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
-        },
+        -- dap = {
+        --     adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
+        -- },
     }
 end
 
