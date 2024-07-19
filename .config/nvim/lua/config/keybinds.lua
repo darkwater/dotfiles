@@ -6,6 +6,9 @@ wk.setup {
         gc = "Comment",
         ["gc"] = "Comment",
     },
+    icons = {
+        mappings = false,
+    },
 }
 
 function Cmd(cmd)
@@ -129,6 +132,7 @@ end
 local nvimdir = vim.fn.stdpath "config"
 local homedir = vim.fn.expand "$HOME"
 local tododir = homedir .. "/sync/todo"
+local hyprdir = homedir .. "/.config/hypr"
 
 local telescope = require("telescope.builtin")
 local hop = require("hop")
@@ -257,6 +261,10 @@ keymap["<leader>"].p.g = { with_input("Grep for:", "search", telescope.grep_stri
 keymap["<leader>"].p.G = { telescope.live_grep,                                      "Live grep" }
 keymap["<leader>"].p.r = { telescope.oldfiles,                                       "Recent files" }
 keymap["<leader>"].p.p = { require("config.telescope").projects,                     "Projects" }
+keymap["<leader>"].p.h = {
+    function() telescope.find_files { cwd = hyprdir } end,
+    "Hyprland config",
+}
 keymap["<leader>"].p[","] = {
     function() telescope.find_files { cwd = nvimdir } end,
     "Editor config",
