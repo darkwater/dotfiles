@@ -225,6 +225,11 @@ if [[ -e ~/.ssh/config ]]; then
     zstyle ':completion:*:ssh:*' users
 fi
 
+if [[ "$TERM" == "xterm-kitty" ]]; then
+    export TERM="xterm-256color"
+fi
+
+source /usr/share/doc/find-the-command/ftc.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
@@ -248,6 +253,3 @@ unsetopt extendedglob
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
