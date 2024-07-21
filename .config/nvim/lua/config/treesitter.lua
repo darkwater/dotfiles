@@ -1,3 +1,7 @@
+vim.filetype.add({
+  pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+})
+
 require("nvim-treesitter.configs").setup {
     highlight = {
         enable = true,
@@ -89,6 +93,7 @@ require("nvim-treesitter.configs").setup {
     },
     ensure_installed = {
         "vimdoc", "query",
+        "hyprlang",
         "rust", "go", "dart", "java",
         "json", "yaml", "toml",
         "html", "css", "javascript", "typescript",
