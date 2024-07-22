@@ -1,9 +1,5 @@
 local lsp = require("lspconfig")
 
-lsp.sourcekit.setup {
-    cmd = {'/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp'}
-}
-
 local null_ls = require('null-ls')
 local jira = require("config.jira")
 null_ls.setup {
@@ -22,6 +18,10 @@ vim.diagnostic.config {
     severity_sort = true,
     float = { source = "if_many" },
 }
+
+lsp.hyprlang.setup {}
+
+lsp.clangd.setup {}
 
 lsp.denols.setup {
     root_dir = lsp.util.root_pattern("deno.json"),
