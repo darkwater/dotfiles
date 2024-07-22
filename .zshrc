@@ -35,6 +35,7 @@ alias sd="sudo docker"
 
 alias sps="sudo pacman -S"
 alias spsyu="sudo pacman -Syu"
+alias spr="sudo pacman -R"
 alias pss="pacman -Ss"
 alias psi="pacman -Si"
 alias pql="pacman -Ql"
