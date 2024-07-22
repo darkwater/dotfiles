@@ -21,7 +21,7 @@ vim.diagnostic.config {
 
 lsp.hyprlang.setup {}
 
-lsp.clangd.setup {}
+-- lsp.clangd.setup {}
 
 lsp.denols.setup {
     root_dir = lsp.util.root_pattern("deno.json"),
