@@ -177,9 +177,9 @@ end, "Toggle inlay hints" }
 
 keymap["<leader>"] = { name = "+leader" }
 
-keymap["<leader>"].F = { name = "+flutter" }
-keymap["<leader>"].F.a = { name = "+android" }
-keymap["<leader>"].F.a.c = {
+keymap["<leader>"].f = { name = "+flutter" }
+keymap["<leader>"].f.a = { name = "+android" }
+keymap["<leader>"].f.a.c = {
     function()
         vim.ui.input(
             "Enter IP address: ",
@@ -190,7 +190,7 @@ keymap["<leader>"].F.a.c = {
     end,
     "Connect over TCP",
 }
--- keymap["<leader>"].F.F = {
+-- keymap["<leader>"].f.F = {
 --     function()
 --         require("toggleterm.terminal").Terminal
 --             :new({
@@ -207,18 +207,18 @@ keymap["<leader>"].F.a.c = {
 --     end,
 --     "Flutter run",
 -- }
-keymap["<leader>"].F.F = { bg_cmd("flutter run", "flutter"), "Flutter run" }
-keymap["<leader>"].F.r = { bg_key("flutter", "", "r"),       "Hot reload" }
-keymap["<leader>"].F.R = { bg_key("flutter", "SHIFT", "R"),  "Hot restart" }
-keymap["<leader>"].F.q = { bg_key("flutter", "", "q"),       "Stop" }
-keymap["<leader>"].F.P = { bg_key("flutter", "SHIFT", "P"),  "Toggle performance overlay" }
-keymap["<leader>"].F.p = { bg_key("flutter", "", "p"),       "Toggle debug painting" }
+keymap["<leader>"].f.f = { bg_cmd("flutter run", "flutter"), "Flutter run" }
+keymap["<leader>"].f.r = { bg_key("flutter", "", "r"),       "Hot reload" }
+keymap["<leader>"].f.R = { bg_key("flutter", "SHIFT", "R"),  "Hot restart" }
+keymap["<leader>"].f.q = { bg_key("flutter", "", "q"),       "Stop" }
+keymap["<leader>"].f.P = { bg_key("flutter", "SHIFT", "P"),  "Toggle performance overlay" }
+keymap["<leader>"].f.p = { bg_key("flutter", "", "p"),       "Toggle debug painting" }
 
-keymap["<leader>"].F.b = { bg_cmd("dart run build_runner watch", "build_runner"), "Build runner" }
+keymap["<leader>"].f.b = { bg_cmd("dart run build_runner watch", "build_runner"), "Build runner" }
 
-keymap["<leader>"].f = { name = "+file" }
-keymap["<leader>"].f.s = { Cmd("source %"), "Source file" }
-keymap["<leader>"].f.f = { vim.lsp.buf.format, "Format file" }
+keymap["<leader>"].F = { name = "+file" }
+keymap["<leader>"].F.s = { Cmd("source %"), "Source file" }
+keymap["<leader>"].F.f = { vim.lsp.buf.format, "Format file" }
 
 keymap["<leader>"].g = { name = "+git" }
 keymap["<leader>"].g.b = { Cmd("Telescope git_branches"), "Branches" }
