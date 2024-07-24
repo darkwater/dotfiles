@@ -19,7 +19,8 @@ vim.diagnostic.config {
     float = { source = "if_many" },
 }
 
-lsp.hyprlang.setup {}
+-- causes something to print on start
+-- lsp.hyprlang.setup {}
 
 -- lsp.clangd.setup {}
 
