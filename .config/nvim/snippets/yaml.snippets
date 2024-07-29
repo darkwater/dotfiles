@@ -1,0 +1,12 @@
+snippet services "services"
+	services:
+		$1:
+			image: $2
+			restart: unless-stopped
+			environment:
+				$3
+			ports:
+				- "$4"
+				- "8000:80"
+			volumes:
+				- "./data:/data"
