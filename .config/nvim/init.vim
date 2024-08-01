@@ -72,6 +72,7 @@ if $USER != "root"
         Plug 'wojciech-kulik/xcodebuild.nvim'
         Plug 's1n7ax/nvim-window-picker'
         Plug 'aklt/plantuml-syntax'
+        Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
 
         if hostname() == "atsushi.local"
             Plug 'ActivityWatch/aw-watcher-vim'
@@ -93,10 +94,8 @@ if exists("g:neovide") || $NEOVIDE_REMOTE == "1"
     if hostname() == "atsushi.local" && $NEOVIDE_REMOTE != "1"
         set guifont=Hack,SauceCodePro\ Nerd\ Font:h14.1
         let g:neovide_fullscreen = v:true
-    elseif hostname() == "nagumo" && $NEOVIDE_REMOTE != "1"
-        set guifont=Hack,SauceCodePro\ Nerd\ Font:h10.0
     else
-        set guifont=Hack,SauceCodePro\ Nerd\ Font:h10.1
+        set guifont=Hack,SauceCodePro\ Nerd\ Font:h9.4
     endif
 
     let g:neovide_transparency = 0.92
