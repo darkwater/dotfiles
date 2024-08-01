@@ -133,6 +133,7 @@ local nvimdir = vim.fn.stdpath "config"
 local homedir = vim.fn.expand "$HOME"
 local tododir = homedir .. "/sync/todo"
 local hyprdir = homedir .. "/.config/hypr"
+local dotdir = homedir .. "/dotfiles"
 
 local telescope = require("telescope.builtin")
 local hop = require("hop")
@@ -209,9 +210,9 @@ keymap["<leader>"].f.a.c = {
 -- }
 keymap["<leader>"].f.f = { bg_cmd("flutter run", "flutter"), "Flutter run" }
 keymap["<leader>"].f.r = { bg_key("flutter", "", "r"),       "Hot reload" }
-keymap["<leader>"].f.R = { bg_key("flutter", "SHIFT", "R"),  "Hot restart" }
+keymap["<leader>"].f.R = { bg_key("flutter", "SHIFT", "r"),  "Hot restart" }
 keymap["<leader>"].f.q = { bg_key("flutter", "", "q"),       "Stop" }
-keymap["<leader>"].f.P = { bg_key("flutter", "SHIFT", "P"),  "Toggle performance overlay" }
+keymap["<leader>"].f.P = { bg_key("flutter", "SHIFT", "p"),  "Toggle performance overlay" }
 keymap["<leader>"].f.p = { bg_key("flutter", "", "p"),       "Toggle debug painting" }
 
 keymap["<leader>"].f.b = { bg_cmd("dart run build_runner watch", "build_runner"), "Build runner" }
@@ -268,6 +269,10 @@ keymap["<leader>"].p.h = {
 keymap["<leader>"].p[","] = {
     function() telescope.find_files { cwd = nvimdir } end,
     "Editor config",
+}
+keymap["<leader>"].p["."] = {
+    function() telescope.find_files { cwd = dotdir, hidden = true } end,
+    "Dotfiles",
 }
 keymap["<leader>"].p.t = {
     function() telescope.find_files { cwd = tododir } end,
@@ -374,8 +379,8 @@ keymap["<leader>"].K = { vim.diagnostic.open_float, "Show diagnostic details" }
 
 keymap["<leader>"].x = { function() require("config.xcode") end, "Load xcodebuild" }
 
-keymap["<leader>"][">"] = { "!ipsort<CR>", "Sort paragraph" }
-keymap["<leader>"]["<"] = { "!ipsort -r<CR>", "Sort paragraph (reverse)" }
+keymap["<leader>"][">"] = { "!ipLANG=C sort<CR>", "Sort paragraph" }
+keymap["<leader>"]["<"] = { "!ipLANG=C sort -r<CR>", "Sort paragraph (reverse)" }
 
 keymap["["] = { name = "+previous" }
 keymap["["].e = { vim.diagnostic.goto_prev, "Previous error" }
