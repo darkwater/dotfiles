@@ -73,6 +73,7 @@ if $USER != "root"
         Plug 's1n7ax/nvim-window-picker'
         Plug 'aklt/plantuml-syntax'
         Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+        Plug 'jbyuki/venn.nvim'
 
         if hostname() == "atsushi.local"
             Plug 'ActivityWatch/aw-watcher-vim'
