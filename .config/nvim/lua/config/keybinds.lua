@@ -263,7 +263,7 @@ keymap["<leader>"].l.S = { with_input("Workspace symbol search:", "query", teles
 
 keymap["<leader>"].p = { name = "+project/plugins" }
 keymap["<leader>"].p.i = { Cmd("PlugInstall"),                                       "Install plugins" }
-keymap["<leader>"].p.u = { Cmd("PlugUpdate"),                                        "Install plugins" }
+keymap["<leader>"].p.u = { Cmd("PlugUpdate"),                                        "Update plugins" }
 keymap["<leader>"].p.f = { telescope.find_files,                                     "Find file" }
 keymap["<leader>"].p.g = { with_input("Grep for:", "search", telescope.grep_string), "Grep" }
 keymap["<leader>"].p.G = { telescope.live_grep,                                      "Live grep" }
