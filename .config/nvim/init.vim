@@ -75,7 +75,7 @@ if $USER != "root"
         Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
         Plug 'jbyuki/venn.nvim'
         " Plug 'startup-nvim/startup.nvim'
-        Plug 'goolord/alpha-nvim'
+        Plug 'darkwater/alpha-nvim', { 'branch': 'patch-1' }
 
         if hostname() == "atsushi.local"
             Plug 'ActivityWatch/aw-watcher-vim'
