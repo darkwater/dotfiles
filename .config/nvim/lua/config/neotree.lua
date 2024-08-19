@@ -36,7 +36,6 @@ require("neo-tree").setup {
             hide_by_pattern = {
                 "*.g.dart",
                 "*.freezed.dart",
-                "*/lib/src",
             },
         },
     },
