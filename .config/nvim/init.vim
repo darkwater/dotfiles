@@ -74,6 +74,8 @@ if $USER != "root"
         Plug 'aklt/plantuml-syntax'
         Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
         Plug 'jbyuki/venn.nvim'
+        " Plug 'startup-nvim/startup.nvim'
+        Plug 'goolord/alpha-nvim'
 
         if hostname() == "atsushi.local"
             Plug 'ActivityWatch/aw-watcher-vim'
@@ -308,6 +310,7 @@ elseif $USER != "root"
     lua require "config.roomlang"
     lua require "config.rust"
     lua require "config.snippets"
+    lua require "config.startup"
     lua require "config.statusline"
     lua require "config.telescope"
     lua require "config.terminal"
