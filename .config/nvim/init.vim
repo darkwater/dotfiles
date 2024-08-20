@@ -1,6 +1,7 @@
 if $USER != "root"
     call plug#begin()
 
+    Plug 'tpope/vim-abolish'         " better search/replace
     Plug 'tpope/vim-characterize'    " better ga
     Plug 'tpope/vim-commentary'      " toggle comments with gc
     Plug 'tpope/vim-endwise'         " auto-end
@@ -74,8 +75,7 @@ if $USER != "root"
         Plug 'aklt/plantuml-syntax'
         Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
         Plug 'jbyuki/venn.nvim'
-        " Plug 'startup-nvim/startup.nvim'
-        Plug 'darkwater/alpha-nvim', { 'branch': 'patch-1' }
+        Plug 'goolord/alpha-nvim'
 
         if hostname() == "atsushi.local"
             Plug 'ActivityWatch/aw-watcher-vim'
