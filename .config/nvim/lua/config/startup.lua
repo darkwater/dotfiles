@@ -4,20 +4,29 @@ local dashboard = require("alpha.themes.dashboard")
 -- theta.section.buttons.val = {
 -- }
 
-table.insert(theta.config.layout, 5, {
-    type = "padding",
-    val = 2,
-})
+theta.config.layout[4].val[1].val = vim.fn.getcwd
 
-table.insert(theta.config.layout, 6, {
+theta.config.layout[6] = {
     type = "group",
     val = {
         { type = "text", val = "Projects", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
-        dashboard.button("b", "󰫢  Bar", ":cd ~/github/darkwater/fdls<CR>"),
+        dashboard.button("hb", "󰫢  Bar", ":cd ~/github/darkwater/fdls<CR>"),
+        dashboard.button("hl", "󰫢  Launcher", ":cd ~/github/darkwater/hoshi-launcher<CR>"),
+        dashboard.button("hs", "󰫢  Settings", ":cd ~/github/darkwater/hoshi-settings<CR>"),
+        { type = "padding", val = 2 },
+        { type = "text", val = "Comforest", opts = { hl = "SpecialComment", position = "center" } },
+        { type = "padding", val = 1 },
+        dashboard.button("cf", "󰌪  Firmware", ":cd ~/gitea/comforest/firmware<CR>"),
+        dashboard.button("css", "󰌪  SICshark v2", ":cd ~/gitea/comforest/sicshark<CR>"),
+        dashboard.button("cs1", "󰌪  SICshark", ":cd ~/github/sinewave-ee/sicshark<CR>"),
+        { type = "padding", val = 2 },
+        { type = "text", val = "Sinewave", opts = { hl = "SpecialComment", position = "center" } },
+        { type = "padding", val = 1 },
+        dashboard.button("sfs", "󰥛  Fouling Sensor", ":cd ~/github/sinewave-ee/fouling-sensor<CR>"),
     },
     position = "center",
-})
+}
 
 require("alpha").setup(theta.config)
 
