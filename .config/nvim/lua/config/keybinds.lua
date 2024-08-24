@@ -2,10 +2,6 @@ local wk = require("which-key")
 
 wk.setup {
     show_help = false,
-    operators = {
-        gc = "Comment",
-        ["gc"] = "Comment",
-    },
     icons = {
         mappings = false,
     },
@@ -33,14 +29,6 @@ function run_cmd(title, cmd, max_lines)
             max_lines = max_lines,
         })
 
-        -- local task = require("overseer").new_task {
-        --     cmd = cmd,
-        -- }
-        -- task:start()
-
-        -- require("notify")("foo", vim.log.levels.INFO, {
-        --     replace = notification.id,
-        -- })
         local job_id = vim.fn.jobstart(cmd, {
             on_stdout = function(j, data, event)
                 for _, line in ipairs(data) do
@@ -142,6 +130,7 @@ local hop = require("hop")
 function with_input(prompt, name, fn)
     return function()
         vim.ui.input(prompt, function(input)
+            if input == nil then return end
             local opts = { [name] = input }
             fn(opts)
         end)
@@ -153,163 +142,14 @@ function with_opts(fn, opts)
     end
 end
 
-local keymap = {}
+function find_files_in(dir, opts)
+    if opts == nil then
+        opts = {}
+    end
 
-keymap.K = { vim.lsp.buf.hover, "Hover" }
-keymap["<C-S-k>"] = { vim.lsp.buf.signature_help, "Signature help" }
-vim.keymap.set("v", "K", vim.lsp.buf.hover)
-vim.keymap.set("i", "<C-S-k>", "<Cmd>lua vim.lsp.buf.signature_help()<CR>", { noremap = true })
-
-keymap["<C-S-v>"] = { "\"+p", "Paste from +" }
-vim.keymap.set("i", "<C-S-v>", "<C-c>\"+p`]a", { noremap = true })
-
-keymap.d = {}
-keymap.d.s = {}
--- TODO: doesn't work
-keymap.d.s.f = { "dt(ds)", "Delete surrounding function", { noremap = false } }
-
-keymap.g = {}
-keymap.g.d = { telescope.lsp_definitions, "Go to definition" }
-keymap.g.t = { telescope.lsp_type_definitions, "Go to type definition" }
-
-keymap["<Bslash>"] = { function()
-    local enabled = vim.lsp.inlay_hint.is_enabled()
-
-    vim.lsp.inlay_hint.enable(not enabled)
-
-    vim.diagnostic.config {
-        virtual_text = enabled,
-        virtual_lines = not enabled,
-    }
-end, "Toggle inlay hints" }
-
-keymap["<leader>"] = { name = "+leader" }
-
-keymap["<leader>"].f = { name = "+flutter" }
-keymap["<leader>"].f.a = { name = "+android" }
-keymap["<leader>"].f.a.c = {
-    function()
-        vim.ui.input(
-            "Enter IP address: ",
-            function(ip)
-                vim.cmd("!adb connect " .. ip)
-            end
-        )
-    end,
-    "Connect over TCP",
-}
--- keymap["<leader>"].f.F = {
---     function()
---         require("toggleterm.terminal").Terminal
---             :new({
---                 dir = vim.fn.getcwd(),
---                 cmd = "flutter run",
---                 close_on_exit = false,
---                 env = env,
---                 on_open = function(t)
---                     -- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes([[<C-\><C-n>]], true, true, true), '', true)
---                     -- vim.api.nvim_buf_set_keymap(t.bufnr, 'n', 'q', '<cmd>close<CR>', { noremap = true, silent = true })
---                 end,
---             })
---             :toggle()
---     end,
---     "Flutter run",
--- }
-keymap["<leader>"].f.f = { bg_cmd("flutter run", "flutter"), "Flutter run" }
-keymap["<leader>"].f.r = { bg_key("flutter", "", "r"),       "Hot reload" }
-keymap["<leader>"].f.R = { bg_key("flutter", "SHIFT", "r"),  "Hot restart" }
-keymap["<leader>"].f.q = { bg_key("flutter", "", "q"),       "Stop" }
-keymap["<leader>"].f.P = { bg_key("flutter", "SHIFT", "p"),  "Toggle performance overlay" }
-keymap["<leader>"].f.p = { bg_key("flutter", "", "p"),       "Toggle debug painting" }
-
-keymap["<leader>"].f.b = { bg_cmd("dart run build_runner watch", "build_runner"), "Build runner" }
-
-keymap["<leader>"].F = { name = "+file" }
-keymap["<leader>"].F.s = { Cmd("source %"), "Source file" }
-keymap["<leader>"].F.f = { vim.lsp.buf.format, "Format file" }
-
-keymap["<leader>"].g = { name = "+git" }
-keymap["<leader>"].g.b = { Cmd("Telescope git_branches"), "Branches" }
-keymap["<leader>"].g.B = { Cmd("Gitsigns blame_line"),    "Blame line" }
-keymap["<leader>"].g.l = { Cmd("Telescope git_commits"),  "Commit log" }
-keymap["<leader>"].g.C = { Cmd("Git commit"),             "Commit" }
-keymap["<leader>"].g.d = {
-    Cmd("Gitsigns toggle_linehl") ..
-    Cmd("Gitsigns toggle_deleted"),
-    "Toggle inline diff",
-}
-keymap["<leader>"].g.f = { Cmd("Telescope git_bcommits"),       "File history" }
-keymap["<leader>"].g.p = { Cmd("Gitsigns preview_hunk_inline"), "Preview hunk" }
-keymap["<leader>"].g.s = { Cmd("Telescope git_status"),         "Status" }
-keymap["<leader>"].g.S = { Cmd("Telescope git_stash"),          "Stash" }
-keymap["<leader>"].g.u = { Cmd("Gitsigns reset_hunk"),          "Undo hunk" }
-
-keymap["<leader>"].i = { name = "+insert" }
-keymap["<leader>"].i.u = { Cmd("read !uuidgen"), "Insert UUID" }
-
-local diag_opts = { severity_limit = "error", disable_coordinates = true }
-keymap["<leader>"].l = { name = "+lsp" }
-keymap["<leader>"].l.a = { vim.lsp.buf.code_action,                      "Code actions" }
-keymap["<leader>"].l.c = { telescope.lsp_incoming_calls,                 "Incoming calls" }
-keymap["<leader>"].l.C = { telescope.lsp_outgoing_calls,                 "Outgoing calls" }
-keymap["<leader>"].l.e = { with_opts(telescope.diagnostics, diag_opts),  "Errors" }
-keymap["<leader>"].l.d = { telescope.diagnostics,                        "All diagnostics" }
-keymap["<leader>"].l.f = { vim.lsp.buf.format,                           "Format buffer" }
-keymap["<leader>"].l.i = { telescope.lsp_implementations,                "Implementations" }
-keymap["<leader>"].l.r = { vim.lsp.buf.rename,                           "Rename symbol" }
-keymap["<leader>"].l.R = { telescope.lsp_references,                     "References" }
-keymap["<leader>"].l.s = { telescope.lsp_document_symbols,               "Symbols (document)" }
-keymap["<leader>"].l.S = { with_input("Workspace symbol search:", "query", telescope.lsp_workspace_symbols), "Symbols (workspace)" }
-
-keymap["<leader>"].p = { name = "+project/plugins" }
-keymap["<leader>"].p.i = { Cmd("PlugInstall"),                                       "Install plugins" }
-keymap["<leader>"].p.u = { Cmd("PlugUpdate"),                                        "Update plugins" }
-keymap["<leader>"].p.f = { telescope.find_files,                                     "Find file" }
-keymap["<leader>"].p.g = { with_input("Grep for:", "search", telescope.grep_string), "Grep" }
-keymap["<leader>"].p.G = { telescope.live_grep,                                      "Live grep" }
-keymap["<leader>"].p.r = { telescope.oldfiles,                                       "Recent files" }
-keymap["<leader>"].p.p = { require("config.telescope").projects,                     "Projects" }
-keymap["<leader>"].p.h = {
-    function() telescope.find_files { cwd = hyprdir } end,
-    "Hyprland config",
-}
-keymap["<leader>"].p[","] = {
-    function() telescope.find_files { cwd = nvimdir } end,
-    "Editor config",
-}
-keymap["<leader>"].p["."] = {
-    function() telescope.find_files { cwd = dotdir, hidden = true } end,
-    "Dotfiles",
-}
-keymap["<leader>"].p.t = {
-    function() telescope.find_files { cwd = tododir } end,
-    "Todo lists",
-}
-
-keymap["<leader>"].r = { name = "+rust" }
-keymap["<leader>"].r.c = { shell("cargo clippy", false),                         "Clippy" }
-keymap["<leader>"].r.C = { Cmd("RustLsp openCargo"),                             "Open Cargo.toml" }
-keymap["<leader>"].r.F = { require("crates").show_features_popup,                "Show crate features" }
-keymap["<leader>"].r.D = { require("crates").show_dependencies_popup,            "Show crate dependencies" }
-keymap["<leader>"].r["?"] = { require("crates").open_documentation,              "Show crate docs" }
-keymap["<leader>"].r.R = { shell("cargo run", false, { RUST_BACKTRACE = "1" }),  "Run (keep terminal)" }
-keymap["<leader>"].r.r = { shell("cargo run", true, { RUST_BACKTRACE = "1" }),   "Run" }
-keymap["<leader>"].r.t = { shell("cargo test", false, { RUST_BACKTRACE = "1" }), "Test" }
-keymap["<leader>"].r.b = { shell("cargo bench", false),                          "Bench" }
-keymap["<leader>"].r.J = { Cmd("RustLsp joinLines"),                             "Join lines" }
-keymap["<leader>"].r.u = { Cmd("RustLsp parentModule"),                          "Jump to parent module" }
-keymap["<leader>"].r.m = { Cmd("RustLsp expandMacro"),                           "Expand macro" }
-keymap["<leader>"].r.a = {
-    function()
-        vim.ui.input(
-            "Cargo add:",
-            function(args)
-                vim.cmd("!cargo add " .. args)
-            end
-        )
-    end,
-    "Add dependency",
-}
+    opts["cwd"] = dir
+    return function() telescope.find_files(opts) end
+end
 
 local copilot_enabled = true
 function toggle_copilot()
@@ -323,61 +163,30 @@ function toggle_copilot()
     end
 end
 
-keymap["<leader>"].s = { name = "+sic" }
-keymap["<leader>"].s.i = { shell("cargo sic inspect", false),                "Inspect" }
-keymap["<leader>"].s.d = { shell("cargo sic dev", false),                    "Develop" }
-keymap["<leader>"].s.D = { shell("cargo sic dev --dfu", false),              "Develop (dfu)" }
-keymap["<leader>"].s.r = { shell("cargo sic dev --release", false),          "Develop (release)" }
-keymap["<leader>"].s.R = { shell("cargo sic dev --release --dfu", false),    "Develop (release, dfu)" }
-keymap["<leader>"].s.h = { shell("cargo sic dev --hwtest", false),           "Develop (hwtest)" }
-keymap["<leader>"].s.H = { shell("cargo sic dev --hwtest --release", false), "Develop (hwtest, release)" }
-keymap["<leader>"].s.a = { shell("cargo sic attach --reset", false),         "Attach" }
-keymap["<leader>"].s.A = { shell("cargo sic attach", false),                 "Attach (no reset)" }
-keymap["<leader>"].s.c = { shell("cargo sic config-builder", false),         "Config builder" }
-keymap["<leader>"].s.e = { name = "+env" }
-keymap["<leader>"].s.e.s = { shell("cargo sic env status", false),           "Status" }
-keymap["<leader>"].s.e.S = { shell("cargo sic env status --details", false), "Status (details)" }
-keymap["<leader>"].s.e.l = { shell("cargo sic env list", false),             "List" }
-keymap["<leader>"].s.m = { shell("cargo sic monitor", false),                "Monitor traffic" }
+function toggle_inlay_hints()
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end
 
-keymap["<leader>"].t = { name = "+toggle" }
-keymap["<leader>"].t.c = { toggle_copilot, "Copilot" }
-keymap["<leader>"].t.w = { Cmd("set wrap!"), "Text wrapping" }
+local virtual_errors_enabled = true
+function toggle_virtual_errors()
+    virtual_errors_enabled = not virtual_errors_enabled
 
-keymap["<leader>"].T = { name = "+Telescope" }
-keymap["<leader>"].T.T = { telescope.builtin,                   "Telescope pickers" }
-keymap["<leader>"].T.A = { telescope.autocommands,              "Autocommands" }
-keymap["<leader>"].T.b = { telescope.current_buffer_fuzzy_find, "Current buffer" }
-keymap["<leader>"].T.B = { telescope.buffers,                   "Buffers" }
-keymap["<leader>"].T.c = { telescope.loclist,                   "Location list" }
-keymap["<leader>"].T.C = { telescope.commands,                  "Plugin/user commands" }
-keymap["<leader>"].T.f = { telescope.git_files,                 "Find git files" }
-keymap["<leader>"].T.F = { with_opts(telescope.find_files, { hidden = true }), "Find all files" }
-keymap["<leader>"].T.H = { telescope.highlights,                "Highlights" }
-keymap["<leader>"].T.M = { telescope.man_pages,                 "Man pages" }
-keymap["<leader>"].T.o = { telescope.vim_options,               "Vim options" }
-keymap["<leader>"].T.P = { telescope.planets,                   "Use the telescope..." }
-keymap["<leader>"].T.q = { telescope.quickfix,                  "Quickfix" }
-keymap["<leader>"].T.r = { telescope.oldfiles,                  "Recent files" }
-keymap["<leader>"].T.t = { telescope.colorscheme,               "Colorschemes" }
-keymap["<leader>"].T["'"] = { telescope.marks,                  "Marks" }
-keymap["<leader>"].T['"'] = { telescope.registers,              "Registers" }
-keymap["<leader>"].T[":"] = { telescope.command_history,        "Command history" }
-keymap["<leader>"].T["/"] = { telescope.search_history,         "Search history" }
-keymap["<leader>"].T["?"] = { telescope.help_tags,              "Help tags" }
-keymap["<leader>"].T["."] = { telescope.resume,                 "Resume last picker" }
+    vim.diagnostic.config {
+        virtual_text = not virtual_errors_enabled,
+        virtual_lines = virtual_errors_enabled,
+    }
+end
 
-keymap["<leader>"]["\t"] = { name = "+tabular" }
-keymap["<leader>"]["\t"]["="] = { Cmd("Tabularize /^[^=]*\\zs="), "=" }
-keymap["<leader>"]["\t"]["<"] = { Cmd("Tabularize /<-"), "<-" }
-keymap["<leader>"]["\t"][">"] = { Cmd("Tabularize /->"), "->" }
-keymap["<leader>"]["\t"]['"'] = { Cmd("Tabularize /\""), '"'}
-keymap["<leader>"]["\t"][":"] = { Cmd("Tabularize /^[^:]*:\\zs/l0r1"), ":"}
-keymap["<leader>"]["\t"][","] = { Cmd("Tabularize /^[^,]*,\\zs/l0r1"), ","}
+function cargo_add()
+    vim.ui.input(
+        "Cargo add:",
+        function(args)
+            vim.cmd("!cargo add " .. args)
+        end
+    )
+end
 
-keymap["<leader>"].V = { ":lua Toggle_venn()<CR>", "Toggle Venn bindings" }
-
-function _G.Toggle_venn()
+function toggle_venn()
     local venn_enabled = vim.inspect(vim.b.venn_enabled)
     if venn_enabled == "nil" then
         vim.b.venn_enabled = true
@@ -400,47 +209,176 @@ function _G.Toggle_venn()
     end
 end
 
-keymap["<leader>"].w = { name = "+window" }
-keymap["<leader>"].w.e = { Cmd("TroubleToggle"), "Toggle problems" }
-keymap["<leader>"].w.s = { Cmd("Neotree document_symbols"), "Document symbols" }
-keymap["<leader>"].w.Q = { Cmd("qa"), "Close all windows" }
-keymap["<leader>"].w.t = { Cmd("Neotree"), "Toggle Neotree" } -- also see neotree.lua mappings
-keymap["<leader>"].w.T = { Cmd("Neotree reveal"), "Reveal file in Neotree" } -- also see neotree.lua mappings
+wk.add {
+    { "K",       vim.lsp.buf.hover,          desc = "Hover",          mode = { "n", "v" } },
+    { "<C-S-k>", vim.lsp.buf.signature_help, desc = "Signature help", mode = { "n", "i" } },
 
-keymap["<leader>"].K = { vim.diagnostic.open_float, "Show diagnostic details" }
+    { "<C-S-v>", '"+p',         desc = "Paste from +" },
+    { "<C-S-v>", '<C-c>"+p`]a', desc = "Paste from +", mode = "i" },
 
-keymap["<leader>"].x = { function() require("config.xcode") end, "Load xcodebuild" }
+    { "gd", telescope.lsp_definitions,      desc = "Go to definition" },
+    { "gt", telescope.lsp_type_definitions, desc = "Go to type definition" },
 
-keymap["<leader>"][">"] = { "!ipLANG=C sort<CR>", "Sort paragraph" }
-keymap["<leader>"]["<"] = { "!ipLANG=C sort -r<CR>", "Sort paragraph (reverse)" }
+    { "<Bslash>", desc = "Toggle inlay hints", toggle_inlay_hints },
 
-keymap["["] = { name = "+previous" }
-keymap["["].e = { vim.diagnostic.goto_prev, "Previous error" }
-keymap["["].h = { Cmd("Gitsigns prev_hunk"), "Previous hunk" }
-keymap["["].q = { Cmd("cprev"), "Previous quickfix" }
-keymap["["].l = { Cmd("lprev"), "Previous location" }
+    { "<BS>", desc = "Toggle full inline errors", toggle_virtual_errors },
 
-keymap["]"] = { name = "+next" }
-keymap["]"].e = { vim.diagnostic.goto_next, "Next error" }
-keymap["]"].h = { Cmd("Gitsigns next_hunk"), "Next hunk" }
-keymap["]"].q = { Cmd("cnext"), "Next quickfix" }
-keymap["]"].l = { Cmd("lnext"), "Next location" }
+    { "<leader>", group = "leader" },
 
--- keymap["'"] = { hop.hint_words, "Last buffer" }
+    { "<leader>f", group = "flutter" },
+    { "<leader>ff", bg_cmd("flutter run", "flutter"),      desc = "Flutter run" },
+    { "<leader>fr", bg_key("flutter", "",      "r"),       desc = "Hot reload" },
+    { "<leader>fR", bg_key("flutter", "SHIFT", "r"),       desc = "Hot restart" },
+    { "<leader>fq", bg_key("flutter", "",      "q"),       desc = "Stop" },
+    { "<leader>fP", bg_key("flutter", "SHIFT", "p"),       desc = "Toggle performance overlay" },
+    { "<leader>fp", bg_key("flutter", "",      "p"),       desc = "Toggle debug painting" },
+    { "<leader>fb", bg_key("dart run build_runner watch"), desc = "Build runner (watch)" },
 
-keymap["<Enter>"] = { Cmd("b#"), "Last buffer" }
+    { "<leader>F", group = "file" },
+    { "<leader>Fs", Cmd("source %"),    desc = "Source file" },
+    { "<leader>Ff", vim.lsp.buf.format, desc = "Format file" },
 
-keymap["<C-'>"] = { Cmd("ToggleTerm"), "Toggle terminal" }
-vim.keymap.set("t", "<C-'>", Cmd("ToggleTerm"))
+    { "<leader>g", group = "git" },
+    { "<leader>gb", Cmd("Telescope git_branches"),       desc = "Branches" },
+    { "<leader>gB", Cmd("Gitsigns blame_line"),          desc = "Blame line" },
+    { "<leader>gl", Cmd("Telescope git_commits"),        desc = "Commit log" },
+    { "<leader>gC", Cmd("Git commit"),                   desc = "Commit" },
+    { "<leader>gf", Cmd("Telescope git_bcommits"),       desc = "File history" },
+    { "<leader>gp", Cmd("Gitsigns preview_hunk_inline"), desc = "Preview hunk" },
+    { "<leader>gs", Cmd("Telescope git_status"),         desc = "Status" },
+    { "<leader>gS", Cmd("Telescope git_stash"),          desc = "Stash" },
+    { "<leader>gu", Cmd("Gitsigns reset_hunk"),          desc = "Undo hunk" },
+    { "<leader>gd", Cmd("Gitsigns toggle_linehl") .. Cmd("Gitsigns toggle_deleted"), desc = "Toggle inline diff" },
 
-keymap["'"] = {
-    function()
-        vim.system({ "kitty" }, {
-            args = { "--directory", vim.fn.getcwd() },
-            detach = true,
-        })
-    end,
-    "Toggle terminal",
+    { "<leader>i", group = "insert" },
+    { "<leader>iu", Cmd("read !uuidgen"), desc = "Insert UUID" },
+
+    { "<leader>l", group = "lsp" },
+    { "<leader>la", vim.lsp.buf.code_action,        desc = "Code actions" },
+    { "<leader>lc", telescope.lsp_incoming_calls,   desc = "Incoming calls" },
+    { "<leader>lC", telescope.lsp_outgoing_calls,   desc = "Outgoing calls" },
+    { "<leader>le", telescope.diagnostics,          desc = "Errors" },
+    { "<leader>ld", telescope.diagnostics,          desc = "All diagnostics" },
+    { "<leader>lf", vim.lsp.buf.format,             desc = "Format buffer" },
+    { "<leader>li", telescope.lsp_implementations,  desc = "Implementations" },
+    { "<leader>lr", vim.lsp.buf.rename,             desc = "Rename symbol" },
+    { "<leader>lR", telescope.lsp_references,       desc = "References" },
+    { "<leader>ls", telescope.lsp_document_symbols, desc = "Symbols (document)" },
+    { "<leader>lS", with_input("Workspace symbol search:", "query", telescope.lsp_workspace_symbols), desc = "Symbols (workspace)" },
+
+    { "<leader>P", group = "plugins" },
+    { "<leader>Pi", Cmd("PlugInstall"), desc = "Install plugins" },
+    { "<leader>Pi", Cmd("PlugUpdate"), desc = "Update plugins" },
+
+    { "<leader>p", group = "project" },
+    { "<leader>pf", telescope.find_files,                                     desc = "Find file" },
+    { "<leader>pG", telescope.live_grep,                                      desc = "Live grep" },
+    { "<leader>pg", with_input("Grep for:", "search", telescope.grep_string), desc = "Grep" },
+    { "<leader>pr", telescope.oldfiles,                                       desc = "Recent files" },
+    { "<leader>ph", find_files_in(hyprdir),                                   desc = "Hyprland config" },
+    { "<leader>pt", find_files_in(tododir),                                   desc = "Todo lists" },
+    { "<leader>p,", find_files_in(nvimdir),                                   desc = "Neovim config" },
+    { "<leader>p.", find_files_in(dotdir, { hidden = true }),                 desc = "Dotfiles" },
+
+    { "<leader>r", group = "rust" },
+    { "<leader>rc", shell("cargo clippy", false),              desc = "Clippy" },
+    { "<leader>rr", shell("cargo run", true),                  desc = "Run" },
+    { "<leader>rR", shell("cargo run", false),                 desc = "Run and keep open" },
+    { "<leader>rt", shell("cargo test", false),                desc = "Test" },
+    { "<leader>rb", shell("cargo bench", false),               desc = "Bench" },
+    { "<leader>rC", Cmd("RustLsp openCargo"),                  desc = "Open Cargo.toml" },
+    { "<leader>rm", Cmd("RustLsp expandMacro"),                desc = "Expand macro" },
+    { "<leader>rF", require("crates").show_features_popup,     desc = "Cargo add" },
+    { "<leader>rD", require("crates").show_dependencies_popup, desc = "Cargo add" },
+    { "<leader>ra", cargo_add,                                 desc = "Cargo add" },
+
+    { "<leader>s", name = "sic" },
+    { "<leader>si", shell("cargo sic inspect", false),                desc = "Inspect" },
+    { "<leader>sd", shell("cargo sic dev", false),                    desc = "Develop" },
+    { "<leader>sD", shell("cargo sic dev --dfu", false),              desc = "Develop (dfu)" },
+    { "<leader>sr", shell("cargo sic dev --release", false),          desc = "Develop (release)" },
+    { "<leader>sR", shell("cargo sic dev --release --dfu", false),    desc = "Develop (release, dfu)" },
+    { "<leader>sh", shell("cargo sic dev --hwtest", false),           desc = "Develop (hwtest)" },
+    { "<leader>sH", shell("cargo sic dev --hwtest --release", false), desc = "Develop (hwtest, release)" },
+    { "<leader>sa", shell("cargo sic attach --reset", false),         desc = "Attach" },
+    { "<leader>sA", shell("cargo sic attach", false),                 desc = "Attach (no reset)" },
+    { "<leader>sc", shell("cargo sic config-builder", false),         desc = "Config builder" },
+    { "<leader>sm", shell("cargo sic monitor", false),                desc = "Monitor traffic" },
+    { "<leader>se", group = "env" },
+    { "<leader>ses", shell("cargo sic env status", false),           desc = "Status" },
+    { "<leader>seS", shell("cargo sic env status --details", false), desc = "Status (details)" },
+    { "<leader>sel", shell("cargo sic env list", false),             desc = "List" },
+
+    { "<leader>t", group = "toggle" },
+    { "<leader>tc", toggle_copilot,   desc = "Toggle Copilot" },
+    { "<leader>tw", Cmd("set wrap!"), desc = "Toggle text wrap" },
+    { "<leader>tv", toggle_venn,      desc = "Toggle Venn mode" },
+
+    { "<leader>T", group = "telescope" },
+    { "<leader>TT", telescope.builtin,                   desc = "Telescope pickers" },
+    { "<leader>TA", telescope.autocommands,              desc = "Autocommands" },
+    { "<leader>Tb", telescope.current_buffer_fuzzy_find, desc = "Current buffer" },
+    { "<leader>TB", telescope.buffers,                   desc = "Buffers" },
+    { "<leader>Tc", telescope.loclist,                   desc = "Location list" },
+    { "<leader>TC", telescope.commands,                  desc = "Plugin/user commands" },
+    { "<leader>Tf", telescope.git_files,                 desc = "Find git files" },
+    { "<leader>TH", telescope.highlights,                desc = "Highlights" },
+    { "<leader>TM", telescope.man_pages,                 desc = "Man pages" },
+    { "<leader>To", telescope.vim_options,               desc = "Vim options" },
+    { "<leader>TP", telescope.planets,                   desc = "Use the telescope..." },
+    { "<leader>Tq", telescope.quickfix,                  desc = "Quickfix" },
+    { "<leader>Tr", telescope.oldfiles,                  desc = "Recent files" },
+    { "<leader>Tt", telescope.colorscheme,               desc = "Colorschemes" },
+    { "<leader>T'", telescope.marks,                     desc = "Marks" },
+    { '<leader>T"', telescope.registers,                 desc = "Registers" },
+    { "<leader>T:", telescope.command_history,           desc = "Command history" },
+    { "<leader>T/", telescope.search_history,            desc = "Search history" },
+    { "<leader>T?", telescope.help_tags,                 desc = "Help tags" },
+    { "<leader>T.", telescope.resume,                    desc = "Resume last picker" },
+    { "<leader>TF", with_opts(telescope.find_files, { hidden = true }), desc = "Find all files" },
+
+    { "<leader><Tab>", group = "tabular" },
+    { "<leader><Tab>=", Cmd("Tabularize /^[^=]*\\zs="), desc = "=" },
+    { "<leader><Tab><", Cmd("Tabularize /<-"), desc = "<-" },
+    { "<leader><Tab>>", Cmd("Tabularize /->"), desc = "->" },
+    { '<leader><Tab>"', Cmd('Tabularize /"'), desc = '"'},
+    { "<leader><Tab>:", Cmd("Tabularize /:\\zs/l0r1"), desc = ":"},
+    { "<leader><Tab>,", Cmd("Tabularize /,\\zs/l0r1"), desc = ","},
+    { "<leader><Tab>1", group = "once" },
+    { "<leader><Tab>1:", Cmd("Tabularize /^[^:]*:\\zs/l0r1"), desc = ":"},
+    { "<leader><Tab>1,", Cmd("Tabularize /^[^,]*,\\zs/l0r1"), desc = ","},
+
+    { "<leader>w", group = "window" },
+    { "<leader>wS", Cmd("Neotree document_symbols"), desc = "Document symbols" },
+    { "<leader>wQ", Cmd("qa"), desc = "Close all windows" },
+    { "<leader>wt", Cmd("Neotree"), desc = "Toggle tree" },
+    { "<leader>wT", Cmd("Neotree reveal"), desc = "Reveal file in tree" },
+
+    { "<leader>K", vim.diagnostic.open_float, desc = "Show diagnostic details" },
+
+    { "<leader>>", "!ipLANG=C sort<CR>", desc = "Sort paragraph" },
+    { "<leader><", "!ipLANG=C sort -r<CR>", desc = "Sort paragraph (reverse)" },
+
+    { "[", group = "previous" },
+    { "[e", vim.diagnostic.goto_prev, desc = "Previous error" },
+    { "[h", Cmd("Gitsigns prev_hunk"), desc = "Previous hunk" },
+    { "[q", Cmd("cprev"), desc = "Previous quickfix" },
+    { "[l", Cmd("lprev"), desc = "Previous location" },
+
+    { "]", group = "next" },
+    { "]e", vim.diagnostic.goto_next, desc = "Next error" },
+    { "]h", Cmd("Gitsigns next_hunk"), desc = "Next hunk" },
+    { "]q", Cmd("cnext"), desc = "Next quickfix" },
+    { "]l", Cmd("lnext"), desc = "Next location" },
+
+    { "<Enter>", Cmd("b#"), desc = "Last buffer" },
+
+    { "<C-'>", Cmd("ToggleTerm"), desc = "Toggle terminal", mode = { "n", "t" } },
+
+    { "'", function()
+        vim.system(
+            { "kitty", "--directory", vim.fn.getcwd() },
+            { detach = true }
+        )
+    end, desc = "Toggle terminal" },
 }
-
-wk.register(keymap)
