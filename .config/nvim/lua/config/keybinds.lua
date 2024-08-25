@@ -106,6 +106,7 @@ function bg_cmd(cmd, class)
 end
 
 function bg_key(class, modifier, key)
+
     return function()
         vim.system({
             "hyprctl",
@@ -232,7 +233,7 @@ wk.add {
     { "<leader>fq", bg_key("flutter", "",      "q"),       desc = "Stop" },
     { "<leader>fP", bg_key("flutter", "SHIFT", "p"),       desc = "Toggle performance overlay" },
     { "<leader>fp", bg_key("flutter", "",      "p"),       desc = "Toggle debug painting" },
-    { "<leader>fb", bg_key("dart run build_runner watch"), desc = "Build runner (watch)" },
+    { "<leader>fb", bg_cmd("dart run build_runner watch"), desc = "Build runner (watch)" },
 
     { "<leader>F", group = "file" },
     { "<leader>Fs", Cmd("source %"),    desc = "Source file" },
