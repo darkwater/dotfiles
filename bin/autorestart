@@ -1,0 +1,23 @@
+#!/bin/sh
+
+MAX_RETRIES=5
+RETRIES=0
+
+while sleep 0.5s; do
+    START=$(date +%s)
+    $*
+    END=$(date +%s)
+
+    if [[ $((END - START)) -lt 2 ]]; then
+        RETRIES=$((RETRIES + 1))
+    else
+        RETRIES=0
+    fi
+
+    if [[ $RETRIES -ge $MAX_RETRIES ]]; then
+        notify-send "Autorestart" "$1 exited too quickly $MAX_RETRIES times"
+        exit 1
+    fi
+
+    notify-send "Autorestart" "$1 exited with status $?, restarting"
+done
