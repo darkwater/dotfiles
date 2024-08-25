@@ -9,11 +9,15 @@ theta.config.layout[4].val[1].val = vim.fn.getcwd
 theta.config.layout[6] = {
     type = "group",
     val = {
-        { type = "text", val = "Projects", opts = { hl = "SpecialComment", position = "center" } },
+        { type = "text", val = "Hoshi", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
         dashboard.button("hb", "󰫢  Bar", ":cd ~/github/darkwater/fdls<CR>"),
         dashboard.button("hl", "󰫢  Launcher", ":cd ~/github/darkwater/hoshi-launcher<CR>"),
         dashboard.button("hs", "󰫢  Settings", ":cd ~/github/darkwater/hoshi-settings<CR>"),
+        { type = "padding", val = 2 },
+        { type = "text", val = "Libraries", opts = { hl = "SpecialComment", position = "center" } },
+        { type = "padding", val = 1 },
+        dashboard.button("lp", "  Pipewire", ":cd ~/github/darkwater/dart-pipewire<CR>"),
         { type = "padding", val = 2 },
         { type = "text", val = "Comforest", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
