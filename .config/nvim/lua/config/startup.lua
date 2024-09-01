@@ -18,6 +18,7 @@ theta.config.layout[6] = {
         { type = "text", val = "Libraries", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
         dashboard.button("lp", "  Pipewire", ":cd ~/github/darkwater/dart-pipewire<CR>"),
+        dashboard.button("lws", "  Wayland Shell", ":cd ~/github/flafydev/wayland_shell<CR>"),
         { type = "padding", val = 2 },
         { type = "text", val = "Comforest", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
