@@ -15,9 +15,9 @@ check() {
     fi
 }
 
-check ~/.config/dunst
-check ~/.config/i3
+check ~/.config/hypr
+check ~/.config/kitty
 check ~/.config/nvim
+check ~/.config/swaync
 check ~/.gitconfig
-check ~/.Xresources
 check ~/.zshrc
