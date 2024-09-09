@@ -52,6 +52,7 @@ alias sai="sudo apt install"
 alias apts="apt search"
 
 alias ip="ip --color=auto"
+alias fd="fd --glob"
 
 ssh() {
     # interferes with `ssh host foo > bar`
