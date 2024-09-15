@@ -109,6 +109,8 @@ if exists("g:neovide") || $NEOVIDE_REMOTE == "1"
     let g:neovide_remember_window_size = v:true
     let g:neovide_cursor_animation_length = 0.05
     let g:neovide_cursor_antialiasing = v:false
+    let g:neovide_position_animation_length = 0
+    let g:neovide_floating_shadow = v:false
 endif
 
 if !exists("g:vscode")
