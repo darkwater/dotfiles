@@ -15,11 +15,11 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-alias f="flutter"
-alias fr="flutter run"
-alias fp="flutter pub"
-alias fbb="dart run build_runner build"
-alias fbw="dart run build_runner watch"
+alias f="fvm flutter"
+alias fr="fvm flutter run"
+alias fp="fvm flutter pub"
+alias fbb="fvm dart run build_runner build"
+alias fbw="fvm dart run build_runner watch"
 
 alias c="cargo"
 alias g="git"
@@ -236,6 +236,7 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 source ~/.nix-profile/etc/profile.d/nix.sh 2>/dev/null
+source ~/.dart-cli-completion/fvm.zsh 2>/dev/null
 
 typeset -A ZSH_HIGHLIGHT_PATTERNS
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main pattern)
