@@ -11,9 +11,10 @@ theta.config.layout[6] = {
     val = {
         { type = "text", val = "Hoshi", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
-        dashboard.button("hb", "󰫢  Bar", ":cd ~/github/darkwater/fdls<CR>"),
+        dashboard.button("hb", "󰫢  Bar", ":cd ~/github/darkwater/hoshi-bar<CR>"),
         dashboard.button("hl", "󰫢  Launcher", ":cd ~/github/darkwater/hoshi-launcher<CR>"),
         dashboard.button("hs", "󰫢  Settings", ":cd ~/github/darkwater/hoshi-settings<CR>"),
+        { type = "padding", val = 2 },
         { type = "text", val = "Personal", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
         dashboard.button("psc", "  Steam Clipper", ":cd ~/github/darkwater/steam-clipper<CR>"),
