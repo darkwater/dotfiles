@@ -1,0 +1,3 @@
+#!/bin/sh
+
+firefox -new-window "moz-extension://0634ad90-0a84-46d0-bfd6-d18bc6dfc5ec/ssb.html?url=$1"
