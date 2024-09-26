@@ -199,6 +199,8 @@ function toggle_venn()
         vim.api.nvim_buf_set_keymap(0, "n", "H", "<C-v>h:VBox<CR>", {noremap = true})
         -- draw a box by pressing "f" with visual selection
         vim.api.nvim_buf_set_keymap(0, "v", "f", ":VBox<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "v", "F", ":VBoxD<CR>", {noremap = true})
+        vim.api.nvim_buf_set_keymap(0, "v", "<C-f>", ":VBoxH<CR>", {noremap = true})
     else
         vim.cmd[[setlocal ve=]]
         vim.api.nvim_buf_del_keymap(0, "n", "J")
@@ -206,6 +208,8 @@ function toggle_venn()
         vim.api.nvim_buf_del_keymap(0, "n", "L")
         vim.api.nvim_buf_del_keymap(0, "n", "H")
         vim.api.nvim_buf_del_keymap(0, "v", "f")
+        vim.api.nvim_buf_del_keymap(0, "v", "F")
+        vim.api.nvim_buf_del_keymap(0, "v", "<C-f>")
         vim.b.venn_enabled = nil
     end
 end
@@ -227,12 +231,13 @@ wk.add {
     { "<leader>", group = "leader" },
 
     { "<leader>f", group = "flutter" },
-    { "<leader>ff", bg_cmd("flutter run", "flutter"),      desc = "Flutter run" },
+    { "<leader>ff", bg_cmd("fvm flutter run", "flutter"),  desc = "Flutter run" },
     { "<leader>fr", bg_key("flutter", "",      "r"),       desc = "Hot reload" },
     { "<leader>fR", bg_key("flutter", "SHIFT", "r"),       desc = "Hot restart" },
     { "<leader>fq", bg_key("flutter", "",      "q"),       desc = "Stop" },
     { "<leader>fP", bg_key("flutter", "SHIFT", "p"),       desc = "Toggle performance overlay" },
     { "<leader>fp", bg_key("flutter", "",      "p"),       desc = "Toggle debug painting" },
+    { "<leader>ft", shell("fvm flutter test", false),      desc = "Test" },
     { "<leader>fb", bg_cmd("dart run build_runner watch"), desc = "Build runner (watch)" },
 
     { "<leader>F", group = "file" },
@@ -269,7 +274,8 @@ wk.add {
 
     { "<leader>P", group = "plugins" },
     { "<leader>Pi", Cmd("PlugInstall"), desc = "Install plugins" },
-    { "<leader>Pi", Cmd("PlugUpdate"), desc = "Update plugins" },
+    { "<leader>Pu", Cmd("PlugUpdate"), desc = "Update plugins" },
+    { "<leader>Pc", Cmd("PlugClean"), desc = "Clean plugins" },
 
     { "<leader>p", group = "project" },
     { "<leader>pf", telescope.find_files,                                     desc = "Find file" },
