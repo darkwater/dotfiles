@@ -76,6 +76,7 @@ if $USER != "root"
         Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
         Plug 'jbyuki/venn.nvim'
         Plug 'goolord/alpha-nvim'
+        Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
         if hostname() == "atsushi.local"
             Plug 'ActivityWatch/aw-watcher-vim'
