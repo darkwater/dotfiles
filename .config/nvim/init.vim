@@ -77,6 +77,7 @@ if $USER != "root"
         Plug 'jbyuki/venn.nvim'
         Plug 'goolord/alpha-nvim'
         Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+        Plug 'dcharbon/vim-flatbuffers'
 
         if hostname() == "atsushi.local"
             Plug 'ActivityWatch/aw-watcher-vim'
@@ -280,6 +281,8 @@ function! ClearTrailingWhitespace()
     call winrestview(l:save)
 endfunction
 command! ClearTrailingWhitespace call ClearTrailingWhitespace()
+
+let g:mkdp_browser = "firefox-ssb"
 
 if exists("g:vscode")
     nnoremap gr <Cmd>call VSCodeNotify("editor.action.rename")<CR>
