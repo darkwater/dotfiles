@@ -24,6 +24,7 @@ theta.config.layout[6] = {
         { type = "padding", val = 1 },
         dashboard.button("lws", "  Wayland Shell", ":cd ~/github/flafydev/wayland_shell<CR>"),
         dashboard.button("lxd", "  XDG Desktop Entries", ":cd ~/github/darkwater/xdg_desktop_entries<CR>"),
+        dashboard.button("lim", "󰦆  Iced Material", ":cd ~/github/darkwater/iced-material<CR>"),
         { type = "padding", val = 2 },
         { type = "text", val = "Comforest", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
