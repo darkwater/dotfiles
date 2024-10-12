@@ -78,6 +78,7 @@ if $USER != "root"
         Plug 'goolord/alpha-nvim'
         Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
         Plug 'dcharbon/vim-flatbuffers'
+        Plug 'DNLHC/glance.nvim'
 
         if hostname() == "atsushi.local"
             Plug 'ActivityWatch/aw-watcher-vim'
