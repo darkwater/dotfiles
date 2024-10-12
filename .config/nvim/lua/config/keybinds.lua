@@ -266,9 +266,9 @@ wk.add {
     { "<leader>le", telescope.diagnostics,          desc = "Errors" },
     { "<leader>ld", telescope.diagnostics,          desc = "All diagnostics" },
     { "<leader>lf", vim.lsp.buf.format,             desc = "Format buffer" },
-    { "<leader>li", telescope.lsp_implementations,  desc = "Implementations" },
+    { "<leader>li", Cmd("Glance implementations"),  desc = "Implementations" },
     { "<leader>lr", vim.lsp.buf.rename,             desc = "Rename symbol" },
-    { "<leader>lR", telescope.lsp_references,       desc = "References" },
+    { "<leader>lR", Cmd("Glance references"),       desc = "References" },
     { "<leader>ls", telescope.lsp_document_symbols, desc = "Symbols (document)" },
     { "<leader>lS", with_input("Workspace symbol search:", "query", telescope.lsp_workspace_symbols), desc = "Symbols (workspace)" },
 
