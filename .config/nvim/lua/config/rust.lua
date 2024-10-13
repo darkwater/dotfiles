@@ -90,7 +90,7 @@ vim.g.rustaceanvim = function()
                     or path == "/home/dark/github/sinewave-ee/fouling-sensor/cross" then
                     linkedProjects = {
                         "/home/dark/github/sinewave-ee/fouling-sensor/Cargo.toml",
-                        "/home/dark/github/sinewave-ee/fouling-sensor/cross/Cargo.toml",
+                        "/home/dark/github/sinewave-ee/fouling-sensor/gateway/Cargo.toml",
                     }
                 end
 
