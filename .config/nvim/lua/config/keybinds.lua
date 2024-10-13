@@ -260,7 +260,7 @@ wk.add {
     { "<leader>iu", Cmd("read !uuidgen"), desc = "Insert UUID" },
 
     { "<leader>l", group = "lsp" },
-    { "<leader>la", vim.lsp.buf.code_action,        desc = "Code actions" },
+    { "<leader>la", vim.lsp.buf.code_action,        desc = "Code actions", mode = { "n", "v" } },
     { "<leader>lc", telescope.lsp_incoming_calls,   desc = "Incoming calls" },
     { "<leader>lC", telescope.lsp_outgoing_calls,   desc = "Outgoing calls" },
     { "<leader>le", telescope.diagnostics,          desc = "Errors" },
