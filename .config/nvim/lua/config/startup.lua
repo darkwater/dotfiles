@@ -18,6 +18,7 @@ theta.config.layout[6] = {
         { type = "text", val = "Personal", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
         dashboard.button("pt", "  Tetsu", ":cd ~/github/darkwater/tetsu<CR>"),
+        dashboard.button("ph", "󰋜  Home", ":cd ~/github/darkwater/home<CR>"),
         dashboard.button("psc", "  Steam Clip Exporter", ":cd ~/github/darkwater/steam-clip-exporter<CR>"),
         { type = "padding", val = 2 },
         { type = "text", val = "Libraries", opts = { hl = "SpecialComment", position = "center" } },
@@ -35,6 +36,10 @@ theta.config.layout[6] = {
         { type = "text", val = "Sinewave", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
         dashboard.button("sfs", "󰥛  Fouling Sensor", ":cd ~/github/sinewave-ee/fouling-sensor<CR>"),
+        { type = "padding", val = 2 },
+        { type = "text", val = "Other", opts = { hl = "SpecialComment", position = "center" } },
+        { type = "padding", val = 1 },
+        dashboard.button("n", "󰧮  Blank file", ":enew<CR>"),
     },
     position = "center",
 }
