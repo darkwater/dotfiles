@@ -7,7 +7,7 @@ null_ls.setup {
         jira.completion,
         jira.hover,
         jira.actions,
-        null_ls.builtins.formatting.swift_format
+        -- null_ls.builtins.formatting.swift_format
     },
 }
 
