@@ -79,10 +79,9 @@ if $USER != "root"
         Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
         Plug 'dcharbon/vim-flatbuffers'
         Plug 'DNLHC/glance.nvim'
+        Plug 'mikesmithgh/kitty-scrollback.nvim'
 
-        if hostname() == "atsushi.local"
-            Plug 'ActivityWatch/aw-watcher-vim'
-        endif
+        Plug 'ActivityWatch/aw-watcher-vim'
     endif
 
     call plug#end()
@@ -325,4 +324,6 @@ elseif $USER != "root"
     lua require "config.trouble"
     lua require "config.ufo"
     " lua require "config.xcode" -- triggered by <leader>x
+    
+    lua require("kitty-scrollback").setup()
 endif
