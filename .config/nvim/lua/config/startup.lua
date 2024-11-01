@@ -34,6 +34,7 @@ theta.config.layout[6] = {
         dashboard.button("cfw", "󰌪  Firmware", ":cd ~/gitea/comforest/firmware<CR>"),
         dashboard.button("css", "󰌪  SICshark v2", ":cd ~/gitea/comforest/sicshark<CR>"),
         dashboard.button("cs1", "󰌪  SICshark", ":cd ~/github/sinewave-ee/sicshark<CR>"),
+        dashboard.button("ctb", "󰌪  Testboard UI", ":cd ~/gitea/comforest/testboard-ui<CR>"),
         { type = "padding", val = 2 },
         { type = "text", val = "Sinewave", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
