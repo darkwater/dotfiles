@@ -106,7 +106,6 @@ function bg_cmd(cmd, class)
 end
 
 function bg_key(class, modifier, key)
-
     return function()
         vim.system({
             "hyprctl",
@@ -223,6 +222,8 @@ wk.add {
 
     { "gd", telescope.lsp_definitions,      desc = "Go to definition" },
     { "gt", telescope.lsp_type_definitions, desc = "Go to type definition" },
+    { "gi", Cmd("Glance implementations"),  desc = "Implementations" },
+    { "gr", Cmd("Glance references"),       desc = "References" },
 
     { "<Bslash>", desc = "Toggle inlay hints", toggle_inlay_hints },
 
@@ -238,7 +239,7 @@ wk.add {
     { "<leader>fP", bg_key("flutter", "SHIFT", "p"),       desc = "Toggle performance overlay" },
     { "<leader>fp", bg_key("flutter", "",      "p"),       desc = "Toggle debug painting" },
     { "<leader>ft", shell("fvm flutter test", false),      desc = "Test" },
-    { "<leader>fb", bg_cmd("dart run build_runner watch"), desc = "Build runner (watch)" },
+    { "<leader>fb", bg_cmd("fvm dart run build_runner watch"), desc = "Build runner (watch)" },
 
     { "<leader>F", group = "file" },
     { "<leader>Fs", Cmd("source %"),    desc = "Source file" },
@@ -269,7 +270,6 @@ wk.add {
     { "<leader>lf", vim.lsp.buf.format,             desc = "Format buffer" },
     { "<leader>li", Cmd("Glance implementations"),  desc = "Implementations" },
     { "<leader>lr", vim.lsp.buf.rename,             desc = "Rename symbol" },
-    { "<leader>lR", Cmd("Glance references"),       desc = "References" },
     { "<leader>ls", telescope.lsp_document_symbols, desc = "Symbols (document)" },
     { "<leader>lS", with_input("Workspace symbol search:", "query", telescope.lsp_workspace_symbols), desc = "Symbols (workspace)" },
 
@@ -331,6 +331,7 @@ wk.add {
     { "<leader>TC", telescope.commands,                  desc = "Plugin/user commands" },
     { "<leader>Tf", telescope.git_files,                 desc = "Find git files" },
     { "<leader>TH", telescope.highlights,                desc = "Highlights" },
+    { "<leader>TJ", telescope.jumplist,                  desc = "Jumplist" },
     { "<leader>TM", telescope.man_pages,                 desc = "Man pages" },
     { "<leader>To", telescope.vim_options,               desc = "Vim options" },
     { "<leader>TP", telescope.planets,                   desc = "Use the telescope..." },
