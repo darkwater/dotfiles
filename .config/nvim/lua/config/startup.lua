@@ -17,6 +17,7 @@ theta.config.layout[6] = {
         { type = "padding", val = 2 },
         { type = "text", val = "Personal", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
+        dashboard.button("pdp", "  Darkplayer", ":cd ~/github/darkwater/darkplayer<CR>"),
         dashboard.button("pte", "  Tetsu", ":cd ~/github/darkwater/tetsu<CR>"),
         dashboard.button("pho", "󰋜  Home", ":cd ~/github/darkwater/home<CR>"),
         dashboard.button("pwi", "󰑔  Weird Input", ":cd ~/github/darkwater/weird-input<CR>"),
