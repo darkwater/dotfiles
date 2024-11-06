@@ -69,12 +69,17 @@ vim.g.rustaceanvim = function()
             capabilities = require("cmp_nvim_lsp").default_capabilities(),
             settings = function (path)
                 local linkedProjects
+                local check
 
                 if path == "/home/dark/gitea/comforest/firmware"
                     or path == "/home/dark/gitea/comforest/firmware/cross" then
                     linkedProjects = {
                         "/home/dark/gitea/comforest/firmware/Cargo.toml",
                         "/home/dark/gitea/comforest/firmware/cross/Cargo.toml",
+                    }
+                    check = {
+                        allTargets = false,
+                        targets = { "bin", "lib" },
                     }
                 end
 
@@ -103,6 +108,7 @@ vim.g.rustaceanvim = function()
                         cargo = {
                             -- loadOutDirsFromCheck = true,
                         },
+                        check = check,
                         checkOnSave = {
                             command = "clippy",
                         },
