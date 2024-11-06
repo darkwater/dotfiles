@@ -10,6 +10,7 @@ setopt prompt_subst
 unsetopt beep
 
 export PATH="$HOME/dotfiles/bin:$HOME/.cargo/bin:$HOME/.local/bin:$PATH"
+export fpath=($HOME/.local/share/zsh/site-functions $fpath)
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -254,5 +255,5 @@ export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 unsetopt extendedglob
 
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+    . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
