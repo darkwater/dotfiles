@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cat /proc/*/environ 2>/dev/null | tr '\0' '\n' | rg "^$1" | sort | uniq
