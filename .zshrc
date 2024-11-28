@@ -67,7 +67,12 @@ exists eza && alias ls=eza
 l() {
     # -aa only in $HOME and without arguments
     aa="$([[ "$(pwd)" = "$HOME" && "$#" = 0 ]] || echo -n -aa)"
-    ls -lgF $aa --group-directories-first "$@"
+    if [[ -d .git ]]; then
+        git="--git"
+    else
+        git="--git-repos-no-status"
+    fi
+    ls -lgF $aa $git --group-directories-first "$@"
 }
 
 alias lr="ls -lgaaF -snew"
