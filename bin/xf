@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+if [[ "$#" -ne 1 ]]; then
+    echo "Usage: $0 <file>"
+    exit 1
+fi
+
+NAME="$(tr -dc a-zA-Z0-9 </dev/urandom | head -c 6)"
+EXT="${1##*.}"
+
+scp "$1" "sinon:/data/s/xf/$NAME.$EXT" 
+
+echo "https://s.dark.red/xf/$NAME.$EXT"
+echo -n "https://s.dark.red/xf/$NAME.$EXT" | wl-copy
