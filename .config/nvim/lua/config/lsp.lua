@@ -1,7 +1,7 @@
 local lsp = require("lspconfig")
 
 local null_ls = require('null-ls')
-local jira = require("config.jira")
+-- local jira = require("config.jira")
 null_ls.setup {
     sources = {
         -- jira.completion,
@@ -26,6 +26,10 @@ vim.diagnostic.config {
     },
     severity_sort = true,
     float = { source = "if_many" },
+}
+
+lsp.qmlls.setup {
+    cmd = { "qmlls6" },
 }
 
 -- causes something to print on start
