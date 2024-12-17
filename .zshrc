@@ -33,6 +33,7 @@ alias scu="systemctl --user"
 alias ssc="sudo systemctl"
 alias svim="sudo nvim"
 alias sd="sudo docker"
+alias sdc="sudo docker compose"
 
 alias sps="sudo pacman -S"
 alias spsyu="sudo pacman -Syu"
