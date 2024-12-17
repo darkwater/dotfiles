@@ -120,8 +120,11 @@ end
 local nvimdir = vim.fn.stdpath "config"
 local homedir = vim.fn.expand "$HOME"
 local tododir = homedir .. "/sync/todo"
-local hyprdir = homedir .. "/.config/hypr"
 local dotdir = homedir .. "/dotfiles"
+
+function confdir(name)
+    return homedir .. "/.config/" .. name
+end
 
 local telescope = require("telescope.builtin")
 local hop = require("hop")
@@ -283,7 +286,8 @@ wk.add {
     { "<leader>pG", telescope.live_grep,                                      desc = "Live grep" },
     { "<leader>pg", with_input("Grep for:", "search", telescope.grep_string), desc = "Grep" },
     { "<leader>pr", telescope.oldfiles,                                       desc = "Recent files" },
-    { "<leader>ph", find_files_in(hyprdir),                                   desc = "Hyprland config" },
+    { "<leader>ph", find_files_in(confdir("hypr")),                           desc = "Hyprland config" },
+    { "<leader>pq", find_files_in(confdir("quickshell")),                     desc = "Quickshell config" },
     { "<leader>pt", find_files_in(tododir),                                   desc = "Todo lists" },
     { "<leader>p,", find_files_in(nvimdir),                                   desc = "Neovim config" },
     { "<leader>p.", find_files_in(dotdir, { hidden = true }),                 desc = "Dotfiles" },
