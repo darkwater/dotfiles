@@ -1,49 +1,46 @@
 import "../utils"
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Hyprland
 
 Repeater {
-    model: {
-        let max = 1;
-        for (let ws of Hyprland.workspaces.values) {
-            max = Math.max(max, ws.id);
-        }
-        max
-    }
+    id: repeater
+
+    required property ShellScreen screen
+    readonly property HyprlandMonitor hyprMonitor: Hyprland.monitorFor(this.screen)
+
+    model: Hyprland.workspaces.values.map(ws => ws.id).reduce((a, v) => Math.max(a, v)) + 1
 
     Rectangle {
         required property var index
-        function workspace() {
-            return Hyprland.workspaces.values.find(ws => ws.id === index + 1);
-        }
+        readonly property var workspace: Hyprland.workspaces.values.find(ws => ws.id === index + 1)
+        readonly property bool isPlus: index + 1 == repeater.model
 
-        Layout.preferredWidth: 50
+        Layout.preferredWidth: (this.isPlus) ? 30 : 50
         Layout.fillHeight: true
 
-        color: {
-            let ws = workspace();
-            if (ws == null) return Theme.workspaceEmptyColor;
-            if (ws.monitor != Hyprland.monitorFor(panel.modelData)) return Theme.workspaceOtherMonitorColor;
-            if (ws == Hyprland.monitorFor(panel.modelData).activeWorkspace) return Theme.workspaceActiveColor;
-            return Theme.workspaceUsedColor;
+        readonly property var colors: {
+            if (isPlus) return Theme.workspaceUsedColors;
+            let ws = workspace;
+            if (ws == null) return Theme.workspaceEmptyColors;
+            if (ws.monitor != repeater.hyprMonitor) return Theme.workspaceOtherMonitorColors;
+            if (ws == repeater.hyprMonitor.activeWorkspace) return Theme.workspaceActiveColors;
+            Theme.workspaceUsedColors
         }
-        border.color: {
-            let ws = workspace();
-            if (ws == null) return Theme.workspaceEmptyBorderColor;
-            if (ws.monitor != Hyprland.monitorFor(panel.modelData)) return Theme.workspaceOtherMonitorBorderColor;
-            if (ws == Hyprland.monitorFor(panel.modelData).activeWorkspace) return Theme.workspaceActiveBorderColor;
-            return Theme.workspaceUsedBorderColor;
-        }
+
+        color: colors.bg
+        border.color: colors.border
 
         MouseArea {
             anchors.fill: parent
             onClicked: Hyprland.dispatch(`workspace ${parent.index + 1}`)
+            cursorShape: Qt.PointingHandCursor
         }
 
         Text {
             anchors.centerIn: parent
-            text: parent.index + 1
+            text: (parent.isPlus) ? "+" : parent.index + 1
             color: parent.border.color
             font: Theme.workspaceFont
         }
