@@ -9,7 +9,7 @@ Scope {
 
         delegate: PanelWindow {
             id: panel
-            property var modelData
+            required property ShellScreen modelData
 
             screen: modelData
 
@@ -33,7 +33,9 @@ Scope {
 
                 spacing: 5
 
-                Workspaces {}
+                Workspaces {
+                   screen: panel.modelData
+                }
             }
 
             RowLayout {
