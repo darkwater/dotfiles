@@ -32,8 +32,7 @@ lsp.qmlls.setup {
     cmd = { "qmlls6" },
 }
 
--- causes something to print on start
--- lsp.hyprlang.setup {}
+lsp.ts_ls.setup {}
 
 -- lsp.clangd.setup {}
 
