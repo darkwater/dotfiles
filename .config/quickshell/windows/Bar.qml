@@ -13,7 +13,7 @@ Scope {
 
             screen: modelData
 
-            WlrLayershell.layer: WlrLayer.Bottom
+            WlrLayershell.layer: WlrLayer.Top
 
             anchors {
                 bottom: true
@@ -46,6 +46,7 @@ Scope {
 
                 spacing: 5
 
+                Battery {}
                 Clock {}
             }
         }
