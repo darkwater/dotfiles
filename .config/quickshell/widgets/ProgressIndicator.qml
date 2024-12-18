@@ -4,7 +4,7 @@ Rectangle {
     required property real progress
     required property color progressColor
 
-    color: Qt.alpha(this.progressColor, 0.2)
+    color: Qt.alpha(progressColor, 0.2)
 
     Rectangle {
         anchors.left: parent.left
