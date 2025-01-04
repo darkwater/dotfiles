@@ -1,3 +1,5 @@
+pragma ComponentBehavior: Bound
+
 import "../utils"
 import QtQuick
 import QtQuick.Layouts
@@ -42,7 +44,7 @@ Repeater {
             anchors.centerIn: parent
             text: (parent.isPlus) ? "+" : parent.index + 1
             color: parent.border.color
-            font: Theme.workspaceFont
+            font: Theme.defaultFont
         }
     }
 }
