@@ -16,7 +16,9 @@ Singleton {
     property var workspaceActiveColors:       ({ bg: bg,
                                                  border: Material.blue })
 
-    property var workspaceFont: Qt.font({pixelSize: 16})
+    property var defaultFont: Qt.font({pixelSize: 14})
+    property var smallFont: Qt.font({pixelSize: 10})
+    property var iconFont: Qt.font({family: "Hack Nerd Font", pixelSize: 18})
 
     property color progressIndicatorBg: Material.blueGrey800
 }
