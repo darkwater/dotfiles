@@ -80,6 +80,7 @@ if $USER != "root"
         Plug 'dcharbon/vim-flatbuffers'
         Plug 'DNLHC/glance.nvim'
         Plug 'mikesmithgh/kitty-scrollback.nvim'
+        Plug 'topaxi/pipeline.nvim'
 
         Plug 'ActivityWatch/aw-watcher-vim'
     endif
