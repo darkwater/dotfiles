@@ -259,6 +259,8 @@ wk.add {
     { "<leader>gs", Cmd("Telescope git_status"),         desc = "Status" },
     { "<leader>gS", Cmd("Telescope git_stash"),          desc = "Stash" },
     { "<leader>gu", Cmd("Gitsigns reset_hunk"),          desc = "Undo hunk" },
+    { "<leader>gw", Cmd("Pipeline"),                     desc = "GitHub Workflows" },
+
     { "<leader>gd", Cmd("Gitsigns toggle_linehl") .. Cmd("Gitsigns toggle_deleted"), desc = "Toggle inline diff" },
 
     { "<leader>i", group = "insert" },
