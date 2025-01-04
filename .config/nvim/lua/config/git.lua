@@ -4,3 +4,5 @@ require("gitsigns").setup {
         delete = { text = "▁" },
     },
 }
+
+require("pipeline").setup {}
