@@ -16,11 +16,11 @@ snippet bevp "bevy plugin"
 	}
 
 	// impl Default for $3 {
-	// 	fn default() -> Self {
-	// 		Self {
-	// 			$4
-	// 		}
-	// 	}
+	//	fn default() -> Self {
+	//		Self {
+	//			$4
+	//		}
+	//	}
 	// }
 
 	fn $2($5) {
@@ -30,3 +30,348 @@ snippet let-else "let else"
 	let $1 = $2 else {
 		${3:return;}
 	};
+snippet relm-component "Relm4 Component Widget"
+	use relm4::{gtk, Component, ComponentSender, ComponentParts};
+
+	pub struct ComponentModel {}
+
+	#[derive(Debug)]
+	pub enum ComponentInput {}
+
+	#[derive(Debug)]
+	pub enum ComponentOutput {}
+
+	pub struct ComponentInit {}
+
+	#[relm4::component(pub)]
+	impl Component for ComponentModel {
+		type CommandOutput = ();
+		type Input = ComponentInput;
+		type Output = ComponentOutput;
+		type Init = ComponentInit;
+
+		view! {
+			#[root]
+			gtk::Box {
+
+			}
+		}
+
+		fn init(
+			init: Self::Init,
+			root: &Self::Root,
+			sender: ComponentSender<Self>,
+		) -> ComponentParts<Self> {
+			let model = ComponentModel {};
+			let widgets = view_output!();
+			ComponentParts { model, widgets }
+		}
+
+		fn update(&mut self, message: Self::Input, sender: ComponentSender<Self>, root: &Self::Root) {
+			match message {
+
+			}
+		}
+	}
+snippet relm-simple-component "Relm4 SimpleComponent Widget"
+	use relm4::{gtk, SimpleComponent, ComponentSender, ComponentParts};
+
+	pub struct ComponentModel {}
+
+	#[derive(Debug)]
+	pub enum ComponentInput {}
+
+	#[derive(Debug)]
+	pub enum ComponentOutput {}
+
+	pub struct ComponentInit {}
+
+	#[relm4::component(pub)]
+	impl SimpleComponent for ComponentModel {
+		type Input = ComponentInput;
+		type Output = ComponentOutput;
+		type Init = ComponentInit;
+
+		view! {
+			#[root]
+			gtk::Box {
+
+			}
+		}
+
+		fn init(
+			init: Self::Init,
+			root: &Self::Root,
+			sender: ComponentSender<Self>,
+		) -> ComponentParts<Self> {
+			let model = ComponentModel {};
+			let widgets = view_output!();
+			ComponentParts { model, widgets }
+		}
+
+		fn update(&mut self, message: Self::Input, sender: ComponentSender<Self>) {
+			match message {
+
+			}
+		}
+	}
+snippet relm-async-component "Relm4 Component Widget"
+	use relm4::{gtk, component::{AsyncComponent, AsyncComponentParts}, AsyncComponentSender};
+
+	pub struct AsyncComponentModel {}
+
+	#[derive(Debug)]
+	pub enum AsyncComponentInput {}
+
+	#[derive(Debug)]
+	pub enum AsyncComponentOutput {}
+
+	pub struct AsyncComponentInit {}
+
+	#[relm4::component(pub async)]
+	impl AsyncComponent for AsyncComponentModel {
+		type CommandOutput = ();
+		type Input = AsyncComponentInput;
+		type Output = AsyncComponentOutput;
+		type Init = AsyncComponentInit;
+
+		view! {
+			#[root]
+			gtk::Box {
+
+			}
+		}
+
+		async fn init(
+			init: Self::Init,
+			root: Self::Root,
+			sender: AsyncComponentSender<Self>,
+		) -> AsyncComponentParts<Self> {
+			let model = AsyncComponentModel {};
+			let widgets = view_output!();
+			AsyncComponentParts { model, widgets }
+		}
+
+		async fn update(&mut self, message: Self::Input, sender: AsyncComponentSender<Self>, _root: &Self::Root) {
+			match message {
+
+			}
+		}
+	}
+snippet relm-simple-async-component "Relm4 SimpleAsyncComponent Widget"
+	use relm4::{gtk, component::{SimpleAsyncComponent, AsyncComponentParts}, AsyncComponentSender};
+
+	pub struct AsyncComponentModel {}
+
+	#[derive(Debug)]
+	pub enum AsyncComponentInput {}
+
+	#[derive(Debug)]
+	pub enum AsyncComponentOutput {}
+
+	pub struct AsyncComponentInit {}
+
+	#[relm4::component(pub async)]
+	impl SimpleAsyncComponent for AsyncComponentModel {
+		type Input = AsyncComponentInput;
+		type Output = AsyncComponentOutput;
+		type Init = AsyncComponentInit;
+
+		view! {
+			#[root]
+			gtk::Box {
+
+			}
+		}
+
+		async fn init(
+			init: Self::Init,
+			root: Self::Root,
+			sender: AsyncComponentSender<Self>,
+		) -> AsyncComponentParts<Self> {
+			let model = AsyncComponentModel {};
+			let widgets = view_output!();
+			AsyncComponentParts { model, widgets }
+		}
+
+		async fn update(&mut self, message: Self::Input, sender: AsyncComponentSender<Self>) {
+			match message {
+
+			}
+		}
+	}
+snippet relm-factory "Relm4 Factory Component"
+	use relm4::{
+		factory::FactoryView,
+		gtk,
+		prelude::{DynamicIndex, FactoryComponent},
+		FactorySender,
+	};
+
+	pub struct FactoryModel {}
+
+	#[derive(Debug)]
+	pub enum FactoryInput {}
+
+	#[derive(Debug)]
+	pub enum FactoryOutput {}
+
+	pub struct FactoryInit {}
+
+	#[relm4::factory(pub)]
+	impl FactoryComponent for FactoryModel {
+		type ParentWidget = gtk::Box;
+		type ParentInput = ();
+		type Input = FactoryInput;
+		type Output = FactoryOutput;
+		type Init = FactoryInit;
+		type CommandOutput = ();
+
+		view! {
+			#[root]
+			gtk::Box {
+
+			}
+		}
+
+		fn init_model(
+			init: Self::Init,
+			index: &DynamicIndex,
+			sender: FactorySender<Self>,
+		) -> Self {
+			Self {}
+		}
+
+		fn init_widgets(
+			&mut self,
+			_index: &DynamicIndex,
+			root: &Self::Root,
+			_returned_widget: &<Self::ParentWidget as FactoryView>::ReturnedWidget,
+			sender: FactorySender<Self>,
+		) -> Self::Widgets {
+			let widgets = view_output!();
+			widgets
+		}
+
+		fn update(&mut self, message: Self::Input, sender: FactorySender<Self>) {
+			match message {}
+		}
+
+		fn output_to_parent_input(output: Self::Output) -> Option<Self::ParentInput> {
+			let output = match output {};
+			Some(output)
+		}
+	}
+snippet relm-async-factory "Relm4 Async Factory Component"
+	use relm4::{
+		factory::{FactoryView, AsyncFactoryComponent},
+		gtk,
+		prelude::{DynamicIndex},
+		AsyncFactorySender, loading_widgets::LoadingWidgets,
+	};
+
+	pub struct FactoryModel {}
+
+	#[derive(Debug)]
+	pub enum FactoryInput {}
+
+	#[derive(Debug)]
+	pub enum FactoryOutput {}
+
+	pub struct FactoryInit {}
+
+	#[relm4::factory(pub async)]
+	impl AsyncFactoryComponent for FactoryModel {
+		type ParentWidget = gtk::Box;
+		type ParentInput = ();
+		type Input = FactoryInput;
+		type Output = FactoryOutput;
+		type Init = FactoryInit;
+		type CommandOutput = ();
+
+		view! {
+			#[root]
+			gtk::Box {
+
+			}
+		}
+
+		fn init_loading_widgets(
+			root: &mut Self::Root,
+		) -> Option<LoadingWidgets> {
+			relm4::view! {
+				#[local_ref]
+				root {
+					#[name(spinner)]
+					gtk::Spinner {
+						start: ()
+					}
+				}
+			}
+			Some(LoadingWidgets::new(root, spinner))
+		}
+
+		async fn init_model(
+			init: Self::Init,
+			_index: &DynamicIndex,
+			_sender: AsyncFactorySender<Self>,
+		) -> Self {
+			Self {}
+		}
+
+		fn init_widgets(
+			&mut self,
+			_index: &DynamicIndex,
+			root: &Self::Root,
+			_returned_widget: &<Self::ParentWidget as FactoryView>::ReturnedWidget,
+			sender: AsyncFactorySender<Self>,
+		) -> Self::Widgets {
+			let widgets = view_output!();
+			widgets
+		}
+
+		async fn update(
+			&mut self,
+			message: Self::Input,
+			sender: AsyncFactorySender<Self>,
+		) {
+			match message {}
+		}
+
+		fn output_to_parent_input(output: Self::Output) -> Option<Self::ParentInput> {
+			let output = match output {};
+			Some(output)
+		}
+	}
+snippet relm-template "Relm4 Widget Template"
+	use relm4::{gtk, WidgetTemplate};
+
+	#[relm4::widget_template]
+	impl WidgetTemplate for Widget {
+		view! {
+			gtk::Box {
+				// Customize your widget
+			}
+		}
+	}
+snippet relm-worker "Relm4 Worker"
+	use relm4::{ComponentSender, Worker};
+
+	pub struct AsyncHandler;
+
+	#[derive(Debug)]
+	pub enum AsyncHandlerInput {}
+
+	impl Worker for AsyncHandler {
+		type Init = ();
+		type Input = AsyncHandlerInput;
+		type Output = ();
+
+		fn init(_init: Self::Init, _sender: ComponentSender<Self>) -> Self {
+			Self
+		}
+
+		fn update(&mut self, msg: AsyncHandlerInput, sender: ComponentSender<Self>) {
+			match msg {}
+		}
+	}
