@@ -14,6 +14,7 @@
     ca = "commit --all --verbose"
     c = "commit --verbose"
     ci = "commit --verbose"
+    amend = "commit --amend --verbose"
     co = "checkout"
     d = "diff"
     di = "diff"
@@ -22,7 +23,8 @@
     st = "status"
     l = "log --graph --abbrev=8"
     la = "log --all --graph --abbrev=8"
-    pou = "push -u origin"
+    pf = "push --force"
+    pou = "push --set-upstream origin"
 
 [log]
     date = relative
