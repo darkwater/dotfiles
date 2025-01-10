@@ -19,7 +19,7 @@ Singleton {
         timer.interval = 999 - ms;
         timer.running = true;
 
-        return `${weekday} ${day} ${month} ${hh}:${mm}`;
+        return `${weekday} ${day} ${month} ${hh}:${mm}:${ss}`;
     }
 
     property var time: createDate()
