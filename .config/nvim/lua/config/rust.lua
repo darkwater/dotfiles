@@ -126,6 +126,9 @@ vim.g.rustaceanvim = function()
                                 "remove-unnecessary-else",
                             },
                         },
+                        imports = {
+                            preferPrelude = true,
+                        },
                         procMacro = {
                             enable = true,
                         },
