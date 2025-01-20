@@ -103,9 +103,9 @@ require("nvim-treesitter.configs").setup {
     },
     ensure_installed = {
         "vimdoc", "query",
-        "hyprlang", "qmljs",
+        "hyprlang", "qmljs", "wgsl",
         "rust", "go", "java", "dart",
-        "json", "yaml", "toml",
+        "json", "yaml", "toml", "ron",
         "html", "css", "javascript", "typescript",
         "python", "lua", "bash", "cpp", "swift",
         "org", "markdown", "markdown_inline", "sql",
