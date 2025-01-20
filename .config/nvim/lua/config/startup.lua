@@ -24,6 +24,7 @@ theta.config.layout[6] = {
         dashboard.button("pob", "  Obsidian", ":cd ~/github/darkwater/obsidian<CR>"),
         dashboard.button("ppl", "  Padland", ":cd ~/github/darkwater/padland<CR>"),
         dashboard.button("pqs", "  quickshell", ":cd ~/.config/quickshell<CR>"),
+        dashboard.button("plg", "  lasergame", ":cd ~/github/darkwater/lasergame<CR>"),
         dashboard.button("psc", "  Steam Clip Exporter", ":cd ~/github/darkwater/steam-clip-exporter<CR>"),
         dashboard.button("pta", "  Tetsu App", ":cd ~/github/darkwater/tetsu-app<CR>"),
         dashboard.button("pte", "  Tetsu", ":cd ~/github/darkwater/tetsu<CR>"),
