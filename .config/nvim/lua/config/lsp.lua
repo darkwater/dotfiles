@@ -34,6 +34,8 @@ lsp.qmlls.setup {
 
 lsp.ts_ls.setup {}
 
+lsp.wgsl_analyzer.setup {}
+
 -- lsp.clangd.setup {}
 
 -- lsp.denols.setup {
