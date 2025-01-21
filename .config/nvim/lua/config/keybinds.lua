@@ -366,7 +366,7 @@ wk.add {
     { "<leader><Tab>1,", Cmd("Tabularize /^[^,]*,\\zs/l0r1"), desc = ","},
 
     { "<leader>w", group = "window" },
-    { "<leader>wS", Cmd("Neotree document_symbols"), desc = "Document symbols" },
+    { "<leader>ws", Cmd("Neotree document_symbols"), desc = "Document symbols" },
     { "<leader>wQ", Cmd("qa"), desc = "Close all windows" },
     { "<leader>wt", Cmd("Neotree"), desc = "Toggle tree" },
     { "<leader>wT", Cmd("Neotree reveal"), desc = "Reveal file in tree" },
