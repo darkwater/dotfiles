@@ -284,7 +284,7 @@ wk.add {
     { "<leader>Pc", Cmd("PlugClean"), desc = "Clean plugins" },
 
     { "<leader>p", group = "project" },
-    { "<leader>pf", telescope.find_files,                                     desc = "Find file" },
+    { "<leader>pf", telescope.git_files,                                      desc = "Find files (git)" },
     { "<leader>pG", telescope.live_grep,                                      desc = "Live grep" },
     { "<leader>pg", with_input("Grep for:", "search", telescope.grep_string), desc = "Grep" },
     { "<leader>pr", telescope.oldfiles,                                       desc = "Recent files" },
@@ -337,7 +337,7 @@ wk.add {
     { "<leader>TB", telescope.buffers,                   desc = "Buffers" },
     { "<leader>Tc", telescope.loclist,                   desc = "Location list" },
     { "<leader>TC", telescope.commands,                  desc = "Plugin/user commands" },
-    { "<leader>Tf", telescope.git_files,                 desc = "Find git files" },
+    { "<leader>Tf", telescope.find_files,                desc = "Find git files" },
     { "<leader>TH", telescope.highlights,                desc = "Highlights" },
     { "<leader>TJ", telescope.jumplist,                  desc = "Jumplist" },
     { "<leader>TM", telescope.man_pages,                 desc = "Man pages" },
