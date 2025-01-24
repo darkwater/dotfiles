@@ -32,11 +32,13 @@ require("telescope").setup {
         },
 
         file_ignore_patterns = {
+            ".git/",
             "%.g.dart",
         },
     },
     pickers = {
         find_files = {
+            hidden = true,
             previewer = false,
             mappings = {
                 i = {
