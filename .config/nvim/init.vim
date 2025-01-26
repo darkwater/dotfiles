@@ -88,10 +88,11 @@ if $USER != "root"
     call plug#end()
 endif
 
-autocmd FileType swift setlocal commentstring=//\ %s
-autocmd FileType c     setlocal commentstring=//\ %s
-autocmd FileType cpp   setlocal commentstring=//\ %s
-autocmd FileType dart  setlocal shiftwidth=2 tabstop=2
+autocmd FileType swift     setlocal commentstring=//\ %s
+autocmd FileType c         setlocal commentstring=//\ %s
+autocmd FileType cpp       setlocal commentstring=//\ %s
+autocmd FileType dart      setlocal shiftwidth=2 tabstop=2
+autocmd FileType hyprlang  setlocal commentstring=#\ %s
 
 if exists("g:neovide") || $NEOVIDE_REMOTE == "1"
     nmap <D-v> "+p
@@ -101,7 +102,7 @@ if exists("g:neovide") || $NEOVIDE_REMOTE == "1"
         set guifont=Hack,SauceCodePro\ Nerd\ Font:h14.1
         let g:neovide_fullscreen = v:true
     else
-        set guifont=Hack,SauceCodePro\ Nerd\ Font:h9.4
+        set guifont=Hack,SauceCodePro\ Nerd\ Font:h9.0
     endif
 
     let g:neovide_transparency = 0.92
