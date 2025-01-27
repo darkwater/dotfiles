@@ -31,8 +31,16 @@ require("neo-tree").setup {
     },
     filesystem = {
         filtered_items = {
+            visible = true,
+            hide_dotfiles = false,
+            always_show = {
+                ".cargo",
+                ".github",
+                ".gitea",
+            },
             hide_by_name = {
                 "__generated__",
+                ".git",
             },
             hide_by_pattern = {
                 "*.g.dart",
