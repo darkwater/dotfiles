@@ -88,11 +88,13 @@ if $USER != "root"
     call plug#end()
 endif
 
-autocmd FileType swift     setlocal commentstring=//\ %s
 autocmd FileType c         setlocal commentstring=//\ %s
 autocmd FileType cpp       setlocal commentstring=//\ %s
 autocmd FileType dart      setlocal shiftwidth=2 tabstop=2
 autocmd FileType hyprlang  setlocal commentstring=#\ %s
+autocmd FileType jsonc     setlocal commentstring=//\ %s
+autocmd FileType swift     setlocal commentstring=//\ %s
+autocmd FileType wgsl      setlocal commentstring=//\ %s
 
 if exists("g:neovide") || $NEOVIDE_REMOTE == "1"
     nmap <D-v> "+p
