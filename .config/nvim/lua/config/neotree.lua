@@ -31,7 +31,7 @@ require("neo-tree").setup {
     },
     filesystem = {
         filtered_items = {
-            visible = true,
+            visible = false,
             hide_dotfiles = false,
             always_show = {
                 ".cargo",
