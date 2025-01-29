@@ -300,7 +300,7 @@ wk.add {
     { "<leader>rc", shell("cargo clippy", false),              desc = "Clippy" },
     { "<leader>rr", shell("cargo run", true),                  desc = "Run" },
     { "<leader>rR", shell("cargo run", false),                 desc = "Run and keep open" },
-    { "<leader>rt", shell("cargo test", false),                desc = "Test" },
+    { "<leader>rt", shell("cargo nextest run", false),         desc = "Test" },
     { "<leader>rb", shell("cargo bench", false),               desc = "Bench" },
     { "<leader>rC", Cmd("RustLsp openCargo"),                  desc = "Open Cargo.toml" },
     { "<leader>rm", Cmd("RustLsp expandMacro"),                desc = "Expand macro" },
