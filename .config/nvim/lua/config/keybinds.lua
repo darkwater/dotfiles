@@ -216,6 +216,8 @@ function toggle_venn()
     end
 end
 
+local neotest = require("neotest")
+
 wk.add {
     { "K",       vim.lsp.buf.hover,          desc = "Hover",          mode = { "n", "v" } },
     { "<C-S-k>", vim.lsp.buf.signature_help, desc = "Signature help", mode = { "n", "i" } },
@@ -325,10 +327,20 @@ wk.add {
     { "<leader>seS", shell("cargo sic env status --details", false), desc = "Status (details)" },
     { "<leader>sel", shell("cargo sic env list", false),             desc = "List" },
 
-    { "<leader>t", group = "toggle" },
-    { "<leader>tc", toggle_copilot,   desc = "Toggle Copilot" },
-    { "<leader>tw", Cmd("set wrap!"), desc = "Toggle text wrap" },
-    { "<leader>tv", toggle_venn,      desc = "Toggle Venn mode" },
+    { "<leader>!", group = "toggle" },
+    { "<leader>!c", toggle_copilot,   desc = "Toggle Copilot" },
+    { "<leader>!w", Cmd("set wrap!"), desc = "Toggle text wrap" },
+    { "<leader>!v", toggle_venn,      desc = "Toggle Venn mode" },
+
+    { "<leader>!", group = "toggle" },
+    { "<leader>!c", toggle_copilot,   desc = "Toggle Copilot" },
+    { "<leader>!w", Cmd("set wrap!"), desc = "Toggle text wrap" },
+    { "<leader>!v", toggle_venn,      desc = "Toggle Venn mode" },
+
+    { "<leader>t", group = "neotest" },
+    { "<leader>tt", neotest.run.run,       desc = "Run test" },
+    { "<leader>tw", neotest.watch.watch,   desc = "Run test" },
+    { "<leader>ts", neotest.summary.open,  desc = "Open summary" },
 
     { "<leader>T", group = "telescope" },
     { "<leader>TT", telescope.builtin,                   desc = "Telescope pickers" },
