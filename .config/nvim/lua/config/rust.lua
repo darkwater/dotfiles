@@ -129,6 +129,9 @@ vim.g.rustaceanvim = function()
                         imports = {
                             preferPrelude = true,
                         },
+                        interpret = {
+                            tests = true,
+                        },
                         procMacro = {
                             enable = true,
                         },
