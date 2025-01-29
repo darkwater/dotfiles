@@ -81,8 +81,8 @@ if $USER != "root"
         Plug 'DNLHC/glance.nvim'
         Plug 'mikesmithgh/kitty-scrollback.nvim'
         Plug 'topaxi/pipeline.nvim'
-
         Plug 'ActivityWatch/aw-watcher-vim'
+        Plug 'nvim-neotest/neotest'
     endif
 
     call plug#end()
@@ -311,7 +311,7 @@ elseif $USER != "root"
     lua require "config.flutter"
     lua require "config.git"
     lua require "config.hop"
-    lua require "config.keybinds"
+    lua require "config.neotest"
     lua require "config.neotree"
     lua require "config.noice"
     lua require "config.notify"
@@ -328,6 +328,8 @@ elseif $USER != "root"
     lua require "config.trouble"
     lua require "config.ufo"
     " lua require "config.xcode" -- triggered by <leader>x
+    "
+    lua require "config.keybinds"
     
     lua require("kitty-scrollback").setup()
 endif
