@@ -15,9 +15,12 @@ check() {
     fi
 }
 
+check ~/.config/htop
 check ~/.config/hypr
 check ~/.config/kitty
 check ~/.config/nvim
+check ~/.config/quickshell
 check ~/.config/swaync
+check ~/.config/waybar
 check ~/.gitconfig
 check ~/.zshrc
