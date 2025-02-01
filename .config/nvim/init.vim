@@ -81,8 +81,11 @@ if $USER != "root"
         Plug 'DNLHC/glance.nvim'
         Plug 'mikesmithgh/kitty-scrollback.nvim'
         Plug 'topaxi/pipeline.nvim'
-        Plug 'ActivityWatch/aw-watcher-vim'
         Plug 'nvim-neotest/neotest'
+
+        if hostname() != "sinon"
+            Plug 'ActivityWatch/aw-watcher-vim'
+        endif
     endif
 
     call plug#end()
