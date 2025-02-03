@@ -1,5 +1,10 @@
 local cmp = require("cmp")
 
+local colorful = require("colorful-menu")
+colorful.setup {
+    max_width = 120
+}
+
 cmp.setup {
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
@@ -30,31 +35,46 @@ cmp.setup {
     }),
     formatting = {
         format = function(entry, vim_item)
-            if vim.tbl_contains({ 'path' }, entry.source.name) then
-                local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
-                if icon then
-                    vim_item.kind = icon
-                    vim_item.kind_hl_group = hl_group
-                    return vim_item
-                end
+            local highlights_info = colorful.cmp_highlights(entry)
+
+            if highlights_info ~= nil then
+                vim_item.abbr_hl_group = highlights_info.highlights
+                vim_item.abbr = highlights_info.text
             end
 
-            local item = entry:get_completion_item()
-            if item.data ~= nil and item.data.jira_issue then
-                local map = {
-                    ["Done"] = "@constant",
-                    ["Closed"] = "@constant",
-                    ["In Progress"] = "@property",
-                    ["Todo"] = "@string",
-                    ["Ready for preparation Client"] = "@comment",
-                }
+            vim_item.kind = ""
+            vim_item.kind_hl_group = ""
 
-                vim_item.kind = item.data.status
-                vim_item.kind_hl_group = map[item.data.status] or "@function"
-                return vim_item
-            end
+            vim_item.menu = ""
+            vim_item.menu_hl_group = ""
 
-            return require('lspkind').cmp_format{ with_text = false }(entry, vim_item)
+            return vim_item
+
+            -- if vim.tbl_contains({ 'path' }, entry.source.name) then
+            --     local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
+            --     if icon then
+            --         vim_item.kind = icon
+            --         vim_item.kind_hl_group = hl_group
+            --         return vim_item
+            --     end
+            -- end
+
+            -- local item = entry:get_completion_item()
+            -- if item.data ~= nil and item.data.jira_issue then
+            --     local map = {
+            --         ["Done"] = "@constant",
+            --         ["Closed"] = "@constant",
+            --         ["In Progress"] = "@property",
+            --         ["Todo"] = "@string",
+            --         ["Ready for preparation Client"] = "@comment",
+            --     }
+
+            --     vim_item.kind = item.data.status
+            --     vim_item.kind_hl_group = map[item.data.status] or "@function"
+            --     return vim_item
+            -- end
+
+            -- return require('lspkind').cmp_format{ with_text = false }(entry, vim_item)
         end,
     },
 }
