@@ -216,7 +216,7 @@ function toggle_venn()
     end
 end
 
-local neotest = require("neotest")
+-- local neotest = require("neotest")
 
 wk.add {
     { "K",       vim.lsp.buf.hover,          desc = "Hover",          mode = { "n", "v" } },
@@ -286,15 +286,15 @@ wk.add {
     { "<leader>Pc", Cmd("PlugClean"), desc = "Clean plugins" },
 
     { "<leader>p", group = "project" },
-    { "<leader>pf", telescope.git_files,                                      desc = "Find files (git)" },
-    { "<leader>pG", telescope.live_grep,                                      desc = "Live grep" },
-    { "<leader>pg", with_input("Grep for:", "search", telescope.grep_string), desc = "Grep" },
-    { "<leader>pr", telescope.oldfiles,                                       desc = "Recent files" },
-    { "<leader>ph", find_files_in(confdir("hypr")),                           desc = "Hyprland config" },
-    { "<leader>pq", find_files_in(confdir("quickshell")),                     desc = "Quickshell config" },
-    { "<leader>pt", find_files_in(tododir),                                   desc = "Todo lists" },
-    { "<leader>p,", find_files_in(nvimdir),                                   desc = "Neovim config" },
-    { "<leader>p.", find_files_in(dotdir, { hidden = true }),                 desc = "Dotfiles" },
+    { "<leader>pf", with_opts(telescope.git_files, { show_untracked = true }), desc = "Find files (git)" },
+    { "<leader>pG", telescope.live_grep,                                       desc = "Live grep" },
+    { "<leader>pg", with_input("Grep for:", "search", telescope.grep_string),  desc = "Grep" },
+    { "<leader>pr", telescope.oldfiles,                                        desc = "Recent files" },
+    { "<leader>ph", find_files_in(confdir("hypr")),                            desc = "Hyprland config" },
+    { "<leader>pq", find_files_in(confdir("quickshell")),                      desc = "Quickshell config" },
+    { "<leader>pt", find_files_in(tododir),                                    desc = "Todo lists" },
+    { "<leader>p,", find_files_in(nvimdir),                                    desc = "Neovim config" },
+    { "<leader>p.", find_files_in(dotdir, { hidden = true }),                  desc = "Dotfiles" },
 
     { "<leader>r",      group = "rust" },
     { "<leader>rc",     shell("cargo clippy", false),              desc = "Clippy" },
@@ -338,10 +338,10 @@ wk.add {
     { "<leader>!w", Cmd("set wrap!"), desc = "Toggle text wrap" },
     { "<leader>!v", toggle_venn,      desc = "Toggle Venn mode" },
 
-    { "<leader>t", group = "neotest" },
-    { "<leader>tt", neotest.run.run,       desc = "Run test" },
-    { "<leader>tw", neotest.watch.watch,   desc = "Run test" },
-    { "<leader>ts", neotest.summary.open,  desc = "Open summary" },
+    -- { "<leader>t", group = "neotest" },
+    -- { "<leader>tt", neotest.run.run,       desc = "Run test" },
+    -- { "<leader>tw", neotest.watch.watch,   desc = "Run test" },
+    -- { "<leader>ts", neotest.summary.open,  desc = "Open summary" },
 
     { "<leader>T", group = "telescope" },
     { "<leader>TT", telescope.builtin,                   desc = "Telescope pickers" },
