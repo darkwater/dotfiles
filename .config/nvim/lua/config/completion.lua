@@ -2,7 +2,16 @@ local cmp = require("cmp")
 
 local colorful = require("colorful-menu")
 colorful.setup {
-    max_width = 120
+    ls = {
+        ["rust-analyzer"] = {
+            align_type_to_right = false,
+        },
+    },
+    max_width = 60,
+}
+
+require("nvim-web-devicons").setup {
+    default = true,
 }
 
 cmp.setup {
@@ -33,7 +42,15 @@ cmp.setup {
         -- ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
         -- ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
     }),
+    window = {
+        completion = {
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+            col_offset = -3,
+            side_padding = 1,
+        },
+    },
     formatting = {
+        fields = { "kind", "abbr", "menu" },
         format = function(entry, vim_item)
             local highlights_info = colorful.cmp_highlights(entry)
 
@@ -42,22 +59,26 @@ cmp.setup {
                 vim_item.abbr = highlights_info.text
             end
 
-            vim_item.kind = ""
-            vim_item.kind_hl_group = ""
+            -- vim_item.kind = ""
+            -- vim_item.kind_hl_group = ""
+
+            if vim.tbl_contains({ 'path' }, entry.source.name) then
+                print(entry:get_completion_item().label)
+                local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
+                if icon then
+                    vim_item.kind = icon
+                    vim_item.kind_hl_group = hl_group
+                end
+            end
 
             vim_item.menu = ""
             vim_item.menu_hl_group = ""
 
-            return vim_item
+            local vim_item = require('lspkind').cmp_format{ mode = "symbol" }(entry, vim_item)
 
-            -- if vim.tbl_contains({ 'path' }, entry.source.name) then
-            --     local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
-            --     if icon then
-            --         vim_item.kind = icon
-            --         vim_item.kind_hl_group = hl_group
-            --         return vim_item
-            --     end
-            -- end
+            vim_item.kind = vim_item.kind .. " "
+
+            return vim_item
 
             -- local item = entry:get_completion_item()
             -- if item.data ~= nil and item.data.jira_issue then
