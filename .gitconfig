@@ -53,7 +53,14 @@
     conflictstyle = diff3
 
 [diff]
+    tool = nvim
     colorMoved = default
+
+[difftool]
+    prompt = false
+
+[difftool.nvim]
+    cmd = nvim -d $LOCAL $REMOTE
 
 [push]
     autoSetupRemote = yes
