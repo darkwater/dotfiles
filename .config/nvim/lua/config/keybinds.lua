@@ -305,6 +305,7 @@ wk.add {
     { "<leader>rb",     shell("cargo bench", false),               desc = "Bench" },
     { "<leader>rC",     Cmd("RustLsp openCargo"),                  desc = "Open Cargo.toml" },
     { "<leader>rm",     Cmd("RustLsp expandMacro"),                desc = "Expand macro" },
+    { "<leader>rl",     Cmd("FerrisViewMemoryLayout"),             desc = "View memory layout" },
     { "<leader>rF",     require("crates").show_features_popup,     desc = "Show features" },
     { "<leader>rD",     require("crates").show_dependencies_popup, desc = "Show dependencies" },
     { "<leader>ra",     cargo_add,                                 desc = "Cargo add" },
