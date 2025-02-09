@@ -43,7 +43,7 @@ theta.config.layout[6] = {
         dashboard.button("css", "󰌪  SICshark v2", ":cd ~/gitea/comforest/sicshark<CR>"),
         dashboard.button("cs1", "󰌪  SICshark", ":cd ~/github/sinewave-ee/sicshark<CR>"),
         dashboard.button("ctb", "󰌪  Testboard UI", ":cd ~/gitea/comforest/testboard-ui<CR>"),
-        dashboard.button("czg", "󰌪  Zigbee", ":cd ~/github/sinewave-ee/zigbee<CR>"),
+        dashboard.button("cet", "󰌪  ETRX3xx", ":cd ~/github/sinewave-ee/etrx3<CR>"),
         { type = "padding", val = 2 },
         { type = "text", val = "Sinewave", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
