@@ -238,7 +238,6 @@ if [[ "$TERM" == "xterm-kitty" ]]; then
     export TERM="xterm-256color"
 fi
 
-source /usr/share/doc/find-the-command/ftc.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
