@@ -100,6 +100,8 @@ autocmd FileType jsonc     setlocal commentstring=//\ %s
 autocmd FileType swift     setlocal commentstring=//\ %s
 autocmd FileType wgsl      setlocal commentstring=//\ %s
 
+autocmd FileType css setlocal iskeyword-=-
+
 if exists("g:neovide") || $NEOVIDE_REMOTE == "1"
     nmap <D-v> "+p
     imap <D-v> <C-r>+
