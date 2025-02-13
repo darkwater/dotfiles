@@ -11,6 +11,7 @@
 [alias]
     a = "add --all"
     aa = "add --all"
+    ap = "add --all --patch"
     ca = "commit --all --verbose"
     c = "commit --verbose"
     ci = "commit --verbose"
