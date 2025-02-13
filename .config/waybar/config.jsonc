@@ -16,16 +16,16 @@
     "modules-right": [
         // "mpd",
         // "idle_inhibitor",
-        "pulseaudio",
-        "network",
-        "power-profiles-daemon",
-        "cpu",
-        "memory",
-        "temperature",
-        "backlight",
+        // "pulseaudio",
+        // "network",
+        // "power-profiles-daemon",
+        // "cpu",
+        // "memory",
+        // "temperature",
+        // "backlight",
+        "tray",
         "battery",
         "clock"
-        // "tray"
     ],
     // Modules configuration
     "hyprland/workspaces": {
@@ -48,7 +48,9 @@
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format": "{:%H:%M:%S}",
+        "format-alt": "{:%Y-%m-%d}",
+        "interval": 1
     },
     "cpu": {
         "format": "{usage}% ",
