@@ -83,6 +83,7 @@ if $USER != "root"
         Plug 'topaxi/pipeline.nvim'
         Plug 'nvim-neotest/neotest'
         Plug 'xzbdmw/colorful-menu.nvim'
+        Plug 'olimorris/codecompanion.nvim'
 
         if hostname() != "sinon"
             Plug 'ActivityWatch/aw-watcher-vim'
@@ -308,6 +309,7 @@ elseif $USER != "root"
     lua require "config.treesitter"
     lua require "config.lsp"
 
+    lua require "config.ai"
     lua require "config.autoformat"
     lua require "config.colors"
     lua require "config.completion"
