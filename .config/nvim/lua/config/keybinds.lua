@@ -236,6 +236,9 @@ wk.add {
 
     { "<leader>", group = "leader" },
 
+    { "<leader>a", group = "ai" },
+    { "<leader>ac", Cmd("CodeCompanionChat"), desc = "Open chat" },
+
     { "<leader>f", group = "flutter" },
     { "<leader>ff", bg_cmd("fvm flutter run", "flutter"),  desc = "Flutter run" },
     { "<leader>fr", bg_key("flutter", "",      "r"),       desc = "Hot reload" },
