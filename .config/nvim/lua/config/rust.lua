@@ -126,6 +126,21 @@ vim.g.rustaceanvim = function()
                                 "remove-unnecessary-else",
                             },
                         },
+                        inlayHints = {
+                            bindingModeHints = { enable = true },
+                            closureCaptureHints = { enable = true },
+                            closureReturnTypeHints = { enable = "always" },
+                            discriminantHints = { enable = "always" },
+                            expressionAdjustmentHints = { enable = "always" },
+                            genericParametersHints = {
+                                lifetime = { enable = true },
+                                type = { enable = true },
+                            },
+                            implicitDrops = { enable = true },
+                            lifetimeElisionHints = { enable = true },
+                            rangeExclusiveHints = { enable = true },
+                            reborrowHints = { enable = "always" },
+                        },
                         imports = {
                             preferPrelude = true,
                         },
