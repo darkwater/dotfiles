@@ -103,6 +103,9 @@ autocmd FileType wgsl      setlocal commentstring=//\ %s
 
 autocmd FileType css setlocal iskeyword-=-
 
+autocmd TermOpen * setlocal nonumber norelativenumber
+autocmd TermOpen * startinsert
+
 if exists("g:neovide") || $NEOVIDE_REMOTE == "1"
     nmap <D-v> "+p
     imap <D-v> <C-r>+
