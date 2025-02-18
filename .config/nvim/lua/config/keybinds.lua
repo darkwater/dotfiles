@@ -254,6 +254,7 @@ wk.add {
     { "<leader>Ff", vim.lsp.buf.format, desc = "Format file" },
 
     { "<leader>g", group = "git" },
+    { "<leader>gg", Cmd("tabnew term://gitu"),           desc = "Gitu" },
     { "<leader>gb", Cmd("Telescope git_branches"),       desc = "Branches" },
     { "<leader>gB", Cmd("Gitsigns blame_line"),          desc = "Blame line" },
     { "<leader>gl", Cmd("Telescope git_commits"),        desc = "Commit log" },
