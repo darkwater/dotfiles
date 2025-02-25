@@ -18,7 +18,7 @@
         // "idle_inhibitor",
         // "pulseaudio",
         // "network",
-        // "power-profiles-daemon",
+        "power-profiles-daemon",
         // "cpu",
         // "memory",
         // "temperature",
@@ -48,7 +48,7 @@
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "{:%H:%M:%S}",
+        "format": "{:%d %b %H:%M:%S}",
         "format-alt": "{:%Y-%m-%d}",
         "interval": 1
     },
@@ -80,12 +80,12 @@
         },
         "format": "{capacity}% {icon}",
         "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
+        "format-charging": "{capacity}% {icon}󰉁",
+        "format-plugged": "{capacity}% {icon}",
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
     "battery#bat2": {
         "bat": "BAT2"
