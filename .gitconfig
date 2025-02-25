@@ -1,37 +1,49 @@
+[core]
+    fsmonitor = true # only on mac and windows
+    untrackedCache = true
+
 [user]
-	email = dark@dark.red
-	name = darkwater
+    email = dark@dark.red
+    name = darkwater
 
 [commit]
-	gpgsign = no
+    gpgsign = no
+    verbose = true
 
 [init]
-	defaultBranch = master
+    defaultBranch = master
 
 [alias]
     a = "add --all"
     aa = "add --all"
     ap = "add --all --patch"
-    ca = "commit --all --verbose"
-    c = "commit --verbose"
-    ci = "commit --verbose"
-    amend = "commit --amend --verbose"
+    ca = "commit --all"
+    c = "commit"
+    ci = "commit"
+    amend = "commit --amend"
     co = "checkout"
     d = "diff"
     di = "diff"
     dc = "diff --cached"
+    f = "fetch"
     s = "status"
     st = "status"
-    l = "log --graph --abbrev=8"
+    l = "log --graph --abbrev=8 --date=relative"
     la = "log --all --graph --abbrev=8"
     pf = "push --force"
     pou = "push --set-upstream origin"
 
 [log]
-    date = relative
+    date = "format:%d %b"
+
+[branch]
+    sort = -committerdate
+
+[tag]
+    sort = version:refname
 
 [format]
-    pretty = format:%C(auto,yellow)%h %C(auto,blue)%>(8,trunc)%ad %C(auto,green)%<(7,trunc)%aN  %C(auto,reset)%s%C(auto,red)% gD% D
+    pretty = format:%C(auto,yellow)%h %C(auto,blue)%>(6,trunc)%ad %C(auto,green)%<(7,trunc)%aN  %C(auto,reset)%s%C(auto,red)% gD% D
 
 [pager]
     blame = delta
@@ -51,11 +63,19 @@
     diffFilter = delta --color-only
 
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
+
+[rebase]
+    autoSquash = true
+    autoStash = true
+    updateRefs = true
 
 [diff]
     tool = nvim
     colorMoved = default
+    algorithm = histogram
+    mnemonicPrefix = true
+    renames = true
 
 [difftool]
     prompt = false
@@ -63,5 +83,19 @@
 [difftool.nvim]
     cmd = nvim -d $LOCAL $REMOTE
 
+[rerere]
+    enabled = true
+    autoupdate = true
+
 [push]
-    autoSetupRemote = yes
+    default = simple
+    autoSetupRemote = true
+    followTags = true
+
+[pull]
+    rebase = true
+
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
