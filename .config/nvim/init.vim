@@ -111,10 +111,10 @@ if exists("g:neovide") || $NEOVIDE_REMOTE == "1"
     imap <D-v> <C-r>+
 
     if hostname() == "atsushi.local" && $NEOVIDE_REMOTE != "1"
-        set guifont=Hack,SauceCodePro\ Nerd\ Font:h14.1
+        set guifont=Hack\ Nerd\ Font:h14.1
         let g:neovide_fullscreen = v:true
     else
-        set guifont=Hack,SauceCodePro\ Nerd\ Font:h9.0
+        set guifont=Hack\ Nerd\ Font:h9.0
     endif
 
     let g:neovide_transparency = 0.92
