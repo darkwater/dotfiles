@@ -1,0 +1,8 @@
+#!/bin/bash
+
+CAPACITY="$(cat /sys/class/power_supply/BAT*/capacity | head -n 1)"
+STATUS="$(cat /sys/class/power_supply/BAT*/status | head -n 1)"
+
+if [ "$STATUS" == "Discharging" ] && [ "$CAPACITY" -lt 10 ]; then
+    hyprctl --instance 0 notify 1 60000 "rgb(ff0000)" "  Battery is at ${CAPACITY}% "
+fi
