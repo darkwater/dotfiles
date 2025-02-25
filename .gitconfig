@@ -2,6 +2,9 @@
     fsmonitor = true # only on mac and windows
     untrackedCache = true
 
+[feature]
+    experimental = true
+
 [user]
     email = dark@dark.red
     name = darkwater
@@ -67,7 +70,7 @@
 
 [rebase]
     autoSquash = true
-    autoStash = true
+    autoStash = false
     updateRefs = true
 
 [diff]
