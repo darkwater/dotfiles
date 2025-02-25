@@ -11,22 +11,24 @@ require("crates").setup {
         hover = true,
     },
     text = {
-        loading = "     Loading",
-        version = "     %s",
-        prerelease = "     %s",
-        yanked = "     %s",
-        nomatch = "     No match",
-        upgrade = "     %s",
-        error = "     Error fetching crate",
+        searching  = "     Searching",
+        loading    = "     Loading",
+        version    = "     %s",
+        prerelease = "     %s",
+        yanked     = "     %s",
+        nomatch    = "     No match",
+        upgrade    = "     %s",
+        error      = "     Error fetching crate",
     },
     completion = {
         cmp = {
             enabled = true,
+            use_custom_kind = false,
         },
         crates = {
             enabled = true,
-            min_chars = 2,
-            max_results = 15,
+            min_chars = 3,
+            max_results = 8,
         },
     },
 }
@@ -83,16 +85,8 @@ vim.g.rustaceanvim = function()
                     }
                 end
 
-                if path == "/home/dark/atsushi/firmware"
-                    or path == "/home/dark/atsushi/firmware/cross" then
-                    linkedProjects = {
-                        "/home/dark/atsushi/firmware/Cargo.toml",
-                        "/home/dark/atsushi/firmware/cross/Cargo.toml",
-                    }
-                end
-
                 if path == "/home/dark/github/sinewave-ee/fouling-sensor"
-                    or path == "/home/dark/github/sinewave-ee/fouling-sensor/cross" then
+                    or path == "/home/dark/github/sinewave-ee/fouling-sensor/gateway" then
                     linkedProjects = {
                         "/home/dark/github/sinewave-ee/fouling-sensor/Cargo.toml",
                         "/home/dark/github/sinewave-ee/fouling-sensor/gateway/Cargo.toml",
