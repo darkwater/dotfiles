@@ -44,7 +44,7 @@ cmp.setup {
     }),
     window = {
         completion = {
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None,CursorLine:CmpSelection",
             col_offset = -3,
             side_padding = 1,
         },
