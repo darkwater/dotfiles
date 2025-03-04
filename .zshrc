@@ -24,7 +24,7 @@ alias fbw="fvm dart run build_runner watch"
 
 alias c="cargo"
 alias g="git"
-alias h="hyprctl"
+alias h="hyprctl --instance 0"
 alias s="ssh"
 alias x="cargo xtask"
 
