@@ -379,6 +379,7 @@ wk.add {
     { '<leader><Tab>"', Cmd('Tabularize /"'), desc = '"'},
     { "<leader><Tab>:", Cmd("Tabularize /:\\zs/l0r1"), desc = ":"},
     { "<leader><Tab>,", Cmd("Tabularize /,\\zs/l0r1"), desc = ","},
+    { '<leader><Tab>{', Cmd('Tabularize /{'), desc = "{"},
     { "<leader><Tab>1", group = "once" },
     { "<leader><Tab>1:", Cmd("Tabularize /^[^:]*:\\zs/l0r1"), desc = ":"},
     { "<leader><Tab>1,", Cmd("Tabularize /^[^,]*,\\zs/l0r1"), desc = ","},
