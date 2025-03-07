@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sed -re '/TETSUYA TV/s/^#? ?/#/' -e '/TETSUYA DESK/s/^# ?/ /' -i ~/.config/hypr/hyprland.conf
