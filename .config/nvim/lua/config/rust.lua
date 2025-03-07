@@ -35,7 +35,7 @@ require("crates").setup {
 
 require("ferris").setup {}
 
-vim.g.rustaceanvim = function()
+-- vim.g.rustaceanvim = function()
     local function get_rust_analyzer_path()
         local handle = io.popen("rustup which rust-analyzer")
         local result = handle:read("*a")
@@ -59,7 +59,8 @@ vim.g.rustaceanvim = function()
     liblldb_path = liblldb_path .. ".dylib"
 
     local cfg = require('rustaceanvim.config')
-    return {
+vim.g.rustaceanvim = {
+    -- return {
         tools = {
             executor = require("rustaceanvim.executors.toggleterm"),
             inlay_hints = {
@@ -153,7 +154,7 @@ vim.g.rustaceanvim = function()
         --     adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
         -- },
     }
-end
+-- end
 
 -- vim.g.rustaceanvim = {
     -- dap = {
