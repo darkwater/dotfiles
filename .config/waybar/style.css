@@ -1,18 +1,68 @@
+/*
+ * $ GTK_DEBUG=interactive waybar
+ *
+ *   window #waybar .background .bottom .eDP-1 .mode-default
+ *   ├─ decoration
+ *   └─ box .horizontal
+ *      ├─ box .horizontal .modules-left
+ *      │  └─ widget
+ *      │     └─ box #workspaces .horizontal .module
+ *      │        ├─ button .active .flat .hosting-monitor .visible :hover
+ *      │        ├─ button .flat .visible :hover
+ *      │        └─ button .flat :hover
+ *      ├─ box .horizontal .modules-center
+ *      │  └─ widget
+ *      │     └─ box #window .horizontal .module :hover
+ *      │        └─ label
+ *      └─ box .horizontal .modules-right
+ *         ├─ widget
+ *         │  └─ label #pulseaudio .module :hover
+ *         ├─ widget
+ *         │  └─ box #tray .horizontal .module :hover
+ *         │     ├─ widget .active
+ *         │     │  ├─ image
+ *         │     │  └─ window
+ *         │     │     ├─ decoration
+ *         │     │     └─ menu
+ *         │     │        ├─ arrow
+ *         │     │        ├─ menuitem
+ *         │     │        │  ├─ check
+ *         │     │        │  └─ label
+ *         │     │        ├─ separator
+ *         │     │        ├─ menuitem :disabled
+ *         │     │        └─ arrow
+ *         │     ├─ widget .active
+ *         │     └─ widget .active
+ *         ├─ widget
+ *         │  └─ label #battery .charging .module :hover
+ *         └─ widget
+ *            └─ label #clock .module :hover
+ */
+
+@import "mocha.css";
+
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
     font-family: Hack Nerd Font;
     font-size: 14px;
+    margin: 0;
 }
 
 window#waybar {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.5));
-    color: #ffffff;
+    background: linear-gradient(180deg, alpha(@crust, 0.0), @crust);
+    /* background: linear-gradient(90deg, @rosewater, @flamingo, @pink, @mauve, @red, @maroon, @peach, @yellow, @green, @teal, @sky, @sapphire, @blue, @lavender); */
+    /* background: linear-gradient(90deg, @text, @subtext1, @subtext0, @overlay2, @overlay1, @overlay0, @surface2, @surface1, @surface0, @base, @mantle, @crust); */
+    color: @text;
     transition-property: background-color;
     transition-duration: .5s;
 }
 
 window#waybar.hidden {
     opacity: 0.2;
+}
+
+window#waybar > box {
+    margin-top: 8px;
+    margin-bottom: 4px;
 }
 
 /*
@@ -26,282 +76,52 @@ window#waybar.solo {
 
 button {
     /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -3px transparent;
+    /* box-shadow: inset 0 -3px transparent; */
     /* Avoid rounded borders under each button name */
     border: none;
     border-radius: 0;
+    padding: 0 8px;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
     background: inherit;
-    box-shadow: inset 0 -3px #ffffff;
+    transition: none; 
+    /* box-shadow: inset 0 -3px #ffffff; */
 }
 
-/* you can set a style on hover for any module like this */
-#pulseaudio:hover {
-    color: #a37800;
-}
+.module       { padding: 0 10px; }
+.module       { margin: 0 4px; }
+.module:hover { color: @yellow; }
 
-#workspaces button {
-    padding: 0 5px;
-    color: transparent;
-    color: #ffffff;
-}
+#workspaces button                                { color: #707070; }
+#workspaces button.persistent.empty:not(.visible) { color: #404040; }
+#workspaces button.hosting-monitor                { color: @text; }
+#workspaces button.hosting-monitor.visible        { color: @sapphire; }
+#workspaces button.hosting-monitor.active         { color: @sapphire; }
+#workspaces#workspaces button:hover               { color: @yellow; }
+#workspaces button.urgent                         { color: @red; }
 
-#workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
-}
 
-#workspaces button.focused {
-    color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
-}
+/* .modules-left > widget:first-child > #workspaces { margin-left: 0; } */
+/* .modules-right > widget:last-child > #workspaces { margin-right: 0; } */
 
-#workspaces button.urgent {
-    color: #eb4d4b;
-}
+#clock             { color: @pink; }
+#battery           { color: @maroon; }
+#cpu               { color: @yellow; }
+#network           { color: @green; }
+#bluetooth         { color: @sapphire; }
+#wireplumber       { color: @lavender; }
+#wireplumber.muted { color: #aaaaaa; }
 
-#mode {
-    color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
-}
-
-#clock,
-#battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
-#backlight,
-#network,
-#pulseaudio,
-#wireplumber,
-#custom-media,
-#tray,
-#mode,
-#idle_inhibitor,
-#scratchpad,
-#power-profiles-daemon,
-#mpd {
-    padding: 0 10px;
-    color: #ffffff;
-}
-
-#window,
-#workspaces {
-    margin: 0 4px;
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
-
-#clock {
-    color: #ffffff;
-}
-
-#battery {
-    color: #ffffff;
-}
-
-#battery.charging, #battery.plugged {
-    color: #ffffff;
-}
-
-@keyframes blink {
-    to {
-        color: #ffffff;
-        color: #000000;
-    }
-}
-
-/* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
-    color: #f53c3c;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: steps(12);
+    animation-name: battery-blink;
+    animation-duration: 1s;
+    animation-timing-function: steps(2);
     animation-iteration-count: infinite;
-    animation-direction: alternate;
 }
 
-#power-profiles-daemon {
-    padding-right: 15px;
-}
-
-#power-profiles-daemon.performance {
-    color: #f53c3c;
-}
-
-#power-profiles-daemon.balanced {
-    color: #2980b9;
-}
-
-#power-profiles-daemon.power-saver {
-    color: #2ecc71;
-}
-
-label:focus {
-    color: #ffffff;
-}
-
-#cpu {
-    color: #2ecc71;
-}
-
-#memory {
-    color: #9b59b6;
-}
-
-#disk {
-    color: #964B00;
-}
-
-#backlight {
-    color: #90b1b1;
-}
-
-#network {
-    color: #2980b9;
-}
-
-#network.disconnected {
-    color: #f53c3c;
-}
-
-#pulseaudio {
-    color: #f1c40f;
-}
-
-#pulseaudio.muted {
-    color: #90b1b1;
-    color: #2a5c45;
-}
-
-#wireplumber {
-    color: #fff0f5;
-}
-
-#wireplumber.muted {
-    color: #f53c3c;
-}
-
-#custom-media {
-    color: #66cc99;
-    color: #2a5c45;
-    min-width: 100px;
-}
-
-#custom-media.custom-spotify {
-    color: #66cc99;
-}
-
-#custom-media.custom-vlc {
-    color: #ffa000;
-}
-
-#temperature {
-    color: #f0932b;
-}
-
-#temperature.critical {
-    color: #eb4d4b;
-}
-
-#tray {
-    color: #2980b9;
-}
-
-#tray > .passive {
-    -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    color: #eb4d4b;
-}
-
-#idle_inhibitor {
-    color: #2d3436;
-}
-
-#idle_inhibitor.activated {
-    color: #ecf0f1;
-    color: #2d3436;
-}
-
-#mpd {
-    color: #66cc99;
-    color: #2a5c45;
-}
-
-#mpd.disconnected {
-    color: #f53c3c;
-}
-
-#mpd.stopped {
-    color: #90b1b1;
-}
-
-#mpd.paused {
-    color: #51a37a;
-}
-
-#language {
-    color: #00b093;
-    padding: 0 5px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#keyboard-state {
-    color: #97e1ad;
-    padding: 0 0px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#keyboard-state > label {
-    padding: 0 5px;
-}
-
-#keyboard-state > label.locked {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-#scratchpad {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-#scratchpad.empty {
-	color: transparent;
-}
-
-#privacy {
-    padding: 0;
-}
-
-#privacy-item {
-    padding: 0 5px;
-    color: white;
-}
-
-#privacy-item.screenshare {
-    color: #cf5700;
-}
-
-#privacy-item.audio-in {
-    color: #1ca000;
-}
-
-#privacy-item.audio-out {
-    color: #0069d4;
+@keyframes battery-blink {
+    50% { opacity: 0; }
+    to  { opacity: 1; }
 }
