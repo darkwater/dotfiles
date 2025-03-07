@@ -94,6 +94,7 @@
     default = simple
     autoSetupRemote = true
     followTags = true
+    tags = true
 
 [pull]
     rebase = true
