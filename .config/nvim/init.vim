@@ -84,6 +84,7 @@ if $USER != "root"
         Plug 'nvim-neotest/neotest'
         Plug 'xzbdmw/colorful-menu.nvim'
         Plug 'olimorris/codecompanion.nvim'
+        Plug 'sindrets/diffview.nvim'
 
         if hostname() != "sinon"
             Plug 'ActivityWatch/aw-watcher-vim'
@@ -239,6 +240,8 @@ set backspace=start,eol,indent
 set cmdheight=1
 set completeopt=menu,longest,noselect,preview
 set conceallevel=2
+set diffopt+=algorithm:histogram
+set fillchars+=diff:╱
 set history=10000
 set inccommand=nosplit
 set iskeyword=@,48-57,_,192-255
