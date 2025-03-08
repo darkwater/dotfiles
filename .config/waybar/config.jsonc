@@ -48,10 +48,12 @@
             "title<.*nvim.*>": " ",
             "class<kitty>": " ",
             "class<firefox>": " ",
+            "class<zen>": " ",
             "class<.*sicshark.*>": "󱙳 ",
             "class<.*telegram.*>": " ",
             "class<vesktop>": " ",
-            "class<discord>": " "
+            "class<discord>": " ",
+            "class<steam>": " ",
         },
         "persistent-workspaces": {
             "*": [1, 2, 3, 4, 5]
