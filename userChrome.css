@@ -1,9 +1,9 @@
 :root {
-	--zen-main-browser-background: rgba(15, 20, 25, 0.9) !important;
+	--zen-main-browser-background: rgba(33, 39, 51, 0.92) !important;
 }
 
 #tabbrowser-tabbox #tabbrowser-tabpanels .browserSidebarContainer browser[transparent='true'] {
-    background: rgba(255, 255, 255, 0.0) !important;
+    background: transparent !important;
 }
 
 #tabbrowser-tabbox #tabbrowser-tabpanels .browserSidebarContainer {
