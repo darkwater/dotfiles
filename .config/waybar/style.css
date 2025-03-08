@@ -48,7 +48,26 @@
 }
 
 window#waybar {
-    background: linear-gradient(180deg, alpha(black, 0.0), black);
+    /* background: linear-gradient(180deg, alpha(black, 0.0), black); */
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.000)  0.0%,
+        rgba(0, 0, 0, 0.013)  6.4%,
+        rgba(0, 0, 0, 0.049) 13.2%,
+        rgba(0, 0, 0, 0.104) 20.3%,
+        rgba(0, 0, 0, 0.175) 27.6%,
+        rgba(0, 0, 0, 0.259) 35.0%,
+        rgba(0, 0, 0, 0.352) 42.5%,
+        rgba(0, 0, 0, 0.450) 50.0%,
+        rgba(0, 0, 0, 0.550) 57.4%,
+        rgba(0, 0, 0, 0.648) 64.7%,
+        rgba(0, 0, 0, 0.741) 71.6%,
+        rgba(0, 0, 0, 0.825) 78.3%,
+        rgba(0, 0, 0, 0.896) 84.5%,
+        rgba(0, 0, 0, 0.951) 90.3%,
+        rgba(0, 0, 0, 0.987) 95.5%,
+        rgba(0, 0, 0, 1.000)  100%
+    );
     /* background: linear-gradient(90deg, @rosewater, @flamingo, @pink, @mauve, @red, @maroon, @peach, @yellow, @green, @teal, @sky, @sapphire, @blue, @lavender); */
     /* background: linear-gradient(90deg, @text, @subtext1, @subtext0, @overlay2, @overlay1, @overlay0, @surface2, @surface1, @surface0, @base, @mantle, @crust); */
     color: @text;
@@ -61,46 +80,46 @@ window#waybar.hidden {
 }
 
 window#waybar > box {
-    margin-top: 8px;
-    margin-bottom: 4px;
+    margin: 0px;
 }
-
-/*
-window#waybar.empty {
-    background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
 
 button {
-    /* Use box-shadow instead of border so the text isn't offset */
-    /* box-shadow: inset 0 -3px transparent; */
-    /* Avoid rounded borders under each button name */
     border: none;
     border-radius: 0;
-    padding: 0 8px;
+    padding: 8px 10px 4px 10px;
+    margin: 0;
+    box-shadow: inset 0 0 transparent;
+    transition: box-shadow 0.2s;
 }
 
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
     background: inherit;
-    transition: none; 
-    /* box-shadow: inset 0 -3px #ffffff; */
 }
 
-.module       { padding: 0 10px; }
-.module       { margin: 0 4px; }
-.module:hover { color: @yellow; }
+.module {
+    padding: 8px 10px 4px 10px;
+    margin: 0;
+}
+
+.module#workspaces {
+    padding: 0;
+}
 
 #workspaces button                                { color: #707070; }
 #workspaces button.persistent.empty:not(.visible) { color: #404040; }
 #workspaces button.hosting-monitor                { color: @text; }
 #workspaces button.hosting-monitor.visible        { color: @sapphire; }
 #workspaces button.hosting-monitor.active         { color: @sapphire; }
-#workspaces#workspaces button:hover               { color: @yellow; }
 #workspaces button.urgent                         { color: @red; }
+
+#workspaces button:hover {
+    box-shadow: inset 0 -2px @overlay2;
+}
+
+#workspaces button.empty {
+    padding-left: 8px;
+    padding-right: 2px;
+}
 
 
 /* .modules-left > widget:first-child > #workspaces { margin-left: 0; } */
@@ -108,6 +127,7 @@ button:hover {
 
 #clock             { color: @pink; }
 #battery           { color: @maroon; }
+#battery.mouse     { color: @peach; }
 #cpu               { color: @yellow; }
 #network           { color: @green; }
 #bluetooth         { color: @sapphire; }
