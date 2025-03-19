@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+TOKEN="$(cat ~/.hass-key)"
+
+ACTION="$1"
+
+case "$ACTION" in
+    call-service)
+        SERVICE="$2"
+        ENTITY="$3"
+
+        echo "$ENTITY" |
+            jq -Rc "{ entity_id: . }" |
+            curl \
+                -H "Authorization: Bearer $TOKEN" \
+                --json @- \
+                https://ha.fbk.red/api/services/"$(echo "$SERVICE" | sed -e 's|\.|/|')"
+
+        ;;
+esac
