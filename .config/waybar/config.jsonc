@@ -14,6 +14,7 @@
     "modules-center": [
     ],
     "modules-right": [
+        "custom/3dp",
         "pulseaudio",
         "bluetooth",
         "network",
@@ -51,6 +52,8 @@
             "class<firefox>": " ",
             "class<zen>": " ",
             "class<.*sicshark.*>": "󱙳 ",
+            "class<.*freecad.*>": "󰻬 ",
+            "class<.*Slicer.*>": "󰐫 ",
             "class<.*telegram.*>": " ",
             "class<vesktop>": " ",
             "class<discord>": " ",
@@ -169,16 +172,9 @@
         },
         "on-click": "kitty -e pulsemixer"
     },
-    "custom/media": {
-        "format": "{icon} {}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
-        // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
+    "custom/3dp": {
+        "format": "{text}",
+        "interval": 5,
+        "exec": "$HOME/.config/waybar/3dp.sh 2>/dev/null"
     }
 }
