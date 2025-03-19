@@ -134,6 +134,8 @@ button:hover {
 #wireplumber       { color: @lavender; }
 #wireplumber.muted { color: #aaaaaa; }
 
+#custom-3dp        { color: @sky; }
+
 #battery.critical:not(.charging) {
     animation-name: battery-blink;
     animation-duration: 1s;
