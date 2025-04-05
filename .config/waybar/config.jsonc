@@ -48,6 +48,7 @@
         "window-rewrite": {
             "class<neovide>": " ",
             "title<.*nvim.*>": " ",
+            "title<vd .*>": "󰓫 ",
             "class<kitty>": " ",
             "class<firefox>": " ",
             "class<zen>": " ",
@@ -57,7 +58,8 @@
             "class<.*telegram.*>": " ",
             "class<vesktop>": " ",
             "class<discord>": " ",
-            "class<steam>": " "
+            "class<steam>": " ",
+            "class<.*Minecraft.*>": "󰍳 "
         },
         "persistent-workspaces": {
             "*": [1, 2, 3, 4, 5]
