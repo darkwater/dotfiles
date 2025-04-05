@@ -1,0 +1,3 @@
+[box-drawing]
+mode = "native"
+sizes = { default = [2, 4] }
