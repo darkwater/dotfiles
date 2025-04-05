@@ -55,4 +55,14 @@ hi link JiraInTest JiraInProgress
 hi link JiraReleased JiraDone
 hi link JiraClosed JiraDone
 hi link CratesNvimVersion Comment
+hi link column0 Removed
+hi link column1 Added
+hi link column2 Changed
+hi link column3 Keyword
+hi link column4 Boolean
+hi link column5 Removed
+hi link column6 Added
+hi link column7 Changed
+hi link column8 Keyword
+hi link column9 Boolean
 ]]
