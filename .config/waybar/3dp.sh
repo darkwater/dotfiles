@@ -11,6 +11,6 @@ curl -s 'https://3dp.fbk.red/printer/objects/query?webhooks&virtual_sdcard&print
             eta=$((now + left))
             eta=$(date -d @$eta +%H:%M)
 
-            echo "󰹜 $progress ($eta)"
+            echo "󰹜 $progress"
         fi
     }
