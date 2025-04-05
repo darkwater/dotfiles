@@ -85,6 +85,7 @@ if $USER != "root"
         Plug 'xzbdmw/colorful-menu.nvim'
         Plug 'olimorris/codecompanion.nvim'
         Plug 'sindrets/diffview.nvim'
+        Plug 'mechatroner/rainbow_csv'
 
         if hostname() != "sinon"
             Plug 'ActivityWatch/aw-watcher-vim'
@@ -118,13 +119,13 @@ if exists("g:neovide") || $NEOVIDE_REMOTE == "1"
         set guifont=Hack\ Nerd\ Font:h9.0
     endif
 
-    let g:neovide_transparency = 0.92
+    let g:neovide_opacity = 0.92
     let g:transparency = 0.92
     let g:neovide_scroll_animation_length = 0.12
     let g:neovide_scroll_animation_far_lines = 500
     let g:neovide_hide_mouse_when_typing = v:true
     let g:neovide_remember_window_size = v:true
-    let g:neovide_cursor_animation_length = 0.05
+    let g:neovide_cursor_animation_length = 0.08
     let g:neovide_cursor_antialiasing = v:false
     let g:neovide_position_animation_length = 0
     let g:neovide_floating_shadow = v:false
@@ -251,7 +252,6 @@ set mouse=a
 set mousemodel=extend
 set nrformats=bin,hex,octal,alpha
 set numberwidth=6
-set pastetoggle=<F11>
 set pumblend=0
 set switchbuf=useopen
 set shortmess=filnxtToOFW
