@@ -34,6 +34,17 @@ lsp.qmlls.setup {
 
 lsp.ts_ls.setup {}
 
+lsp.clangd.setup {}
+
+lsp.csharp_ls.setup {}
+
+-- lsp.denols.setup {
+--     root_dir = lsp.util.root_pattern("deno.json"),
+-- }
+
+-- lsp.slint_lsp.setup {}
+-- vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
+
 lsp.wgsl_analyzer.setup {
     settings = {
         ["wgsl-analyzer"] = {
@@ -102,12 +113,3 @@ lsp.wgsl_analyzer.setup {
         }
     }
 }
-
--- lsp.clangd.setup {}
-
--- lsp.denols.setup {
---     root_dir = lsp.util.root_pattern("deno.json"),
--- }
-
--- lsp.slint_lsp.setup {}
--- vim.cmd [[ autocmd BufRead,BufNewFile *.slint set filetype=slint ]]
