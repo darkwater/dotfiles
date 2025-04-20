@@ -34,6 +34,7 @@ require("telescope").setup {
         file_ignore_patterns = {
             ".git/",
             "%.g.dart",
+            "%.freezed.dart",
         },
     },
     pickers = {
