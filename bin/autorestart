@@ -15,7 +15,7 @@ RETRIES=0
 
 while sleep 0.5s; do
     START=$(date +%s)
-    $*
+    $* >/dev/null 2>/dev/null
     END=$(date +%s)
 
     if [[ $((END - START)) -lt 2 ]]; then
