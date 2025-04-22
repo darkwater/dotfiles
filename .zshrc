@@ -56,6 +56,10 @@ alias apts="apt search"
 alias ip="ip --color=auto"
 alias fd="fd --glob"
 
+md() {
+    mkdir "$@" && cd "$@"
+}
+
 ssh() {
     # interferes with `ssh host foo > bar`
     # set_window_title "ssh $*"
