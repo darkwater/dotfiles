@@ -4,6 +4,9 @@ case "$(hostname)" in
   "tetsuya")
     xrandr --output DP-1 --primary
     ;;
+  "nagumo")
+    pkill hypridle
+    ;;
   "holo")
     hyprctl keyword general:gaps_out 10,10,0,10
     hyprctl keyword general:border_size 1
