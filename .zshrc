@@ -55,6 +55,7 @@ alias apts="apt search"
 
 alias ip="ip --color=auto"
 alias fd="fd --glob"
+alias rsync="rsync --progress --human-readable"
 
 md() {
     mkdir "$@" && cd "$@"
