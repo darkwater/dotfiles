@@ -1,6 +1,15 @@
 local theta = require("alpha.themes.theta")
 local dashboard = require("alpha.themes.dashboard")
 
+theta.config.layout[2].val = {
+    [[                                   ▁▁                ]],
+    [[      ▁▁▁▁    ▁▁▁▁   ▁▁▁▁  ▁▁  ▁▁ ╲▁╲    ▁▁▁▁▁▁▁▁   ]],
+    [[      ▁  ╲   ▁▁ ╲  ▁▁ ╲╲ ╲╲ ╲╲╲ ╲   ▁▁  ▁▁ ╲  ]],
+    [[    ╲ ╲╲ ╲╲  ▁▁╲ ╲▁╲ ╲ ╲ ╲▁▎ ▎╲ ╲ ╲╲ ╲╲ ╲╲ ╲ ]],
+    [[    ╲ ╲▁╲ ╲▁╲ ╲▁▁▁▁╲ ╲▁▁▁▁╲ ╲▁▁▁  ╲ ╲▁╲ ╲▁╲ ╲▁╲ ╲▁╲]],
+    [[     ╲▁╲▁╲▁▁▁▁╲▁▁▁  ╲▁▁    ╲▁╲▁╲▁╲▁]],
+}
+
 -- theta.section.buttons.val = {
 -- }
 
