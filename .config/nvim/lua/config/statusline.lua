@@ -55,7 +55,7 @@ end
 
 local ayu_mirage = require("lualine.themes.ayu_mirage")
 ayu_mirage.normal.a.bg = "#59c2ff"
--- ayu_mirage.normal.c.fg = "#000000"
+ayu_mirage.inactive.c.fg = ayu_mirage.normal.c.fg
 
 local function xcodebuild_device()
   if vim.g.xcodebuild_platform == "macOS" then
@@ -73,9 +73,9 @@ end
 
 require("lualine").setup {
     options = {
-        -- hh ─  9472   HH ━  9473   vv │  9474   VV ┃  9475   3- ┄  9476   3_ ┅  9477   3! ┆  9478   3/ ┇  9479   4- ┈  9480   4_ ┉  9481   4! ┊  9482   4/ ┋  9483   dr ┌  9484   dR ┍  9485   Dr ┎  9486   DR ┏  9487   dl ┐  9488   dL ┑  9489   Dl ┒  9490   LD ┓  9491   ur └  9492   uR ┕  9493   Ur ┖  9494   UR ┗  9495
+        -- https://raw.githubusercontent.com/entombedvirus/neovide/2c5dc27b8d940378a69d682a995cdbbd627af243/src/renderer/box_drawing/box_drawing_test.txt
         theme = ayu_mirage,
-        section_separators = { left = "", right = "" },
+        section_separators = { left = " ", right = " " },
         component_separators = { left = "", right = "" },
         refresh = {
             statusline = 1000,
@@ -89,7 +89,7 @@ require("lualine").setup {
             path = 1,
         }},
         lualine_b = {"diagnostics"},
-        lualine_c = {},
+        lualine_c = {"branch"},
         lualine_x = {
             LspClients,
             { "' ' .. vim.g.xcodebuild_last_status", color = { fg = "Gray" } },
@@ -105,7 +105,7 @@ require("lualine").setup {
             path = 1,
         }},
         lualine_b = {"diagnostics"},
-        lualine_c = {},
+        lualine_c = {"branch"},
         lualine_x = {},
         lualine_y = {"diff", "filetype"},
         lualine_z = {"location", "progress"},
