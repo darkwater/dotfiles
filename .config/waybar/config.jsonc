@@ -18,6 +18,7 @@
         "pulseaudio",
         "bluetooth",
         "network",
+        "memory",
         "cpu",
         "battery#mouse",
         "battery",
@@ -90,7 +91,7 @@
         "tooltip": true
     },
     "memory": {
-        "format": "{}%  "
+        "format": "{}% "
     },
     "bluetooth": {
         "format": "󰂯",
