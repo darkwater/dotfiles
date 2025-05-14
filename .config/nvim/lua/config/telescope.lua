@@ -1,4 +1,6 @@
-require("telescope").setup {
+local telescope = require("telescope")
+
+telescope.setup {
     defaults = {
         border = false,
         borderchars = {
@@ -48,6 +50,12 @@ require("telescope").setup {
             },
         },
     },
+}
+
+telescope.load_extension("ui-select")
+
+require("actions-preview").setup {
+    telescope = {},
 }
 
 local M = {}
