@@ -26,6 +26,7 @@ require("ayu").setup {
         CratesNvimPopupPillText = { fg = "#e0e0e0", bg = "#806010" },
         CratesNvimPopupPillBorder = { fg = "#806010" },
         CmpSelection = { bg = "#606873" },
+        -- DiagnosticUnnecessary = { undercurl = true, sp = "#af00ff" },
         -- OL1 = { fg = "#409fff" },
         -- OL2 = { fg = "#4e99e5" },
         -- OL3 = { fg = "#5791cc" },
