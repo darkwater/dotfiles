@@ -82,7 +82,7 @@ vim.g.rustaceanvim = {
                     }
                     check = {
                         allTargets = false,
-                        targets = { "bin", "lib" },
+                        extraArgs = { "--bins", "--libs" },
                     }
                 end
 
