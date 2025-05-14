@@ -38,6 +38,8 @@ lsp.clangd.setup {}
 
 lsp.csharp_ls.setup {}
 
+lsp.gopls.setup {}
+
 -- lsp.denols.setup {
 --     root_dir = lsp.util.root_pattern("deno.json"),
 -- }
