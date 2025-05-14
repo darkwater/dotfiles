@@ -54,6 +54,8 @@ if $USER != "root"
         Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' }
         Plug 'nvim-orgmode/orgmode'
         Plug 'nvim-telescope/telescope.nvim'
+        Plug 'nvim-telescope/telescope-ui-select.nvim'
+        Plug 'aznhe21/actions-preview.nvim'
         Plug 'nvim-tree/nvim-web-devicons'
         Plug 'nvim-treesitter/nvim-treesitter'
         Plug 'nvim-treesitter/nvim-treesitter-textobjects'
@@ -62,8 +64,8 @@ if $USER != "root"
         Plug 'pangloss/vim-javascript'
         Plug 'phaazon/hop.nvim'
         Plug 'rcarriga/nvim-notify'
-        Plug 'stevearc/dressing.nvim' " optional for vim.ui.select
-        Plug 'stevearc/overseer.nvim'
+        " Plug 'stevearc/dressing.nvim' " optional for vim.ui.select
+        " Plug 'stevearc/overseer.nvim'
         Plug 'tikhomirov/vim-glsl'
         Plug 'pest-parser/pest.vim'
         Plug 'mfussenegger/nvim-dap'
@@ -83,9 +85,10 @@ if $USER != "root"
         Plug 'topaxi/pipeline.nvim'
         Plug 'nvim-neotest/neotest'
         Plug 'xzbdmw/colorful-menu.nvim'
-        Plug 'olimorris/codecompanion.nvim'
+        " Plug 'olimorris/codecompanion.nvim'
         Plug 'sindrets/diffview.nvim'
         Plug 'mechatroner/rainbow_csv'
+        Plug 'CopilotC-Nvim/CopilotChat.nvim'
 
         if hostname() != "sinon"
             Plug 'ActivityWatch/aw-watcher-vim'
@@ -344,6 +347,6 @@ elseif $USER != "root"
     " lua require "config.xcode" -- triggered by <leader>x
     "
     lua require "config.keybinds"
-    
+
     lua require("kitty-scrollback").setup()
 endif
