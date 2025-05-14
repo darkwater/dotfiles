@@ -127,12 +127,13 @@ function confdir(name)
 end
 
 local telescope = require("telescope.builtin")
+local actions_preview = require("actions-preview")
 local hop = require("hop")
 -- local flutter = require("flutter")
 
 function with_input(prompt, name, fn)
     return function()
-        vim.ui.input(prompt, function(input)
+        vim.ui.input({ prompt = prompt }, function(input)
             if input == nil then return end
             local opts = { [name] = input }
             fn(opts)
@@ -182,7 +183,7 @@ end
 
 function cargo_add()
     vim.ui.input(
-        "Cargo add:",
+        { prompt = "Cargo add:" },
         function(args)
             vim.cmd("!cargo add " .. args)
         end
@@ -267,13 +268,14 @@ wk.add {
     { "<leader>gu", Cmd("Gitsigns reset_hunk"),          desc = "Undo hunk" },
     { "<leader>gw", Cmd("Pipeline"),                     desc = "GitHub Workflows" },
 
-    { "<leader>gd", Cmd("Gitsigns toggle_linehl") .. Cmd("Gitsigns toggle_deleted"), desc = "Toggle inline diff" },
+    -- { "<leader>gd", Cmd("Gitsigns toggle_linehl") .. Cmd("Gitsigns toggle_deleted"), desc = "Toggle inline diff" },
 
     { "<leader>i", group = "insert" },
     { "<leader>iu", Cmd("read !uuidgen"), desc = "Insert UUID" },
 
     { "<leader>l", group = "lsp" },
-    { "<leader>la", vim.lsp.buf.code_action,        desc = "Code actions", mode = { "n", "v" } },
+    -- { "<leader>la", vim.lsp.buf.code_action,        desc = "Code actions", mode = { "n", "v" } },
+    { "<leader>la", actions_preview.code_actions,   desc = "Code actions", mode = { "n", "v" } },
     { "<leader>lc", telescope.lsp_incoming_calls,   desc = "Incoming calls" },
     { "<leader>lC", telescope.lsp_outgoing_calls,   desc = "Outgoing calls" },
     { "<leader>le", telescope.diagnostics,          desc = "Errors" },
