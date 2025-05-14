@@ -128,11 +128,12 @@ button:hover {
 #clock             { color: @pink; }
 #battery           { color: @maroon; }
 #battery.mouse     { color: @peach; }
-#cpu               { color: @yellow; }
+#cpu               { color: @yellow; margin-left: -4px; }
+#memory            { color: @yellow; }
 #network           { color: @green; }
 #bluetooth         { color: @sapphire; }
-#wireplumber       { color: @lavender; }
-#wireplumber.muted { color: #aaaaaa; }
+#pulseaudio        { color: @lavender; }
+#pulseaudio.muted  { color: #aaaaaa; }
 
 #custom-3dp        { color: @sky; }
 
