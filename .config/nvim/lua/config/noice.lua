@@ -11,7 +11,7 @@ require("noice").setup {
         },
     },
     messages = {
-        enabled = false,
+        enabled = true,
     },
     -- you can enable a preset for easier configuration
     presets = {
