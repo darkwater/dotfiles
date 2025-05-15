@@ -8,3 +8,12 @@
 --         },
 --     },
 -- }
+
+require("CopilotChat").setup {
+    mappings = {
+        submit_prompt = {
+            normal = "<C-CR>",
+            insert = "<C-CR>",
+        },
+    },
+}
