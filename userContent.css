@@ -1,0 +1,28 @@
+@-moz-document domain(github.com) {
+    :root {
+        --bgColor-default: transparent !important;
+    }
+}
+
+@-moz-document domain(chatgpt.com) {
+    :root {
+        --main-surface-primary: transparent !important;
+        --sidebar-surface-primary: transparent !important;
+        --bg-elevated-secondary: transparent !important;
+    }
+
+    [dir="ltr"] .horzScrollShadows {
+        background: transparent !important;
+    }
+}
+
+@-moz-document domain(youtube.com) {
+    html[dark], [dark] {
+        background-color: transparent !important;
+        --yt-spec-base-background: transparent !important;
+    }
+}
+
+:root {
+    /* --darkreader-background-ffffff: transparent !important; */
+}
