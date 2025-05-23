@@ -6,6 +6,7 @@ case "$(hostname)" in
     ;;
   "nagumo")
     pkill hypridle
+    hyprctl keyword general:gaps_out 13,18,0,19
     ;;
   "holo")
     hyprctl keyword general:gaps_out 10,10,0,10
