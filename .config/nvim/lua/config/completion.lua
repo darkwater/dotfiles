@@ -63,7 +63,6 @@ cmp.setup {
             -- vim_item.kind_hl_group = ""
 
             if vim.tbl_contains({ 'path' }, entry.source.name) then
-                print(entry:get_completion_item().label)
                 local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
                 if icon then
                     vim_item.kind = icon
