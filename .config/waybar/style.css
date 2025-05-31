@@ -126,6 +126,7 @@ button:hover {
 /* .modules-right > widget:last-child > #workspaces { margin-right: 0; } */
 
 #clock             { color: @pink; }
+#custom-power      { color: @maroon; margin-left: -12px; }
 #battery           { color: @maroon; }
 #battery.mouse     { color: @peach; }
 #cpu               { color: @yellow; margin-left: -4px; }
