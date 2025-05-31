@@ -22,6 +22,7 @@
         "cpu",
         "battery#mouse",
         "battery",
+        "custom/power",
         "tray",
         "clock"
     ],
@@ -91,7 +92,7 @@
         "tooltip": true
     },
     "memory": {
-        "format": "{}% "
+        "format": "{percentage}% ({swapPercentage}%) "
     },
     "bluetooth": {
         "format": "󰂯",
@@ -104,6 +105,22 @@
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
         "on-click": "blueman-manager"
+    },
+    "battery#mouse": {
+        "bat": "hidpp_battery_0",
+        "states": {
+            "fullish": 100,
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% 󰍽 {icon}",
+        "format-full": "{capacity}% 󰍽 {icon}",
+        "format-charging": "{capacity}% 󰍽 {icon}󰉁",
+        "format-plugged": "{capacity}% 󰍽 {icon}",
+        "format-fullish": "", // An empty format will hide the module // List of String, delimiter: ^
+        "format-full": "",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
     "battery": {
         "states": {
@@ -121,21 +138,10 @@
         "format-full": "",
         "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
-    "battery#mouse": {
-        "bat": "hidpp_battery_0",
-        "states": {
-            "fullish": 100,
-            "good": 95,
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% 󰍽 {icon}",
-        "format-full": "{capacity}% 󰍽 {icon}",
-        "format-charging": "{capacity}% 󰍽 {icon}󰉁",
-        "format-plugged": "{capacity}% 󰍽 {icon}",
-        "format-fullish": "", // An empty format will hide the module // List of String, delimiter: ^
-        "format-full": "",
-        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    "custom/power": {
+        "format": "{text} W",
+        "interval": 15,
+        "exec": "$HOME/.config/waybar/power.sh 2>/dev/null"
     },
     "power-profiles-daemon": {
       "format": "{icon}",
@@ -175,7 +181,9 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "kitty -e pulsemixer"
+        "scroll-step": 5,
+        "on-click": "kitty -e pulsemixer",
+        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
     },
     "custom/3dp": {
         "format": "{text}",
