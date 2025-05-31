@@ -8,9 +8,13 @@
 [user]
     email = dark@dark.red
     name = darkwater
+    signingkey = ~/.ssh/id_ed25519
+
+[gpg]
+    format = ssh
 
 [commit]
-    gpgsign = no
+    gpgsign = true
     verbose = true
 
 [init]
