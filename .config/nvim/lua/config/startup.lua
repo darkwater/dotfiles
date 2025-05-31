@@ -33,6 +33,7 @@ theta.config.layout[6] = {
         dashboard.button("lws", "  Wayland Shell", ":cd ~/github/flafydev/wayland_shell<CR>"),
         dashboard.button("lxd", "  XDG Desktop Entries", ":cd ~/github/darkwater/xdg_desktop_entries<CR>"),
         dashboard.button("lim", "󰦆  Iced Material", ":cd ~/github/darkwater/iced-material<CR>"),
+        dashboard.button("lel", "󰦆  Egui wlr layer", ":cd ~/github/darkwater/egui-wlr-layer<CR>"),
         { type = "padding", val = 2 },
         { type = "text", val = "Comforest", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
