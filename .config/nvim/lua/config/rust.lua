@@ -81,8 +81,8 @@ vim.g.rustaceanvim = {
                         "/home/dark/gitea/comforest/firmware/cross/Cargo.toml",
                     }
                     check = {
-                        allTargets = false,
-                        extraArgs = { "--bins", "--libs" },
+                        -- allTargets = false,
+                        -- extraArgs = { "--bins", "--libs" },
                     }
                 end
 
@@ -137,7 +137,8 @@ vim.g.rustaceanvim = {
                             reborrowHints = { enable = "always" },
                         },
                         imports = {
-                            preferPrelude = true,
+                            preferNoStd = true,
+                            preferPrelude = false,
                         },
                         interpret = {
                             tests = true,
