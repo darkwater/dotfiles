@@ -12,6 +12,8 @@
 require 'fileutils'
 require 'shellwords'
 
+`ssh-add -l || ssh-add ~/.ssh/id_ed25519`
+
 def commit(filename, message)
     puts "committing #{filename}"
 
