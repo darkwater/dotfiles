@@ -33,7 +33,11 @@ if [[ "$1" = "once" ]]; then
         sleep 2; launch gtk-launch vesktop
         sleep 5; launch gtk-launch org.telegram.desktop.desktop
     else
-        launch walker
+        (
+            sleep 2
+            hyprctl hyprpaper preload /home/dark/holo.jpg
+            hyprctl hyprpaper wallpaper ,/home/dark/holo.jpg
+        )
     fi
 
     sleep 10s; ddcutil -d 1 setvcp 10 100; sleep 1s; ddcutil -d 2 setvcp 10 100
@@ -47,8 +51,10 @@ else
         hyprctl keyword general:gaps_out 13,18,0,19
         ;;
     "holo")
-        hyprctl keyword general:gaps_out 10,10,0,10
+        hyprctl keyword general:gaps_in 1
+        hyprctl keyword general:gaps_out 0
         hyprctl keyword general:border_size 1
+        hyprctl keyword decoration:rounding 0
         hyprctl keyword general:col.active_border "rgba(f63d28ee) rgba(f65643ee) 45deg"
         ;;
     esac
