@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 #
 #  Utility to automatically commit all changes to dotfiles.
 #
