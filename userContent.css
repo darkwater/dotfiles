@@ -21,6 +21,10 @@
         background-color: transparent !important;
         --yt-spec-base-background: transparent !important;
     }
+
+    #frosted-glass.with-chipbar.ytd-app {
+        background-color: transparent !important;
+    }
 }
 
 :root {
