@@ -1,6 +1,7 @@
 [core]
     fsmonitor = true # only on mac and windows
     untrackedCache = true
+    hooksPath = /home/dark/dotfiles/git-hooks
 
 [feature]
     experimental = true
