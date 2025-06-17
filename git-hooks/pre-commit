@@ -1,0 +1,3 @@
+#!/bin/bash
+
+! rg -C3 'TODO *\(dev\)'
