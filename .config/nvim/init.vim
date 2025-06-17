@@ -29,7 +29,7 @@ if $USER != "root"
         Plug 'folke/noice.nvim'
         Plug 'folke/trouble.nvim'
         Plug 'folke/which-key.nvim'
-        Plug 'github/copilot.vim'
+        " Plug 'github/copilot.vim'
         Plug 'glts/vim-magnum'
         Plug 'glts/vim-radical'
         Plug 'hrsh7th/cmp-buffer'
