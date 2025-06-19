@@ -172,6 +172,11 @@ function toggle_inlay_hints()
 end
 
 local virtual_errors_enabled = true
+vim.diagnostic.config {
+    virtual_text = not virtual_errors_enabled,
+    virtual_lines = virtual_errors_enabled,
+}
+
 function toggle_virtual_errors()
     virtual_errors_enabled = not virtual_errors_enabled
 
