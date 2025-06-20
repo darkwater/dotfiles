@@ -15,6 +15,7 @@
     ],
     "modules-right": [
         "custom/3dp",
+        "custom/swaync",
         "pulseaudio",
         "bluetooth",
         "network",
@@ -189,5 +190,12 @@
         "format": "{text}",
         "interval": 30,
         "exec": "$HOME/.config/waybar/3dp.sh 2>/dev/null"
+    },
+    "custom/swaync": {
+        "format": "{text}",
+        "tooltip": false,
+        "interval": 5,
+        "exec": "$HOME/.config/waybar/swaync.sh 2>/dev/null",
+        "on-click": "swaync-client -d; swaync-client -C"
     }
 }
