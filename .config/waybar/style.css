@@ -137,6 +137,7 @@ button:hover {
 #pulseaudio.muted  { color: #aaaaaa; }
 
 #custom-3dp        { color: @sky; }
+#custom-swaync     { color: @maroon; }
 
 #battery.critical:not(.charging) {
     animation-name: battery-blink;
