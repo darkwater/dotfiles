@@ -13,7 +13,7 @@ theta.config.layout[2].val = {
 -- theta.section.buttons.val = {
 -- }
 
-theta.config.layout[4].val[1].val = vim.fn.getcwd
+theta.config.layout[4].val[1].val = function () return vim.fn.hostname() .. " : " .. vim.fn.getcwd() end
 
 theta.config.layout[6] = {
     type = "group",
