@@ -89,6 +89,7 @@ if $USER != "root"
         Plug 'sindrets/diffview.nvim'
         Plug 'mechatroner/rainbow_csv'
         Plug 'CopilotC-Nvim/CopilotChat.nvim'
+        Plug '2KAbhishek/nerdy.nvim'
 
         if hostname() != "sinon"
             Plug 'ActivityWatch/aw-watcher-vim'
@@ -350,5 +351,5 @@ elseif $USER != "root"
     "
     lua require "config.keybinds"
 
-    lua require("kitty-scrollback").setup()
+    lua require("kitty-scrollback").setup {}
 endif
