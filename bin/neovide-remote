@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+HOST="$1"
+
+if [[ -z "$HOST" ]]; then
+  echo "Usage: $0 <host>"
+  exit 1
+fi
+
+# spawn nvim on the remote host
+ssh -t "$HOST" "NEOVIDE_REMOTE=1 nvim --headless --listen 0.0.0.0:6487" &
+
+# spawn neovide and connect it
+exec neovide --server "$HOST:6487"
