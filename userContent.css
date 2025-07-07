@@ -6,6 +6,8 @@
 
 @-moz-document domain(chatgpt.com) {
     :root {
+        --bg-primary: transparent !important;
+        --main-surface-background: transparent !important;
         --main-surface-primary: transparent !important;
         --sidebar-surface-primary: transparent !important;
         --bg-elevated-secondary: transparent !important;
