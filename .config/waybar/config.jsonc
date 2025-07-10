@@ -58,6 +58,7 @@
             "class<.*sicshark.*>": "󱙳 ",
             "class<.*freecad.*>": "󰻬 ",
             "class<.*Slicer.*>": "󰐫 ",
+            "class<.*rnote.*>": "󰽉 ",
             "class<.*telegram.*>": " ",
             "class<vesktop>": " ",
             "class<discord>": " ",
