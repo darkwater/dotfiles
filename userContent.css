@@ -4,6 +4,22 @@
     }
 }
 
+@-moz-document domain(news.ycombinator.com) {
+    html, body, table {
+        background-color: transparent !important;
+    }
+}
+
+@-moz-document domain(docs.rs) {
+    body, .sidebar {
+        background-color: transparent !important;
+    }
+
+    .nav-container {
+        backdrop-filter: opacity(50%) !important;
+    }
+}
+
 @-moz-document domain(chatgpt.com) {
     :root {
         --bg-primary: transparent !important;
