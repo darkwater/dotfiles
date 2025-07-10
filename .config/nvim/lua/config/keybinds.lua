@@ -243,7 +243,7 @@ wk.add {
     { "<leader>", group = "leader" },
 
     { "<leader>a", group = "ai" },
-    { "<leader>ac", Cmd("CopilotChat"), desc = "Open chat" },
+    { "<leader>ac", Cmd("CopilotChat"), desc = "Open chat", mode = { "n", "v" } },
 
     { "<leader>f", group = "flutter" },
     { "<leader>ff", bg_cmd("fvm flutter run", "flutter"),  desc = "Flutter run" },
@@ -312,7 +312,7 @@ wk.add {
     { "<leader>rr",     shell("cargo run", true),                  desc = "Run" },
     { "<leader>rR",     shell("cargo run", false),                 desc = "Run and keep open" },
     { "<leader>r<C-r>", shell("cargo run --release", true),        desc = "Run (release)" },
-    { "<leader>rt",     shell("cargo nextest run -j 1", false),    desc = "Test" },
+    { "<leader>rt",     shell("cargo nextest run", false),         desc = "Test" },
     { "<leader>rb",     shell("cargo bench", false),               desc = "Bench" },
     { "<leader>rC",     Cmd("RustLsp openCargo"),                  desc = "Open Cargo.toml" },
     { "<leader>rm",     Cmd("RustLsp expandMacro"),                desc = "Expand macro" },
