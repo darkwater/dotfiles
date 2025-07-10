@@ -83,10 +83,22 @@
     },
     "clock": {
         // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "locale": "en_GB.UTF-8",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "format": "{:%a %d %b %H:%M:%S}",
-        "format-alt": "{:%Y-%m-%d}",
-        "interval": 1
+        "interval": 1,
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "left",
+            "format": {
+                "months":   "   <span color='#bfbdb6'><b>{}</b></span>",
+                "days":     "<span color='#d2a6ff'><b>{}</b></span>",
+                "weeks":    "<span color='#39bae6'><b>{:%V}</b></span>",
+                "weekdays": "<span color='#ffb454'><b>{}</b></span>",
+                "today":    "<span color='#f07178'><b><u>{}</u></b></span>"
+            }
+        }
     },
     "cpu": {
         "format": "{usage}% {icon}",
