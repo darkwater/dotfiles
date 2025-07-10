@@ -38,7 +38,7 @@
     st = "status"
     sw = "switch"
     l = "log --graph --abbrev=8 --date=relative"
-    la = "log --all --graph --abbrev=8"
+    la = "log --branches --graph --abbrev=8"
     pf = "push --force"
     pou = "push --set-upstream origin"
 
@@ -52,7 +52,7 @@
     sort = version:refname
 
 [format]
-    pretty = format:%C(auto,yellow)%h %C(auto,blue)%>(6,trunc)%ad %C(auto,green)%<(7,trunc)%aN  %C(auto,reset)%s%C(auto,red)% gD% D
+    pretty = format:%C(auto,yellow)%h %C(auto,blue)%>(6,trunc)%ad %C(auto,green)%<(7,trunc)%aN  %C(auto,reset)%s%C(auto,red)% gD% D % N
 
 [pager]
     blame = delta
