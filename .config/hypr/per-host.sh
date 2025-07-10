@@ -29,6 +29,8 @@ if [[ "$1" = "once" ]]; then
         launch /opt/activitywatch/aw-server/aw-server
         launch aw-watcher-window-wayland
 
+        random-wallpaper
+
         sleep 0; launch gtk-launch zen
         sleep 2; launch gtk-launch vesktop
         sleep 5; launch gtk-launch org.telegram.desktop.desktop
