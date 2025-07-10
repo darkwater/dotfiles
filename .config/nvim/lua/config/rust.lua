@@ -36,126 +36,126 @@ require("crates").setup {
 require("ferris").setup {}
 
 -- vim.g.rustaceanvim = function()
-    local function get_rust_analyzer_path()
-        local handle = io.popen("rustup which rust-analyzer")
-        local result = handle:read("*a")
-        handle:close()
-        return result:match("^(.-)%s*$") -- Trim the result
-    end
+local function get_rust_analyzer_path()
+    local handle = io.popen("rustup which rust-analyzer")
+    local result = handle:read("*a")
+    handle:close()
+    return result:match("^(.-)%s*$") -- Trim the result
+end
 
-    local rust_analyzer_path = get_rust_analyzer_path()
+local rust_analyzer_path = get_rust_analyzer_path()
 
-    if rust_analyzer_path == "" then
-        print("rust-analyzer not found")
-        return
-    end
+if rust_analyzer_path == "" then
+    print("rust-analyzer not found")
+    return
+end
 
-    -- Update this path
-    local extension_path = vim.env.HOME .. '/.vscode/extensions/vadimcn.vscode-lldb-1.10.0/'
-    local codelldb_path = extension_path .. 'adapter/codelldb'
-    local liblldb_path = extension_path .. 'lldb/lib/liblldb'
+-- Update this path
+local extension_path = vim.env.HOME .. '/.vscode/extensions/vadimcn.vscode-lldb-1.10.0/'
+local codelldb_path = extension_path .. 'adapter/codelldb'
+local liblldb_path = extension_path .. 'lldb/lib/liblldb'
 
-    -- The liblldb extension is .so for Linux and .dylib for MacOS
-    liblldb_path = liblldb_path .. ".dylib"
+-- The liblldb extension is .so for Linux and .dylib for MacOS
+liblldb_path = liblldb_path .. ".dylib"
 
-    local cfg = require('rustaceanvim.config')
+local cfg = require('rustaceanvim.config')
 vim.g.rustaceanvim = {
-    -- return {
-        tools = {
-            executor = require("rustaceanvim.executors.toggleterm"),
-            inlay_hints = {
-                auto = false,
-            },
+-- return {
+    tools = {
+        executor = require("rustaceanvim.executors.toggleterm"),
+        inlay_hints = {
+            auto = false,
         },
-        server = {
-            cmd = { rust_analyzer_path },
-            capabilities = require("cmp_nvim_lsp").default_capabilities(),
-            settings = function (path)
-                local linkedProjects
-                local check
+    },
+    server = {
+        cmd = { rust_analyzer_path },
+        capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        settings = function (path)
+            local linkedProjects
+            local check
 
-                if path == "/home/dark/gitea/comforest/firmware"
-                    or path == "/home/dark/gitea/comforest/firmware/cross" then
-                    linkedProjects = {
-                        "/home/dark/gitea/comforest/firmware/Cargo.toml",
-                        "/home/dark/gitea/comforest/firmware/cross/Cargo.toml",
-                        "/home/dark/gitea/comforest/firmware/tools/Cargo.toml",
-                    }
-                    check = {
-                        -- allTargets = false,
-                        -- extraArgs = { "--bins", "--libs" },
-                    }
-                end
-
-                if path == "/home/dark/github/sinewave-ee/fouling-sensor"
-                    or path == "/home/dark/github/sinewave-ee/fouling-sensor/gateway" then
-                    linkedProjects = {
-                        "/home/dark/github/sinewave-ee/fouling-sensor/Cargo.toml",
-                        "/home/dark/github/sinewave-ee/fouling-sensor/gateway/Cargo.toml",
-                    }
-                end
-
-                return {
-                    ["rust-analyzer"] = {
-                        assist = {
-                            importMergeBehavior = "last",
-                            importPrefix = "by_self",
-                        },
-                        cargo = {
-                            -- loadOutDirsFromCheck = true,
-                        },
-                        check = check,
-                        checkOnSave = {
-                            command = "clippy",
-                        },
-                        completion = {
-                            postfix = {
-                                enable = false,
-                            },
-                        },
-                        diagnostics = {
-                            enable = false,
-                            disabled = {
-                                -- "unresolved-proc-macro",
-                                "inactive-code",
-                                "trait-impl-incorrect-safety",
-                                "remove-unnecessary-else",
-                            },
-                        },
-                        inlayHints = {
-                            bindingModeHints = { enable = true },
-                            closureCaptureHints = { enable = true },
-                            closureReturnTypeHints = { enable = "always" },
-                            discriminantHints = { enable = "always" },
-                            expressionAdjustmentHints = { enable = "always" },
-                            genericParametersHints = {
-                                lifetime = { enable = true },
-                                type = { enable = true },
-                            },
-                            implicitDrops = { enable = true },
-                            lifetimeElisionHints = { enable = true },
-                            rangeExclusiveHints = { enable = true },
-                            reborrowHints = { enable = "always" },
-                        },
-                        imports = {
-                            preferNoStd = true,
-                            preferPrelude = false,
-                        },
-                        interpret = {
-                            tests = true,
-                        },
-                        procMacro = {
-                            enable = true,
-                        },
-                        linkedProjects = linkedProjects,
-                    },
+            if path == "/home/dark/gitea/comforest/firmware"
+                or path == "/home/dark/gitea/comforest/firmware/cross" then
+                linkedProjects = {
+                    "/home/dark/gitea/comforest/firmware/Cargo.toml",
+                    "/home/dark/gitea/comforest/firmware/cross/Cargo.toml",
+                    "/home/dark/gitea/comforest/firmware/tools/Cargo.toml",
                 }
-            end,
-        },
-        -- dap = {
-        --     adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
-        -- },
-    }
+                check = {
+                    -- allTargets = false,
+                    -- extraArgs = { "--bins", "--libs" },
+                }
+            end
+
+            if path == "/home/dark/github/sinewave-ee/fouling-sensor"
+                or path == "/home/dark/github/sinewave-ee/fouling-sensor/gateway" then
+                linkedProjects = {
+                    "/home/dark/github/sinewave-ee/fouling-sensor/Cargo.toml",
+                    "/home/dark/github/sinewave-ee/fouling-sensor/gateway/Cargo.toml",
+                }
+            end
+
+            return {
+                ["rust-analyzer"] = {
+                    assist = {
+                        importMergeBehavior = "last",
+                        importPrefix = "by_self",
+                    },
+                    cargo = {
+                        -- loadOutDirsFromCheck = true,
+                    },
+                    check = check,
+                    checkOnSave = {
+                        command = "clippy",
+                    },
+                    completion = {
+                        postfix = {
+                            enable = false,
+                        },
+                    },
+                    diagnostics = {
+                        enable = false,
+                        disabled = {
+                            -- "unresolved-proc-macro",
+                            "inactive-code",
+                            "trait-impl-incorrect-safety",
+                            "remove-unnecessary-else",
+                        },
+                    },
+                    inlayHints = {
+                        bindingModeHints = { enable = true },
+                        closureCaptureHints = { enable = true },
+                        closureReturnTypeHints = { enable = "always" },
+                        discriminantHints = { enable = "always" },
+                        expressionAdjustmentHints = { enable = "always" },
+                        genericParametersHints = {
+                            lifetime = { enable = true },
+                            type = { enable = true },
+                        },
+                        implicitDrops = { enable = true },
+                        lifetimeElisionHints = { enable = true },
+                        rangeExclusiveHints = { enable = true },
+                        reborrowHints = { enable = "always" },
+                    },
+                    imports = {
+                        preferNoStd = true,
+                        preferPrelude = false,
+                    },
+                    interpret = {
+                        tests = true,
+                    },
+                    procMacro = {
+                        enable = true,
+                    },
+                    linkedProjects = linkedProjects,
+                },
+            }
+        end,
+    },
+    -- dap = {
+    --     adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
+    -- },
+}
 -- end
 
 -- vim.g.rustaceanvim = {
