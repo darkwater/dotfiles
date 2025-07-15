@@ -197,7 +197,8 @@
         },
         "scroll-step": 5,
         "on-click": "kitty -e pulsemixer",
-        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-click-middle": "$HOME/.config/waybar/cycle-audio-output.sh"
     },
     "custom/3dp": {
         "format": "{text}",
