@@ -187,6 +187,7 @@
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
+            "alsa_output.pci-0000_0e_00.4.iec958-stereo": "",
             "headphone": "",
             "hands-free": "",
             "headset": "",
