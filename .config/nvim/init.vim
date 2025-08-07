@@ -123,8 +123,7 @@ if exists("g:neovide") || $NEOVIDE_REMOTE == "1"
         set guifont=Hack\ Nerd\ Font:h9.0
     endif
 
-    let g:neovide_opacity = 0.92
-    let g:transparency = 0.92
+    let g:neovide_opacity = 0.8
     let g:neovide_scroll_animation_length = 0.12
     let g:neovide_scroll_animation_far_lines = 500
     let g:neovide_hide_mouse_when_typing = v:true
