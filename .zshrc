@@ -1,3 +1,5 @@
+# zmodload zsh/zprof
+
 setopt auto_cd
 setopt append_history
 setopt inc_append_history
@@ -103,13 +105,7 @@ man() {
     nvim +"Man $*" +only
 }
 
-autoload -Uz compinit promptinit colors
-
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+2) ]]; then
-    compinit
-else
-    compinit -C
-fi
+autoload -Uz promptinit colors
 
 promptinit
 colors
@@ -244,11 +240,11 @@ if [[ "$TERM" == "xterm-kitty" ]]; then
     export TERM="xterm-256color"
 fi
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 source ~/.nix-profile/etc/profile.d/nix.sh 2>/dev/null
 source ~/.dart-cli-completion/fvm.zsh 2>/dev/null
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 typeset -A ZSH_HIGHLIGHT_PATTERNS
 ZSH_HIGHLIGHT_HIGHLIGHTERS+=(main pattern)
@@ -265,8 +261,19 @@ export MANPATH="${MANPATH-$(manpath)}:$NPM_PACKAGES/share/man"
 
 export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
 
+
+setopt extendedglob
+autoload -Uz compinit
+# TODO: doesnt work
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+2) ]]; then
+    compinit
+else
+    compinit -C
+fi
 unsetopt extendedglob
 
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
     . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
+
+# zprof
