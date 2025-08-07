@@ -2,6 +2,11 @@
     :root {
         --bgColor-default: transparent !important;
     }
+
+    .TimelineItem::before {
+        /* the line going through all timeline items in issues/prs */
+        background: none !important;
+    }
 }
 
 @-moz-document domain(news.ycombinator.com) {
