@@ -45,6 +45,12 @@
     }
 }
 
+@-moz-document domain(fbk.red) {
+    :root {
+        --background: transparent !important;
+    }
+}
+
 :root {
     /* --darkreader-background-ffffff: transparent !important; */
 }
