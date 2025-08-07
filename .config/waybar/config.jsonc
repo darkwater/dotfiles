@@ -103,10 +103,12 @@
     "cpu": {
         "format": "{usage}% {icon}",
         "format-icons": ["󰾆", "󰾅", "󰓅"],
-        "tooltip": true
+        "tooltip": true,
+        "on-click": "kitty -e htop"
     },
     "memory": {
-        "format": "{percentage}% ({swapPercentage}%) "
+        "format": "{percentage}% ({swapPercentage}%) ",
+        "on-click": "kitty -e htop"
     },
     "bluetooth": {
         "format": "󰂯",
