@@ -1,57 +1,57 @@
-local function LspStatus()
-    return require("lsp-progress").progress({
-        format = function(messages)
-            local active_clients = vim.lsp.get_clients()
-            local client_count = #active_clients
-            if #messages > 0 then
-                return " "
-                .. client_count
-                .. " "
-                .. table.concat(messages, " ")
-            end
-            if #active_clients <= 0 then
-                return " None"
-            else
-                local client_names = {}
-                for i, client in ipairs(active_clients) do
-                    if client and client.name ~= "" then
-                        table.insert(client_names, client.name)
-                        -- print(
-                        --     "client[" .. i .. "]:" .. vim.inspect(client.name)
-                        -- )
-                    end
-                end
-                return " "
-                .. table.concat(client_names, ", ")
-            end
-        end,
-    })
-end
+-- local function LspStatus()
+--     return require("lsp-progress").progress({
+--         format = function(messages)
+--             local active_clients = vim.lsp.get_clients()
+--             local client_count = #active_clients
+--             if #messages > 0 then
+--                 return " "
+--                 .. client_count
+--                 .. " "
+--                 .. table.concat(messages, " ")
+--             end
+--             if #active_clients <= 0 then
+--                 return " None"
+--             else
+--                 local client_names = {}
+--                 for i, client in ipairs(active_clients) do
+--                     if client and client.name ~= "" then
+--                         table.insert(client_names, client.name)
+--                         -- print(
+--                         --     "client[" .. i .. "]:" .. vim.inspect(client.name)
+--                         -- )
+--                     end
+--                 end
+--                 return " "
+--                 .. table.concat(client_names, ", ")
+--             end
+--         end,
+--     })
+-- end
 
-local function LspClients()
-    return require("lsp-progress").progress({
-        format = function(messages)
-            local active_clients = vim.lsp.get_clients()
-            local client_count = #active_clients
-            if #active_clients <= 0 then
-                return " none"
-            else
-                local client_names = {}
-                for i, client in ipairs(active_clients) do
-                    if client and client.name ~= "" then
-                        table.insert(client_names, client.name)
-                        -- print(
-                        --     "client[" .. i .. "]:" .. vim.inspect(client.name)
-                        -- )
-                    end
-                end
-                return 
-                " "
-                .. table.concat(client_names, ", ")
-            end
-        end,
-    })
-end
+-- local function LspClients()
+--     return require("lsp-progress").progress({
+--         format = function(messages)
+--             local active_clients = vim.lsp.get_clients()
+--             local client_count = #active_clients
+--             if #active_clients <= 0 then
+--                 return " none"
+--             else
+--                 local client_names = {}
+--                 for i, client in ipairs(active_clients) do
+--                     if client and client.name ~= "" then
+--                         table.insert(client_names, client.name)
+--                         -- print(
+--                         --     "client[" .. i .. "]:" .. vim.inspect(client.name)
+--                         -- )
+--                     end
+--                 end
+--                 return 
+--                 " "
+--                 .. table.concat(client_names, ", ")
+--             end
+--         end,
+--     })
+-- end
 
 local ayu_mirage = require("lualine.themes.ayu_mirage")
 ayu_mirage.normal.a.bg = "#59c2ff"
@@ -67,6 +67,11 @@ local function xcodebuild_device()
   end
 
   return " " .. vim.g.xcodebuild_device_name
+end
+
+local function cwd()
+    local cwd = vim.fn.getcwd()
+    return cwd:gsub(vim.env.HOME, "~")
 end
 
 ------
@@ -89,9 +94,10 @@ require("lualine").setup {
             path = 1,
         }},
         lualine_b = {"diagnostics"},
-        lualine_c = {"branch"},
+        lualine_c = {cwd, "branch"},
         lualine_x = {
-            LspClients,
+            -- LspStatus,
+            -- LspClients,
             { "' ' .. vim.g.xcodebuild_last_status", color = { fg = "Gray" } },
             { "'󰙨 ' .. vim.g.xcodebuild_test_plan", color = { fg = "#a6e3a1", bg = "#161622" } },
             { xcodebuild_device, color = { fg = "#f9e2af", bg = "#161622" } },
@@ -105,7 +111,7 @@ require("lualine").setup {
             path = 1,
         }},
         lualine_b = {"diagnostics"},
-        lualine_c = {"branch"},
+        lualine_c = {cwd, "branch"},
         lualine_x = {},
         lualine_y = {"diff", "filetype"},
         lualine_z = {"location", "progress"},
