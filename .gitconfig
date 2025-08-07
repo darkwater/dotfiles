@@ -38,7 +38,7 @@
     st = "status"
     sw = "switch"
     l = "log --graph --abbrev=8 --date=relative"
-    la = "log --branches --graph --abbrev=8"
+    la = "log --branches --tags --remotes --graph --abbrev=8"
     pf = "push --force"
     pou = "push --set-upstream origin"
 
