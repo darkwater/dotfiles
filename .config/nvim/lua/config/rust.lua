@@ -22,7 +22,6 @@ require("crates").setup {
     },
     completion = {
         cmp = {
-            enabled = true,
             use_custom_kind = false,
         },
         crates = {
