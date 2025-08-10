@@ -37,6 +37,10 @@
     [dir="ltr"] .horzScrollShadows {
         background: transparent !important;
     }
+
+    body > picture {
+        display: none !important;
+    }
 }
 
 @-moz-document domain(youtube.com) {
