@@ -108,4 +108,5 @@
 [fetch]
     prune = true
     ; pruneTags = true
+    tags = true
     all = true
