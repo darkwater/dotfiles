@@ -38,7 +38,7 @@
     st = "status"
     sw = "switch"
     l = "log --graph --abbrev=8 --date=relative"
-    la = "log --branches --tags --remotes --graph --abbrev=8"
+    la = "log --branches --tags --exclude=origin/release-pr --remotes --graph --abbrev=8"
     pf = "push --force"
     pou = "push --set-upstream origin"
 
@@ -107,6 +107,6 @@
 
 [fetch]
     prune = true
-    ; pruneTags = true
+    pruneTags = true
     tags = true
     all = true
