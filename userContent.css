@@ -60,6 +60,14 @@
     }
 }
 
-:root {
-    /* --darkreader-background-ffffff: transparent !important; */
+@-moz-document domain(git.comforest.software) {
+    .item[href$="/settings/units"] {
+        display: none !important;
+    }
+
+    html {
+        --color-body: transparent !important;
+        --color-nav-bg: transparent !important;
+        --color-secondary-nav-bg: transparent !important;
+    }
 }
