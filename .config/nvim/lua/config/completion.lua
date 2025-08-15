@@ -17,7 +17,7 @@ require("nvim-web-devicons").setup {
 cmp.setup {
     sources = cmp.config.sources({
         { name = "nvim_lsp" },
-        { name = "buffer" },
+        -- { name = "buffer" },
         { name = "path" },
         { name = "nvim_lua" },
         { name = "snippy" },
