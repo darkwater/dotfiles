@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -e
+
+host="$(echo -e "tetsuya\nsinon\nnagumo" | fuzzel --dmenu)"
+
+exec ssh "$host" PATH=/usr/bin:/home/dark/.cargo/bin nvim "$@"
