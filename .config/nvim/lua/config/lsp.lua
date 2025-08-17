@@ -40,6 +40,21 @@ lsp.csharp_ls.setup {}
 
 lsp.gopls.setup {}
 
+vim.api.nvim_create_autocmd("BufEnter", {
+    pattern = {
+        "*.service", "*.mount", "*.device", "*.nspawn", "*.target", "*.timer", "*.path",
+        ".#*.service*", ".#*.mount*", ".#*.device*", ".#*.nspawn*", ".#*.target*", ".#*.timer*", ".#*.path*",
+    },
+    callback = function()
+        vim.bo.filetype = "systemd"
+        vim.lsp.start({
+            name = 'systemd_ls',
+            cmd = { '/home/dark/.cargo/bin/systemd-lsp' }, -- Update this path to your systemd-lsp binary
+            root_dir = vim.fn.getcwd(),
+        })
+    end,
+})
+
 -- lsp.denols.setup {
 --     root_dir = lsp.util.root_pattern("deno.json"),
 -- }
