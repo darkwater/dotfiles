@@ -78,7 +78,6 @@ vim.g.rustaceanvim = {
                 linkedProjects = {
                     "/home/dark/gitea/comforest/firmware/Cargo.toml",
                     "/home/dark/gitea/comforest/firmware/cross/Cargo.toml",
-                    "/home/dark/gitea/comforest/firmware/tools/Cargo.toml",
                 }
                 check = {
                     -- allTargets = false,
