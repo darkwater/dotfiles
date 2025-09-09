@@ -66,4 +66,5 @@ hi link column6 Added
 hi link column7 Changed
 hi link column8 Keyword
 hi link column9 Boolean
+hi link LspReferenceTarget Normal
 ]]
