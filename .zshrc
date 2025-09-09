@@ -188,7 +188,6 @@ genps1() {
     echo -n "%}"
 
     echo
-    [[ -n "$ZSH_PROMPT_AUR_PKG" ]] && echo -n "%{\e[33;1m%}[$ZSH_PROMPT_AUR_PKG] "
     echo -n "%{\e]133;A\a$(hostname_color)%} %m $reset"
 
     if [[ "$(whoami)" != "dark" ]]; then
@@ -196,7 +195,14 @@ genps1() {
     fi
 
     echo -n " $blue%~"
-    echo -n "%(!.$bred # .$aqua %{\xe2\x97%}\x86 )$reset"
+
+    local level=$SHLVL
+    while [ $level -ge 1 ]; do
+        level=$((level - 1))
+        echo -n "%(!.$bred #.$aqua %{\xe2\x97%}\x86)"
+    done
+    echo -n " $reset"
+
 }
 PS1="$(genps1)"
 
