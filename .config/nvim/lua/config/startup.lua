@@ -44,6 +44,7 @@ theta.config.layout[6] = {
         dashboard.button("cet", "󰌪  ETRX3xx", ":cd ~/github/sinewave-ee/etrx3<CR>"),
         dashboard.button("cre", "󰌪  Receiver", ":cd ~/gitea/comforest/receiver-rs<CR>"),
         dashboard.button("cpo", "󰌪  Protocol", ":cd ~/gitea/comforest/protocol<CR>"),
+        dashboard.button("cto", "󰌪  Toolchain", ":cd ~/gitea/comforest/toolchain<CR>"),
         { type = "padding", val = 2 },
         { type = "text", val = "Sinewave", opts = { hl = "SpecialComment", position = "center" } },
         { type = "padding", val = 1 },
