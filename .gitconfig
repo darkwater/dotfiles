@@ -38,8 +38,8 @@
     st = "status"
     sw = "switch"
     l = "log --graph --abbrev=8 --date=relative"
-    la = "log --branches --tags --exclude=origin/release-pr --remotes --graph --abbrev=8"
-    pf = "push --force"
+    la = "log --branches --tags --exclude=origin/release-pr --exclude=origin/release-plz* --remotes --tags --graph --abbrev=8"
+    pf = "push --force-with-lease"
     pou = "push --set-upstream origin"
 
 [log]
