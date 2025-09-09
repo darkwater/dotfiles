@@ -314,6 +314,7 @@ wk.add {
     { "<leader>r<C-r>", shell("cargo run --release", true),        desc = "Run (release)" },
     { "<leader>rt",     shell("cargo nextest run", false),         desc = "Test" },
     { "<leader>rb",     shell("cargo bench", false),               desc = "Bench" },
+    { "<leader>rd",     shell("cargo doc --open", true),           desc = "Docs (open)" },
     { "<leader>rC",     Cmd("RustLsp openCargo"),                  desc = "Open Cargo.toml" },
     { "<leader>rm",     Cmd("RustLsp expandMacro"),                desc = "Expand macro" },
     { "<leader>rl",     Cmd("FerrisViewMemoryLayout"),             desc = "View memory layout" },
