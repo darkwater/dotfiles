@@ -108,7 +108,7 @@ require("nvim-treesitter.configs").setup {
         "json", "yaml", "toml", "ron",
         "html", "css", "javascript", "typescript",
         "python", "lua", "bash", "cpp", "swift",
-        "dockerfile",
+        "dockerfile", "mermaid",
         "org", "markdown", "markdown_inline", "sql",
         "regex", "comment",
     },
