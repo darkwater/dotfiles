@@ -71,17 +71,12 @@ vim.g.rustaceanvim = {
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
         settings = function (path)
             local linkedProjects
-            local check
 
             if path == "/home/dark/gitea/comforest/firmware"
                 or path == "/home/dark/gitea/comforest/firmware/cross" then
                 linkedProjects = {
                     "/home/dark/gitea/comforest/firmware/Cargo.toml",
                     "/home/dark/gitea/comforest/firmware/cross/Cargo.toml",
-                }
-                check = {
-                    -- allTargets = false,
-                    -- extraArgs = { "--bins", "--libs" },
                 }
             end
 
@@ -96,16 +91,13 @@ vim.g.rustaceanvim = {
             return {
                 ["rust-analyzer"] = {
                     assist = {
+                        preferSelf = true,
                         importMergeBehavior = "last",
                         importPrefix = "by_self",
                     },
-                    cargo = {
-                        -- loadOutDirsFromCheck = true,
-                    },
-                    check = check,
-                    checkOnSave = {
-                        command = "clippy",
-                    },
+                    cargo = {},
+                    check = {},
+                    checkOnSave = true,
                     completion = {
                         postfix = {
                             enable = false,
