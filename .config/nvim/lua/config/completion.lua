@@ -4,7 +4,8 @@ local colorful = require("colorful-menu")
 colorful.setup {
     ls = {
         ["rust-analyzer"] = {
-            align_type_to_right = false,
+            extra_info_hl = "@comment",
+            align_type_to_right = true,
         },
     },
     max_width = 60,
@@ -70,8 +71,15 @@ cmp.setup {
                 end
             end
 
-            vim_item.menu = ""
-            vim_item.menu_hl_group = ""
+            -- print(vim.inspect(entry.completion_item))
+            -- print(vim.inspect(entry.completion_item.labelDetails.detail))
+
+            if entry.completion_item.labelDetails ~= nil and entry.completion_item.labelDetails.detail ~= nil then
+                vim_item.menu = entry.completion_item.labelDetails.detail
+            else
+                vim_item.menu = ""
+            end
+            -- vim_item.menu_hl_group = ""
 
             local vim_item = require('lspkind').cmp_format{ mode = "symbol" }(entry, vim_item)
 
