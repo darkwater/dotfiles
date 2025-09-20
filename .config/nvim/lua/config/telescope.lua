@@ -37,6 +37,7 @@ telescope.setup {
             "\\.git/",
             "%.g.dart",
             "%.freezed.dart",
+            "Cargo.lock",
         },
     },
     pickers = {
