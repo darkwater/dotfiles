@@ -90,6 +90,7 @@ if $USER != "root"
         Plug 'mechatroner/rainbow_csv'
         Plug 'CopilotC-Nvim/CopilotChat.nvim'
         Plug '2KAbhishek/nerdy.nvim'
+        Plug 'norcalli/nvim-colorizer.lua'
 
         if hostname() != "sinon"
             Plug 'ActivityWatch/aw-watcher-vim'
