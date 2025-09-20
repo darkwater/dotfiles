@@ -16,13 +16,16 @@
 }
 
 @-moz-document domain(docs.rs) {
-    body, .sidebar {
-        background-color: transparent !important;
-    }
-
-    .nav-container {
-        backdrop-filter: opacity(50%) !important;
-    }
+    body, .sidebar { background-color: transparent !important; }
+    .nav-container { backdrop-filter: opacity(50%) !important; }
+}
+@-moz-document domain(docs.embassy.dev) {
+    body, .sidebar { background-color: transparent !important; }
+    .nav-container { backdrop-filter: opacity(50%) !important; }
+}
+@-moz-document domain(rustdocs.comforest.software) {
+    html, body, .sidebar { background-color: transparent !important; }
+    .nav-container { backdrop-filter: opacity(50%) !important; }
 }
 
 @-moz-document domain(chatgpt.com) {
