@@ -139,6 +139,10 @@ button:hover {
 #custom-3dp        { color: @sky; }
 #custom-swaync     { color: @maroon; }
 
+#custom-forgejo.running { color: @blue; }
+#custom-forgejo.success { color: @green; }
+#custom-forgejo.failed  { color: @red; }
+
 #battery.critical:not(.charging) {
     animation-name: battery-blink;
     animation-duration: 1s;
