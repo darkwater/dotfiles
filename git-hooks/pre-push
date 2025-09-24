@@ -1,0 +1,47 @@
+#!/bin/bash
+
+set -eu
+
+remote="$2"
+
+if [[ "$1" != "__detached__" ]]; then
+    ( "$0" "__detached__" "$2" ) & disown
+    exit 0
+fi
+
+if [[ "$remote" != "comforest:"* ]]; then
+  echo "Pushing to non-comforest remote: $remote"
+  exit 0
+fi
+
+repo="${remote#comforest:}"
+
+sleep 10s
+
+id="$(fgj "repos/$repo/actions/runs?event=push&status=running" | jq -r '.workflow_runs | last | .id')"
+
+if [[ -z "$id" ]]; then
+  exit 0
+fi
+
+while true; do
+    res="$(fgj "repos/$repo/actions/runs/$id")"
+
+    echo "$res" |
+        jq -cr '{
+            text: "\(.status) ",
+            class: .status,
+            url: .html_url
+        }' \
+        > /run/user/1000/last-action-status
+
+    case "$(echo "$res" | jq -r '.status')" in
+        "running" | "waiting")
+            ;;
+        *)
+            exit 0
+            ;;
+    esac
+
+    sleep 15s
+done
