@@ -14,6 +14,7 @@
     "modules-center": [
     ],
     "modules-right": [
+        "custom/forgejo",
         "custom/3dp",
         "custom/swaync",
         "pulseaudio",
@@ -202,6 +203,13 @@
         "on-click": "kitty -e pulsemixer",
         "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
         "on-click-middle": "$HOME/.config/waybar/cycle-audio-output.sh"
+    },
+    "custom/forgejo": {
+        "format": "{text}",
+        "interval": 5,
+        "exec": "cat /run/user/1000/last-action-status",
+        "return-type": "json",
+        "on-click": "xdg-open $(jq </run/user/1000/last-action-status -r .url)"
     },
     "custom/3dp": {
         "format": "{text}",
