@@ -16,7 +16,7 @@ fi
 
 repo="${remote#comforest:}"
 
-sleep 10s
+sleep 5s
 
 id="$(fgj "repos/$repo/actions/runs?event=push&status=running" | jq -r '.workflow_runs | last | .id')"
 
