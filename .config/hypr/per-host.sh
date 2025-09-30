@@ -48,6 +48,12 @@ else
     case "$(hostname)" in
     "tetsuya")
         xrandr --output DP-1 --primary
+        ( sleep 10 && xrandr --output DP-1 --primary) &
+        ( sleep 20 && xrandr --output DP-1 --primary) &
+        ( sleep 30 && xrandr --output DP-1 --primary) &
+        ( sleep 1m && xrandr --output DP-1 --primary) &
+        ( sleep 2m && xrandr --output DP-1 --primary) &
+        ( sleep 5m && xrandr --output DP-1 --primary) &
         ;;
     "nagumo")
         pkill hypridle
