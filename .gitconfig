@@ -70,6 +70,7 @@
 
 [interactive]
     diffFilter = delta --color-only
+    singleKey = true
 
 [merge]
     conflictstyle = zdiff3
