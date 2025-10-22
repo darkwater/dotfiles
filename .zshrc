@@ -28,7 +28,7 @@ alias c="cargo"
 alias g="git"
 alias h="hyprctl --instance 0"
 alias s="ssh"
-alias x="cargo xtask"
+# alias x="cargo xtask"
 
 alias sysa="sysz -s active"
 alias scu="systemctl --user"
@@ -101,9 +101,10 @@ downloads() {
     eza -alF -snew --color=always | tail
 }
 
-man() {
-    nvim +"Man $*" +only
-}
+# man() {
+#     nvim +"Man $*" +only
+# }
+export MANPAGER="nvim +Man!"
 
 autoload -Uz promptinit colors
 
