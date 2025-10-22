@@ -101,9 +101,6 @@ downloads() {
     eza -alF -snew --color=always | tail
 }
 
-# man() {
-#     nvim +"Man $*" +only
-# }
 export MANPAGER="nvim +Man!"
 
 autoload -Uz promptinit colors
