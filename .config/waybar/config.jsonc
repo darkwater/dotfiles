@@ -105,11 +105,11 @@
         "format": "{usage}% {icon}",
         "format-icons": ["󰾆", "󰾅", "󰓅"],
         "tooltip": true,
-        "on-click": "kitty -e htop"
+        "on-click": "kitty -e btop"
     },
     "memory": {
         "format": "{percentage}% ({swapPercentage}%) ",
-        "on-click": "kitty -e htop"
+        "on-click": "kitty -e btop"
     },
     "bluetooth": {
         "format": "󰂯",
@@ -221,6 +221,7 @@
         "tooltip": false,
         "interval": 5,
         "exec": "$HOME/.config/waybar/swaync.sh 2>/dev/null",
-        "on-click": "swaync-client -d; swaync-client -C"
+        "on-click": "swaync-client -d; swaync-client -C",
+        "on-click-right": "swaync-client -t"
     }
 }
