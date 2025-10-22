@@ -34,7 +34,7 @@ lsp.qmlls.setup {
 
 lsp.ts_ls.setup {}
 
--- lsp.clangd.setup {}
+lsp.clangd.setup {}
 
 lsp.csharp_ls.setup {}
 
