@@ -16,24 +16,32 @@
 }
 
 @-moz-document domain(docs.rs) {
-    :root[data-theme="ayu"] { --table-alt-row-background-color: #191f2680 !important; }
-    body, .sidebar { background-color: transparent !important; }
-    .nav-container { backdrop-filter: opacity(50%) !important; }
+    :root[data-theme="ayu"] {
+        --table-alt-row-background-color: #191f2680 !important;
+        html, body, .sidebar { background-color: transparent !important; }
+        .nav-container { backdrop-filter: opacity(50%) !important; }
+    }
 }
 @-moz-document domain(docs.embassy.dev) {
-    :root[data-theme="ayu"] { --table-alt-row-background-color: #191f2680 !important; }
-    body, .sidebar { background-color: transparent !important; }
-    .nav-container { backdrop-filter: opacity(50%) !important; }
+    :root[data-theme="ayu"] {
+        --table-alt-row-background-color: #191f2680 !important;
+        html, body, .sidebar { background-color: transparent !important; }
+        .nav-container { backdrop-filter: opacity(50%) !important; }
+    }
 }
 @-moz-document domain(rustdocs.comforest.software) {
-    :root[data-theme="ayu"] { --table-alt-row-background-color: #191f2680 !important; }
-    html, body, .sidebar { background-color: transparent !important; }
-    .nav-container { backdrop-filter: opacity(50%) !important; }
+    :root[data-theme="ayu"] {
+        --table-alt-row-background-color: #191f2680 !important;
+        html, body, .sidebar { background-color: transparent !important; }
+        .nav-container { backdrop-filter: opacity(50%) !important; }
+    }
 }
 @-moz-document domain(localhost) {
-    :root[data-theme="ayu"] { --table-alt-row-background-color: #191f2680 !important; }
-    html, body, .sidebar { background-color: transparent !important; }
-    .nav-container { backdrop-filter: opacity(50%) !important; }
+    :root[data-theme="ayu"] {
+        --table-alt-row-background-color: #191f2680 !important;
+        html, body, .sidebar { background-color: transparent !important; }
+        .nav-container { backdrop-filter: opacity(50%) !important; }
+    }
 }
 
 @-moz-document domain(chatgpt.com) {
