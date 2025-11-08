@@ -18,7 +18,9 @@ if [[ "$1" = "once" ]]; then
 
     if [[ "$hostname" = "tetsuya" ]]; then
         launch hypridle
-        sleep 5s; launch openrgb -p pride
+        sleep 3s; hyprctl keyword monitor DP-1, disable
+        sleep 2s; launch openrgb -p pride
+        sleep 10s; hyprctl reload
     fi
 
     if [[ "$hostname" = "nagumo" ]]; then
