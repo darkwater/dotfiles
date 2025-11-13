@@ -15,6 +15,13 @@
     }
 }
 
+@-moz-document domain(doc.rust-lang.org) {
+    :root[data-theme="ayu"] {
+        --table-alt-row-background-color: #191f2680 !important;
+        html, body, .sidebar { background-color: transparent !important; }
+        .nav-container { backdrop-filter: opacity(50%) !important; }
+    }
+}
 @-moz-document domain(docs.rs) {
     :root[data-theme="ayu"] {
         --table-alt-row-background-color: #191f2680 !important;
