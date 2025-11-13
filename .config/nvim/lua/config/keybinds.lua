@@ -316,6 +316,7 @@ wk.add {
     { "<leader>rb",     shell("cargo bench", false),               desc = "Bench" },
     { "<leader>rd",     shell("cargo doc --open", true),           desc = "Docs (open)" },
     { "<leader>rC",     Cmd("RustLsp openCargo"),                  desc = "Open Cargo.toml" },
+    { "<leader>r<C-d>", Cmd("RustLsp openDocs"),                   desc = "Open docs for item under cursor" },
     { "<leader>rm",     Cmd("RustLsp expandMacro"),                desc = "Expand macro" },
     { "<leader>rl",     Cmd("FerrisViewMemoryLayout"),             desc = "View memory layout" },
     { "<leader>rF",     require("crates").show_features_popup,     desc = "Show features" },
