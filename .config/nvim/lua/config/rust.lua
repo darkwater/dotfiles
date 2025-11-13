@@ -96,7 +96,9 @@ vim.g.rustaceanvim = {
                         importPrefix = "by_self",
                     },
                     cargo = {},
-                    check = {},
+                    check = {
+                        command = "clippy",
+                    },
                     checkOnSave = true,
                     completion = {
                         postfix = {
