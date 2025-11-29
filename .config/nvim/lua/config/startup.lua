@@ -42,7 +42,7 @@ theta.config.layout[6] = {
         dashboard.button("csf", "󰌪  SICshark v2 Flutter", ":cd ~/gitea/comforest/sicshark<CR>"),
         dashboard.button("cs1", "󰌪  SICshark", ":cd ~/github/sinewave-ee/sicshark<CR>"),
         dashboard.button("ctb", "󰌪  Testboard UI", ":cd ~/gitea/comforest/testboard-ui<CR>"),
-        dashboard.button("cet", "󰌪  ETRX3xx", ":cd ~/github/sinewave-ee/etrx3<CR>"),
+        dashboard.button("cet", "󰌪  ETRX3xx", ":cd ~/gitea/comforest/etrx3<CR>"),
         dashboard.button("cre", "󰌪  Receiver", ":cd ~/gitea/comforest/receiver-rs<CR>"),
         dashboard.button("cpo", "󰌪  Protocol", ":cd ~/gitea/comforest/protocol<CR>"),
         dashboard.button("cto", "󰌪  Toolchain", ":cd ~/gitea/comforest/toolchain<CR>"),
