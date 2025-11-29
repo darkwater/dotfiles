@@ -12,6 +12,7 @@
         // "custom/media"
     ],
     "modules-center": [
+        "mpd",
     ],
     "modules-right": [
         "custom/forgejo",
@@ -29,6 +30,23 @@
         "clock"
     ],
     // Modules configuration
+    "mpd": {
+        "server": "192.168.0.106",
+        "format": "{artist} - {title}  󰓃 {volume}%",
+        "format-paused": " {artist} - {title}",
+        "format-disconnected": "󰝚 󰌙",
+        "format-icons": {
+            "playing": "",
+            "paused": "",
+            "stopped": ""
+        },
+        "on-click": "mpc -h 192.168.0.106 toggle",
+        "on-click-middle": "mpc -h 192.168.0.106 next",
+        "on-click-right": "kitty -e rmpc -a 192.168.0.106:6600",
+        "on-scroll-up": "mpc -h 192.168.0.106 vol +5",
+        "on-scroll-down": "mpc -h 192.168.0.106 vol -5",
+        "tooltip-format": "{artist}\n{album}\n{title}"
+    },
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
@@ -191,6 +209,8 @@
         "format-source-muted": "",
         "format-icons": {
             "alsa_output.pci-0000_0e_00.4.iec958-stereo": "",
+            "alsa_output.pci-0000_0c_00.1.hdmi-stereo": "󰽟",
+            "bluez_output.6C_5C_3D_3C_67_40.1": "󰓃",
             "headphone": "",
             "hands-free": "",
             "headset": "",
