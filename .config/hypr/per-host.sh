@@ -19,7 +19,8 @@ if [[ "$1" = "once" ]]; then
     if [[ "$hostname" = "tetsuya" ]]; then
         launch hypridle
         sleep 3s; hyprctl keyword monitor DP-1, disable
-        sleep 2s; launch openrgb -p pride
+        systemctl --user start hyprpolkitagent
+        sleep 2s; #launch openrgb -p pride
         sleep 10s; hyprctl reload
     fi
 
@@ -36,7 +37,6 @@ if [[ "$1" = "once" ]]; then
         sleep 0; launch gtk-launch zen
         sleep 2; launch gtk-launch vesktop
         sleep 5; launch gtk-launch org.telegram.desktop.desktop
-        # sicshark-2
     else
         (
             sleep 2
