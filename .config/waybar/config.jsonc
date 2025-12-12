@@ -32,20 +32,36 @@
     // Modules configuration
     "mpd": {
         "server": "192.168.0.106",
-        "format": "{artist} - {title}  󰓃 {volume}%",
-        "format-paused": " {artist} - {title}",
+        "format": "{stateIcon}  {artist} - {title}  󰓃 {volume}%  {randomIcon} {repeatIcon} {singleIcon} {consumeIcon}",
         "format-disconnected": "󰝚 󰌙",
-        "format-icons": {
+        "state-icons": {
             "playing": "",
             "paused": "",
-            "stopped": ""
+            "stopped": "",
         },
-        "on-click": "mpc -h 192.168.0.106 toggle",
+        "random-icons": {
+            "on": "",
+            "off": " "
+        },
+        "repeat-icons": {
+            "on": "",
+            "off": " "
+        },
+        "single-icons": {
+            "on": "󰲠",
+            "off": " "
+        },
+        "consume-icons": {
+            "on": "󰒦",
+            "off": " "
+        },
+        // "on-click": "kitty -e rmpc -a 192.168.0.106:6600",
+        "on-click": "kitty -e ncmpcpp -h 192.168.0.106",
         "on-click-middle": "mpc -h 192.168.0.106 next",
-        "on-click-right": "kitty -e rmpc -a 192.168.0.106:6600",
+        "on-click-right": "mpc -h 192.168.0.106 toggle",
         "on-scroll-up": "mpc -h 192.168.0.106 vol +5",
         "on-scroll-down": "mpc -h 192.168.0.106 vol -5",
-        "tooltip-format": "{artist}\n{album}\n{title}"
+        "tooltip-format": "{artist}\n{album}\n{title}",
     },
     "hyprland/workspaces": {
         "disable-scroll": true,
