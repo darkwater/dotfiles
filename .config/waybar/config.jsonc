@@ -66,9 +66,14 @@
     },
     "mpris": {
         "ignored-players": [ "mpd" ],
-        "format": "{dynamic}",
+        "format": "{status_icon}  {dynamic}",
         "on-click-middle": "playerctl next",
         "on-click-right": "playerctl play-pause",
+        "status-icons": {
+            "playing": "",
+            "paused": "",
+            "stopped": ""
+        },
     },
     "hyprland/workspaces": {
         "disable-scroll": true,
