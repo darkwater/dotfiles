@@ -13,6 +13,7 @@
     ],
     "modules-center": [
         "mpd",
+        "mpris",
     ],
     "modules-right": [
         "custom/forgejo",
@@ -62,6 +63,12 @@
         "on-scroll-up": "mpc -h 192.168.0.106 vol +5",
         "on-scroll-down": "mpc -h 192.168.0.106 vol -5",
         "tooltip-format": "{artist}\n{album}\n{title}",
+    },
+    "mpris": {
+        "ignored-players": [ "mpd" ],
+        "format": "{dynamic}",
+        "on-click-middle": "playerctl next",
+        "on-click-right": "playerctl play-pause",
     },
     "hyprland/workspaces": {
         "disable-scroll": true,
