@@ -383,8 +383,8 @@ wk.add {
 
     { "<leader><Tab>", group = "tabular" },
     { "<leader><Tab>=", Cmd("Tabularize /^[^=]*\\zs="), desc = "=" },
-    { "<leader><Tab><", Cmd("Tabularize /<-"), desc = "<-" },
-    { "<leader><Tab>>", Cmd("Tabularize /->"), desc = "->" },
+    { "<leader><Tab><", Cmd("Tabularize /<[-=]"), desc = "<-" },
+    { "<leader><Tab>>", Cmd("Tabularize /[-=]>"), desc = "->" },
     { '<leader><Tab>"', Cmd('Tabularize /"'), desc = '"'},
     { '<leader><Tab>#', Cmd('Tabularize /#'), desc = '#'},
     { '<leader><Tab>(', Cmd('Tabularize /('), desc = '('},
