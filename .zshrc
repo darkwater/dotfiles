@@ -43,6 +43,7 @@ alias spr="sudo pacman -Rs"
 alias pss="pacman -Ss"
 alias psi="pacman -Si"
 alias pql="pacman -Ql"
+alias pqi="pacman -Qi"
 alias pqo="pacman -Qo"
 
 alias ys="yay -S"
