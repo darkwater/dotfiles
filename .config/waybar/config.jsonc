@@ -33,7 +33,7 @@
     // Modules configuration
     "mpd": {
         "server": "192.168.0.106",
-        "format": "{stateIcon}  {artist} - {title}  󰓃 {volume}%  {randomIcon} {repeatIcon} {singleIcon} {consumeIcon}",
+        "format": "{stateIcon}  {artist} - {title}  󰓃 {volume}%  {repeatIcon}{randomIcon}{singleIcon}{consumeIcon}",
         "format-disconnected": "󰝚 󰌙",
         "state-icons": {
             "playing": "",
@@ -41,20 +41,20 @@
             "stopped": "",
         },
         "random-icons": {
-            "on": "",
-            "off": " "
+            "on": " ",
+            "off": ""
         },
         "repeat-icons": {
-            "on": "",
-            "off": " "
+            "on": " ",
+            "off": ""
         },
         "single-icons": {
-            "on": "󰲠",
-            "off": " "
+            "on": "󰲠 ",
+            "off": ""
         },
         "consume-icons": {
-            "on": "󰒦",
-            "off": " "
+            "on": "󰒦 ",
+            "off": ""
         },
         // "on-click": "kitty -e rmpc -a 192.168.0.106:6600",
         "on-click": "kitty -e ncmpcpp -h 192.168.0.106",
