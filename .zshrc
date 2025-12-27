@@ -51,7 +51,7 @@ alias ysyu="yay -Syu"
 alias yss="yay -Ss"
 alias ysi="yay -Si"
 alias yql="yay -Ql"
-alias yqo="yay -Ql"
+alias yqo="yay -Qo"
 
 alias sai="sudo apt install"
 alias apts="apt search"
