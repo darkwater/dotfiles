@@ -60,6 +60,8 @@ alias ip="ip --color=auto"
 alias fd="fd --glob"
 alias rsync="rsync --progress --human-readable"
 
+alias clear="printf '\e[3J\e[H\e[2J'"
+
 md() {
     mkdir "$@" && cd "$@"
 }
