@@ -1,104 +1,105 @@
-if $USER != "root"
-    call plug#begin()
+" if $USER != "root"
+"     call plug#begin()
 
-    Plug 'tpope/vim-abolish'         " better search/replace
-    Plug 'tpope/vim-characterize'    " better ga
-    Plug 'tpope/vim-commentary'      " toggle comments with gc
-    Plug 'tpope/vim-endwise'         " auto-end
-    Plug 'tpope/vim-fugitive'        " git
-    Plug 'tpope/vim-repeat'          " more support for .
-    Plug 'tpope/vim-rsi'             " readline-style insertion
-    Plug 'tpope/vim-speeddating'     " increment dates
-    Plug 'tpope/vim-surround'        " surround with pairs
-    Plug 'godlygeek/tabular'         " tabularize code
-    Plug 'AndrewRadev/splitjoin.vim' " split/join lines
+"     Plug 'tpope/vim-abolish'         " better search/replace
+"     Plug 'tpope/vim-characterize'    " better ga
+"     Plug 'tpope/vim-commentary'      " toggle comments with gc
+"     Plug 'tpope/vim-endwise'         " auto-end
+"     Plug 'tpope/vim-fugitive'        " git
+"     Plug 'tpope/vim-repeat'          " more support for .
+"     Plug 'tpope/vim-rsi'             " readline-style insertion
+"     Plug 'tpope/vim-speeddating'     " increment dates
+"     Plug 'tpope/vim-surround'        " surround with pairs
+"     Plug 'godlygeek/tabular'         " tabularize code
+"     Plug 'AndrewRadev/splitjoin.vim' " split/join lines
 
-    if !exists("g:vscode")
-        " Plug 'file:///Users/dark/github/darkwater/flutter.nvim'
-        " Plug 'darkwater/flutter.nvim'
+"     if !exists("g:vscode")
+"         " Plug 'file:///Users/dark/github/darkwater/flutter.nvim'
+"         " Plug 'darkwater/flutter.nvim'
 
-        Plug 'MunifTanjim/nui.nvim',
-        Plug 'Saecki/crates.nvim'
-        Plug 'Shatur/neovim-ayu'
-        Plug 'akinsho/flutter-tools.nvim'
-        Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
-        Plug 'andythigpen/nvim-coverage'
-        Plug 'dcampos/cmp-snippy'
-        Plug 'dcampos/nvim-snippy'
-        Plug 'evanleck/vim-svelte', {'branch': 'main'}
-        Plug 'folke/noice.nvim'
-        Plug 'folke/trouble.nvim'
-        Plug 'folke/which-key.nvim'
-        Plug 'github/copilot.vim'
-        Plug 'glts/vim-magnum'
-        Plug 'glts/vim-radical'
-        Plug 'hrsh7th/cmp-buffer'
-        Plug 'hrsh7th/cmp-nvim-lsp'
-        Plug 'hrsh7th/cmp-nvim-lua'
-        Plug 'hrsh7th/cmp-path'
-        Plug 'hrsh7th/nvim-cmp'
-        Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
-        " Plug 'jose-elias-alvarez/null-ls.nvim'
-        Plug 'nvimtools/none-ls.nvim'
-        Plug 'jparise/vim-graphql'
-        Plug 'kevinhwang91/nvim-ufo'
-        Plug 'kevinhwang91/promise-async'
-        Plug 'lewis6991/gitsigns.nvim'
-        Plug 'mrcjkb/rustaceanvim'
-        Plug 'darkwater/ferris.nvim'
-        Plug 'lvimuser/lsp-inlayhints.nvim'
-        Plug 'neovim/nvim-lspconfig'
-        Plug 'nvchad/nvterm'
-        Plug 'nvim-lua/plenary.nvim'
-        Plug 'nvim-lualine/lualine.nvim'
-        Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' }
-        Plug 'nvim-orgmode/orgmode'
-        Plug 'nvim-telescope/telescope.nvim'
-        Plug 'nvim-telescope/telescope-ui-select.nvim'
-        Plug 'aznhe21/actions-preview.nvim'
-        Plug 'nvim-tree/nvim-web-devicons'
-        Plug 'nvim-treesitter/nvim-treesitter'
-        Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-        Plug 'onsails/lspkind.nvim'
-        Plug 'othree/html5.vim'
-        Plug 'pangloss/vim-javascript'
-        Plug 'phaazon/hop.nvim'
-        Plug 'rcarriga/nvim-notify'
-        " Plug 'stevearc/dressing.nvim' " optional for vim.ui.select
-        " Plug 'stevearc/overseer.nvim'
-        Plug 'tikhomirov/vim-glsl'
-        Plug 'pest-parser/pest.vim'
-        Plug 'mfussenegger/nvim-dap'
-        Plug 'nvim-neotest/nvim-nio'
-        Plug 'rcarriga/nvim-dap-ui'
-        Plug 'vimoutliner/vimoutliner'
-        Plug 'wojciech-kulik/xcodebuild.nvim'
-        Plug 's1n7ax/nvim-window-picker'
-        Plug 'aklt/plantuml-syntax'
-        Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
-        Plug 'jbyuki/venn.nvim'
-        Plug 'goolord/alpha-nvim'
-        Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-        Plug 'dcharbon/vim-flatbuffers'
-        Plug 'DNLHC/glance.nvim'
-        Plug 'mikesmithgh/kitty-scrollback.nvim'
-        Plug 'topaxi/pipeline.nvim'
-        Plug 'nvim-neotest/neotest'
-        Plug 'xzbdmw/colorful-menu.nvim'
-        " Plug 'olimorris/codecompanion.nvim'
-        Plug 'sindrets/diffview.nvim'
-        Plug 'mechatroner/rainbow_csv'
-        Plug 'CopilotC-Nvim/CopilotChat.nvim'
-        Plug '2KAbhishek/nerdy.nvim'
-        Plug 'norcalli/nvim-colorizer.lua'
+"         Plug 'MunifTanjim/nui.nvim',
+"         Plug 'Saecki/crates.nvim'
+"         Plug 'Shatur/neovim-ayu'
+"         Plug 'akinsho/flutter-tools.nvim'
+"         Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+"         Plug 'andythigpen/nvim-coverage'
+"         Plug 'dcampos/cmp-snippy'
+"         Plug 'dcampos/nvim-snippy'
+"         Plug 'evanleck/vim-svelte', {'branch': 'main'}
+"         Plug 'folke/noice.nvim'
+"         Plug 'folke/trouble.nvim'
+"         Plug 'folke/which-key.nvim'
+"         Plug 'github/copilot.vim'
+"         Plug 'glts/vim-magnum'
+"         Plug 'glts/vim-radical'
+"         Plug 'hrsh7th/cmp-buffer'
+"         Plug 'hrsh7th/cmp-nvim-lsp'
+"         Plug 'hrsh7th/cmp-nvim-lua'
+"         Plug 'hrsh7th/cmp-path'
+"         Plug 'hrsh7th/nvim-cmp'
+"         Plug 'j-hui/fidget.nvim', { 'tag': 'legacy' }
+"         " Plug 'jose-elias-alvarez/null-ls.nvim'
+"         Plug 'nvimtools/none-ls.nvim'
+"         Plug 'jparise/vim-graphql'
+"         Plug 'kevinhwang91/nvim-ufo'
+"         Plug 'kevinhwang91/promise-async'
+"         Plug 'lewis6991/gitsigns.nvim'
+"         Plug 'mrcjkb/rustaceanvim'
+"         Plug 'darkwater/ferris.nvim'
+"         Plug 'lvimuser/lsp-inlayhints.nvim'
+"         Plug 'neovim/nvim-lspconfig'
+"         Plug 'nvchad/nvterm'
+"         Plug 'nvim-lua/plenary.nvim'
+"         Plug 'nvim-lualine/lualine.nvim'
+"         Plug 'nvim-neo-tree/neo-tree.nvim', { 'branch': 'v3.x' }
+"         Plug 'nvim-orgmode/orgmode'
+"         Plug 'nvim-telescope/telescope.nvim'
+"         Plug 'nvim-telescope/telescope-ui-select.nvim'
+"         Plug 'aznhe21/actions-preview.nvim'
+"         Plug 'nvim-tree/nvim-web-devicons'
+"         Plug 'nvim-treesitter/nvim-treesitter'
+"         " Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+"         Plug 'onsails/lspkind.nvim'
+"         Plug 'othree/html5.vim'
+"         Plug 'pangloss/vim-javascript'
+"         Plug 'phaazon/hop.nvim'
+"         Plug 'rcarriga/nvim-notify'
+"         " Plug 'stevearc/dressing.nvim' " optional for vim.ui.select
+"         " Plug 'stevearc/overseer.nvim'
+"         Plug 'tikhomirov/vim-glsl'
+"         Plug 'pest-parser/pest.vim'
+"         Plug 'mfussenegger/nvim-dap'
+"         Plug 'nvim-neotest/nvim-nio'
+"         Plug 'rcarriga/nvim-dap-ui'
+"         Plug 'vimoutliner/vimoutliner'
+"         Plug 'wojciech-kulik/xcodebuild.nvim'
+"         Plug 's1n7ax/nvim-window-picker'
+"         Plug 'aklt/plantuml-syntax'
+"         Plug 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+"         Plug 'jbyuki/venn.nvim'
+"         Plug 'goolord/alpha-nvim'
+"         Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+"         Plug 'dcharbon/vim-flatbuffers'
+"         Plug 'DNLHC/glance.nvim'
+"         Plug 'mikesmithgh/kitty-scrollback.nvim'
+"         Plug 'topaxi/pipeline.nvim'
+"         Plug 'nvim-neotest/neotest'
+"         Plug 'xzbdmw/colorful-menu.nvim'
+"         " Plug 'olimorris/codecompanion.nvim'
+"         Plug 'sindrets/diffview.nvim'
+"         Plug 'mechatroner/rainbow_csv'
+"         Plug 'CopilotC-Nvim/CopilotChat.nvim'
+"         Plug '2KAbhishek/nerdy.nvim'
+"         Plug 'norcalli/nvim-colorizer.lua'
+"         Plug 'NickvanDyke/opencode.nvim'
 
-        if hostname() != "sinon"
-            Plug 'ActivityWatch/aw-watcher-vim'
-        endif
-    endif
+"         if hostname() != "sinon"
+"             Plug 'ActivityWatch/aw-watcher-vim'
+"         endif
+    " endif
 
-    call plug#end()
-endif
+    " call plug#end()
+" endif
 
 autocmd FileType c         setlocal commentstring=//\ %s
 autocmd FileType cpp       setlocal commentstring=//\ %s
@@ -124,7 +125,7 @@ if exists("g:neovide") || $NEOVIDE_REMOTE == "1"
         set guifont=Hack\ Nerd\ Font:h9.0
     endif
 
-    let g:neovide_opacity = 0.8
+    let g:neovide_opacity = 0.92
     let g:neovide_scroll_animation_length = 0.12
     let g:neovide_scroll_animation_far_lines = 500
     let g:neovide_hide_mouse_when_typing = v:true
@@ -207,7 +208,7 @@ set wildmenu
 " display
 set cursorline
 set list
-set wrap
+set nowrap
 set showbreak=󱞩
 set number
 set relativenumber
@@ -315,9 +316,10 @@ if exists("g:vscode")
 
     nnoremap gf <Cmd>e <cWORD><CR>
 elseif $USER != "root"
+    lua require "config.lazy"
+
     " lua require("orgmode").setup_ts_grammar()
 
-    lua require "config.treesitter"
     lua require "config.lsp"
 
     lua require "config.ai"
@@ -351,5 +353,5 @@ elseif $USER != "root"
     "
     lua require "config.keybinds"
 
-    lua require("kitty-scrollback").setup {}
+    " lua require("kitty-scrollback").setup {}
 endif
