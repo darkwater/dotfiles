@@ -78,6 +78,21 @@
     #frosted-glass.with-chipbar.ytd-app {
         background-color: transparent !important;
     }
+
+    @media (width: 1398px) {
+        ytd-watch-flexy[full-bleed-player] #full-bleed-container.ytd-watch-flexy {
+            max-height: calc(100vh) !important;
+            z-index: 999999 !important;
+        }
+
+        .ytp-contextmenu {
+            z-index: 9999999 !important;
+        }
+
+        #page-manager.ytd-app {
+            margin-top: 0 !important;
+        }
+    }
 }
 
 @-moz-document domain(fbk.red) {
