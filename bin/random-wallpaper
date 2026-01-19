@@ -6,4 +6,4 @@ test -e ~/wallpapers
 
 file="$(find ~/wallpapers -maxdepth 1 -type f | shuf -n 1)"
 
-hyprctl hyprpaper reload ,"$file"
+hyprctl hyprpaper wallpaper ,"$file",cover
