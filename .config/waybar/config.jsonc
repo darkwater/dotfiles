@@ -12,8 +12,8 @@
         // "custom/media"
     ],
     "modules-center": [
-        "mpd",
-        "mpris",
+        // "mpd",
+        "mpris"
     ],
     "modules-right": [
         "custom/forgejo",
