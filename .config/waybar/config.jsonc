@@ -12,7 +12,7 @@
         // "custom/media"
     ],
     "modules-center": [
-        // "mpd",
+        "mpd",
         "mpris"
     ],
     "modules-right": [
