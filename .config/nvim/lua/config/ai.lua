@@ -17,3 +17,7 @@ require("CopilotChat").setup {
         },
     },
 }
+
+--@type opencode.Opts
+vim.g.opencode_opts = {
+}
