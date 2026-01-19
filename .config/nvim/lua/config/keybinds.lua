@@ -1,7 +1,10 @@
 local wk = require("which-key")
 
 wk.setup {
+    preset = "helix",
     show_help = false,
+    delay = 0,
+    sort = { "local", "order", "group", "manual" },
     icons = {
         mappings = false,
     },
@@ -244,6 +247,7 @@ wk.add {
 
     { "<leader>a", group = "ai" },
     { "<leader>ac", Cmd("CopilotChat"), desc = "Open chat", mode = { "n", "v" } },
+    -- { "<leader>ac", Cmd("CopilotChat"), desc = "Open chat", mode = { "n", "v" } },
 
     { "<leader>f", group = "flutter" },
     { "<leader>ff", bg_cmd("fvm flutter run", "flutter"),  desc = "Flutter run" },
