@@ -40,8 +40,7 @@ if [[ "$1" = "once" ]]; then
     else
         (
             sleep 2
-            hyprctl hyprpaper preload /home/dark/holo.jpg
-            hyprctl hyprpaper wallpaper ,/home/dark/holo.jpg
+            hyprctl hyprpaper wallpaper ,/home/dark/holo.jpg,cover
         )
     fi
 
