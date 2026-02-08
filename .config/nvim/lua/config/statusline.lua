@@ -96,6 +96,7 @@ require("lualine").setup {
         lualine_b = {"diagnostics"},
         lualine_c = {cwd, "branch"},
         lualine_x = {
+            { vim.fn.hostname, },
             -- LspStatus,
             -- LspClients,
             { "' ' .. vim.g.xcodebuild_last_status", color = { fg = "Gray" } },
