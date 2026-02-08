@@ -16,6 +16,7 @@
         "mpris"
     ],
     "modules-right": [
+        "custom/winvm",
         "custom/forgejo",
         "custom/3dp",
         "custom/swaync",
@@ -251,6 +252,12 @@
         "on-click": "kitty -e pulsemixer",
         "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
         "on-click-middle": "$HOME/.config/waybar/cycle-audio-output.sh"
+    },
+    "custom/winvm": {
+        "format": "",
+        "interval": 2,
+        "exec": "echo ",
+        "exec-if": "pidof qemu-system-x86_64"
     },
     "custom/forgejo": {
         "format": "{text}",
