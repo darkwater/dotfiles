@@ -17,6 +17,8 @@ if [[ "$1" = "once" ]]; then
     launch autorestart wvkbd-mobintl --hidden
 
     if [[ "$hostname" = "tetsuya" ]]; then
+        hyprctl keyword decoration:blur:enabled true
+
         launch hypridle
         sleep 3s; hyprctl keyword monitor DP-1, disable
         systemctl --user start hyprpolkitagent
