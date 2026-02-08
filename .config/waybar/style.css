@@ -138,6 +138,7 @@ button:hover {
 
 #custom-3dp        { color: @sky; }
 #custom-swaync     { color: @maroon; }
+#custom-winvm      { color: @sapphire; }
 
 #custom-forgejo.running { color: @blue; }
 #custom-forgejo.success { color: @green; }
