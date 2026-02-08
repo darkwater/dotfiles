@@ -11,7 +11,7 @@ launch() {
 
 if [[ "$1" = "once" ]]; then
     # AUTOSTART
-    launch hyprpaper
+    # launch hyprpaper
     launch hyprpm reload
     launch autorestart waybar
     launch autorestart wvkbd-mobintl --hidden
@@ -34,7 +34,7 @@ if [[ "$1" = "once" ]]; then
         launch /opt/activitywatch/aw-server/aw-server
         launch aw-watcher-window-wayland
 
-        random-wallpaper
+        # random-wallpaper
 
         sleep 0; launch gtk-launch zen
         sleep 2; launch gtk-launch vesktop
@@ -42,7 +42,7 @@ if [[ "$1" = "once" ]]; then
     else
         (
             sleep 2
-            hyprctl hyprpaper wallpaper ,/home/dark/holo.jpg,cover
+            # hyprctl hyprpaper wallpaper ,/home/dark/holo.jpg,cover
         )
     fi
 
