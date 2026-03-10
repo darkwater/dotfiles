@@ -20,10 +20,10 @@ if [[ "$1" = "once" ]]; then
         hyprctl keyword decoration:blur:enabled true
 
         launch hypridle
-        sleep 3s; hyprctl keyword monitor DP-1, disable
+        sleep 3s; #hyprctl keyword monitor DP-1, disable
         systemctl --user start hyprpolkitagent
         sleep 2s; #launch openrgb -p pride
-        sleep 10s; hyprctl reload
+        sleep 10s; #hyprctl reload
     fi
 
     if [[ "$hostname" = "nagumo" ]]; then
