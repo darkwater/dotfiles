@@ -12,8 +12,8 @@
         // "custom/media"
     ],
     "modules-center": [
-        // "mpd",
-        "mpris"
+        "mpd"
+        // "mpris"
     ],
     "modules-right": [
         "custom/winvm",
@@ -36,6 +36,7 @@
         "server": "192.168.0.106",
         "format": "{stateIcon}  {artist} - {title}  󰓃 {volume}%  {repeatIcon}{randomIcon}{singleIcon}{consumeIcon}",
         "format-disconnected": "󰝚 󰌙",
+        "format-stopped": "󰝛",
         "state-icons": {
             "playing": "",
             "paused": "",
