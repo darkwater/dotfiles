@@ -196,14 +196,7 @@ genps1() {
     fi
 
     echo -n " $blue%~"
-
-    local level=$SHLVL
-    while [ $level -ge 1 ]; do
-        level=$((level - 1))
-        echo -n "%(!.$bred #.$aqua %{\xe2\x97%}\x86)"
-    done
-    echo -n " $reset"
-
+    echo -n "%(!.$bred # .$aqua %{\xe2\x97\x86%} )\e%{[0m%}"
 }
 PS1="$(genps1)"
 
