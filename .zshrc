@@ -205,6 +205,11 @@ preexec() {
 
     cmd="$(echo "$2" | tr -d '\000-\037')"
     set_window_title "$(hostname -s) $ $cmd"
+
+    case "$cmd" in
+        *jq*)      echo "jq:"      "consider using jnv instead" >&2 ;;
+        *sqlite3*) echo "sqlite3:" "consider using litecli instead" >&2 ;;
+    esac
 }
 precmd() {
     local exit_status="$?"
