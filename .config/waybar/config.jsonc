@@ -33,7 +33,7 @@
     ],
     // Modules configuration
     "mpd": {
-        "server": "192.168.0.106",
+        "server": "192.168.0.134",
         "format": "{stateIcon}  {artist} - {title}  󰓃 {volume}%  {repeatIcon}{randomIcon}{singleIcon}{consumeIcon}",
         "format-disconnected": "󰝚 󰌙",
         "format-stopped": "󰝛",
@@ -59,11 +59,11 @@
             "off": ""
         },
         // "on-click": "kitty -e rmpc -a 192.168.0.106:6600",
-        "on-click": "kitty -e ncmpcpp -h 192.168.0.106",
-        "on-click-middle": "mpc -h 192.168.0.106 next",
-        "on-click-right": "mpc -h 192.168.0.106 toggle",
-        "on-scroll-up": "mpc -h 192.168.0.106 vol +5",
-        "on-scroll-down": "mpc -h 192.168.0.106 vol -5",
+        "on-click": "kitty -e ncmpcpp -h 192.168.0.134",
+        "on-click-middle": "mpc -h 192.168.0.134 next",
+        "on-click-right": "mpc -h 192.168.0.134 toggle",
+        "on-scroll-up": "mpc -h 192.168.0.134 vol +5",
+        "on-scroll-down": "mpc -h 192.168.0.134 vol -5",
         "tooltip-format": "{artist}\n{album}\n{title}",
     },
     "mpris": {
