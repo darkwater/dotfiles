@@ -356,4 +356,6 @@ hl.window_rule({
 })
 
 
+-- print(package.searchers[1])
+package.cpath = "/home/dark/?.so"
 require("libtestrust")
