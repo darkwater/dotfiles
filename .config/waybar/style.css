@@ -48,6 +48,7 @@
 }
 
 window#waybar {
+    /* background: black; */
     /* background: linear-gradient(180deg, alpha(black, 0.0), black); */
     background: linear-gradient(
         to bottom,
