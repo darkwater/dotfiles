@@ -14,3 +14,9 @@ ssh -t "$HOST" "NEOVIDE_REMOTE=1 nvim --headless --listen 0.0.0.0:6487" &
 
 # spawn neovide and connect it
 exec neovide --server "$HOST:6487"
+
+# TODO: maybe use unix sockets:
+# # nvim --headless --listen some-existing-dir/my-nvim-instance.sock
+# # /path/to/neovide --server=some-existing-dir/my-nvim-instance.sock
+# # ssh -L /path/to/local/socket:/path/to/remote/socket ip.of.other.machine \
+# #   nvim --headless --listen /path/to/remote/socket
