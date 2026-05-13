@@ -46,9 +46,9 @@ FileUtils.cd File.dirname(__FILE__) do
     puts "pulling"
     res = `git pull --rebase`
     exit $?.exitstatus unless $?.success?
-    unless res.include? "Already up to date."
-      system "nvim +PlugUpdate +qa"
-    end
+    # unless res.include? "Already up to date."
+    #   system "nvim +PlugUpdate +qa"
+    # end
 
     puts "pushing"
     `git push -q`
