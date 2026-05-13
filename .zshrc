@@ -66,11 +66,11 @@ md() {
     mkdir "$@" && cd "$@"
 }
 
-ssh() {
-    # interferes with `ssh host foo > bar`
-    # set_window_title "ssh $*"
-    command ssh "$@"
-}
+# ssh() {
+#     # interferes with `ssh host foo > bar`
+#     # set_window_title "ssh $*"
+#     command ssh "$@"
+# }
 
 exists() { command -v $1 >/dev/null }
 exists eza && alias ls=eza
@@ -78,11 +78,13 @@ exists eza && alias ls=eza
 l() {
     # -aa only in $HOME and without arguments
     aa="$([[ "$(pwd)" = "$HOME" && "$#" = 0 ]] || echo -n -aa)"
+
     if [[ -d .git ]]; then
         git="--git"
     else
         git="--git-repos-no-status"
     fi
+
     ls -lgF $aa $git --group-directories-first "$@"
 }
 
