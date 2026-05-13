@@ -7,6 +7,35 @@ fn libtestrust(lua: &Lua) -> LuaResult<LuaTable> {
     config.general.gaps_out(50.)?;
     config.apply()?;
 
+    let ret = lua
+        .globals()
+        .get::<LuaTable>("hl")?
+        .get::<LuaFunction>("bind")?
+        .call::<LuaValue>((
+            "ALT + SHIFT + T",
+            lua.create_async_function(async |lua, ()| {
+                for n in 1..=3 {
+                    let args = lua.create_table().unwrap();
+                    args.set("text", format!("Test bind {n}")).unwrap();
+                    args.set("timeout", 10000).unwrap();
+
+                    lua.globals()
+                        .get::<LuaTable>("hl")
+                        .unwrap()
+                        .get::<LuaTable>("notification")
+                        .unwrap()
+                        .get::<LuaFunction>("create")
+                        .unwrap()
+                        .call::<()>(args)
+                        .unwrap();
+                }
+
+                Ok(())
+            }),
+        ))?;
+
+    dbg!(ret);
+
     println!("Hello from Rust!");
 
     lua.create_table()
