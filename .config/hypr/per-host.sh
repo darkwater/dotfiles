@@ -13,21 +13,26 @@ if [[ "$1" = "once" ]]; then
     # AUTOSTART
     launch hyprpaper
     launch hyprpm reload
-    launch autorestart waybar
+    # launch autorestart waybar
+    launch wayle panel start
     launch autorestart wvkbd-mobintl --hidden
 
     if [[ "$hostname" = "tetsuya" ]]; then
         hyprctl keyword decoration:blur:enabled true
+
+        launch kdeconnectd
 
         launch hypridle
         sleep 5s; hyprctl keyword monitor DP-1, disable
         systemctl --user start hyprpolkitagent
         sleep 2s; #launch openrgb -p pride
         sleep 10s; hyprctl reload
+        sleep 2s; wayle panel restart
     fi
 
     if [[ "$hostname" = "nagumo" ]]; then
         launch autorestart ~/.cargo/bin/fprint-prompt
+        launch kdeconnectd
     fi
 
     if [[ "$hostname" != "holo" ]]; then
@@ -37,8 +42,8 @@ if [[ "$1" = "once" ]]; then
         # random-wallpaper
 
         sleep 0; launch gtk-launch zen
-        sleep 2; launch gtk-launch vesktop
-        sleep 5; launch gtk-launch org.telegram.desktop.desktop
+        sleep 2; launch gtk-launch org.telegram.desktop.desktop
+        sleep 5; launch gtk-launch vesktop
     else
         (
             sleep 2
