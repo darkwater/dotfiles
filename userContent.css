@@ -70,7 +70,7 @@
 }
 
 @-moz-document domain(youtube.com) {
-    html[dark], [dark] {
+    html[dark], [dark], body > ytd-app {
         background-color: transparent !important;
         --yt-spec-base-background: transparent !important;
     }
