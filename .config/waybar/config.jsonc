@@ -93,7 +93,8 @@
             // "8": "󰭁",
             // "9": "󰭂",
             // "10": "󰿩",
-            "magic": ""
+            "magic": "",
+            "ham": ""
         },
         "format-window-separator": "",
         "window-rewrite-default": " ",
