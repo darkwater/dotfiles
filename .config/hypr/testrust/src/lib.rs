@@ -4,40 +4,23 @@ pub mod event;
 use mlua::prelude::*;
 
 #[mlua::lua_module]
-fn libtestrust(lua: &Lua) -> LuaResult<LuaTable> {
+fn libtestrust(lua: &Lua) -> LuaResult<LuaValue> {
     let config = config::Config::new(lua)?;
-    config.general.gaps_in(1.)?;
-    config.general.gaps_out(50)?;
+    config.general.gaps_in(5)?;
+    config.general.gaps_out(20)?;
+    config.general.border_size(2)?;
+    config.general.resize_on_border(false)?;
+    config.general.allow_tearing(false)?;
+    config.general.layout("dwindle")?;
+    config.decoration.rounding(10)?;
+    config.decoration.rounding_power(2.0)?;
+    config.decoration.active_opacity(1.0)?;
+    config.decoration.inactive_opacity(1.0)?;
+    config.animations.enabled(true)?;
+    config.dwindle.preserve_split(true)?;
+    config.master.new_status("master")?;
+    config.scrolling.fullscreen_on_one_column(true)?;
     config.apply()?;
-
-    // let ret = lua
-    //     .globals()
-    //     .get::<LuaTable>("hl")?
-    //     .get::<LuaFunction>("bind")?
-    //     .call::<LuaValue>((
-    //         "ALT + SHIFT + T",
-    //         lua.create_async_function(async |lua, ()| {
-    //             for n in 1..=3 {
-    //                 let args = lua.create_table().unwrap();
-    //                 args.set("text", format!("Test bind {n}")).unwrap();
-    //                 args.set("timeout", 10000).unwrap();
-    //
-    //                 lua.globals()
-    //                     .get::<LuaTable>("hl")
-    //                     .unwrap()
-    //                     .get::<LuaTable>("notification")
-    //                     .unwrap()
-    //                     .get::<LuaFunction>("create")
-    //                     .unwrap()
-    //                     .call::<()>(args)
-    //                     .unwrap();
-    //             }
-    //
-    //             Ok(())
-    //         }),
-    //     ))?;
-
-    // dbg!(ret);
 
     println!("Hello from Rust!");
 
@@ -50,5 +33,5 @@ fn libtestrust(lua: &Lua) -> LuaResult<LuaTable> {
         dbg!(value?.info().source);
     }
 
-    lua.create_table()
+    Ok(LuaValue::Nil)
 }
