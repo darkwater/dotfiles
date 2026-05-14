@@ -46,8 +46,8 @@ fn libtestrust(lua: &Lua) -> LuaResult<LuaTable> {
         .get::<LuaTable>("package")?
         .get::<LuaTable>("searchers")?;
 
-    for value in searchers.sequence_values::<LuaValue>() {
-        dbg!(value?);
+    for value in searchers.sequence_values::<LuaFunction>() {
+        dbg!(value?.info().source);
     }
 
     lua.create_table()
