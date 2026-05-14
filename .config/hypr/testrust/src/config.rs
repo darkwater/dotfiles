@@ -5,9 +5,14 @@ use mlua::prelude::*;
 macro_rules! config {
     (
         $(
+            // General general {
             $section:ident $section_lower:ident {
                 $(
                     $( #[$meta:meta] )*
+                    // gaps_in: impl Into<CssGaps> => CssGaps,
+                    //          ^^^^^^^^^^^^^^^^^^------------- argument type for function
+                    //                                ^^^^^^^-- type that implements IntoLua
+                    //                                          (.into() used for conversion)
                     $option:ident: $pubtype:ty => $innertype:ty,
                 )*
             }
@@ -64,6 +69,41 @@ macro_rules! config {
                         Ok(())
                     }
                 )*
+            }
+        )*
+    };
+}
+
+macro_rules! enums {
+    (
+        $(
+            $( #[$meta:meta] )*
+            $name:ident {
+                $(
+                    $( #[$varmeta:meta] )*
+                    $variant:ident = $value:expr,
+                )*
+            }
+        )*
+    ) => {
+        $(
+            $( #[$meta] )*
+            #[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+            pub enum $name {
+                $(
+                    $( #[$varmeta] )*
+                    $variant = $value,
+                )*
+            }
+
+            impl From<$name> for u32 {
+                fn from(value: $name) -> Self {
+                    match value {
+                        $(
+                            $name::$variant => $value,
+                        )*
+                    }
+                }
             }
         )*
     };
@@ -413,6 +453,57 @@ macro_rules! config {
 // ---@field ['xwayland.use_nearest_neighbor'] boolean
 
 config! {
+    // border_size	size of the border around windows	int	1
+    // gaps_in	gaps between windows	css_gaps	5
+    // gaps_out	gaps between windows and monitor edges	css_gaps	20
+    // float_gaps	gaps between windows and monitor edges for floating windows -1 means default	css_gaps	0
+    // gaps_workspaces	gaps between workspaces. Stacks with gaps_out.	css_gaps	0
+    // col.inactive_border	border color for inactive windows	gradient	0xff444444
+    // col.active_border	border color for the active window	gradient	0xffffffff
+    // col.nogroup_border	inactive border color for window that cannot be added to a group (see hl.dsp.window.deny_from_group dispatcher)	gradient	0xffffaaff
+    // col.nogroup_border_active	active border color for window that cannot be added to a group	gradient	0xffff00ff
+    // layout	which layout to use. [dwindle/master/scrolling/monocle]	str	dwindle
+    // no_focus_fallback	if true, will not fall back to the next available window when moving focus in a direction where no window was found	bool	false
+    // resize_on_border	enables resizing windows by clicking and dragging on borders and gaps	bool	false
+    // extend_border_grab_area	extends the area around the border where you can click and drag on, only used when general:resize_on_border is on.	int	15
+    // hover_icon_on_border	show a cursor icon when hovering over borders, only used when general:resize_on_border is on.	bool	true
+    // allow_tearing	master switch for allowing tearing to occur. See the Tearing page.	bool	false
+    // resize_corner	force floating windows to use a specific corner when being resized (1-4 going clockwise from top left, 0 to disable)	int	0
+    // modal_parent_blocking	whether parent windows of modals will be interactive	bool	true
+    // locale	overrides the system locale (e.g. en_US, es)	str	[[Empty]]
+    General general {
+        /// The size of the border around windows, in pixels.
+        ///
+        /// Default: `1`
+        border_size: u32 => u32,
+
+        /// The gaps between windows, in pixels. Can be set to a single number or a table of
+        /// numbers for different gaps on each side.
+        ///
+        /// Default: `5`
+        gaps_in: impl Into<CssGaps> => CssGaps,
+
+        /// The gaps between windows and monitor edges, in pixels. Can be set to a single number
+        /// or a table of numbers for different gaps on each side.
+        ///
+        /// Default: `20`
+        gaps_out: impl Into<CssGaps> => CssGaps,
+
+        /// Gaps between windows and monitor edges for floating windows, in pixels.
+        ///
+        /// Default: `0`
+        float_gaps: impl Into<CssGaps> => CssGaps,
+
+        /// Gaps between workspaces. Stacks with `gaps_out`.
+        ///
+        /// Default: `0`
+        gaps_workspaces: impl Into<CssGaps> => CssGaps,
+
+        /// Border color for inactive windows. Can be a solid color or a gradient.
+        ///
+        /// Default: `0xff444444`
+        col_inactive_border: impl Into<LuaValue> => LuaValue,
+    }
     Animations animations {
         /// Enable animations
         ///
@@ -425,20 +516,6 @@ config! {
         /// Default: `false`
         workspace_wraparound: bool => bool,
     }
-//     pass_mouse_when_bound	if disabled, will not pass the mouse events to apps / dragging windows around if a keybind has been triggered.	bool	false
-// scroll_event_delay	in ms, how many ms to wait after a scroll event to allow passing another one for the binds.	int	300
-// workspace_back_and_forth	If enabled, an attempt to switch to the currently focused workspace will instead switch to the previous workspace. Akin to i3’s auto_back_and_forth.	bool	false
-// hide_special_on_workspace_change	If enabled, changing the active workspace (including to itself) will hide the special workspace on the monitor where the newly active workspace resides.	bool	false
-// allow_workspace_cycles	If enabled, workspaces don’t forget their previous workspace, so cycles can be created by switching to the first workspace in a sequence, then endlessly going to the previous workspace.	bool	false
-// workspace_center_on	Whether switching workspaces should center the cursor on the workspace (0) or on the last active window for that workspace (1)	int	0
-// focus_preferred_method	sets the preferred focus finding method when using focuswindow/movewindow/etc with a direction. 0 - history (recent have priority), 1 - length (longer shared edges have priority)	int	0
-// ignore_group_lock	If enabled, dispatchers like moveintogroup, moveoutofgroup and movewindoworgroup will ignore lock per group.	bool	false
-// movefocus_cycles_fullscreen	If enabled, when on a fullscreen window, movefocus will cycle fullscreen, if not, it will move the focus in a direction.	bool	false
-// movefocus_cycles_groupfirst	If enabled, when in a grouped window, movefocus will cycle windows in the groups first, then at each ends of tabs, it’ll move on to other windows/groups	bool	false
-// window_direction_monitor_fallback	If enabled, moving a window or focus over the edge of a monitor with a direction will move it to the next monitor in that direction.	bool	true
-// disable_keybind_grabbing	If enabled, apps that request keybinds to be disabled (e.g. VMs) will not be able to do so.	bool	false
-// allow_pin_fullscreen	If enabled, Allow fullscreen to pinned windows, and restore their pinned status afterwards	bool	false
-// drag_threshold	Movement threshold in pixels for window dragging and c/g bind flags. 0 to disable and grab on mousedown.	int	0
     Binds binds {
         /// If disabled, will not pass the mouse events to apps / dragging windows around if a
         /// keybind has been triggered.
@@ -456,10 +533,95 @@ config! {
         ///
         /// Default: `false`
         workspace_back_and_forth: bool => bool,
+
+        /// If enabled, changing the active workspace (including to itself) will hide the special
+        /// workspace on the monitor where the newly active workspace resides.
+        ///
+        /// Default: `false`
+        hide_special_on_workspace_change: bool => bool,
+
+        /// If enabled, workspaces don’t forget their previous workspace, so cycles can be created
+        /// by switching to the first workspace in a sequence, then endlessly going to the previous
+        /// workspace.
+        ///
+        /// Default: `false`
+        allow_workspace_cycles: bool => bool,
+
+        /// Whether switching workspaces should center the cursor on the workspace or on the last
+        /// active window for that workspace.
+        ///
+        /// Default: [`WorkspaceCenterOn::Workspace`]
+        workspace_center_on: WorkspaceCenterOn => u32,
+
+        /// Sets the preferred focus finding method when using focuswindow/movewindow/etc with a
+        /// direction.
+        ///
+        /// Default: [`FocusPreferredMethod::History`]
+        focus_preferred_method: FocusPreferredMethod => u32,
+
+        // TODO: refer to the Rust methods in these docs
+        /// If enabled, dispatchers like `hl.dsp.window.move({ into_group })` and
+        /// `hl.dsp.window.move({ out_of_group })` will ignore lock per group.
+        ///
+        /// Default: `false`
+        ignore_group_lock: bool => bool,
+
+        /// If enabled, when on a fullscreen window, `hl.dsp.focus({ direction })` will cycle
+        /// fullscreen, if not, it will move the focus in a direction.
+        ///
+        /// Default: `false`
+        movefocus_cycles_fullscreen: bool => bool,
+
+        /// If enabled, when in a grouped window, `hl.dsp.focus({ direction })` will cycle windows
+        /// in the groups first, then at each ends of tabs, it’ll move on to other windows/groups.
+        ///
+        /// Default: `false`
+        movefocus_cycles_groupfirst: bool => bool,
+
+        /// If enabled, moving a window or focus over the edge of a monitor with a direction will
+        /// move it to the next monitor in that direction.
+        ///
+        /// Default: `true`
+        window_direction_monitor_fallback: bool => bool,
+
+        /// If enabled, apps that request keybinds to be disabled (e.g. VMs) will not be able to do
+        /// so.
+        ///
+        /// Default: `false`
+        disable_keybind_grabbing: bool => bool,
+
+        /// If enabled, Allow fullscreen to pinned windows, and restore their pinned status
+        /// afterwards
+        ///
+        /// Default: `false`
+        allow_pin_fullscreen: bool => bool,
+
+        /// Movement threshold in pixels for window dragging and c/g bind flags. 0 to disable and
+        /// grab on mousedown.
+        ///
+        /// Default: `0`
+        // TODO: use Option?
+        drag_threshold: u32 => u32,
     }
-    General general {
-        gaps_in: impl Into<CssGaps> => CssGaps,
-        gaps_out: impl Into<CssGaps> => CssGaps,
+}
+
+enums! {
+    /// See [`Binds::workspace_center_on`]
+    WorkspaceCenterOn {
+        /// Center the cursor on the workspace
+        #[default]
+        Workspace = 0,
+        /// Center the cursor on the last active window for that workspace
+        LastActiveWindow = 1,
+    }
+
+    /// See [`Binds::focus_preferred_method`]
+    FocusPreferredMethod {
+        /// Recent windows have priority
+        #[default]
+        History = 0,
+        /// Windows with longer shared edges have priority
+        Length = 1,
     }
 }
 
