@@ -6,9 +6,19 @@ pub type Vec2 = [f32; 2];
 
 macro_rules! config {
     (
+        // Config config {
+        $config:ident {
+            // general: General,
+            $( $conf_section:ident: $conf_type:ty, )*
+        }
+
         $(
             // General general {
             $section:ident $section_lower:ident {
+                $(
+                    @table $property:ident: $tabletype:ty,
+                )*
+
                 $(
                     $( #[$meta:meta] )*
                     // gaps_in: impl Into<CssGaps> => CssGaps,
@@ -22,16 +32,16 @@ macro_rules! config {
     ) => {
         pub struct Config<'a> {
             lua: &'a Lua,
-            $( pub $section_lower: $section, )*
+            $( pub $conf_section: $conf_type, )*
         }
 
         impl<'a> Config<'a> {
             pub fn new(lua: &'a Lua) -> LuaResult<Self> {
-                $( let $section_lower = $section::new(lua)?; )*
+                $( let $conf_section = <$conf_type>::new(lua)?; )*
 
                 Ok(Self {
                     lua,
-                    $( $section_lower, )*
+                    $( $conf_section, )*
                 })
             }
 
@@ -39,7 +49,7 @@ macro_rules! config {
                 let config_table = self.lua.create_table()?;
 
                 $(
-                    config_table.set(stringify!($section_lower), self.$section_lower.table.clone())?;
+                    config_table.set(stringify!($conf_section), self.$conf_section.table.clone())?;
                 )*
 
                 self.lua
@@ -54,13 +64,22 @@ macro_rules! config {
 
         $(
             pub struct $section {
+                /// Raw Lua table access, be careful.
                 pub table: LuaTable,
+                $( pub $property: $tabletype, )*
             }
 
             impl $section {
                 pub fn new(lua: &Lua) -> LuaResult<Self> {
                     let table = lua.create_table()?;
-                    Ok(Self { table })
+                    $(
+                        let $property = <$tabletype>::new(lua)?;
+                        table.set(stringify!($property), $property.table.clone())?;
+                    )*
+                    Ok(Self {
+                        table,
+                        $( $property, )*
+                    })
                 }
 
                 $(
@@ -112,7 +131,32 @@ macro_rules! enums {
 }
 
 config! {
+    Config {
+        general: General,
+        decoration: Decoration,
+        animations: Animations,
+        input: Input,
+        gestures: Gestures,
+        group: Group,
+        groupbar: Groupbar,
+        misc: Misc,
+        layout: Layout,
+        binds: Binds,
+        xwayland: XWayland,
+        opengl: OpenGL,
+        render: Render,
+        cursor: Cursor,
+        ecosystem: Ecosystem,
+        quirks: Quirks,
+        debug: Debug,
+        dwindle: Dwindle,
+        master: Master,
+        scrolling: Scrolling,
+    }
+
     General general {
+        @table snap: GeneralSnap,
+
         /// The size of the border around windows, in pixels.
         ///
         /// Default: `1`
