@@ -161,16 +161,20 @@ fi
 
 # prompt
 hostname_color() {
-    case "$(hostname | cut -d. -f1)" in
-        tetsuya) echo -n "\e[1;38;2;159;204;225;48;2;27;27;38m"   ;;
-        nagumo)  echo -n "\e[1;38;2;206;16;21;48;2;36;28;22m"     ;;
-        fubuki)  echo -n "\e[1;38;2;250;250;250;48;2;81;114;142m" ;;
-        sinon)   echo -n "\e[1;38;2;196;252;227;48;2;48;42;3m"    ;;
-        atsushi) echo -n "\e[1;38;2;189;155;235;48;2;50;50;50m"   ;;
-        winbox)  echo -n "\e[1;38;2;159;204;225;48;2;27;27;88m"   ;;
-        holo)    echo -n "\e[1;38;2;232;100;31;48;2;0;0;0m"       ;;
-        *)       echo -n "\e[1;38;2;200;200;200;48;2;50;50;50m"   ;;
-    esac
+    # case "$(hostname | cut -d. -f1)" in
+    #     tetsuya) echo -n "\e[1;38;2;159;204;225;48;2;27;27;38m"   ;;
+    #     nagumo)  echo -n "\e[1;38;2;206;16;21;48;2;36;28;22m"     ;;
+    #     fubuki)  echo -n "\e[1;38;2;250;250;250;48;2;81;114;142m" ;;
+    #     sinon)   echo -n "\e[1;38;2;196;252;227;48;2;48;42;3m"    ;;
+    #     atsushi) echo -n "\e[1;38;2;189;155;235;48;2;50;50;50m"   ;;
+    #     winbox)  echo -n "\e[1;38;2;159;204;225;48;2;27;27;88m"   ;;
+    #     holo)    echo -n "\e[1;38;2;232;100;31;48;2;0;0;0m"       ;;
+    #     *)       echo -n "\e[1;38;2;200;200;200;48;2;50;50;50m"   ;;
+    # esac
+    ACCENT_FG_RGB="200;200;200"
+    ACCENT_BG_RGB="50;50;50"
+    source "/etc/system-colors.conf"
+    echo -n "\e[1;38;2;${ACCENT_FG_RGB};48;2;${ACCENT_BG_RGB}m"
 }
 
 function set_window_title() {
