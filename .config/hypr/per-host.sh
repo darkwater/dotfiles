@@ -31,7 +31,7 @@ if [[ "$1" = "once" ]]; then
     fi
 
     if [[ "$hostname" = "nagumo" ]]; then
-        launch autorestart ~/.cargo/bin/fprint-prompt
+        # launch autorestart ~/.cargo/bin/fprint-prompt
         launch kdeconnectd
     fi
 
