@@ -189,20 +189,33 @@ genps1() {
     local aqua=$'%{\e[36m%}'
     local reset=$'%{\e[0m%}'
 
+    # shell integration: prompt start
+    echo -n "%{\e]133;A\a%}"
+
     # bell and window title set
     echo -n "%{\a"
     set_window_title "%m: %~"
     echo -n "%}"
 
+    # blank line
     echo
-    echo -n "%{\e]133;A\a$(hostname_color)%} %m $reset"
 
+    # hostname
+    echo -n "%{$(hostname_color)%} %m $reset"
+
+    # username
     if [[ "$(whoami)" != "dark" ]]; then
         echo -n " ${bred}[%n]$reset"
     fi
 
+    # cwd
     echo -n " $blue%~"
+
+    # prompt icon
     echo -n "%(!.$bred # .$aqua %{\xe2\x97\x86%} )\e%{[0m%}"
+
+    # shell integration: prompt end
+    echo -n "%{\e]133;B\a%}"
 }
 PS1="$(genps1)"
 
