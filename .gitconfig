@@ -109,6 +109,6 @@
 
 [fetch]
     prune = true
-    pruneTags = true
+    pruneTags = false
     tags = true
     all = true
