@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ -z "$1" ] || [ -z "$2" ]; then
+  echo "Usage: $0 <host> <metric>"
+  exit 1
+fi
+
+host="$1"
+query="$2"
+
+if [[ "$host" == *"local"* ]]; then
+    host="http://localhost:9090"
+else
+    host="https://prometheus.$host.fbk.red"
+fi
+
+endpoint="$host/api/v1/query"
+query="query=$query"
+
+curl -s "$endpoint" --url-query "$query" |
+    jq -r '.data.result | map(.value[1]) | join(", ")'
