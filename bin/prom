@@ -7,6 +7,7 @@ fi
 
 host="$1"
 query="$2"
+extra="$3"
 
 if [[ "$host" == *"local"* ]]; then
     host="http://localhost:9090"
@@ -17,5 +18,11 @@ fi
 endpoint="$host/api/v1/query"
 query="query=$query"
 
+if [[ -n "$extra" ]]; then
+    extra=" | tonumber | $extra"
+else
+    extra=""
+fi
+
 curl -s "$endpoint" --url-query "$query" |
-    jq -r '.data.result | map(.value[1]) | join(", ")'
+    jq -r '.data.result | map(.value[1]) | join(", ")'" $extra"
